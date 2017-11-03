@@ -98,14 +98,14 @@ knitr::kable(head(benchmarks))</code></pre>
 </table>
 <p>Here’s a probability-probability plot for English learners in reading.</p>
 <pre class="r"><code>pp_plot(reading ~ ell, benchmarks)</code></pre>
-<p><img src="/post/2017-11-02-trial2_files/figure-html/esvis-1.png" width="672" /></p>
+<p><img src="/post/2017-11-02-trial2_files/figure-html/esvis-1.png" width="480" /></p>
 <p>There’s customizable themes too. Here’ the built in dark theme.</p>
 <pre class="r"><code>pp_plot(reading ~ ell, benchmarks, theme = &quot;dark&quot;)</code></pre>
-<p><img src="/post/2017-11-02-trial2_files/figure-html/esvis_dark-1.png" width="672" /></p>
+<p><img src="/post/2017-11-02-trial2_files/figure-html/esvis_dark-1.png" width="432" /></p>
 <p>We can also look at binned effect size plots for a similar view of the data, but this time with Cohen’s d. Let’s look at it by quintile, and we’ll use the tan theme this time.</p>
 <pre class="r"><code>binned_plot(reading ~ ell, 
             data = benchmarks, 
             qtiles = seq(0, 1, 0.2),
             theme = &quot;tan&quot;)</code></pre>
-<p><img src="/post/2017-11-02-trial2_files/figure-html/binned_quintile-1.png" width="672" /></p>
+<p><img src="/post/2017-11-02-trial2_files/figure-html/binned_quintile-1.png" width="432" /></p>
 <p>Okay. That’s good enough for now.</p>

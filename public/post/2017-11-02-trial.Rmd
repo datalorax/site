@@ -7,18 +7,27 @@ categories: []
 tags: []
 ---
 
+
+```{r setup, include = FALSE}
+library(knitr)
+opts_chunk$set(fig.width = 4.5)
+```
+
+
 Here's some stuff
 
-```{r plot, message = FALSE}
+```{r plot, message = FALSE, warning = FALSE}
 library(ggplot2)
-ggplot(diamonds, aes(carat, price)) +
+p <- ggplot(mpg, aes(displ, hwy)) +
   geom_point(color = "gray80") +
-  geom_smooth(aes(color = clarity)) +
-  ggthemes::theme_calc()
+  geom_smooth(aes(color = factor(drv))) +
+  ggthemes::theme_hc()
+
+plotly::ggplotly(p)
 ```
 
 here's the head of the dataset
 
 ```{r head_data}
-head(diamonds)
+head(mpg)
 ```

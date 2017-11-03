@@ -7,6 +7,12 @@ categories: [data_vis]
 tags: [data_vis]
 ---
 
+```{r setup, include = FALSE}
+library(knitr)
+opts_chunk$set(fig.width = 4.5)
+```
+
+
 Here's some more stuff, this time with my *esvsis* package.
 
 Here's a sampling of the data we'll be playing with.
@@ -16,7 +22,7 @@ knitr::kable(head(benchmarks))
 ```
 
 Here's a probability-probability plot for English learners in reading.
-```{r esvis}
+```{r esvis, fig.width = 5}
 pp_plot(reading ~ ell, benchmarks)
 ```
 

@@ -18,7 +18,7 @@ disableKinds=["RSS"]
 
 [[params.social]]
   medium = "stackoverflow"
-  icon = "stackoverflow"
+  icon = "stack-overflow"
   link = "https://stackoverflow.com/users/4959854/daniel-anderson"
 
 [[params.social]]
