@@ -1,0 +1,40 @@
+---
+title: esvis
+author: Daniel Anderson
+date: '2017-11-02'
+slug: esvis
+categories: [data_vis]
+tags: [data_vis]
+---
+
+Here's some more stuff, this time with my *esvsis* package.
+
+Here's a sampling of the data we'll be playing with.
+```{r data}
+library(esvis)
+knitr::kable(head(benchmarks))
+```
+
+Here's a probability-probability plot for English learners in reading.
+```{r esvis}
+pp_plot(reading ~ ell, benchmarks)
+```
+
+There's customizable themes too. Here' the built in dark theme.
+
+```{r esvis_dark}
+pp_plot(reading ~ ell, benchmarks, theme = "dark")
+```
+
+We can also look at binned effect size plots for a similar view of the data, 
+but this time with Cohen's d. Let's look at it by quintile, and we'll use the 
+tan theme this time.
+
+```{r binned_quintile}
+binned_plot(reading ~ ell, 
+            data = benchmarks, 
+            qtiles = seq(0, 1, 0.2),
+            theme = "tan")
+```
+
+Okay. That's good enough for now.

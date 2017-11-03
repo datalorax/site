@@ -1,0 +1,28 @@
+baseurl = "/"
+title = "data science in education"
+theme = "dimension"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+enableRobotsTXT = true
+disableKinds=["RSS"]
+
+[params]
+  description = '<!--[-->a blog by daniel anderson<!--]--><br />'
+  logo = "fa-code"
+  copyright = "daniel anderson"
+
+[[params.social]]
+  medium = "twitter"
+  icon = "twitter"
+  link = "https://twitter.com/DJAnderson_07"
+
+[[params.social]]
+  medium = "stackoverflow"
+  icon = "stackoverflow"
+  link = "https://stackoverflow.com/users/4959854/daniel-anderson"
+
+[[params.social]]
+  medium = "github"
+  icon = "github"
+  link = "https://github.com/DJAnderson07"
+

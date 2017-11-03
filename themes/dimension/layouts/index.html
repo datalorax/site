@@ -1,0 +1,46 @@
+{{ partial "header.html" . }}
+
+    <!-- Wrapper -->
+      <div id="wrapper">
+
+        <!-- Header -->
+          <header id="header">
+            <div class="logo">
+              {{ with .Site.Params.logoimage }}
+              <img src="{{ . }}" width="100%" style="padding: 10px 10px 10px 10px;">
+            {{ end }}
+            {{ with .Site.Params.logo }}            
+              <span class="icon {{ . }}"></span>
+            {{ end }}
+            </div>
+            <div class="content">
+              <div class="inner">
+                <h1>{{ .Site.Title | safeHTML }}</h1>
+                <p>{{ .Site.Params.description | safeHTML }}</p>
+              </div>
+            </div>
+            <nav>
+              <ul>
+                {{ range .Data.Pages.ByWeight }}
+                  <li>{{ if isset .Params "link" }}<a href="{{ index .Params "link" }}"{{else}}<a href="#{{ .File.TranslationBaseName }}"{{end}}>{{ if .GetParam "menuname" }}{{ .GetParam "menuname" }}{{ else }}{{ .Title }}{{ end }}</a></li>
+                {{ end }}
+              </ul>
+            </nav>
+          </header>
+
+        <!-- Main -->
+          <div id="main">
+            {{ range .Data.Pages }}
+              {{ .Render "onepagestyle" }}
+            {{ end }}
+          </div>
+
+        <!-- Multilanguage -->
+          <div id="languages">
+            {{ if .IsTranslated }}
+              {{ range $i, $e := .Translations }}
+                {{ if $i }}, {{ end }}<a href="{{ .Permalink }}">{{ $e.Language.LanguageName }}</a>
+              {{ end}}
+            {{ end }}
+          </div>
+{{ partial "footer.html" . }}

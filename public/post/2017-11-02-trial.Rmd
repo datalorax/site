@@ -1,0 +1,24 @@
+---
+title: trial
+author: Daniel Anderson
+date: '2017-11-02'
+slug: trial
+categories: []
+tags: []
+---
+
+Here's some stuff
+
+```{r plot, message = FALSE}
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(color = "gray80") +
+  geom_smooth(aes(color = clarity)) +
+  ggthemes::theme_calc()
+```
+
+here's the head of the dataset
+
+```{r head_data}
+head(diamonds)
+```
