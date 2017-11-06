@@ -1,10 +1,11 @@
-baseurl = "/"
+baseurl = "http://www.dandersondata.com"
 title = "data science in education"
 theme = "dimension"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 enableRobotsTXT = true
-disableKinds=["RSS"]
+disableKinds = ["RSS"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
   description = '<!--[-->a blog by daniel anderson<!--]--><br />'
