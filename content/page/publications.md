@@ -6,7 +6,7 @@ comments: false
 ## Peer-Reviewed Journal Articles
 9.	Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., Kennedy, P. (in press). Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement. Learning Disabilities Research & Practice.
 
-8.	Anderson, D., Kahn, J, and Tindal, G. (2017). Exploring the Robustness of a Unidimensional Item Response Theory Model with Empirically Multidimensional Data. Applied Measurement in Education. 30, 163-177. doi: [10.1080&#8203;/08957347.2017.1316277](http://www.tandfonline.com/doi/abs/10.1080/08957347.2017.1316277?journalCode=hame20)
+8.	Anderson, D., Kahn, J, and Tindal, G. (2017). [Exploring the Robustness of a Unidimensional Item Response Theory Model with Empirically Multidimensional Data](https://www.dropbox.com/s/iaok5s6wg29lgkp/AndersonKahnTindal_17.pdf?dl=0). Applied Measurement in Education. 30, 163-177. doi: [10.1080&#8203;/08957347.2017.1316277](http://www.tandfonline.com/doi/abs/10.1080/08957347.2017.1316277?journalCode=hame20)
 
 7.	Farley, D., Anderson, D., Irvin, P. S.,  & Tindal, G. (2016). Modeling reading growth in Grades 3-5 with an alternate assessment. Remedial and Special Education, 38, 195-206. doi: 10.1177&#8203;/0741932516678661 
 
