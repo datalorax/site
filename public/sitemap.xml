@@ -3,18 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/work/</loc>
-  </url>
-  
-  <url>
-    <loc>/about/</loc>
-  </url>
-  
-  <url>
-    <loc>/elements/</loc>
-  </url>
-  
-  <url>
     <loc>/post/esvis-part-1/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
   </url>
@@ -49,6 +37,10 @@
     <loc>/post/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/page/publications/</loc>
   </url>
   
   <url>
