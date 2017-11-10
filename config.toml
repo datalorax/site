@@ -46,6 +46,12 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [[menu.main]]
     parent = "vita_docs"
+    name = "conference presentations"
+    url = "page/conference_pres"
+    weight = 1
+
+[[menu.main]]
+    parent = "vita_docs"
     name = "publications"
     url = "page/publications"
     weight = 1
