@@ -1,94 +1,58 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>//#work</loc>
+    <loc>/work/</loc>
   </url>
   
   <url>
-    <loc>//#about</loc>
+    <loc>/about/</loc>
   </url>
   
   <url>
-    <loc>//#elements</loc>
+    <loc>/elements/</loc>
   </url>
   
   <url>
-    <loc>//#2017-11-05-esvis-part-1</loc>
+    <loc>/post/esvis-part-1/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//#2017-11-02-trial2</loc>
-    <lastmod>2017-11-02T00:00:00+00:00</lastmod>
+    <loc>/page/about/</loc>
   </url>
   
   <url>
-    <loc>//#2017-11-02-trial</loc>
-    <lastmod>2017-11-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>//#2015-07-23-r-rmarkdown</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>//#</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>//#</loc>
+    <loc>/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>//#</loc>
-    <lastmod>2017-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//#</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//#</loc>
+    <loc>/tags/data_vis/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>//#</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    <loc>/page/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>//#</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//#</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//#</loc>
+    <loc>/post/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>//#</loc>
+    <loc>/tags/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

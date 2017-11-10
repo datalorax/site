@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Science in Education</title>
+    <link>/</link>
+    <description>Recent content on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
+    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
+    <lastBuildDate>Sun, 05 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Work</title>
+      <link>/work/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/work/</guid>
+      <description>I work as a Research Associate at Behavioral Research and Teaching (BRT), a grant-based center at the University of Oregon. You can see our website here
+    </description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/about/</guid>
+      <description>This blog relates to a lot of my work with data - some of which is directly related to my job and some of which is not. I enjoy programming with R, and all my blog posts here are related to my work with R.
+    </description>
+    </item>
+    
+    <item>
+      <title>Elements</title>
+      <link>/elements/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/elements/</guid>
+      <description>Hugo shortcodes in theme {&amp;zwnj;{&amp;lt; socialLinks &amp;gt;}} will get into {{&amp;lt; socialLinks &amp;gt;}} configured in config.toml.
+{&amp;zwnj;{&amp;lt; gmaps pb=&amp;rdquo;&amp;lt;sharecode&amp;gt;&amp;rdquo; &amp;gt;}} will get a google map {{&amp;lt; gmaps pb=&amp;ldquo;!1m18!1m12!1m3!1d86456.59681285016!2d8.466675323953403!3d47.377433669132884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900b9749bea219%3A0xe66e8df1e71fdc03!2zWsO8cmljaA!5e0!3m2!1sde!2sch!4v1488248947910&amp;rdquo; &amp;gt;}}
+To get the pb parameter value, search the desired place on google maps and click the share button and copy/paste the pb parameter out of the iframe code.
+Text This is bold and this is strong. This is italic and this is emphasized.</description>
+    </item>
+    
+    <item>
+      <title>esvis: Part 1</title>
+      <link>/post/esvis-part-1/</link>
+      <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/post/esvis-part-1/</guid>
+      <description>This is the first of a series of posts to introduce my new esvis R package, why I think it’s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it’s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
+install.packages(&amp;quot;esvis&amp;quot;) or if you’d prefer the sometimes bugging but more feature-heavy development version, install from github with devtools.</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>/page/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/about/</guid>
+      <description>I work as a research associate for Behavioral Research and Teaching, a grant-based center in the College of Education at the University of Oregon. My career in research began in measurement and psychometrics and I still do consulting work in that area. However, my research focus has mostly moved towards data science and the economics of education. In other words, I am interested in the intersection of computer programming and statistics, as applied to large-scale data, to understand macro-level features of the educational system (e.</description>
+    </item>
+    
+  </channel>
+</rss>

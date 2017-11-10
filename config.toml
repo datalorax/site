@@ -1,29 +1,51 @@
 baseurl = "http://www.dandersondata.com"
-title = "data science in education"
-theme = "dimension"
-languageCode = "en-us"
-defaultContentLanguage = "en"
-enableRobotsTXT = true
-disableKinds = ["RSS"]
+DefaultContentLanguage = "en"
+title = "Data Science in Education"
+theme = "beautifulhugo"
+metaDataFormat = "yaml"
+pygmentsUseClasses = true
+pygmentCodeFences = true
+disqusShortname = "http-www-dandersondata-com.disqus.com"
+#googleAnalytics = "XXX"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-[params]
-  description = '<!--[-->a blog by daniel anderson<!--]--><br />'
-  logo = "fa-code"
-  copyright = "daniel anderson"
+[Params]
+  subtitle = "A blog by Daniel Anderson"
+  logo = "img/scatter.png"
+  dateFormat = "January 2, 2006"
+  commit = false
+  rss = false
+  comments = true
 
-[[params.social]]
-  medium = "twitter"
-  icon = "twitter"
-  link = "https://twitter.com/DJAnderson_07"
+[[Params.bigimg]]
+  src = "img/bg.jpg"
+  desc = "Toketee falls, Umpqua National Forest"
 
-[[params.social]]
-  medium = "stackoverflow"
-  icon = "stack-overflow"
-  link = "https://stackoverflow.com/users/4959854/daniel-anderson"
+[Author]
+  name = "Daniel Anderson"
+  website = "http://www.dandersondata.com"
+  email = "daniela@uoregon.edu"
+  github = "DJAnderson07"
+  twitter = "DJAnderson_07"
+  stackoverflow = "users/4959854/daniel-anderson"
+ 
+[[menu.main]]
+    name = "Blog"
+    url = ""
+    weight = 1
 
-[[params.social]]
-  medium = "github"
-  icon = "github"
-  link = "https://github.com/DJAnderson07"
+[[menu.main]]
+    name = "About"
+    url = "page/about/"
+    weight = 3
 
+[[menu.main]]
+    identifier = "esvis_pkg"
+    name = "esvis"
+    weight = 2
+
+[[menu.main]]
+    parent = "esvis_pkg"
+    name = "Introduction to the esvis package"
+    url = "post/esvis-part-1"
+    weight = 1

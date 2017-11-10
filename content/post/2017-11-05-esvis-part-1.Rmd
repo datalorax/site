@@ -6,6 +6,7 @@ slug: esvis-part-1
 categories: []
 tags:
   - data_vis
+output: html_document
 ---
 
 This is the first of a series of posts to introduce my new *esvis* R package,
