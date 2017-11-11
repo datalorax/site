@@ -48,6 +48,10 @@
   </url>
   
   <url>
+    <loc>/page/software/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>

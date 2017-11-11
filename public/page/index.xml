@@ -40,5 +40,15 @@
  Anderson, D., Kahn, J, and Tindal, G. (2017). Exploring the Robustness of a Unidimensional Item Response Theory Model with Empirically Multidimensional Data. Applied Measurement in Education.</description>
     </item>
     
+    <item>
+      <title>Software</title>
+      <link>/page/software/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/software/</guid>
+      <description>esvis Anderson, D. (2017). esvis: Visualization and Estimation of Effect Sizes. R package version 0.1.0. CRAN GitHub
+The purpose of esvis is primarily to visualize differences in two or more distributions. It is an implementation and extension of ideas discussed by Andrew Ho (see, for example, here). Non-parametric methods for effects sizes are also implemented. For an introduction to the package, see here. The package is under active development.</description>
+    </item>
+    
   </channel>
 </rss>
