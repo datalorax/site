@@ -19,7 +19,7 @@
       <author>daniela@uoregon.edu (Daniel Anderson)</author>
       <guid>/post/esvis-part-1/</guid>
       <description>This is the first of a series of posts to introduce my new esvis R package, why I think it’s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it’s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
-install.packages(&amp;quot;esvis&amp;quot;) or if you’d prefer the sometimes bugging but more feature-heavy development version, install from github with devtools.</description>
+install.packages(&amp;quot;esvis&amp;quot;) or if you’d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
     </item>
     
   </channel>

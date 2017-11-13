@@ -19,7 +19,7 @@ like you would any other on R
 install.packages("esvis")
 ```
 
-or if you'd prefer the sometimes bugging but more feature-heavy development 
+or if you'd prefer the sometimes buggy but more feature-heavy development 
 version, install from github with devtools. 
 
 ```{r install_esvis_github, eval = FALSE}
@@ -27,30 +27,29 @@ version, install from github with devtools.
 devtools::install_github("DJAnderson07/esvis")
 ```
 
+## Overview
 The overall purpose of the package is to visualize distributional differences.
 Often, we think about distributional differences in terms of effect sizes, which
-is certainly a good method. But these effect sizes are not without limitations.
-They are *summary* indicators of the distributional difference, generally 
-providing a standardized (in standard deviation units) measure of the difference
-between the means. Cohen's *d* is perhaps the most common effect size metric,
-and is defined by the difference in the means between two distributions divided
-by the pooled standard deviation. 
+is certainly a good method, but these effect sizes are not without limitations.
+They are *summary* indicators of the distributional differences, generally 
+providing a standardized measure of the difference between the means. Cohen's 
+*d* is perhaps the most common effect size metric, and is defined by the 
+difference in the means between two distributions divided by the pooled standard 
+deviation. 
 
 In some cases, we may be interested in the difference between two 
 distributions at other points in the scale, which may be more relevant to 
 applied use. For example, students in public school systems across the United
-States in Grades 3-8, and once in high school, take statewide achievement tests
-in reading and mathematics. These scores are evaluated relative to performance
+States take statewide achievement tests in reading and mathematics. These scores 
+are evaluated relative to performance
 level classifications (e.g., "needs improvement", "proficient", "advanced"). In
 these cases, it may be more policy-relevant to evaluate the differences between
-the distributions at these cut points, rather than at the means. However, all
-of this comes with a giant caveat, which is that if we're only really 
-interested in evaluating distributional differences at different points on the 
-scale if we think that the differences will vary. And, indeed, if the two 
-distributions are both normal with the same variance, the difference at the 
-means will equal the difference at any point in the scale. In this case, we 
-could just as well evaluate differences at the mean and we'd understand the 
-difference at the cut-point for "proficient" or "advanced" or any other point
+the distributions (different groups of students) at these cut points, rather 
+than at the means. However, all of this comes with a caveat - if the two (or 
+more) distributions are both normally distributed with the same variance, the 
+difference at the means will equal the difference at any point in the scale. In 
+this case, we could just as well evaluate differences at the mean and we'd 
+understand the  difference at the cut-point for "proficient" or any other point
 on the scale. But, real data rarely work out this way and sometimes important
 and meaningful differences can occur at different point in the scale. In this
 case, any effect size measure will be at least somewhat insufficient, because
@@ -65,6 +64,7 @@ may find that the difference is not consistent across the scale. This can occur
 when the shape of the distributions differ, and/or when the variance between the
 two distributions are more that moderately different.
 
+## PP plots - and implementation in *esvis*
 One way to visualize distributional differences is through 
 probability-probability, or PP, plots. PP plots map the empirical cumulative
 distribution function (CDF) from a reference distribution to the empirical CDF
