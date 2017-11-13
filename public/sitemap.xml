@@ -12,6 +12,10 @@
   </url>
   
   <url>
+    <loc>/page/classr/slides/w5p1/w5p1/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <priority>0</priority>
   </url>
@@ -27,9 +31,49 @@
   </url>
   
   <url>
+    <loc>/page/classr/slides/w3p2/w3p2/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/data_vis/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/page/classr/classr/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w2p2/w2p2/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w3p1/w3p1/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w4p1/w4p1/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w7p1/w7p1/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w1p2/w1p2/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w7p2/w7p2/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w4p2/w4p2/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w1p1/w1p1/</loc>
   </url>
   
   <url>
@@ -48,6 +92,10 @@
   </url>
   
   <url>
+    <loc>/page/classr/slides/w6p2/w6p2/</loc>
+  </url>
+  
+  <url>
     <loc>/page/software/</loc>
   </url>
   
@@ -55,6 +103,18 @@
     <loc>/tags/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/page/teaching/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w5p2/w5p2/</loc>
+  </url>
+  
+  <url>
+    <loc>/page/classr/slides/w2p1/w2p1/</loc>
   </url>
   
 </urlset>

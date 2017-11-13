@@ -1,0 +1,2925 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Intro to tidy data</title>
+  <meta property="og:title" content="Intro to tidy data" />
+  <meta name="twitter:title" content="Intro to tidy data" />
+  <meta name="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few models and look at some extensions (the broom package) Practice a bit, if time allows (it probably won&rsquo;t)  A little story first      It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data.">
+  <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few models and look at some extensions (the broom package) Practice a bit, if time allows (it probably won&rsquo;t)  A little story first      It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data.">
+  <meta name="twitter:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few …">
+  <meta name="author" content="Daniel Anderson"/>
+  <meta property="og:image" content="/img/scatter.png" />
+  <meta name="twitter:image" content="/img/scatter.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@DJAnderson_07" />
+  <meta name="twitter:creator" content="@DJAnderson_07" />
+  <meta property="og:url" content="/page/classr/slides/w4p1/w4p1/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Data Science in Education" />
+
+  <meta name="generator" content="Hugo 0.24.1" />
+  <link rel="canonical" href="/page/classr/slides/w4p1/w4p1/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Data Science in Education">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Data Science in Education</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">esvis</a>
+              <div class="navlinks-children">
+                
+                  <a href="/post/esvis-part-1">Introduction to the esvis package</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Vita</a>
+              <div class="navlinks-children">
+                
+                  <a href="/page/conference_pres">conference presentations</a>
+                
+                  <a href="/page/publications">publications</a>
+                
+                  <a href="/page/software">software</a>
+                
+                  <a href="/page/teaching">teaching</a>
+                
+              </div>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Data Science in Education" href="/">
+            <img class="avatar-img" src="/img/scatter.png" alt="Data Science in Education" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>Intro to tidy data</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<style>
+em {
+  font-style: italic
+}
+</style>
+
+<style>
+strong {
+  font-weight: bold;
+}
+</style>
+
+<h2 id="agenda">Agenda</h2>
+
+<ul>
+<li>Introduce the concept of tidy data</li>
+<li>Tidy a simple dataset together with <code>tidyr</code></li>
+<li>Summarize and transform tidy data with <code>dplyr</code></li>
+<li>Fit a few models and look at some extensions (the <code>broom</code> package)</li>
+<li>Practice a bit, if time allows (it probably won&rsquo;t)</li>
+</ul>
+
+<hr />
+
+<h2 id="a-little-story-first">A little story first</h2>
+
+<div align = "center">
+<img src = ../assets/img/cross_validated.png width = 750 height = 650>
+</div>
+
+<hr />
+
+<div align = "center">
+<img src = ../assets/img/ask_ben.png width = 750 height = 650>
+</div>
+
+<hr />
+
+<div align = "center">
+<img src = ../assets/img/ben_answer.png width = 750 height = 250>
+</div>
+
+<hr />
+
+<div align = "center">
+<img src = ../assets/img/hadley_answer.png width = 750 height = 250>
+</div>
+
+<hr />
+
+<p><q> It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data.</p>
+
+<hr />
+
+<ul>
+<li>Persistent and varied challenge</li>
+<li>Little research on how to do it well
+
+<ul>
+<li>Enter Hadley Wickham</li>
+</ul></li>
+</ul>
+
+<div align = "center">
+<img src = ../assets/img/hadley_JSS.png width = 500 height = 750>
+</div>
+
+<hr />
+
+<h2 id="tidy-data">Tidy data</h2>
+
+<h1 id="definition">Definition</h1>
+
+<ol>
+<li>Each variable is a column</li>
+<li>Each observation is a row</li>
+<li>Each type of observational unit forms a table</li>
+</ol>
+
+<div align = "left">
+<img src = ../assets/img/tidy_data.png width = 1000 height = 350>
+</div>
+
+<hr />
+
+<h2 id="common-ways-rectangular-datasets-are-messy">Common ways rectangular datasets are &ldquo;messy&rdquo;</h2>
+
+<p>(We won&rsquo;t get into multiple data files and how they interact, i.e., relational databases)</p>
+
+<ul>
+<li>Column headers are values, not variable names</li>
+<li>Multiple variables stored in one column</li>
+<li>Variables are stored in both rows and columns</li>
+</ul>
+
+<hr />
+
+<h2 id="some-examples">Some examples</h2>
+
+<p>(from the JSS paper)</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">religion</th>
+<th align="right">&lt;$10k</th>
+<th align="right">$10-20k</th>
+<th align="right">$20-30k</th>
+<th align="right">$30-40k</th>
+<th align="right">$40-50k</th>
+<th align="right">$50-75k</th>
+<th align="right">$75-100k</th>
+<th align="right">$100-150k</th>
+<th align="right">&gt;150k</th>
+<th align="right">Don&rsquo;t know/refused</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Agnostic</td>
+<td align="right">27</td>
+<td align="right">34</td>
+<td align="right">60</td>
+<td align="right">81</td>
+<td align="right">76</td>
+<td align="right">137</td>
+<td align="right">122</td>
+<td align="right">109</td>
+<td align="right">84</td>
+<td align="right">96</td>
+</tr>
+
+<tr>
+<td align="left">Atheist</td>
+<td align="right">12</td>
+<td align="right">27</td>
+<td align="right">37</td>
+<td align="right">52</td>
+<td align="right">35</td>
+<td align="right">70</td>
+<td align="right">73</td>
+<td align="right">59</td>
+<td align="right">74</td>
+<td align="right">76</td>
+</tr>
+
+<tr>
+<td align="left">Buddhist</td>
+<td align="right">27</td>
+<td align="right">21</td>
+<td align="right">30</td>
+<td align="right">34</td>
+<td align="right">33</td>
+<td align="right">58</td>
+<td align="right">62</td>
+<td align="right">39</td>
+<td align="right">53</td>
+<td align="right">54</td>
+</tr>
+
+<tr>
+<td align="left">Catholic</td>
+<td align="right">418</td>
+<td align="right">617</td>
+<td align="right">732</td>
+<td align="right">670</td>
+<td align="right">638</td>
+<td align="right">1116</td>
+<td align="right">949</td>
+<td align="right">792</td>
+<td align="right">633</td>
+<td align="right">1489</td>
+</tr>
+
+<tr>
+<td align="left">Don’t know/refused</td>
+<td align="right">15</td>
+<td align="right">14</td>
+<td align="right">15</td>
+<td align="right">11</td>
+<td align="right">10</td>
+<td align="right">35</td>
+<td align="right">21</td>
+<td align="right">17</td>
+<td align="right">18</td>
+<td align="right">116</td>
+</tr>
+
+<tr>
+<td align="left">Evangelical Prot</td>
+<td align="right">575</td>
+<td align="right">869</td>
+<td align="right">1064</td>
+<td align="right">982</td>
+<td align="right">881</td>
+<td align="right">1486</td>
+<td align="right">949</td>
+<td align="right">723</td>
+<td align="right">414</td>
+<td align="right">1529</td>
+</tr>
+
+<tr>
+<td align="left">Hindu</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">9</td>
+<td align="right">11</td>
+<td align="right">34</td>
+<td align="right">47</td>
+<td align="right">48</td>
+<td align="right">54</td>
+<td align="right">37</td>
+</tr>
+
+<tr>
+<td align="left">Historically Black Prot</td>
+<td align="right">228</td>
+<td align="right">244</td>
+<td align="right">236</td>
+<td align="right">238</td>
+<td align="right">197</td>
+<td align="right">223</td>
+<td align="right">131</td>
+<td align="right">81</td>
+<td align="right">78</td>
+<td align="right">339</td>
+</tr>
+
+<tr>
+<td align="left">Jehovah&rsquo;s Witness</td>
+<td align="right">20</td>
+<td align="right">27</td>
+<td align="right">24</td>
+<td align="right">24</td>
+<td align="right">21</td>
+<td align="right">30</td>
+<td align="right">15</td>
+<td align="right">11</td>
+<td align="right">6</td>
+<td align="right">37</td>
+</tr>
+
+<tr>
+<td align="left">Jewish</td>
+<td align="right">19</td>
+<td align="right">19</td>
+<td align="right">25</td>
+<td align="right">25</td>
+<td align="right">30</td>
+<td align="right">95</td>
+<td align="right">69</td>
+<td align="right">87</td>
+<td align="right">151</td>
+<td align="right">162</td>
+</tr>
+
+<tr>
+<td align="left">Mainline Prot</td>
+<td align="right">289</td>
+<td align="right">495</td>
+<td align="right">619</td>
+<td align="right">655</td>
+<td align="right">651</td>
+<td align="right">1107</td>
+<td align="right">939</td>
+<td align="right">753</td>
+<td align="right">634</td>
+<td align="right">1328</td>
+</tr>
+
+<tr>
+<td align="left">Mormon</td>
+<td align="right">29</td>
+<td align="right">40</td>
+<td align="right">48</td>
+<td align="right">51</td>
+<td align="right">56</td>
+<td align="right">112</td>
+<td align="right">85</td>
+<td align="right">49</td>
+<td align="right">42</td>
+<td align="right">69</td>
+</tr>
+
+<tr>
+<td align="left">Muslim</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td align="right">9</td>
+<td align="right">10</td>
+<td align="right">9</td>
+<td align="right">23</td>
+<td align="right">16</td>
+<td align="right">8</td>
+<td align="right">6</td>
+<td align="right">22</td>
+</tr>
+
+<tr>
+<td align="left">Orthodox</td>
+<td align="right">13</td>
+<td align="right">17</td>
+<td align="right">23</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">47</td>
+<td align="right">38</td>
+<td align="right">42</td>
+<td align="right">46</td>
+<td align="right">73</td>
+</tr>
+
+<tr>
+<td align="left">Other Christian</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">11</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">14</td>
+<td align="right">18</td>
+<td align="right">14</td>
+<td align="right">12</td>
+<td align="right">18</td>
+</tr>
+
+<tr>
+<td align="left">Other Faiths</td>
+<td align="right">20</td>
+<td align="right">33</td>
+<td align="right">40</td>
+<td align="right">46</td>
+<td align="right">49</td>
+<td align="right">63</td>
+<td align="right">46</td>
+<td align="right">40</td>
+<td align="right">41</td>
+<td align="right">71</td>
+</tr>
+
+<tr>
+<td align="left">Other World Religions</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">7</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">8</td>
+</tr>
+
+<tr>
+<td align="left">Unaffiliated</td>
+<td align="right">217</td>
+<td align="right">299</td>
+<td align="right">374</td>
+<td align="right">365</td>
+<td align="right">341</td>
+<td align="right">528</td>
+<td align="right">407</td>
+<td align="right">321</td>
+<td align="right">258</td>
+<td align="right">597</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="the-tidied-version">The tidied version</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">religion</th>
+<th align="left">income</th>
+<th align="right">freq</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">&lt;$10k</td>
+<td align="right">27</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">$10-20k</td>
+<td align="right">34</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">$20-30k</td>
+<td align="right">60</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">$30-40k</td>
+<td align="right">81</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">$40-50k</td>
+<td align="right">76</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">$50-75k</td>
+<td align="right">137</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">$75-100k</td>
+<td align="right">122</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">$100-150k</td>
+<td align="right">109</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">&gt;150k</td>
+<td align="right">84</td>
+</tr>
+
+<tr>
+<td align="left">Agnostic</td>
+<td align="left">Don&rsquo;t know/refused</td>
+<td align="right">96</td>
+</tr>
+
+<tr>
+<td align="left">Atheist</td>
+<td align="left">&lt;$10k</td>
+<td align="right">12</td>
+</tr>
+
+<tr>
+<td align="left">Atheist</td>
+<td align="left">$10-20k</td>
+<td align="right">27</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="yet-another-example">Yet another example</h2>
+
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_integer(),
+##   iso2 = col_character()
+## )
+</code></pre>
+
+<pre><code>## See spec(...) for full column specifications.
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">country</th>
+<th align="right">year</th>
+<th align="right">m014</th>
+<th align="right">m1524</th>
+<th align="right">m2534</th>
+<th align="right">m3544</th>
+<th align="right">m4554</th>
+<th align="right">mu</th>
+<th align="right">f014</th>
+<th align="right">f1524</th>
+<th align="right">f2534</th>
+<th align="right">f3544</th>
+<th align="right">f4554</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">AE</td>
+<td align="right">2000</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">5</td>
+<td align="right"></td>
+<td align="right">3</td>
+<td align="right">16</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AF</td>
+<td align="right">2000</td>
+<td align="right">52</td>
+<td align="right">228</td>
+<td align="right">183</td>
+<td align="right">149</td>
+<td align="right">129</td>
+<td align="right"></td>
+<td align="right">93</td>
+<td align="right">414</td>
+<td align="right">565</td>
+<td align="right">339</td>
+<td align="right">205</td>
+</tr>
+
+<tr>
+<td align="left">AG</td>
+<td align="right">2000</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right"></td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AL</td>
+<td align="right">2000</td>
+<td align="right">2</td>
+<td align="right">19</td>
+<td align="right">21</td>
+<td align="right">14</td>
+<td align="right">24</td>
+<td align="right"></td>
+<td align="right">3</td>
+<td align="right">11</td>
+<td align="right">10</td>
+<td align="right">8</td>
+<td align="right">8</td>
+</tr>
+
+<tr>
+<td align="left">AM</td>
+<td align="right">2000</td>
+<td align="right">2</td>
+<td align="right">152</td>
+<td align="right">130</td>
+<td align="right">131</td>
+<td align="right">63</td>
+<td align="right"></td>
+<td align="right">1</td>
+<td align="right">24</td>
+<td align="right">27</td>
+<td align="right">24</td>
+<td align="right">8</td>
+</tr>
+
+<tr>
+<td align="left">AN</td>
+<td align="right">2000</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right"></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AO</td>
+<td align="right">2000</td>
+<td align="right">186</td>
+<td align="right">999</td>
+<td align="right">1003</td>
+<td align="right">912</td>
+<td align="right">482</td>
+<td align="right"></td>
+<td align="right">247</td>
+<td align="right">1142</td>
+<td align="right">1091</td>
+<td align="right">844</td>
+<td align="right">417</td>
+</tr>
+
+<tr>
+<td align="left">AR</td>
+<td align="right">2000</td>
+<td align="right">97</td>
+<td align="right">278</td>
+<td align="right">594</td>
+<td align="right">402</td>
+<td align="right">419</td>
+<td align="right"></td>
+<td align="right">121</td>
+<td align="right">544</td>
+<td align="right">479</td>
+<td align="right">262</td>
+<td align="right">230</td>
+</tr>
+
+<tr>
+<td align="left">AS</td>
+<td align="right">2000</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">1</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>In this example, <em>M</em> indicates if the data came from a male, while <em>F</em> indicates female. The subsequent numbers represent the age range. Tidying these data will be a two step process.</p>
+
+<hr />
+
+<h2 id="step-one">Step one</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">country</th>
+<th align="right">year</th>
+<th align="left">variable</th>
+<th align="right">cases</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AE</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">2</td>
+</tr>
+
+<tr>
+<td align="left">AF</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">52</td>
+</tr>
+
+<tr>
+<td align="left">AG</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AL</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">2</td>
+</tr>
+
+<tr>
+<td align="left">AM</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">2</td>
+</tr>
+
+<tr>
+<td align="left">AN</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AO</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">186</td>
+</tr>
+
+<tr>
+<td align="left">AR</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">97</td>
+</tr>
+
+<tr>
+<td align="left">AS</td>
+<td align="right">2000</td>
+<td align="left">m014</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+
+<p>Notice this is much closer to what we want, but we have a problem now in that we have <strong>two variables stored in one column</strong>.</p>
+
+<hr />
+
+<h2 id="step-two-tidied-data">Step two: Tidied data</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">country</th>
+<th align="right">year</th>
+<th align="left">sex</th>
+<th align="left">age_range</th>
+<th align="right">cases</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">0-14</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">15-24</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">25-34</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">35-44</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">45-54</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">55-64</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">65+</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">AE</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">0-14</td>
+<td align="right">2</td>
+</tr>
+
+<tr>
+<td align="left">AE</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">15-24</td>
+<td align="right">4</td>
+</tr>
+
+<tr>
+<td align="left">AE</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">25-34</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="variables-as-rows-and-columns">Variables as rows and columns</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">id</th>
+<th align="right">year</th>
+<th align="right">month</th>
+<th align="left">element</th>
+<th align="right">d1</th>
+<th align="right">d2</th>
+<th align="right">d3</th>
+<th align="right">d4</th>
+<th align="right">d5</th>
+<th align="right">d6</th>
+<th align="right">d7</th>
+<th align="right">d8</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">1</td>
+<td align="left">tmax</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">1</td>
+<td align="left">tmin</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmax</td>
+<td align="right"></td>
+<td align="right">27.3</td>
+<td align="right">24.1</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmin</td>
+<td align="right"></td>
+<td align="right">14.4</td>
+<td align="right">14.4</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">3</td>
+<td align="left">tmax</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">32.1</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">3</td>
+<td align="left">tmin</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">14.2</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">4</td>
+<td align="left">tmax</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">4</td>
+<td align="left">tmin</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">5</td>
+<td align="left">tmax</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">5</td>
+<td align="left">tmin</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="two-steps">Two Steps</h2>
+
+<h1 id="step-1">Step 1</h1>
+
+<table>
+<thead>
+<tr>
+<th align="left">id</th>
+<th align="right">year</th>
+<th align="right">month</th>
+<th align="left">element</th>
+<th align="left">day_key</th>
+<th align="right">value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">12</td>
+<td align="left">tmax</td>
+<td align="left">d1</td>
+<td align="right">29.9</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">12</td>
+<td align="left">tmin</td>
+<td align="left">d1</td>
+<td align="right">13.8</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmax</td>
+<td align="left">d2</td>
+<td align="right">27.3</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmin</td>
+<td align="left">d2</td>
+<td align="right">14.4</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">11</td>
+<td align="left">tmax</td>
+<td align="left">d2</td>
+<td align="right">31.3</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">11</td>
+<td align="left">tmin</td>
+<td align="left">d2</td>
+<td align="right">16.3</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmax</td>
+<td align="left">d3</td>
+<td align="right">24.1</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmin</td>
+<td align="left">d3</td>
+<td align="right">14.4</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">7</td>
+<td align="left">tmax</td>
+<td align="left">d3</td>
+<td align="right">28.6</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">7</td>
+<td align="left">tmin</td>
+<td align="left">d3</td>
+<td align="right">17.5</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="step-2">Step 2</h1>
+
+<table>
+<thead>
+<tr>
+<th align="left">id</th>
+<th align="left">date</th>
+<th align="right">tmax</th>
+<th align="right">tmin</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-01-01</td>
+<td align="right">27.8</td>
+<td align="right">14.5</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-02-02</td>
+<td align="right">29.7</td>
+<td align="right">13.4</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-02-02</td>
+<td align="right">27.3</td>
+<td align="right">14.4</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-02-02</td>
+<td align="right">29.9</td>
+<td align="right">10.7</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-02-02</td>
+<td align="right">24.1</td>
+<td align="right">14.4</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-03-03</td>
+<td align="right">34.5</td>
+<td align="right">16.8</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-03-03</td>
+<td align="right">31.1</td>
+<td align="right">17.6</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-03-03</td>
+<td align="right">32.1</td>
+<td align="right">14.2</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-04-04</td>
+<td align="right">36.3</td>
+<td align="right">16.7</td>
+</tr>
+
+<tr>
+<td align="left">MX17004</td>
+<td align="left">2010-05-05</td>
+<td align="right">33.2</td>
+<td align="right">18.2</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="the-data-that-vexed-me">The data that vexed me</h2>
+
+<p>Are the below tidy?</p>
+
+<pre><code class="language-r">library(mdsr)
+knitr::kable(head(Minneapolis2013))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Precinct</th>
+<th align="left">First</th>
+<th align="left">Second</th>
+<th align="left">Third</th>
+<th align="left">Ward</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">P-10</td>
+<td align="left">BETSY HODGES</td>
+<td align="left">undervote</td>
+<td align="left">undervote</td>
+<td align="left">W-7</td>
+</tr>
+
+<tr>
+<td align="left">P-06</td>
+<td align="left">BOB FINE</td>
+<td align="left">MARK ANDREW</td>
+<td align="left">undervote</td>
+<td align="left">W-10</td>
+</tr>
+
+<tr>
+<td align="left">P-09</td>
+<td align="left">KURTIS W. HANNA</td>
+<td align="left">BOB FINE</td>
+<td align="left">MIKE GOULD</td>
+<td align="left">W-10</td>
+</tr>
+
+<tr>
+<td align="left">P-05</td>
+<td align="left">BETSY HODGES</td>
+<td align="left">DON SAMUELS</td>
+<td align="left">undervote</td>
+<td align="left">W-13</td>
+</tr>
+
+<tr>
+<td align="left">P-01</td>
+<td align="left">DON SAMUELS</td>
+<td align="left">undervote</td>
+<td align="left">undervote</td>
+<td align="left">W-5</td>
+</tr>
+
+<tr>
+<td align="left">P-04</td>
+<td align="left">undervote</td>
+<td align="left">undervote</td>
+<td align="left">undervote</td>
+<td align="left">W-6</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>I would have expected the data to look like this:
+* Are both forms tidy? What&rsquo;s the difference?</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Precinct</th>
+<th align="left">Ward</th>
+<th align="right">ballot</th>
+<th align="left">choice</th>
+<th align="left">candidate</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">P-10</td>
+<td align="left">W-7</td>
+<td align="right">1</td>
+<td align="left">First</td>
+<td align="left">BETSY HODGES</td>
+</tr>
+
+<tr>
+<td align="left">P-10</td>
+<td align="left">W-7</td>
+<td align="right">1</td>
+<td align="left">Second</td>
+<td align="left">undervote</td>
+</tr>
+
+<tr>
+<td align="left">P-10</td>
+<td align="left">W-7</td>
+<td align="right">1</td>
+<td align="left">Third</td>
+<td align="left">undervote</td>
+</tr>
+
+<tr>
+<td align="left">P-06</td>
+<td align="left">W-10</td>
+<td align="right">2</td>
+<td align="left">First</td>
+<td align="left">BOB FINE</td>
+</tr>
+
+<tr>
+<td align="left">P-06</td>
+<td align="left">W-10</td>
+<td align="right">2</td>
+<td align="left">Second</td>
+<td align="left">MARK ANDREW</td>
+</tr>
+
+<tr>
+<td align="left">P-06</td>
+<td align="left">W-10</td>
+<td align="right">2</td>
+<td align="left">Third</td>
+<td align="left">undervote</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="defining-tidy-data">Defining tidy data</h2>
+
+<p>Two rules essentially define tidy data</p>
+
+<p><span style="color:gray">(from mdsr)</span></p>
+
+<ol>
+<li>Each row is a case representing the same underlying attribute.</li>
+<li>Each column is a variable containing the same type of value for each case.</li>
+</ol>
+
+<p>The combination of rows and columns make each case (row) unique, even though cells may be repeated many times (e.g., student identifier).</p>
+
+<hr />
+
+<h2 id="a-caveat">A caveat</h2>
+
+<ul>
+<li><p>There are many reasons why you might want to have messy data. However, tidy data is an extremely useful format generally, and particularly useful when applying tools within the <em>tidyverse</em>.</p></li>
+
+<li><p>All packages within the tidyverse are designed to either help you get your data in a tidy format, or assume your data are already in a tidy format.</p></li>
+
+<li><p>Assuming a common data format leads to large jumps in efficiency, as the output from certain functions can be directly input into others.</p></li>
+</ul>
+
+<hr />
+
+<h2 id="the-tidyverse-data-analysis-philosophy">The tidyverse data analysis philosophy</h2>
+
+<div align = "left">
+<img src = ../assets/img/data-science.png width = 1000 height = 400>
+</div>
+
+<hr />
+
+<h2 id="load-the-data">Load the data</h2>
+
+<pre><code class="language-r">library(tidyverse)
+library(rio)
+d &lt;- import(&quot;./data/exam1.csv&quot;)
+knitr::kable(head(d))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">stu_name</th>
+<th align="left">gender</th>
+<th align="right">item_1</th>
+<th align="right">item_2</th>
+<th align="right">item_3</th>
+<th align="right">item_4</th>
+<th align="right">item_5</th>
+<th align="right">item_6</th>
+<th align="right">item_7</th>
+<th align="right">item_8</th>
+<th align="right">item_9</th>
+<th align="right">item_10</th>
+<th align="right">item_11</th>
+<th align="right">item_12</th>
+<th align="right">item_13</th>
+<th align="right">item_14</th>
+<th align="right">item_15</th>
+<th align="right">item_16</th>
+<th align="right">item_17</th>
+<th align="right">item_18</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Adam</td>
+<td align="left">M</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">Anne</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">Audrey</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">Barbara</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">Bert</td>
+<td align="left">M</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">Betty</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="pop-quiz-time">Pop Quiz Time</h2>
+
+<p>Consider the item as the unit of analysis</p>
+
+<ul>
+<li>Are these data tidy?</li>
+<li>If not, what needs to happen to make them tidy?</li>
+<li>What are the variables? What are the values?</li>
+</ul>
+
+<hr />
+
+<h2 id="dplyr-versus-tidyr"><code>dplyr</code> versus <code>tidyr</code></h2>
+
+<ul>
+<li><code>dplyr</code>: Helps you manipulate your data (create, remove, summarize, etc. )</li>
+<li><code>tidyr</code>: Helps you get your data into a tidy format</li>
+</ul>
+
+<hr />
+
+<h2 id="verbs-tidyr">Verbs: <code>tidyr</code></h2>
+
+<ul>
+<li><code>gather()</code></li>
+<li><code>spread()</code></li>
+<li><code>separate()</code> and <code>extract()</code></li>
+<li><code>unite()</code></li>
+<li><code>nest()</code></li>
+</ul>
+
+<p>What do you think each do?</p>
+
+<hr />
+
+<h2 id="step-1-gather-the-item-variables">Step 1: <code>gather</code> the item variables</h2>
+
+<ul>
+<li>Change all item variables into two variables: <code>item</code> and <code>score</code></li>
+</ul>
+
+<p><br></p>
+
+<p><img src="../assets/img/gather.png" alt="gather" /></p>
+
+<hr />
+
+<p>Try running the following code</p>
+
+<pre><code class="language-r">d %&gt;% 
+  gather(key = item, value = score, -1:-2) 
+</code></pre>
+
+<ul>
+<li>Third argument to <code>...</code> says we want to omit the first and second columns in when gathering.</li>
+</ul>
+
+<p><br>
+What do you get? Are these data tidy now?</p>
+
+<hr />
+
+<ul>
+<li>The code on the previous slide basically puts our data in a tidy format.</li>
+<li>To &ldquo;clean up&rdquo; some, could transform the <code>item</code> variable to numeric</li>
+</ul>
+
+<hr />
+
+<h2 id="finish-tidying-the-data">Finish tidying the data</h2>
+
+<pre><code class="language-r">td &lt;- d %&gt;% 
+  gather(item, score, -1:-2) %&gt;% 
+  mutate(item = parse_number(item))
+</code></pre>
+
+<ul>
+<li><code>parse_number()</code> comes from the <em>readr</em> package.</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">stu_name</th>
+<th align="left">gender</th>
+<th align="right">item</th>
+<th align="right">score</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Adam</td>
+<td align="left">M</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Anne</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Audrey</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Barbara</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Bert</td>
+<td align="left">M</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Betty</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="an-alternative">An alternative</h2>
+
+<p>(please run this code, following the explanation)</p>
+
+<pre><code class="language-r">td &lt;- d %&gt;% 
+  gather(item, score, -1:-2) %&gt;% 
+  separate(item, c(&quot;discard&quot;, &quot;item&quot;), sep = &quot;_&quot;) %&gt;% 
+  select(-discard)
+</code></pre>
+
+<hr />
+
+<h2 id="why-are-tidy-data-useful">Why are tidy data useful?</h2>
+
+<ul>
+<li>When used in conjunction with <code>dplyr</code>, tidy data can result in large gains in efficiency.</li>
+</ul>
+
+<p>For example, suppose we want to calculate the proportion of students responding correctly to each item.</p>
+
+<pre><code class="language-r">td %&gt;% 
+  group_by(item) %&gt;% 
+  summarize(prop = mean(score))
+</code></pre>
+
+<hr />
+
+<pre><code>## # A tibble: 18 x 2
+##     item       prop
+##    &lt;chr&gt;      &lt;dbl&gt;
+##  1     1 1.00000000
+##  2    10 0.68571429
+##  3    11 0.34285714
+##  4    12 0.17142857
+##  5    13 0.20000000
+##  6    14 0.08571429
+##  7    15 0.02857143
+##  8    16 0.02857143
+##  9    17 0.02857143
+## 10    18 0.00000000
+## 11     2 1.00000000
+## 12     3 1.00000000
+## 13     4 0.91428571
+## 14     5 0.88571429
+## 15     6 0.85714286
+## 16     7 0.88571429
+## 17     8 0.77142857
+## 18     9 0.85714286
+</code></pre>
+
+<hr />
+
+<p>What if we also wanted to know the standard deviation?</p>
+
+<pre><code class="language-r">td %&gt;% 
+  group_by(item) %&gt;% 
+  summarize(prop = mean(score),
+            sd = sd(score))
+</code></pre>
+
+<pre><code>## # A tibble: 18 x 3
+##     item       prop        sd
+##    &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+##  1     1 1.00000000 0.0000000
+##  2    10 0.68571429 0.4710082
+##  3    11 0.34285714 0.4815940
+##  4    12 0.17142857 0.3823853
+##  5    13 0.20000000 0.4058397
+##  6    14 0.08571429 0.2840286
+##  7    15 0.02857143 0.1690309
+##  8    16 0.02857143 0.1690309
+##  9    17 0.02857143 0.1690309
+## 10    18 0.00000000 0.0000000
+## 11     2 1.00000000 0.0000000
+## 12     3 1.00000000 0.0000000
+## 13     4 0.91428571 0.2840286
+## 14     5 0.88571429 0.3228029
+## 15     6 0.85714286 0.3550358
+## 16     7 0.88571429 0.3228029
+## 17     8 0.77142857 0.4260430
+## 18     9 0.85714286 0.3550358
+</code></pre>
+
+<hr />
+
+<p>What if we wanted to know the proportion correct for each item by gender?</p>
+
+<pre><code class="language-r">td %&gt;% 
+  group_by(item, gender) %&gt;% 
+  summarize(prop = mean(score))
+</code></pre>
+
+<pre><code>## # A tibble: 36 x 3
+## # Groups:   item [?]
+##     item gender       prop
+##    &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;
+##  1     1      F 1.00000000
+##  2     1      M 1.00000000
+##  3    10      F 0.72222222
+##  4    10      M 0.64705882
+##  5    11      F 0.05555556
+##  6    11      M 0.64705882
+##  7    12      F 0.00000000
+##  8    12      M 0.35294118
+##  9    13      F 0.22222222
+## 10    13      M 0.17647059
+## # ... with 26 more rows
+</code></pre>
+
+<hr />
+
+<p>We can take the previous example further, by piping the output into a plot</p>
+
+<pre><code class="language-r">td %&gt;% 
+  group_by(item, gender) %&gt;% 
+  summarize(prop = mean(score)) %&gt;% 
+  mutate(gender = as.factor(gender)) %&gt;% 
+  ggplot(aes(x = item, y = prop, color = gender)) +
+  geom_point() +
+  geom_line(aes(group = item))
+</code></pre>
+
+<p><img src="../assets/fig/prop_correct_by_gender_plot-1.png" alt="plot of chunk prop_correct_by_gender_plot" /></p>
+
+<hr />
+
+<p>But, probably better (clearer) to do it in two steps.
+<br></p>
+
+<p>First produce the data</p>
+
+<pre><code class="language-r">pd &lt;- td %&gt;% 
+  group_by(item, gender) %&gt;% 
+  summarize(prop = mean(score)) %&gt;% 
+  mutate(gender = as.factor(gender))
+</code></pre>
+
+<p>Then produce the plot</p>
+
+<pre><code class="language-r">ggplot(pd, aes(x = item, y = prop, color = gender)) +
+  geom_point() +
+  geom_line(aes(group = item))
+</code></pre>
+
+<hr />
+
+<h2 id="challenge-work-by-yourself-or-with-a-neighbor">Challenge (work by yourself or with a neighbor)</h2>
+
+<p>Remember, the following code calculates the mean score for each item.</p>
+
+<pre><code class="language-r">td %&gt;% 
+  group_by(item) %&gt;% 
+  summarize(prop = mean(score))
+</code></pre>
+
+<ul>
+<li>Try to modify the above code to produce raw scores for every student.</li>
+<li>If you&rsquo;re successful, try to also calculate the percent correct.</li>
+</ul>
+
+<hr />
+
+<h2 id="calculate-raw-scores">Calculate Raw Scores</h2>
+
+<p>Modify the prior code to:</p>
+
+<ul>
+<li><code>group_by</code> <em>stu_name</em> (rather than <em>item</em>)</li>
+<li><code>sum</code> score (rather than average it with <code>mean</code>)</li>
+</ul>
+
+<pre><code class="language-r">td %&gt;% 
+  group_by(stu_name) %&gt;% 
+  summarize(raw_score = sum(score))
+</code></pre>
+
+<pre><code>## # A tibble: 35 x 2
+##    stu_name raw_score
+##       &lt;chr&gt;     &lt;int&gt;
+##  1     Adam         7
+##  2     Anne        10
+##  3   Audrey        11
+##  4  Barbara         6
+##  5     Bert         8
+##  6    Betty         9
+##  7   Blaise        13
+##  8   Brenda        10
+##  9  Britton         8
+## 10    Carol         6
+## # ... with 25 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="calculate-percent-correct">Calculate percent correct</h2>
+
+<pre><code class="language-r">td %&gt;% 
+  group_by(stu_name) %&gt;% 
+  summarize(total_poss = max(n()),
+            raw_score = sum(score),
+            pct_correct = raw_score / total_poss)
+</code></pre>
+
+<pre><code>## # A tibble: 35 x 4
+##    stu_name total_poss raw_score pct_correct
+##       &lt;chr&gt;      &lt;int&gt;     &lt;int&gt;       &lt;dbl&gt;
+##  1     Adam         18         7   0.3888889
+##  2     Anne         18        10   0.5555556
+##  3   Audrey         18        11   0.6111111
+##  4  Barbara         18         6   0.3333333
+##  5     Bert         18         8   0.4444444
+##  6    Betty         18         9   0.5000000
+##  7   Blaise         18        13   0.7222222
+##  8   Brenda         18        10   0.5555556
+##  9  Britton         18         8   0.4444444
+## 10    Carol         18         6   0.3333333
+## # ... with 25 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="another-common-format-with-longitudinal-data">Another common format with longitudinal data</h2>
+
+<p>Are these tidy? If not, what&rsquo;s wrong?</p>
+
+<pre><code class="language-r">set.seed(100)
+ld &lt;- data_frame(sid = 1:5, 
+           wave_1_math = rnorm(5, 100, 10),
+           wave_2_math = wave_1_math + rnorm(5, 3, 1.5),
+           wave_3_math = wave_2_math + rnorm(5, 3, 1.5),
+           wave_4_math = wave_3_math + rnorm(5, 3, 1.5),
+           wave_1_rdg = rnorm(5, 100, 10),
+           wave_2_rdg = wave_1_rdg + rnorm(5, 3, 1.5),
+           wave_3_rdg = wave_2_rdg + rnorm(5, 3, 1.5),
+           wave_4_rdg = wave_3_rdg + rnorm(5, 3, 1.5))
+ld[ ,-1] &lt;- lapply(ld[ ,-1], round)
+ld
+</code></pre>
+
+<pre><code>## # A tibble: 5 x 9
+##     sid wave_1_math wave_2_math wave_3_math wave_4_math wave_1_rdg
+##   &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+## 1     1          95          98         102         105         96
+## 2     2         101         103         107         109        108
+## 3     3          99         103         106         110        103
+## 4     4         109         111         115         116        108
+## 5     5         101         104         107         113         92
+## # ... with 3 more variables: wave_2_rdg &lt;dbl&gt;, wave_3_rdg &lt;dbl&gt;,
+## #   wave_4_rdg &lt;dbl&gt;
+</code></pre>
+
+<hr />
+
+<h2 id="variable-names-include-data">Variable names include data</h2>
+
+<ul>
+<li>wave</li>
+<li>subject</li>
+<li>Two steps
+
+<ul>
+<li>gather, separate</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-r">tidy_ld &lt;- ld %&gt;% 
+  gather(var, score, -1) %&gt;% 
+  separate(var, c(&quot;dis&quot;, &quot;wave&quot;, &quot;subject&quot;), sep = &quot;_&quot;, convert = TRUE) %&gt;% 
+  select(-dis)
+tidy_ld %&gt;% 
+  spread(subject, score)
+</code></pre>
+
+<pre><code>## # A tibble: 20 x 4
+##      sid  wave  math   rdg
+##  * &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1     1     1    95    96
+##  2     1     2    98    98
+##  3     1     3   102   101
+##  4     1     4   105   103
+##  5     2     1   101   108
+##  6     2     2   103   110
+##  7     2     3   107   115
+##  8     2     4   109   118
+##  9     3     1    99   103
+## 10     3     2   103   106
+## 11     3     3   106   109
+## 12     3     4   110   112
+## 13     4     1   109   108
+## 14     4     2   111   109
+## 15     4     3   115   112
+## 16     4     4   116   116
+## 17     5     1   101    92
+## 18     5     2   104    95
+## 19     5     3   107    97
+## 20     5     4   113   102
+</code></pre>
+
+<hr />
+
+<h2 id="again-why-so-useful">Again - why so useful?</h2>
+
+<ul>
+<li>summaries by wave and subject</li>
+</ul>
+
+<pre><code class="language-r">tidy_ld %&gt;% 
+  group_by(wave, subject) %&gt;% 
+  summarize(n = n(),
+            mean = mean(score), 
+            sd = sd(score)) %&gt;% 
+  arrange(subject, wave)
+</code></pre>
+
+<pre><code>## # A tibble: 8 x 5
+## # Groups:   wave [4]
+##    wave subject     n  mean       sd
+##   &lt;int&gt;   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1    math     5 101.0 5.099020
+## 2     2    math     5 103.8 4.658326
+## 3     3    math     5 107.4 4.722288
+## 4     4    math     5 110.6 4.159327
+## 5     1     rdg     5 101.4 7.197222
+## 6     2     rdg     5 103.6 6.730527
+## 7     3     rdg     5 106.8 7.563068
+## 8     4     rdg     5 110.2 7.362065
+</code></pre>
+
+<hr />
+
+<h2 id="plotting">plotting</h2>
+
+<pre><code class="language-r">theme_set(theme_light())
+ggplot(tidy_ld, aes(wave, score)) +
+  geom_smooth(method = &quot;lm&quot;, 
+              color = &quot;orchid1&quot;, 
+              fill = &quot;orchid1&quot;, 
+              alpha = 0.1) +
+  geom_line(color = &quot;cornflowerblue&quot;, aes(group = sid)) +
+  geom_point(color = &quot;gray70&quot;) +
+  facet_wrap(~subject)
+</code></pre>
+
+<p><img src="../assets/fig/plot_tidy_ld-1.png" alt="plot of chunk plot_tidy_ld" /></p>
+
+<hr />
+
+<h2 id="spreading-the-data-back-out">Spreading the data back out</h2>
+
+<p>Tidy data are great when conducting preliminary descriptives and for plotting the data. But if you&rsquo;re using other packages for analysis, it may need to be in a different format.</p>
+
+<p><img src="../assets/img/spread.png" alt="spread" /></p>
+
+<hr />
+
+<h2 id="spread-td">Spread <em>td</em></h2>
+
+<p>Reminder what the tidy data look like</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">stu_name</th>
+<th align="left">gender</th>
+<th align="left">item</th>
+<th align="right">score</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Adam</td>
+<td align="left">M</td>
+<td align="left">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Anne</td>
+<td align="left">F</td>
+<td align="left">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Audrey</td>
+<td align="left">F</td>
+<td align="left">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">s_d &lt;- td %&gt;% 
+  spread(item, score)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">stu_name</th>
+<th align="left">gender</th>
+<th align="right">1</th>
+<th align="right">10</th>
+<th align="right">11</th>
+<th align="right">12</th>
+<th align="right">13</th>
+<th align="right">14</th>
+<th align="right">15</th>
+<th align="right">16</th>
+<th align="right">17</th>
+<th align="right">18</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">4</th>
+<th align="right">5</th>
+<th align="right">6</th>
+<th align="right">7</th>
+<th align="right">8</th>
+<th align="right">9</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Adam</td>
+<td align="left">M</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">Anne</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Audrey</td>
+<td align="left">F</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="fit-model">Fit model</h2>
+
+<p>We&rsquo;ll fit a 1PL IRT model.
+* <code>ltm</code> package
+* <code>rasch</code> function requires only item response data, with each column representing a unique item.</p>
+
+<pre><code class="language-r">md &lt;- s_d %&gt;% 
+  select(-1:-3)
+
+# install.packages(&quot;ltm&quot;)
+library(ltm)
+model &lt;- rasch(md)
+</code></pre>
+
+<hr />
+
+<pre><code class="language-r">summary(model)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## rasch(data = md)
+## 
+## Model Summary:
+##    log.Lik      AIC     BIC
+##  -156.3638 348.7277 376.724
+## 
+## Coefficients:
+##              value    std.err  z.vals
+## Dffclt.10  -0.6313     0.3161 -1.9973
+## Dffclt.11   0.5734     0.3035  1.8890
+## Dffclt.12   1.3010     0.3802  3.4219
+## Dffclt.13   1.1570     0.3601  3.2132
+## Dffclt.14   1.8739     0.4872  3.8459
+## Dffclt.15   2.6306     0.7249  3.6290
+## Dffclt.16   2.6306     0.7249  3.6290
+## Dffclt.17   2.6306     0.7249  3.6290
+## Dffclt.18  14.0580 16370.4931  0.0009
+## Dffclt.2  -14.0580 12394.3912 -0.0011
+## Dffclt.3  -14.0580 12394.3912 -0.0011
+## Dffclt.4   -1.9368     0.5053 -3.8328
+## Dffclt.5   -1.6855     0.4542 -3.7108
+## Dffclt.6   -1.4794     0.4181 -3.5383
+## Dffclt.7   -1.6854     0.4542 -3.7108
+## Dffclt.8   -1.0018     0.3521 -2.8455
+## Dffclt.9   -1.4795     0.4181 -3.5383
+## Dscrmn      1.8186     0.3370  5.3962
+## 
+## Integration:
+## method: Gauss-Hermite
+## quadrature points: 21 
+## 
+## Optimization:
+## Convergence: 0 
+## max(|grad|): 0.0012 
+## quasi-Newton: BFGS
+</code></pre>
+
+<hr />
+
+<h2 id="more-on-spreading">More on spreading</h2>
+
+<ul>
+<li>It&rsquo;s also common to have to <code>gather</code> beyond where you really need to, manipulate the variable, then spread it back out.</li>
+</ul>
+
+<pre><code class="language-r">knitr::kable(d[1:3, 1:10])
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right">SID</th>
+<th align="right">male_g6</th>
+<th align="right">male_g7</th>
+<th align="right">male_g8</th>
+<th align="right">ell_g6</th>
+<th align="right">ell_g7</th>
+<th align="right">ell_g8</th>
+<th align="right">sped_g6</th>
+<th align="right">sped_g7</th>
+<th align="right">sped_g8</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">knitr::kable(d[1:3, 11:ncol(d)])
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right">pullouts_g6</th>
+<th align="right">pullouts_g7</th>
+<th align="right">pullouts_g8</th>
+<th align="left">disability_g6</th>
+<th align="left">disability_g7</th>
+<th align="left">disability_g8</th>
+<th align="right">score_g6</th>
+<th align="right">score_g7</th>
+<th align="right">score_g8</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">none</td>
+<td align="left">none</td>
+<td align="left">none</td>
+<td align="right">208.4344</td>
+<td align="right">212.5270</td>
+<td align="right">219.9994</td>
+</tr>
+
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">none</td>
+<td align="left">none</td>
+<td align="left">none</td>
+<td align="right">193.2352</td>
+<td align="right">200.9181</td>
+<td align="right">205.5614</td>
+</tr>
+
+<tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">asd</td>
+<td align="left">asd</td>
+<td align="left">asd</td>
+<td align="right">196.0857</td>
+<td align="right">203.0576</td>
+<td align="right">210.5305</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="first-gather-all-vars">First <code>gather</code> all vars</h2>
+
+<pre><code class="language-r">d %&gt;% 
+    gather(var, val, -1)
+</code></pre>
+
+<pre><code>## # A tibble: 1,800 x 3
+##      SID     var   val
+##    &lt;int&gt;   &lt;chr&gt; &lt;chr&gt;
+##  1     1 male_g6     0
+##  2     2 male_g6     1
+##  3     3 male_g6     1
+##  4     4 male_g6     1
+##  5     5 male_g6     0
+##  6     6 male_g6     1
+##  7     7 male_g6     1
+##  8     8 male_g6     0
+##  9     9 male_g6     0
+## 10    10 male_g6     1
+## # ... with 1,790 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="next-separate">Next, <code>separate</code></h2>
+
+<pre><code class="language-r">d %&gt;% 
+    gather(var, val, -1) %&gt;% 
+    separate(var, c(&quot;var&quot;, &quot;grade&quot;), sep = &quot;_&quot;)
+</code></pre>
+
+<pre><code>## # A tibble: 1,800 x 4
+##      SID   var grade   val
+##  * &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+##  1     1  male    g6     0
+##  2     2  male    g6     1
+##  3     3  male    g6     1
+##  4     4  male    g6     1
+##  5     5  male    g6     0
+##  6     6  male    g6     1
+##  7     7  male    g6     1
+##  8     8  male    g6     0
+##  9     9  male    g6     0
+## 10    10  male    g6     1
+## # ... with 1,790 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="parse-numeric">Parse Numeric</h2>
+
+<pre><code class="language-r">d %&gt;% 
+    gather(var, val, -1) %&gt;% 
+    separate(var, c(&quot;var&quot;, &quot;grade&quot;), sep = &quot;_&quot;) %&gt;% 
+    mutate(grade = parse_number(grade))
+</code></pre>
+
+<pre><code>## # A tibble: 1,800 x 4
+##      SID   var grade   val
+##    &lt;int&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1     1  male     6     0
+##  2     2  male     6     1
+##  3     3  male     6     1
+##  4     4  male     6     1
+##  5     5  male     6     0
+##  6     6  male     6     1
+##  7     7  male     6     1
+##  8     8  male     6     0
+##  9     9  male     6     0
+## 10    10  male     6     1
+## # ... with 1,790 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="spread-for-final-produce"><code>spread</code> for final produce</h2>
+
+<pre><code class="language-r">d %&gt;% 
+    gather(var, val, -1) %&gt;% 
+    separate(var, c(&quot;var&quot;, &quot;grade&quot;), sep = &quot;_&quot;) %&gt;% 
+    mutate(grade = parse_number(grade)) %&gt;% 
+    spread(var, val)
+</code></pre>
+
+<pre><code>## # A tibble: 300 x 8
+##      SID grade disability   ell  male pullouts            score  sped
+##  * &lt;int&gt; &lt;dbl&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;
+##  1     1     6       none     0     0        0 208.434415681363     0
+##  2     1     7       none     0     0        0  212.52698033647     0
+##  3     1     8       none     0     0        0 219.999423463527     0
+##  4     2     6       none     0     1        0 193.235211343351     0
+##  5     2     7       none     0     1        0 200.918088606708     0
+##  6     2     8       none     0     1        0 205.561434813331     0
+##  7     3     6        asd     1     1        0 196.085670969229     0
+##  8     3     7        asd     1     1        0  203.05758537086     0
+##  9     3     8        asd     1     1        0 210.530524529609     0
+## 10     4     6       none     0     1        0 204.049406440706     0
+## # ... with 290 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="same-thing-with-our-longitudinal-data-from-before">Same thing with our longitudinal data from before</h2>
+
+<p>Say we wanted a wave column, but wanted separate columns by subject</p>
+
+<pre><code class="language-r">tidy_ld %&gt;% 
+  spread(subject, score)
+</code></pre>
+
+<pre><code>## # A tibble: 20 x 4
+##      sid  wave  math   rdg
+##  * &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1     1     1    95    96
+##  2     1     2    98    98
+##  3     1     3   102   101
+##  4     1     4   105   103
+##  5     2     1   101   108
+##  6     2     2   103   110
+##  7     2     3   107   115
+##  8     2     4   109   118
+##  9     3     1    99   103
+## 10     3     2   103   106
+## 11     3     3   106   109
+## 12     3     4   110   112
+## 13     4     1   109   108
+## 14     4     2   111   109
+## 15     4     3   115   112
+## 16     4     4   116   116
+## 17     5     1   101    92
+## 18     5     2   104    95
+## 19     5     3   107    97
+## 20     5     4   113   102
+</code></pre>
+
+<hr />
+
+<h2 id="one-last-note">One last note</h2>
+
+<p>For many models, you can get tidy output using the <em>broom</em> package (part of the <em>tidyverse</em>)</p>
+
+<pre><code class="language-r">lmd &lt;- td %&gt;% 
+  group_by(stu_name, gender) %&gt;% 
+  summarize(raw_score = sum(score)) %&gt;% 
+  ungroup() %&gt;% 
+  mutate(gender = as.factor(gender))
+
+mod &lt;- lm(raw_score ~ gender, data = lmd)
+arm::display(mod, detail = TRUE)
+</code></pre>
+
+<pre><code>## lm(formula = raw_score ~ gender, data = lmd)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  9.44     0.57   16.64    0.00   
+## genderM      0.61     0.81    0.75    0.46   
+## ---
+## n = 35, k = 2
+## residual sd = 2.41, R-Squared = 0.02
+</code></pre>
+
+<hr />
+
+<pre><code class="language-r">library(broom)
+tidy(mod, conf.int = TRUE)
+</code></pre>
+
+<pre><code>##          term  estimate std.error statistic      p.value  conf.low
+## 1 (Intercept) 9.4444444 0.5676249 16.638531 1.300394e-17  8.289603
+## 2     genderM 0.6143791 0.8144623  0.754337 4.559964e-01 -1.042657
+##   conf.high
+## 1 10.599286
+## 2  2.271415
+</code></pre>
+
+<pre><code class="language-r">glance(mod)
+</code></pre>
+
+<pre><code>##    r.squared adj.r.squared    sigma statistic   p.value df    logLik
+## 1 0.01695088   -0.01283849 2.408228 0.5690244 0.4559964  2 -79.39434
+##        AIC      BIC deviance df.residual
+## 1 164.7887 169.4547 191.3856          33
+</code></pre>
+
+<hr />
+
+<p>Broom is particularly useful for things like plotting. The below code will work for any linear model (with any number of predictors)</p>
+
+<pre><code class="language-r">tidy_mod &lt;- tidy(mod, conf.int = TRUE)
+ggplot(tidy_mod, aes(estimate, term, color = term)) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), size = 1.5) +
+    geom_vline(xintercept = 0)
+</code></pre>
+
+<p><img src="../assets/fig/broom_plot-1.png" alt="plot of chunk broom_plot" /></p>
+
+<hr />
+
+<h1 id="practice">Practice</h1>
+
+<hr />
+
+<h2 id="create-these-data">Create these data</h2>
+
+<ul>
+<li>Read in and tidy the <em>vocab_wide.csv</em> dataset and compute means and standard deviations by year and sex</li>
+</ul>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="/page/classr/slides/w7p1/w7p1/" data-toggle="tooltip" data-placement="top" title="Joins">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="/page/classr/slides/w3p1/w3p1/" data-toggle="tooltip" data-placement="top" title="Intro to ggplot2">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'http-www-dandersondata-com';
+    var disqus_identifier = '\/page\/classr\/slides\/w4p1\/w4p1\/';
+    var disqus_title = 'Intro to tidy data';
+    var disqus_url = '\/page\/classr\/slides\/w4p1\/w4p1\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:daniela@uoregon.edu" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/DJAnderson07" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/DJAnderson_07" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/4959854/daniel-anderson" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.dandersondata.com">Daniel Anderson</a>
+                      
+          
+          
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Data Science in Education</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.24.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

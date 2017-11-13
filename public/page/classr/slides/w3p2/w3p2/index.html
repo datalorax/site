@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Data viz best practices</title>
+  <meta property="og:title" content="Data viz best practices" />
+  <meta name="twitter:title" content="Data viz best practices" />
+  <meta name="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Discuss some of the underlying theory and empirical research behind data visualizaitons  What makes a figure good? What makes it bad?  Put it into practice with the lab Disclaimer - a lot of this will be based on Healy, Chapter 2   Above all else, show the data
+
+Edward Tufte">
+  <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Discuss some of the underlying theory and empirical research behind data visualizaitons  What makes a figure good? What makes it bad?  Put it into practice with the lab Disclaimer - a lot of this will be based on Healy, Chapter 2   Above all else, show the data
+
+Edward Tufte">
+  <meta name="twitter:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Discuss some of the underlying theory and empirical research behind data visualizaitons  What makes a figure good? What makes it bad? …">
+  <meta name="author" content="Daniel Anderson"/>
+  <meta property="og:image" content="/img/scatter.png" />
+  <meta name="twitter:image" content="/img/scatter.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@DJAnderson_07" />
+  <meta name="twitter:creator" content="@DJAnderson_07" />
+  <meta property="og:url" content="/page/classr/slides/w3p2/w3p2/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Data Science in Education" />
+
+  <meta name="generator" content="Hugo 0.24.1" />
+  <link rel="canonical" href="/page/classr/slides/w3p2/w3p2/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Data Science in Education">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Data Science in Education</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">esvis</a>
+              <div class="navlinks-children">
+                
+                  <a href="/post/esvis-part-1">Introduction to the esvis package</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Vita</a>
+              <div class="navlinks-children">
+                
+                  <a href="/page/conference_pres">conference presentations</a>
+                
+                  <a href="/page/publications">publications</a>
+                
+                  <a href="/page/software">software</a>
+                
+                  <a href="/page/teaching">teaching</a>
+                
+              </div>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Data Science in Education" href="/">
+            <img class="avatar-img" src="/img/scatter.png" alt="Data Science in Education" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>Data viz best practices</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<style>
+em {
+  font-style: italic
+}
+</style>
+
+<style>
+strong {
+  font-weight: bold;
+}
+</style>
+
+<h2 id="agenda">Agenda</h2>
+
+<ul>
+<li>Discuss some of the underlying theory and empirical research behind data visualizaitons
+
+<ul>
+<li>What makes a figure good? What makes it bad?</li>
+</ul></li>
+<li>Put it into practice with the lab</li>
+<li>Disclaimer - a lot of this will be based on Healy, Chapter 2</li>
+</ul>
+
+<hr />
+
+<p><q> Above all else, show the data</p>
+
+<p><br>
+Edward Tufte</p>
+
+<hr />
+
+<h2 id="why-is-it-so-important">Why is it so important?</h2>
+
+<pre><code class="language-r"># devtools::install_github(&quot;stephlocke/datasauRus&quot;)
+library(datasauRus)
+datasaurus_dozen %&gt;% 
+  group_by(dataset) %&gt;% 
+  summarize(mean_x = mean(x),
+            mean_y = mean(y),
+            sd_x = sd(x),
+            sd_y = sd(y),
+            cor = cor(x, y))
+</code></pre>
+
+<hr />
+
+<pre><code>## # A tibble: 13 x 6
+##       dataset   mean_x   mean_y     sd_x     sd_y         cor
+##         &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1       away 54.26610 47.83472 16.76982 26.93974 -0.06412835
+##  2   bullseye 54.26873 47.83082 16.76924 26.93573 -0.06858639
+##  3     circle 54.26732 47.83772 16.76001 26.93004 -0.06834336
+##  4       dino 54.26327 47.83225 16.76514 26.93540 -0.06447185
+##  5       dots 54.26030 47.83983 16.76774 26.93019 -0.06034144
+##  6    h_lines 54.26144 47.83025 16.76590 26.93988 -0.06171484
+##  7 high_lines 54.26881 47.83545 16.76670 26.94000 -0.06850422
+##  8 slant_down 54.26785 47.83590 16.76676 26.93610 -0.06897974
+##  9   slant_up 54.26588 47.83150 16.76885 26.93861 -0.06860921
+## 10       star 54.26734 47.83955 16.76896 26.93027 -0.06296110
+## 11    v_lines 54.26993 47.83699 16.76996 26.93768 -0.06944557
+## 12 wide_lines 54.26692 47.83160 16.77000 26.93790 -0.06657523
+## 13    x_shape 54.26015 47.83972 16.76996 26.93000 -0.06558334
+</code></pre>
+
+<hr />
+
+<h2 id="what-happens-when-we-plot-them">What happens when we plot them?</h2>
+
+<pre><code class="language-r">theme_set(theme_light())
+ggplot(filter(datasaurus_dozen, dataset == &quot;dino&quot;), aes(x, y)) +
+  geom_point() 
+</code></pre>
+
+<p><img src="../assets/fig/dino2-1.png" alt="plot of chunk dino2" /></p>
+
+<hr />
+
+<pre><code class="language-r">ggplot(filter(datasaurus_dozen, dataset == &quot;away&quot;), aes(x, y)) +
+  geom_point()
+</code></pre>
+
+<p><img src="../assets/fig/dino3-1.png" alt="plot of chunk dino3" /></p>
+
+<hr />
+
+<pre><code class="language-r">ggplot(datasaurus_dozen, aes(x, y)) +
+  geom_point() +
+  facet_wrap(~dataset)
+</code></pre>
+
+<p><img src="../assets/fig/dino4-1.png" alt="plot of chunk dino4" /></p>
+
+<hr />
+
+<h2 id="animate-it">Animate it</h2>
+
+<pre><code class="language-r"># devtools::install_github(&quot;dgrtwo/gganimate&quot;)
+library(gganimate)
+p &lt;- ggplot(datasaurus_dozen, aes(x = x, y = y, frame = dataset)) +
+  geom_point() +
+  theme(legend.position = &quot;none&quot;)
+
+gganimate(p, title_frame = FALSE)
+</code></pre>
+
+<hr />
+
+<video controls loop><source src="../assets/fig/dino6.webm" /><p>plot of chunk dino6</p></video>
+
+<hr />
+
+<h2 id="even-better">Even better</h2>
+
+<p><img src="https://d2f99xq7vri1nk.cloudfront.net/DinoSequentialSmaller.gif" alt="dino_gif" /></p>
+
+<p>Matejka &amp; Fitzmaurice (2017). <em>Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing.</em></p>
+
+<hr />
+
+<h1 id="so-it-s-important-to-look-at-the-data-but-how">So it&rsquo;s important to look at the data, but how?</h1>
+
+<hr />
+
+<h2 id="is-this-a-good-figure">Is this a good figure?</h2>
+
+<p><img src="../assets/img/bs_barplot.png" alt="bs_barplot" /></p>
+
+<p>What&rsquo;s good? What&rsquo;s bad?
+(<a href="http://socviz.co/look-at-data.html#look-at-data">http://socviz.co/look-at-data.html#look-at-data</a>)</p>
+
+<hr />
+
+<h2 id="is-this-a-good-figure-1">Is this a good figure?</h2>
+
+<p><img src="../assets/img/monstrous_costs.png" alt="monstrous_costs" /></p>
+
+<p><a href="http://socviz.co/look-at-data.html#look-at-data">http://socviz.co/look-at-data.html#look-at-data</a></p>
+
+<hr />
+
+<h2 id="what-about-these">What about these?</h2>
+
+<p><img src="../assets/img/boxplots.png" alt="boxplots" /></p>
+
+<p><a href="http://socviz.co/look-at-data.html#look-at-data">http://socviz.co/look-at-data.html#look-at-data</a></p>
+
+<hr />
+
+<h2 id="ways-a-figure-can-be-poor">Ways a figure can be poor</h2>
+
+<p>Healy lists three ways a figure can be poor:</p>
+
+<ol>
+<li>Bad taste
+
+<ul>
+<li>needless frills (3D, poor/unnecessary colors, chartjunk)</li>
+</ul></li>
+<li>Bad data
+
+<ul>
+<li>Basically cooking the data to make it look how you want</li>
+</ul></li>
+<li>Bad perception
+
+<ul>
+<li>Encoding between data and visual properties mislead us</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<h2 id="skip-to-perception">Skip to perception</h2>
+
+<ul>
+<li>We&rsquo;ve already seen some examples of chartjunk and poor data is more self-explanatory (although the example from the book is great). So let&rsquo;s focus on the more difficult task of appropriately mapping data to visual encodings.</li>
+</ul>
+
+<p><img src="../assets/img/three_d_junk.png" alt="three_d_junk" /></p>
+
+<hr />
+
+<h2 id="even-without-junk-it-can-be-a-challenge">Even without junk, it can be a challenge</h2>
+
+<p><img src="../assets/img/junk_free_challenge.png" alt="junk_free_challenge" /></p>
+
+<hr />
+
+<h2 id="aspect-ratios">Aspect ratios</h2>
+
+<p><img src="../assets/img/aspect_ratio.png" alt="aspect_ratio" /></p>
+
+<hr />
+
+<h2 id="how-do-we-fix-these">How do we fix these?</h2>
+
+<ul>
+<li>Eliminate 3D</li>
+<li>Consider faceted or dodged bars</li>
+<li>Aspect ratio is harder
+
+<ul>
+<li>Try different variations and see how much it changes the perceived relations</li>
+<li>If large differences occur, look at tables of the data and make sure they&rsquo;re
+aligning with the visual.</li>
+<li>Most important when using data viz for communication (publication) rather
+than exploratory purposes (which is most of what you should be doing with
+data viz)</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="thinking-about-colors">Thinking about colors</h2>
+
+<ul>
+<li>Generally should be resevered for a third (or fourth, fifth, etc.) variable</li>
+<li>Why is the color needed? What is it supposed to display?</li>
+<li>Palletes<br />
+
+<ul>
+<li>Sequential</li>
+<li>Diverging</li>
+<li>Qualitative</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="some-palettes">Some palettes</h2>
+
+<p><img src="../assets/img/palettes.png" alt="Palettes" /></p>
+
+<hr />
+
+<h2 id="sequential">Sequential</h2>
+
+<div align = "center">
+<img src = ../assets/img/rcolorbrewer_sequential.png width = 1000 height = 550>
+</div>
+
+<hr />
+
+<h2 id="diverging">Diverging</h2>
+
+<div align = "center">
+<img src = ../assets/img/rcolorbrewer_diverging.png width = 1000 height = 550>
+</div>
+
+<hr />
+
+<h2 id="qualitative">Qualitative</h2>
+
+<div align = "center">
+<img src = ../assets/img/rcolorbrewer_qual.png width = 1000 height = 550>
+</div>
+
+<hr />
+
+<h2 id="what-types-of-plots-do-we-understand-best">What types of plots do we understand best?</h2>
+
+<p><img src="../assets/img/error_plot.png" alt="error_plot" /></p>
+
+<hr />
+
+<h2 id="summing-up-healy">Summing up Healy</h2>
+
+<p><img src="../assets/img/Healy_summary.png" alt="Healy_summary" /></p>
+
+<hr />
+
+<h2 id="visual-cues">Visual Cues</h2>
+
+<p>(Taken from mdsr, p. 15)</p>
+
+<ul>
+<li><strong>Position:</strong> <em>Numeric</em>. Where in relation to other things?</li>
+<li><strong>Length:</strong> <em>Numeric</em>. How big (in one dimension)?</li>
+<li><strong>Angle:</strong> <em>Numeric</em>. How wide? Parallel to something else?</li>
+<li><strong>Direction:</strong> <em>Numeric</em>. At what slope? In a time series, going up or down?</li>
+<li><strong>Shape:</strong> <em>Categorical</em>. Belonging to which group?</li>
+<li><strong>Area:</strong> <em>Numeric</em>. How big (in two dimensions)?</li>
+<li><strong>Volumne:</strong> <em>Numeric</em>. How big (in three dimensions)?</li>
+<li><strong>Shade:</strong> <em>Numeric or Categorical</em>. To what extent? How Severely?</li>
+<li><strong>Color:</strong> <em>Numeric or Categorical</em>. To what extent? How Severely? (watch out for red/green color blindness)</li>
+</ul>
+
+<hr />
+
+<h2 id="some-things-to-avoid">Some things to avoid</h2>
+
+<ul>
+<li>3D plots</li>
+<li>Pie charts</li>
+<li>Dual axes</li>
+<li>Restricted axes</li>
+<li>Unnecessary frills (colors, etc)
+
+<ul>
+<li>Show the data as plainly as possible. Let the data speak!</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="some-great-examples-seda">Some great examples: SEDA</h2>
+
+<p>Sean Reardon: <a href="https://cepa.stanford.edu/seda/overview">https://cepa.stanford.edu/seda/overview</a></p>
+
+<div align = "center">
+<img src = ../assets/img/seda.png width = 800 height = 600>
+</div>
+
+<hr />
+
+<h2 id="means-by-district">Means by district</h2>
+
+<div align = "center">
+<img src = ../assets/img/seda_means.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h2 id="average-gains-by-district">Average gains by district</h2>
+
+<div align = "center">
+<img src = ../assets/img/seda_growth.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h2 id="mean-scores-and-ses">Mean scores and SES</h2>
+
+<div align = "center">
+<img src = ../assets/img/seda_ses.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h2 id="mean-scores-and-ses-by-race-ethniciy">Mean scores and SES by Race/Ethniciy</h2>
+
+<div align = "center">
+<img src = ../assets/img/seda_ses_race.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h1 id="some-things-to-avoid-1">Some things to avoid</h1>
+
+<p>(Most of these examples are from Nathan Yau of <a href="https://flowingdata.com">flowingdata</a>)</p>
+
+<hr />
+
+<h2 id="truncated-axes">Truncated axes</h2>
+
+<div align = "center">
+<img src = ../assets/img//truncated_axes.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<div align = "center">
+<img src = ../assets/img//truncated_axes2.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h2 id="dual-axes">Dual axes</h2>
+
+<div align = "center">
+<img src = ../assets/img//dual_axes.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h2 id="other-examples-of-dual-axes">Other examples of dual axes</h2>
+
+<ul>
+<li>Let&rsquo;s look at a shiny app. Try running the following code (install shiny first if you don&rsquo;t already have it).</li>
+</ul>
+
+<pre><code class="language-r">library(shiny)
+runGitHub(&quot;dual-axis&quot;, &quot;leeper&quot;)
+</code></pre>
+
+<ul>
+<li>Spurious correlations? <a href="http://www.tylervigen.com/spurious-correlations">http://www.tylervigen.com/spurious-correlations</a></li>
+</ul>
+
+<hr />
+
+<h2 id="scaling-issues">Scaling issues</h2>
+
+<div align = "center">
+<img src = ../assets/img//area_size.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h2 id="poor-binning-choices">Poor binning choices</h2>
+
+<div align = "center">
+<img src = ../assets/img//poor_binning.png width = 900 height = 500>
+</div>
+
+<hr />
+
+<h2 id="don-t-end-up-in-a-blog-for-wrong-reasons">Don&rsquo;t end up in a blog for wrong reasons</h2>
+
+<ul>
+<li><a href="https://flowingdata.com/2010/05/14/wait-something-isnt-right-here/">https://flowingdata.com/2010/05/14/wait-something-isnt-right-here/</a></li>
+<li><a href="https://flowingdata.com/2009/11/26/fox-news-makes-the-best-pie-chart-ever/">https://flowingdata.com/2009/11/26/fox-news-makes-the-best-pie-chart-ever/</a></li>
+</ul>
+
+<hr />
+
+<h2 id="conclusions">Conclusions</h2>
+
+<ul>
+<li>Essentially never
+
+<ul>
+<li>Use pie charts (use bar charts instead)</li>
+<li>Use dual axes (produce separate plots instead)</li>
+<li>Truncate axes</li>
+<li>Use 3D unnecessarily</li>
+</ul></li>
+<li>Do
+
+<ul>
+<li>Show the data</li>
+<li>Be as clear as possible</li>
+<li>Let the data tell the story</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h1 id="lab-challenge">Lab Challenge</h1>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="/page/classr/classr/" data-toggle="tooltip" data-placement="top" title="Exploring Data with R">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="/page/conference_pres/" data-toggle="tooltip" data-placement="top" title="Conference Presentations">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'http-www-dandersondata-com';
+    var disqus_identifier = '\/page\/classr\/slides\/w3p2\/w3p2\/';
+    var disqus_title = 'Data viz best practices';
+    var disqus_url = '\/page\/classr\/slides\/w3p2\/w3p2\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:daniela@uoregon.edu" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/DJAnderson07" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/DJAnderson_07" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/4959854/daniel-anderson" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.dandersondata.com">Daniel Anderson</a>
+                      
+          
+          
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Data Science in Education</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.24.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

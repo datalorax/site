@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>More on Joins (lab)</title>
+  <meta property="og:title" content="More on Joins (lab)" />
+  <meta name="twitter:title" content="More on Joins (lab)" />
+  <meta name="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Load College scorecard data Load Earnings data Tidy and join Joins with data viz  semi- and anti-joins, mostly   Read in college scorecard data library(tidyverse) library(rio) library(janitor) scorecard &lt;- import(&quot;../../data/Most-Recent-Cohorts-Scorecard-Elements.csv&quot;, setclass = &quot;tbl_df&quot;, na = c(&quot;NULL&quot;, &quot;PrivacySuppressed&quot;)) %&gt;% clean_names() head(scorecard)  ## # A tibble: 6 x 122 ## unitid opeid opeid6 instnm city ## &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; ## 1 100654 100200 1002 Alabama A &amp; M University Normal ## 2 100663 105200 1052 University of Alabama at Birmingham Birmingham ## 3 100690 2503400 25034 Amridge University Montgomery ## 4 100706 105500 1055 University of Alabama in Huntsville Huntsville ## 5 100724 100500 1005 Alabama State University Montgomery ## 6 100751 105100 1051 The University of Alabama Tuscaloosa ## # .">
+  <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Load College scorecard data Load Earnings data Tidy and join Joins with data viz  semi- and anti-joins, mostly   Read in college scorecard data library(tidyverse) library(rio) library(janitor) scorecard &lt;- import(&quot;../../data/Most-Recent-Cohorts-Scorecard-Elements.csv&quot;, setclass = &quot;tbl_df&quot;, na = c(&quot;NULL&quot;, &quot;PrivacySuppressed&quot;)) %&gt;% clean_names() head(scorecard)  ## # A tibble: 6 x 122 ## unitid opeid opeid6 instnm city ## &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; ## 1 100654 100200 1002 Alabama A &amp; M University Normal ## 2 100663 105200 1052 University of Alabama at Birmingham Birmingham ## 3 100690 2503400 25034 Amridge University Montgomery ## 4 100706 105500 1055 University of Alabama in Huntsville Huntsville ## 5 100724 100500 1005 Alabama State University Montgomery ## 6 100751 105100 1051 The University of Alabama Tuscaloosa ## # .">
+  <meta name="twitter:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Load College scorecard data Load Earnings data Tidy and join Joins with data viz  semi- and anti-joins, mostly   Read in college …">
+  <meta name="author" content="Daniel Anderson"/>
+  <meta property="og:image" content="/img/scatter.png" />
+  <meta name="twitter:image" content="/img/scatter.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@DJAnderson_07" />
+  <meta name="twitter:creator" content="@DJAnderson_07" />
+  <meta property="og:url" content="/page/classr/slides/w7p2/w7p2/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Data Science in Education" />
+
+  <meta name="generator" content="Hugo 0.24.1" />
+  <link rel="canonical" href="/page/classr/slides/w7p2/w7p2/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Data Science in Education">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Data Science in Education</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">esvis</a>
+              <div class="navlinks-children">
+                
+                  <a href="/post/esvis-part-1">Introduction to the esvis package</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Vita</a>
+              <div class="navlinks-children">
+                
+                  <a href="/page/conference_pres">conference presentations</a>
+                
+                  <a href="/page/publications">publications</a>
+                
+                  <a href="/page/software">software</a>
+                
+                  <a href="/page/teaching">teaching</a>
+                
+              </div>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Data Science in Education" href="/">
+            <img class="avatar-img" src="/img/scatter.png" alt="Data Science in Education" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>More on Joins (lab)</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<style>
+em {
+  font-style: italic
+}
+</style>
+
+<style>
+strong {
+  font-weight: bold;
+}
+</style>
+
+<h2 id="agenda">Agenda</h2>
+
+<ul>
+<li>Load College scorecard data</li>
+<li>Load Earnings data</li>
+<li>Tidy and join</li>
+<li>Joins with data viz
+
+<ul>
+<li>semi- and anti-joins, mostly</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="read-in-college-scorecard-data">Read in college scorecard data</h2>
+
+<pre><code class="language-r">library(tidyverse)
+library(rio)
+library(janitor)
+scorecard &lt;- import(&quot;../../data/Most-Recent-Cohorts-Scorecard-Elements.csv&quot;,
+                      setclass = &quot;tbl_df&quot;,
+                      na = c(&quot;NULL&quot;, &quot;PrivacySuppressed&quot;)) %&gt;% 
+  clean_names()
+head(scorecard)
+</code></pre>
+
+<pre><code>## # A tibble: 6 x 122
+##   unitid   opeid opeid6                              instnm       city
+##    &lt;int&gt;   &lt;int&gt;  &lt;int&gt;                               &lt;chr&gt;      &lt;chr&gt;
+## 1 100654  100200   1002            Alabama A &amp; M University     Normal
+## 2 100663  105200   1052 University of Alabama at Birmingham Birmingham
+## 3 100690 2503400  25034                  Amridge University Montgomery
+## 4 100706  105500   1055 University of Alabama in Huntsville Huntsville
+## 5 100724  100500   1005            Alabama State University Montgomery
+## 6 100751  105100   1051           The University of Alabama Tuscaloosa
+## # ... with 117 more variables: stabbr &lt;chr&gt;, insturl &lt;chr&gt;, npcurl &lt;chr&gt;,
+## #   hcm2 &lt;int&gt;, preddeg &lt;int&gt;, control &lt;int&gt;, locale &lt;int&gt;, hbcu &lt;int&gt;,
+## #   pbi &lt;int&gt;, annhi &lt;int&gt;, tribal &lt;int&gt;, aanapii &lt;int&gt;, hsi &lt;int&gt;,
+## #   nanti &lt;int&gt;, menonly &lt;int&gt;, womenonly &lt;int&gt;, relaffil &lt;int&gt;,
+## #   satvr25 &lt;int&gt;, satvr75 &lt;int&gt;, satmt25 &lt;int&gt;, satmt75 &lt;int&gt;,
+## #   satwr25 &lt;int&gt;, satwr75 &lt;int&gt;, satvrmid &lt;int&gt;, satmtmid &lt;int&gt;,
+## #   satwrmid &lt;int&gt;, actcm25 &lt;int&gt;, actcm75 &lt;int&gt;, acten25 &lt;int&gt;,
+## #   acten75 &lt;int&gt;, actmt25 &lt;int&gt;, actmt75 &lt;int&gt;, actwr25 &lt;int&gt;,
+## #   actwr75 &lt;int&gt;, actcmmid &lt;int&gt;, actenmid &lt;int&gt;, actmtmid &lt;int&gt;,
+## #   actwrmid &lt;int&gt;, sat_avg &lt;int&gt;, sat_avg_all &lt;int&gt;, pcip01 &lt;dbl&gt;,
+## #   pcip03 &lt;dbl&gt;, pcip04 &lt;dbl&gt;, pcip05 &lt;dbl&gt;, pcip09 &lt;dbl&gt;, pcip10 &lt;dbl&gt;,
+## #   pcip11 &lt;dbl&gt;, pcip12 &lt;dbl&gt;, pcip13 &lt;dbl&gt;, pcip14 &lt;dbl&gt;, pcip15 &lt;dbl&gt;,
+## #   pcip16 &lt;dbl&gt;, pcip19 &lt;dbl&gt;, pcip22 &lt;dbl&gt;, pcip23 &lt;dbl&gt;, pcip24 &lt;dbl&gt;,
+## #   pcip25 &lt;dbl&gt;, pcip26 &lt;dbl&gt;, pcip27 &lt;dbl&gt;, pcip29 &lt;dbl&gt;, pcip30 &lt;dbl&gt;,
+## #   pcip31 &lt;dbl&gt;, pcip38 &lt;dbl&gt;, pcip39 &lt;dbl&gt;, pcip40 &lt;dbl&gt;, pcip41 &lt;dbl&gt;,
+## #   pcip42 &lt;dbl&gt;, pcip43 &lt;dbl&gt;, pcip44 &lt;dbl&gt;, pcip45 &lt;dbl&gt;, pcip46 &lt;dbl&gt;,
+## #   pcip47 &lt;dbl&gt;, pcip48 &lt;dbl&gt;, pcip49 &lt;dbl&gt;, pcip50 &lt;dbl&gt;, pcip51 &lt;dbl&gt;,
+## #   pcip52 &lt;dbl&gt;, pcip54 &lt;dbl&gt;, distanceonly &lt;int&gt;, ugds &lt;int&gt;,
+## #   ugds_white &lt;dbl&gt;, ugds_black &lt;dbl&gt;, ugds_hisp &lt;dbl&gt;, ugds_asian &lt;dbl&gt;,
+## #   ugds_aian &lt;dbl&gt;, ugds_nhpi &lt;dbl&gt;, ugds_2mor &lt;dbl&gt;, ugds_nra &lt;dbl&gt;,
+## #   ugds_unkn &lt;dbl&gt;, pptug_ef &lt;dbl&gt;, curroper &lt;int&gt;, npt4_pub &lt;int&gt;,
+## #   npt4_priv &lt;int&gt;, npt41_pub &lt;int&gt;, npt42_pub &lt;int&gt;, npt43_pub &lt;int&gt;,
+## #   npt44_pub &lt;int&gt;, npt45_pub &lt;int&gt;, npt41_priv &lt;int&gt;, npt42_priv &lt;int&gt;,
+## #   ...
+</code></pre>
+
+<hr />
+
+<h2 id="read-in-earnings-data">Read in earnings data</h2>
+
+<pre><code class="language-r">earnings &lt;- import(&quot;../../data/Most-Recent-Cohorts-Treasury-Elements.csv&quot;, 
+                   setclass = &quot;tbl_df&quot;,
+                   na = c(&quot;NULL&quot;, &quot;PrivacySuppressed&quot;)) %&gt;% 
+  clean_names()
+head(earnings)
+</code></pre>
+
+<pre><code>## # A tibble: 6 x 89
+##   unitid   opeid opeid6                              instnm count_ed
+##    &lt;int&gt;   &lt;int&gt;  &lt;int&gt;                               &lt;chr&gt;    &lt;int&gt;
+## 1 100654  100200   1002            Alabama A &amp; M University     1277
+## 2 100663  105200   1052 University of Alabama at Birmingham     2831
+## 3 100690 2503400  25034                  Amridge University      191
+## 4 100706  105500   1055 University of Alabama in Huntsville     1361
+## 5 100724  100500   1005            Alabama State University     1609
+## 6 100751  105100   1051           The University of Alabama     4210
+## # ... with 84 more variables: agege24 &lt;dbl&gt;, pct_white &lt;dbl&gt;,
+## #   pct_black &lt;dbl&gt;, pct_asian &lt;dbl&gt;, pct_hispanic &lt;dbl&gt;, pct_ba &lt;dbl&gt;,
+## #   pct_grad_prof &lt;dbl&gt;, pct_born_us &lt;dbl&gt;, median_hh_inc &lt;dbl&gt;,
+## #   poverty_rate &lt;dbl&gt;, unemp_rate &lt;dbl&gt;, ln_median_hh_inc &lt;dbl&gt;,
+## #   count_nwne_p10 &lt;int&gt;, count_wne_p10 &lt;int&gt;, mn_earn_wne_p10 &lt;int&gt;,
+## #   md_earn_wne_p10 &lt;int&gt;, pct10_earn_wne_p10 &lt;int&gt;,
+## #   pct25_earn_wne_p10 &lt;int&gt;, pct75_earn_wne_p10 &lt;int&gt;,
+## #   pct90_earn_wne_p10 &lt;int&gt;, sd_earn_wne_p10 &lt;int&gt;,
+## #   count_wne_inc1_p10 &lt;int&gt;, count_wne_inc2_p10 &lt;int&gt;,
+## #   count_wne_inc3_p10 &lt;int&gt;, count_wne_indep0_inc1_p10 &lt;int&gt;,
+## #   count_wne_indep0_p10 &lt;int&gt;, count_wne_indep1_p10 &lt;int&gt;,
+## #   count_wne_male0_p10 &lt;int&gt;, count_wne_male1_p10 &lt;int&gt;,
+## #   gt_25k_p10 &lt;dbl&gt;, mn_earn_wne_inc1_p10 &lt;int&gt;,
+## #   mn_earn_wne_inc2_p10 &lt;int&gt;, mn_earn_wne_inc3_p10 &lt;int&gt;,
+## #   mn_earn_wne_indep0_inc1_p10 &lt;int&gt;, mn_earn_wne_indep0_p10 &lt;int&gt;,
+## #   mn_earn_wne_indep1_p10 &lt;int&gt;, mn_earn_wne_male0_p10 &lt;int&gt;,
+## #   mn_earn_wne_male1_p10 &lt;int&gt;, count_nwne_p6 &lt;int&gt;, count_wne_p6 &lt;int&gt;,
+## #   mn_earn_wne_p6 &lt;int&gt;, md_earn_wne_p6 &lt;int&gt;, pct10_earn_wne_p6 &lt;int&gt;,
+## #   pct25_earn_wne_p6 &lt;int&gt;, pct75_earn_wne_p6 &lt;int&gt;,
+## #   pct90_earn_wne_p6 &lt;int&gt;, sd_earn_wne_p6 &lt;int&gt;,
+## #   count_wne_inc1_p6 &lt;int&gt;, count_wne_inc2_p6 &lt;int&gt;,
+## #   count_wne_inc3_p6 &lt;int&gt;, count_wne_indep0_inc1_p6 &lt;int&gt;,
+## #   count_wne_indep0_p6 &lt;int&gt;, count_wne_indep1_p6 &lt;int&gt;,
+## #   count_wne_male0_p6 &lt;int&gt;, count_wne_male1_p6 &lt;int&gt;, gt_25k_p6 &lt;dbl&gt;,
+## #   mn_earn_wne_inc1_p6 &lt;int&gt;, mn_earn_wne_inc2_p6 &lt;int&gt;,
+## #   mn_earn_wne_inc3_p6 &lt;int&gt;, mn_earn_wne_indep0_inc1_p6 &lt;int&gt;,
+## #   mn_earn_wne_indep0_p6 &lt;int&gt;, mn_earn_wne_indep1_p6 &lt;int&gt;,
+## #   mn_earn_wne_male0_p6 &lt;int&gt;, mn_earn_wne_male1_p6 &lt;int&gt;,
+## #   count_nwne_p7 &lt;int&gt;, count_wne_p7 &lt;int&gt;, mn_earn_wne_p7 &lt;int&gt;,
+## #   sd_earn_wne_p7 &lt;int&gt;, gt_25k_p7 &lt;dbl&gt;, count_nwne_p8 &lt;int&gt;,
+## #   count_wne_p8 &lt;int&gt;, mn_earn_wne_p8 &lt;int&gt;, md_earn_wne_p8 &lt;int&gt;,
+## #   pct10_earn_wne_p8 &lt;int&gt;, pct25_earn_wne_p8 &lt;int&gt;,
+## #   pct75_earn_wne_p8 &lt;int&gt;, pct90_earn_wne_p8 &lt;int&gt;,
+## #   sd_earn_wne_p8 &lt;int&gt;, gt_25k_p8 &lt;dbl&gt;, count_nwne_p9 &lt;int&gt;,
+## #   count_wne_p9 &lt;int&gt;, mn_earn_wne_p9 &lt;int&gt;, sd_earn_wne_p9 &lt;int&gt;,
+## #   gt_25k_p9 &lt;dbl&gt;
+</code></pre>
+
+<hr />
+
+<h2 id="pop-quiz-of-sorts">Pop Quiz (of sorts)</h2>
+
+<p>With a partner, or by yourself, try to address the following:</p>
+
+<ul>
+<li>What is the keyed variable(s) in each dataset. Confirm that this is so.</li>
+<li>How would you go about merging these datasets?</li>
+</ul>
+
+<hr />
+
+<h2 id="keyed-variables">Keyed variables</h2>
+
+<ul>
+<li>unitid?</li>
+</ul>
+
+<pre><code class="language-r">scorecard %&gt;% 
+  count(unitid) %&gt;% 
+  filter(n &gt; 1)
+</code></pre>
+
+<pre><code>## # A tibble: 0 x 2
+## # ... with 2 variables: unitid &lt;int&gt;, n &lt;int&gt;
+</code></pre>
+
+<pre><code class="language-r">earnings %&gt;% 
+  count(unitid) %&gt;% 
+  filter(n &gt; 1)
+</code></pre>
+
+<pre><code>## # A tibble: 0 x 2
+## # ... with 2 variables: unitid &lt;int&gt;, n &lt;int&gt;
+</code></pre>
+
+<hr />
+
+<h2 id="joining">Joining</h2>
+
+<p>We have more than one column in common. Would it hurt to merge by all?</p>
+
+<ul>
+<li>As long as the variables are the same thing and have the same values in both datasets, then it&rsquo;s fine and even preferable to merge by all the variables. Otherwise, you&rsquo;ll end up with <code>.x</code> and <code>.y</code> versions of the same thing.</li>
+</ul>
+
+<hr />
+
+<pre><code class="language-r">left_join(scorecard, earnings, by = &quot;unitid&quot;)
+</code></pre>
+
+<pre><code>## # A tibble: 7,703 x 210
+##    unitid opeid.x opeid6.x                            instnm.x
+##     &lt;int&gt;   &lt;int&gt;    &lt;int&gt;                               &lt;chr&gt;
+##  1 100654  100200     1002            Alabama A &amp; M University
+##  2 100663  105200     1052 University of Alabama at Birmingham
+##  3 100690 2503400    25034                  Amridge University
+##  4 100706  105500     1055 University of Alabama in Huntsville
+##  5 100724  100500     1005            Alabama State University
+##  6 100751  105100     1051           The University of Alabama
+##  7 100760  100700     1007   Central Alabama Community College
+##  8 100812  100800     1008             Athens State University
+##  9 100830  831000     8310     Auburn University at Montgomery
+## 10 100858  100900     1009                   Auburn University
+## # ... with 7,693 more rows, and 206 more variables: city &lt;chr&gt;,
+## #   stabbr &lt;chr&gt;, insturl &lt;chr&gt;, npcurl &lt;chr&gt;, hcm2 &lt;int&gt;, preddeg &lt;int&gt;,
+## #   control &lt;int&gt;, locale &lt;int&gt;, hbcu &lt;int&gt;, pbi &lt;int&gt;, annhi &lt;int&gt;,
+## #   tribal &lt;int&gt;, aanapii &lt;int&gt;, hsi &lt;int&gt;, nanti &lt;int&gt;, menonly &lt;int&gt;,
+## #   womenonly &lt;int&gt;, relaffil &lt;int&gt;, satvr25 &lt;int&gt;, satvr75 &lt;int&gt;,
+## #   satmt25 &lt;int&gt;, satmt75 &lt;int&gt;, satwr25 &lt;int&gt;, satwr75 &lt;int&gt;,
+## #   satvrmid &lt;int&gt;, satmtmid &lt;int&gt;, satwrmid &lt;int&gt;, actcm25 &lt;int&gt;,
+## #   actcm75 &lt;int&gt;, acten25 &lt;int&gt;, acten75 &lt;int&gt;, actmt25 &lt;int&gt;,
+## #   actmt75 &lt;int&gt;, actwr25 &lt;int&gt;, actwr75 &lt;int&gt;, actcmmid &lt;int&gt;,
+## #   actenmid &lt;int&gt;, actmtmid &lt;int&gt;, actwrmid &lt;int&gt;, sat_avg &lt;int&gt;,
+## #   sat_avg_all &lt;int&gt;, pcip01 &lt;dbl&gt;, pcip03 &lt;dbl&gt;, pcip04 &lt;dbl&gt;,
+## #   pcip05 &lt;dbl&gt;, pcip09 &lt;dbl&gt;, pcip10 &lt;dbl&gt;, pcip11 &lt;dbl&gt;, pcip12 &lt;dbl&gt;,
+## #   pcip13 &lt;dbl&gt;, pcip14 &lt;dbl&gt;, pcip15 &lt;dbl&gt;, pcip16 &lt;dbl&gt;, pcip19 &lt;dbl&gt;,
+## #   pcip22 &lt;dbl&gt;, pcip23 &lt;dbl&gt;, pcip24 &lt;dbl&gt;, pcip25 &lt;dbl&gt;, pcip26 &lt;dbl&gt;,
+## #   pcip27 &lt;dbl&gt;, pcip29 &lt;dbl&gt;, pcip30 &lt;dbl&gt;, pcip31 &lt;dbl&gt;, pcip38 &lt;dbl&gt;,
+## #   pcip39 &lt;dbl&gt;, pcip40 &lt;dbl&gt;, pcip41 &lt;dbl&gt;, pcip42 &lt;dbl&gt;, pcip43 &lt;dbl&gt;,
+## #   pcip44 &lt;dbl&gt;, pcip45 &lt;dbl&gt;, pcip46 &lt;dbl&gt;, pcip47 &lt;dbl&gt;, pcip48 &lt;dbl&gt;,
+## #   pcip49 &lt;dbl&gt;, pcip50 &lt;dbl&gt;, pcip51 &lt;dbl&gt;, pcip52 &lt;dbl&gt;, pcip54 &lt;dbl&gt;,
+## #   distanceonly &lt;int&gt;, ugds &lt;int&gt;, ugds_white &lt;dbl&gt;, ugds_black &lt;dbl&gt;,
+## #   ugds_hisp &lt;dbl&gt;, ugds_asian &lt;dbl&gt;, ugds_aian &lt;dbl&gt;, ugds_nhpi &lt;dbl&gt;,
+## #   ugds_2mor &lt;dbl&gt;, ugds_nra &lt;dbl&gt;, ugds_unkn &lt;dbl&gt;, pptug_ef &lt;dbl&gt;,
+## #   curroper &lt;int&gt;, npt4_pub &lt;int&gt;, npt4_priv &lt;int&gt;, npt41_pub &lt;int&gt;,
+## #   npt42_pub &lt;int&gt;, npt43_pub &lt;int&gt;, npt44_pub &lt;int&gt;, npt45_pub &lt;int&gt;,
+## #   npt41_priv &lt;int&gt;, ...
+</code></pre>
+
+<hr />
+
+<h2 id="join-by-all-variables-in-common">Join by all variables in common</h2>
+
+<pre><code class="language-r">joined &lt;- left_join(scorecard, earnings)
+</code></pre>
+
+<pre><code>## Joining, by = c(&quot;unitid&quot;, &quot;opeid&quot;, &quot;opeid6&quot;, &quot;instnm&quot;, &quot;md_earn_wne_p10&quot;, &quot;gt_25k_p6&quot;)
+</code></pre>
+
+<pre><code class="language-r">joined
+</code></pre>
+
+<pre><code>## # A tibble: 7,703 x 205
+##    unitid   opeid opeid6                              instnm
+##     &lt;int&gt;   &lt;int&gt;  &lt;int&gt;                               &lt;chr&gt;
+##  1 100654  100200   1002            Alabama A &amp; M University
+##  2 100663  105200   1052 University of Alabama at Birmingham
+##  3 100690 2503400  25034                  Amridge University
+##  4 100706  105500   1055 University of Alabama in Huntsville
+##  5 100724  100500   1005            Alabama State University
+##  6 100751  105100   1051           The University of Alabama
+##  7 100760  100700   1007   Central Alabama Community College
+##  8 100812  100800   1008             Athens State University
+##  9 100830  831000   8310     Auburn University at Montgomery
+## 10 100858  100900   1009                   Auburn University
+## # ... with 7,693 more rows, and 201 more variables: city &lt;chr&gt;,
+## #   stabbr &lt;chr&gt;, insturl &lt;chr&gt;, npcurl &lt;chr&gt;, hcm2 &lt;int&gt;, preddeg &lt;int&gt;,
+## #   control &lt;int&gt;, locale &lt;int&gt;, hbcu &lt;int&gt;, pbi &lt;int&gt;, annhi &lt;int&gt;,
+## #   tribal &lt;int&gt;, aanapii &lt;int&gt;, hsi &lt;int&gt;, nanti &lt;int&gt;, menonly &lt;int&gt;,
+## #   womenonly &lt;int&gt;, relaffil &lt;int&gt;, satvr25 &lt;int&gt;, satvr75 &lt;int&gt;,
+## #   satmt25 &lt;int&gt;, satmt75 &lt;int&gt;, satwr25 &lt;int&gt;, satwr75 &lt;int&gt;,
+## #   satvrmid &lt;int&gt;, satmtmid &lt;int&gt;, satwrmid &lt;int&gt;, actcm25 &lt;int&gt;,
+## #   actcm75 &lt;int&gt;, acten25 &lt;int&gt;, acten75 &lt;int&gt;, actmt25 &lt;int&gt;,
+## #   actmt75 &lt;int&gt;, actwr25 &lt;int&gt;, actwr75 &lt;int&gt;, actcmmid &lt;int&gt;,
+## #   actenmid &lt;int&gt;, actmtmid &lt;int&gt;, actwrmid &lt;int&gt;, sat_avg &lt;int&gt;,
+## #   sat_avg_all &lt;int&gt;, pcip01 &lt;dbl&gt;, pcip03 &lt;dbl&gt;, pcip04 &lt;dbl&gt;,
+## #   pcip05 &lt;dbl&gt;, pcip09 &lt;dbl&gt;, pcip10 &lt;dbl&gt;, pcip11 &lt;dbl&gt;, pcip12 &lt;dbl&gt;,
+## #   pcip13 &lt;dbl&gt;, pcip14 &lt;dbl&gt;, pcip15 &lt;dbl&gt;, pcip16 &lt;dbl&gt;, pcip19 &lt;dbl&gt;,
+## #   pcip22 &lt;dbl&gt;, pcip23 &lt;dbl&gt;, pcip24 &lt;dbl&gt;, pcip25 &lt;dbl&gt;, pcip26 &lt;dbl&gt;,
+## #   pcip27 &lt;dbl&gt;, pcip29 &lt;dbl&gt;, pcip30 &lt;dbl&gt;, pcip31 &lt;dbl&gt;, pcip38 &lt;dbl&gt;,
+## #   pcip39 &lt;dbl&gt;, pcip40 &lt;dbl&gt;, pcip41 &lt;dbl&gt;, pcip42 &lt;dbl&gt;, pcip43 &lt;dbl&gt;,
+## #   pcip44 &lt;dbl&gt;, pcip45 &lt;dbl&gt;, pcip46 &lt;dbl&gt;, pcip47 &lt;dbl&gt;, pcip48 &lt;dbl&gt;,
+## #   pcip49 &lt;dbl&gt;, pcip50 &lt;dbl&gt;, pcip51 &lt;dbl&gt;, pcip52 &lt;dbl&gt;, pcip54 &lt;dbl&gt;,
+## #   distanceonly &lt;int&gt;, ugds &lt;int&gt;, ugds_white &lt;dbl&gt;, ugds_black &lt;dbl&gt;,
+## #   ugds_hisp &lt;dbl&gt;, ugds_asian &lt;dbl&gt;, ugds_aian &lt;dbl&gt;, ugds_nhpi &lt;dbl&gt;,
+## #   ugds_2mor &lt;dbl&gt;, ugds_nra &lt;dbl&gt;, ugds_unkn &lt;dbl&gt;, pptug_ef &lt;dbl&gt;,
+## #   curroper &lt;int&gt;, npt4_pub &lt;int&gt;, npt4_priv &lt;int&gt;, npt41_pub &lt;int&gt;,
+## #   npt42_pub &lt;int&gt;, npt43_pub &lt;int&gt;, npt44_pub &lt;int&gt;, npt45_pub &lt;int&gt;,
+## #   npt41_priv &lt;int&gt;, ...
+</code></pre>
+
+<hr />
+
+<h2 id="sometimes-this-can-lead-to-a-mess">Sometimes this can lead to a mess</h2>
+
+<ul>
+<li>How would you go about tidying the prior dataset?</li>
+<li>Take a few minutes and discuss this with your neighbor. Try a few strategies, if you&rsquo;d like.</li>
+</ul>
+
+<hr />
+
+<h2 id="specific-rqs">Specific RQs?</h2>
+
+<ul>
+<li><p>With big(-ish) datasets like this, it&rsquo;s generally best to first think about your research questions/the things you want to explore, and limit the variables before the merge.</p></li>
+
+<li><p>Let&rsquo;s explore the relation between SAT scores and income after college.</p></li>
+</ul>
+
+<hr />
+
+<h2 id="first-select-variables">First: Select variables</h2>
+
+<ul>
+<li>From <em>earnings</em>
+
+<ul>
+<li>pct25_earn_wne_p10, md_earn_wne_p10, pct75_earn_wne_p10
+
+<ul>
+<li>25th, Median (50th) and 75th percentiles of earnings for students 10 years after entry</li>
+</ul></li>
+<li>count_ed
+
+<ul>
+<li>Count of students in the earnings cohort</li>
+</ul></li>
+<li>unitid
+
+<ul>
+<li>Keyed variable</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<pre><code class="language-r">earnings_small &lt;- earnings %&gt;% 
+  select(1, count_ed, pct25_earn_wne_p10, md_earn_wne_p10, pct75_earn_wne_p10)  
+earnings_small
+</code></pre>
+
+<pre><code>## # A tibble: 7,703 x 5
+##    unitid count_ed pct25_earn_wne_p10 md_earn_wne_p10 pct75_earn_wne_p10
+##     &lt;int&gt;    &lt;int&gt;              &lt;int&gt;           &lt;int&gt;              &lt;int&gt;
+##  1 100654     1277              17500           30300              46600
+##  2 100663     2831              24400           39700              56500
+##  3 100690      191              22900           40100              57900
+##  4 100706     1361              25900           45500              69500
+##  5 100724     1609              14600           26600              40600
+##  6 100751     4210              27600           41900              61300
+##  7 100760     1091              15500           27500              41400
+##  8 100812     1144              25400           39000              49800
+##  9 100830     1178              20100           35000              49200
+## 10 100858     3536              30500           45700              66900
+## # ... with 7,693 more rows
+</code></pre>
+
+<hr />
+
+<ul>
+<li>From <em>scorecard</em>
+
+<ul>
+<li>SAT percentile variables (25th, 50th, and 75th; exclude averages)</li>
+<li>UNITID
+
+<ul>
+<li>Keyed variable</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<pre><code class="language-r">scorecard_small &lt;- scorecard %&gt;% 
+  select(1, contains(&quot;sat&quot;)) %&gt;% 
+  select(-contains(&quot;avg&quot;))
+scorecard_small
+</code></pre>
+
+<pre><code>## # A tibble: 7,703 x 10
+##    unitid satvr25 satvr75 satmt25 satmt75 satwr25 satwr75 satvrmid
+##     &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;    &lt;int&gt;
+##  1 100654     377     470     370     470     370     470      424
+##  2 100663     500     640     490     640      NA      NA      570
+##  3 100690      NA      NA      NA      NA      NA      NA       NA
+##  4 100706     520     670     530     650      NA      NA      595
+##  5 100724     380     470     380     480      NA      NA      425
+##  6 100751     490     620     500     630     480     600      555
+##  7 100760      NA      NA      NA      NA      NA      NA       NA
+##  8 100812      NA      NA      NA      NA      NA      NA       NA
+##  9 100830     433     538     468     550      NA      NA      486
+## 10 100858     520     630     530     645     520     610      575
+## # ... with 7,693 more rows, and 2 more variables: satmtmid &lt;int&gt;,
+## #   satwrmid &lt;int&gt;
+</code></pre>
+
+<hr />
+
+<h2 id="a-note-on-the-sat-variables">A note on the SAT variables</h2>
+
+<pre><code class="language-r">names(scorecard_small)
+</code></pre>
+
+<pre><code>##  [1] &quot;unitid&quot;   &quot;satvr25&quot;  &quot;satvr75&quot;  &quot;satmt25&quot;  &quot;satmt75&quot;  &quot;satwr25&quot; 
+##  [7] &quot;satwr75&quot;  &quot;satvrmid&quot; &quot;satmtmid&quot; &quot;satwrmid&quot;
+</code></pre>
+
+<hr />
+
+<h1 id="take-it-from-here-tidy-then-join-15-20-minutes">Take it from here: Tidy then join! (15-20 minutes)</h1>
+
+<hr />
+
+<h2 id="tidy-earnings">Tidy earnings</h2>
+
+<pre><code class="language-r">earnings_tidy &lt;- earnings_small %&gt;% 
+  gather(var, earnings, -1:-2) %&gt;% 
+  separate(var, c(&quot;ptile&quot;, &quot;dis1&quot;, &quot;dis2&quot;, &quot;dis3&quot;), sep = &quot;_&quot;) %&gt;% 
+  mutate(ptile = ifelse(ptile == &quot;md&quot;, &quot;50&quot;, ptile),
+         ptile = parse_number(ptile)) %&gt;% 
+  select(-contains(&quot;dis&quot;))
+earnings_tidy
+</code></pre>
+
+<pre><code>## # A tibble: 23,109 x 4
+##    unitid count_ed ptile earnings
+##     &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;
+##  1 100654     1277    25    17500
+##  2 100663     2831    25    24400
+##  3 100690      191    25    22900
+##  4 100706     1361    25    25900
+##  5 100724     1609    25    14600
+##  6 100751     4210    25    27600
+##  7 100760     1091    25    15500
+##  8 100812     1144    25    25400
+##  9 100830     1178    25    20100
+## 10 100858     3536    25    30500
+## # ... with 23,099 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="tidy-scorecard">Tidy scorecard</h2>
+
+<pre><code class="language-r">scorecard_tidy &lt;- scorecard_small %&gt;% 
+  gather(var, sat, -1) %&gt;% 
+  separate(var, c(&quot;dis&quot;, &quot;tmp&quot;), 3) %&gt;% 
+  separate(tmp, c(&quot;test&quot;, &quot;ptile&quot;), 2) %&gt;% 
+  mutate(ptile = as.numeric(recode(ptile, &quot;mid&quot; = &quot;50&quot;))) %&gt;% 
+  select(-dis)
+scorecard_tidy
+</code></pre>
+
+<pre><code>## # A tibble: 69,327 x 4
+##    unitid  test ptile   sat
+##     &lt;int&gt; &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;
+##  1 100654    vr    25   377
+##  2 100663    vr    25   500
+##  3 100690    vr    25    NA
+##  4 100706    vr    25   520
+##  5 100724    vr    25   380
+##  6 100751    vr    25   490
+##  7 100760    vr    25    NA
+##  8 100812    vr    25    NA
+##  9 100830    vr    25   433
+## 10 100858    vr    25   520
+## # ... with 69,317 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="join">Join!</h2>
+
+<pre><code class="language-r">td &lt;- left_join(earnings_tidy, scorecard_tidy)
+</code></pre>
+
+<pre><code>## Joining, by = c(&quot;unitid&quot;, &quot;ptile&quot;)
+</code></pre>
+
+<pre><code class="language-r">td
+</code></pre>
+
+<pre><code>## # A tibble: 69,327 x 6
+##    unitid count_ed ptile earnings  test   sat
+##     &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;chr&gt; &lt;int&gt;
+##  1 100654     1277    25    17500    vr   377
+##  2 100654     1277    25    17500    mt   370
+##  3 100654     1277    25    17500    wr   370
+##  4 100663     2831    25    24400    vr   500
+##  5 100663     2831    25    24400    mt   490
+##  6 100663     2831    25    24400    wr    NA
+##  7 100690      191    25    22900    vr    NA
+##  8 100690      191    25    22900    mt    NA
+##  9 100690      191    25    22900    wr    NA
+## 10 100706     1361    25    25900    vr   520
+## # ... with 69,317 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="visualize">Visualize!</h2>
+
+<h1 id="explore-relation-between-sat-scores-and-earnings-10-years-later">Explore relation between SAT scores and earnings 10 years later</h1>
+
+<ul>
+<li>10 minutes.</li>
+<li>Come up with a couple plots. I&rsquo;ll then walk you through what I did.</li>
+</ul>
+
+<hr />
+
+<pre><code class="language-r">theme_set(theme_light())
+ggplot(td, aes(sat, earnings, color = factor(ptile))) +
+  geom_point(aes(size = count_ed), alpha = 0.2) +
+  geom_smooth() +
+  scale_color_brewer(palette = &quot;Set2&quot;) +
+  facet_grid(~test)
+</code></pre>
+
+<p><img src="../assets/fig/viz1-1.png" alt="plot of chunk viz1" /></p>
+
+<hr />
+
+<h2 id="couple-things">Couple things</h2>
+
+<ul>
+<li>All our points look basically the same size, even though we told them to vary according to count.</li>
+<li>Our axis label goes way up high.</li>
+</ul>
+
+<p>What&rsquo;s causing these?</p>
+
+<hr />
+
+<pre><code class="language-r">ggplot(td, aes(count_ed)) +
+  geom_histogram()
+</code></pre>
+
+<p><img src="../assets/fig/hist_count-1.png" alt="plot of chunk hist_count" /></p>
+
+<hr />
+
+<h2 id="what-school-s-is-so-large">What school(s) is so large?</h2>
+
+<pre><code class="language-r">huge &lt;- td %&gt;% 
+  filter(count_ed &gt; 50000) %&gt;% 
+  distinct(unitid) 
+huge
+</code></pre>
+
+<pre><code>## # A tibble: 19 x 1
+##    unitid
+##     &lt;int&gt;
+##  1 380465
+##  2 382063
+##  3 405997
+##  4 420042
+##  5 432223
+##  6 432241
+##  7 434973
+##  8 439297
+##  9 440420
+## 10 440457
+## 11 440466
+## 12 442161
+## 13 443544
+## 14 445300
+## 15 445319
+## 16 445391
+## 17 446729
+## 18 448567
+## 19 448822
+</code></pre>
+
+<hr />
+
+<h2 id="semi-join">semi-join</h2>
+
+<ul>
+<li>We can use the <code>semi_join</code> with the <em>huge</em> dataset to extract the names associated with these school ids.</li>
+<li>Try it!</li>
+</ul>
+
+<hr />
+
+<ul>
+<li>What do you notice?</li>
+</ul>
+
+<blockquote>
+<ul>
+<li>Try using <code>anti_join</code> to remove these schools from your tidied data.</li>
+</ul>
+</blockquote>
+
+<pre><code class="language-r">semi_join(scorecard, huge) %&gt;% 
+  select(instnm)
+</code></pre>
+
+<pre><code>## Joining, by = &quot;unitid&quot;
+</code></pre>
+
+<pre><code>## # A tibble: 19 x 1
+##                                  instnm
+##                                   &lt;chr&gt;
+##  1           University of Phoenix-Utah
+##  2    University of Phoenix-Puerto Rico
+##  3     University of Phoenix-New Mexico
+##  4         University of Phoenix-Hawaii
+##  5     University of Phoenix-Washington
+##  6         University of Phoenix-Oregon
+##  7       University of Phoenix-Maryland
+##  8           University of Phoenix-Ohio
+##  9  University of Phoenix-Massachusetts
+## 10      University of Phoenix-Wisconsin
+## 11          University of Phoenix-Idaho
+## 12       University of Phoenix-Illinois
+## 13        University of Phoenix-Indiana
+## 14     University of Phoenix-New Jersey
+## 15      University of Phoenix-Minnesota
+## 16       University of Phoenix-Kentucky
+## 17           University of Phoenix-Iowa
+## 18 University of Phoenix-South Carolina
+## 19    University of Phoenix-Connecticut
+</code></pre>
+
+<hr />
+
+<h2 id="remove-university-of-phoenix-schools">Remove University of Phoenix Schools</h2>
+
+<pre><code class="language-r">td &lt;- anti_join(td, huge)
+</code></pre>
+
+<pre><code>## Joining, by = &quot;unitid&quot;
+</code></pre>
+
+<pre><code class="language-r">td
+</code></pre>
+
+<pre><code>## # A tibble: 69,156 x 6
+##    unitid count_ed ptile earnings  test   sat
+##     &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;chr&gt; &lt;int&gt;
+##  1 100654     1277    25    17500    vr   377
+##  2 100654     1277    25    17500    mt   370
+##  3 100654     1277    25    17500    wr   370
+##  4 100663     2831    25    24400    vr   500
+##  5 100663     2831    25    24400    mt   490
+##  6 100663     2831    25    24400    wr    NA
+##  7 100690      191    25    22900    vr    NA
+##  8 100690      191    25    22900    mt    NA
+##  9 100690      191    25    22900    wr    NA
+## 10 100706     1361    25    25900    vr   520
+## # ... with 69,146 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="try-again">Try again</h2>
+
+<p>(a little better)</p>
+
+<pre><code class="language-r">ggplot(td, aes(sat, earnings, color = factor(ptile))) +
+  geom_point(aes(size = count_ed), alpha = 0.2) +
+  geom_smooth() +
+  scale_color_brewer(palette = &quot;Set2&quot;) +
+  facet_grid(~test)
+</code></pre>
+
+<p><img src="../assets/fig/viz2-1.png" alt="plot of chunk viz2" /></p>
+
+<hr />
+
+<h2 id="transform-y-axis">Transform y-axis</h2>
+
+<pre><code class="language-r">ggplot(td, aes(sat, earnings, color = factor(ptile))) +
+  geom_point(aes(size = count_ed), alpha = 0.2) +
+  geom_smooth() +
+  scale_color_brewer(palette = &quot;Set2&quot;) +
+  scale_y_log10(labels = scales::dollar) +
+  facet_grid(~test)
+</code></pre>
+
+<p><img src="../assets/fig/viz3-1.png" alt="plot of chunk viz3" /></p>
+
+<hr />
+
+<h2 id="difference-between-subjects">Difference between subjects?</h2>
+
+<ul>
+<li>Currently, we&rsquo;ve been looking at differences between percentiles within subject. How might you look at differences between subjects within percentiles?</li>
+</ul>
+
+<hr />
+
+<h2 id="flip-grouping-and-faceting">Flip grouping and faceting</h2>
+
+<ul>
+<li>Any evidence for differences by content area?</li>
+</ul>
+
+<pre><code class="language-r">ggplot(td, aes(sat, earnings, color = test)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth() +
+  scale_color_brewer(palette = &quot;Set2&quot;) +
+  scale_y_log10(label = scales::dollar) +
+  facet_grid(~ptile)
+</code></pre>
+
+<p><img src="../assets/fig/viz4-1.png" alt="plot of chunk viz4" /></p>
+
+<hr />
+
+<h2 id="oregon-schools">Oregon Schools</h2>
+
+<ul>
+<li>How could we use joins to limit our <em>td</em> dataset to only schools in Oregon?</li>
+<li>Try it</li>
+</ul>
+
+<hr />
+
+<h2 id="limit-to-oregon">Limit to Oregon</h2>
+
+<pre><code class="language-r">or_schools &lt;- scorecard %&gt;% 
+  select(1, stabbr) %&gt;% 
+  filter(stabbr == &quot;OR&quot;)
+
+or &lt;- semi_join(td, or_schools)
+</code></pre>
+
+<pre><code>## Joining, by = &quot;unitid&quot;
+</code></pre>
+
+<pre><code class="language-r">or
+</code></pre>
+
+<pre><code>## # A tibble: 846 x 6
+##    unitid count_ed ptile earnings  test   sat
+##     &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;chr&gt; &lt;int&gt;
+##  1 208080       73    25       NA    vr    NA
+##  2 208080       73    25       NA    mt    NA
+##  3 208080       73    25       NA    wr    NA
+##  4 208123       68    25       NA    vr    NA
+##  5 208123       68    25       NA    mt    NA
+##  6 208123       68    25       NA    wr    NA
+##  7 208187       NA    25       NA    vr    NA
+##  8 208187       NA    25       NA    mt    NA
+##  9 208187       NA    25       NA    wr    NA
+## 10 208239     1020    25    17200    vr    NA
+## # ... with 836 more rows
+</code></pre>
+
+<hr />
+
+<h2 id="reproduce-plot-for-oregon">Reproduce plot for Oregon</h2>
+
+<pre><code class="language-r">ggplot(or, aes(sat, earnings, color = factor(ptile))) +
+  geom_point(aes(size = count_ed), alpha = 0.7) +
+  geom_smooth(se = FALSE, span = 1.5) +
+  scale_color_brewer(palette = &quot;Set2&quot;) +
+  scale_y_log10(labels = scales::dollar) +
+  facet_grid(~test)
+</code></pre>
+
+<p><img src="../assets/fig/or_reproduce-1.png" alt="plot of chunk or_reproduce" /></p>
+
+<hr />
+
+<h2 id="another-example">Another example</h2>
+
+<p>Plot quartiles of schools</p>
+
+<pre><code class="language-r">or_math &lt;- filter(or, test == &quot;mt&quot;)
+ggplot(or_math, aes(factor(unitid), earnings)) +
+  geom_line(aes(group = factor(unitid)), color = &quot;gray70&quot;) +
+  geom_point(aes(color = factor(ptile))) + 
+  ggtitle(&quot;Oregon Schools&quot;) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+</code></pre>
+
+<p><img src="../assets/fig/or_connect_lines-1.png" alt="plot of chunk or_connect_lines" /></p>
+
+<hr />
+
+<h2 id="reorder">Reorder</h2>
+
+<pre><code class="language-r">ordered &lt;- or_math %&gt;% 
+  filter(ptile == 50 &amp; !is.na(earnings)) %&gt;% 
+  arrange(earnings) %&gt;% 
+  mutate(unitid2 = 1:n(),
+         unitid2 = factor(unitid2, 
+                          levels = unitid2, 
+                          labels = unitid)) %&gt;% 
+  select(1, 7)
+  
+or_math &lt;- left_join(or_math, ordered) 
+</code></pre>
+
+<hr />
+
+<h2 id="ordered-plot">Ordered plot</h2>
+
+<pre><code class="language-r">ggplot(or_math, aes(unitid2, earnings)) +
+  geom_line(aes(group = unitid2), color = &quot;gray70&quot;) +
+  geom_point(aes(color = factor(ptile))) + 
+  ggtitle(&quot;Oregon Schools&quot;) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+</code></pre>
+
+<p><img src="../assets/fig/or_ordered_plot-1.png" alt="plot of chunk or_ordered_plot" /></p>
+
+<hr />
+
+<h2 id="highlight-uo">Highlight UO</h2>
+
+<pre><code class="language-r">uo &lt;- semi_join(or_math, 
+          filter(scorecard, instnm == &quot;University of Oregon&quot;)) %&gt;% 
+      filter(test == &quot;mt&quot;)
+
+ggplot(or_math, aes(unitid2, earnings)) +
+  geom_line(aes(group = unitid2), color = &quot;gray70&quot;) +
+  geom_point(aes(color = factor(ptile))) + 
+  annotate(&quot;text&quot;, x = &quot;209551&quot;, y = 85000, label = &quot;UO&quot;, col = &quot;palegreen4&quot;, size = 12) +
+  geom_point(data = uo, size = 3, col = &quot;palegreen4&quot;) +
+  ggtitle(&quot;Oregon Schools&quot;) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+</code></pre>
+
+<hr />
+
+<p><img src="../assets/fig/highlight_uo_eval-1.png" alt="plot of chunk highlight_uo_eval" /></p>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="/page/classr/slides/w4p2/w4p2/" data-toggle="tooltip" data-placement="top" title="More on tidy data">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="/page/classr/slides/w1p2/w1p2/" data-toggle="tooltip" data-placement="top" title="Lab 1">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'http-www-dandersondata-com';
+    var disqus_identifier = '\/page\/classr\/slides\/w7p2\/w7p2\/';
+    var disqus_title = 'More on Joins (lab)';
+    var disqus_url = '\/page\/classr\/slides\/w7p2\/w7p2\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:daniela@uoregon.edu" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/DJAnderson07" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/DJAnderson_07" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/4959854/daniel-anderson" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.dandersondata.com">Daniel Anderson</a>
+                      
+          
+          
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Data Science in Education</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.24.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+
