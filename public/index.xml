@@ -206,5 +206,14 @@ The purpose of esvis is primarily to visualize differences in two or more distri
  Others? Tidyverse: Providing a grammar for&amp;hellip;  Graphics (ggplot) Data manipulations (dplyr, tidyr) Ever expanding specialized topics (not quite modeling yet, although there is some)  dplyr: A grammar for data wrangling Take a guess - what do you think the following do?</description>
     </item>
     
+    <item>
+      <title>esvis</title>
+      <link>/page/esvis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/esvis/</guid>
+      <description>The esvis package is designed to visually compare two or more distributions across the entirety of the scale, rather than only by measures of central tendency (e.g., means). There are also some functions for estimating effect size, including Cohen&amp;rsquo;s d, Hedges&amp;rsquo; g, percentage above a cut, transformed (normalized) percentage above a cut, the area under the curve (conceptually equivalent to the probability that a randomly selected individual from Distribution A has a higher value than a randomly selected individual from Distribution B), and the V statistic, which essentially transforms the area under the curve to standard deviation units (see Ho, 2009).</description>
+    </item>
+    
   </channel>
 </rss>

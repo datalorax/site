@@ -69,14 +69,6 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 1
 
 [[menu.main]]
-    identifier = "esvis_pkg"
     name = "esvis"
-    weight = 2
-
-[[menu.main]]
-    parent = "esvis_pkg"
-    name = "Introduction to the esvis package"
-    url = "post/esvis-part-1"
-    weight = 1
-
-
+    url = "page/esvis/"
+    weight = 3
