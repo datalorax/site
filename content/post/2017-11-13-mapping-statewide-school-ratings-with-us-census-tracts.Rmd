@@ -166,7 +166,7 @@ icons <- awesomeIcons(
 
 cols <- gplots::col2hex(c("red", "pink", "white", "lightgreen", "darkgreen"))
 
-pdx_acs %>%
+map <- pdx_acs %>%
   st_transform(crs = "+init=epsg:4326") %>%
   leaflet() %>%
   addProviderTiles(provider = "CartoDB.Positron") %>%
@@ -191,4 +191,11 @@ pdx_acs %>%
             labels = 5:1,
             title = "Achievement Ratings",
             opacity = 1)
+```
+
+```{r map_save, echo = FALSE}
+library(htmlwidgets)
+library(htmltools)
+dir.create("static/leaflet", showWarnings = FALSE)
+saveWidget(leafMap, "./static/leaflet/leafMap.html")
 ```

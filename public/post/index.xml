@@ -18,7 +18,7 @@
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       <author>daniela@uoregon.edu (Daniel Anderson)</author>
       <guid>/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
-      <description>In this post, I’d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.</description>
+      <description>--- title: Mapping Statewide School Ratings with US Census Tracts author: Daniel Anderson date: &#39;2017-11-13&#39; slug: mapping-statewide-school-ratings-with-us-census-tracts categories: [] tags: - data_vis ---             In this post, I’d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area.</description>
     </item>
     
     <item>
