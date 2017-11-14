@@ -1,0 +1,11 @@
+import_rcdetails	library	tidyverse	rio	janitor	ratings	import	%>%	clean_names	achievement	filter	district_name	spread	indicator	rating	select	school_name	mutate	parse_number	is.na
+import_addresses	addresses	import	%>%	clean_names	filter	city	mutate	str_to_title	name	unite	address	c	state	zip	select
+join	d	inner_join	achievement	addresses	c
+lat_long	library	ggmap	lat_long	geocode	d	address	bind_cols	c
+label	library	leaflet	get_col	sapply	df	as.character	indicator	rating
+tidycensus	library	tidycensus	pdx_acs	get_acs
+tract_fill	pal	colorNumeric	pdx_acs	estimate
+icons	pins	awesomeIcons	get_col	d	cols	col2hex	c
+map	pdx_acs	%>%	separate	NAME	c	leaflet	addProviderTiles	addPolygons	tract	pal	estimate	addAwesomeMarkers	d	lon	lat	pins	school_name	addLegend	labelFormat	rev	cols
+map_save	pins	awesomeIcons	get_col	d	cols	col2hex	c	map_schools	pdx_acs	%>%	leaflet	addProviderTiles	addPolygons	str_extract	NAME	pal	estimate	addLegend	labelFormat	addAwesomeMarkers	lon	lat	school_name	rev	library	htmlwidgets	htmltools	saveWidget
+growth_map	growth	ratings	%>%	filter	district_name	spread	indicator	rating	clean_names	select	school_name	mutate	parse_number	is.na	d2	left_join	d	pins_growth	awesomeIcons	get_col	map_schools_growth	pdx_acs	leaflet	addProviderTiles	addPolygons	str_extract	NAME	pal	estimate	addAwesomeMarkers	lon	lat	addLegend	labelFormat	rev	cols	library	htmlwidgets	htmltools	saveWidget
