@@ -1,0 +1,194 @@
+---
+title: Mapping Statewide School Ratings with US Census Tracts
+author: Daniel Anderson
+date: '2017-11-13'
+slug: mapping-statewide-school-ratings-with-us-census-tracts
+categories: []
+tags:
+  - data_vis
+---
+
+```{r setup, include = FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE)
+```
+In this post, I'd like to share some work related to geo-spatial mapping, 
+statewide school ratings, and US Census Bureau data using census tracts. 
+Specifically, I wanted to investigate whether there was a relation between the
+median housing price in an area, and the statewide achievement ratings for 
+schools in the corresponding area. There is a 
+[strong relation](https://cepa.stanford.edu/sites/default/files/may-sreardon.pdf)
+between socio-economic status and student achievement, but less is known about
+how statewide ratings for schools relate to the demographics of the 
+corresponding area. This is a rather long post, so you'll have to have a bit
+of endurance to get through it all (I considered splitting it into two posts
+but it felt less cohesive).
+
+This post uses the [tidyverse](https://www.tidyverse.org) and 
+[leaflet](https://rstudio.github.io/leaflet/) packages, as well the terrific 
+[tidycensus](https://github.com/walkerke/tidycensus) package by Kyle Walker in 
+conjunction with [sf](http://r-spatial.github.io/sf/). The 
+[ggmap](https://github.com/dkahle/ggmap) package is used for pulling 
+lattitude and longitude data from physical addresses. Finally, this post 
+builds off a [wonderful post](https://juliasilge.com/blog/using-tidycensus/) by 
+Julia Silge.
+
+## The data
+For this project, I wanted to use only publicly available data. I meandered 
+around the Oregon Department of Education (ODE) website for a while and eventually
+came to the file I wanted: [Report Card Ratings for each school](http://www.oregon.gov/ode/schools-and-districts/reportcards/reportcards/Pages/Accountability-Measures.aspx).
+If you've explored my R course slides at all you know I'm a fan of Thomas 
+Leeper's *rio* package for data import. It just makes things easy. So let's 
+import the data directly from the ODE website and take a look.
+
+```{r import_rcdetails}
+# load packages for data import/prep
+library(tidyverse)
+library(rio)
+library(janitor)
+
+library(DT) # for nice tables
+
+ratings <- import("http://www.oregon.gov/ode/schools-and-districts/reportcards/reportcards/Documents/rcdetails_1617.xlsx",
+                  setclass = "tbl_df") %>% 
+            clean_names()
+
+# Clean up the file to what we need
+ratings <- ratings %>% 
+  filter(district_name == "Portland SD 1J") %>% 
+  spread(indicator, rating) %>% 
+  clean_names() %>% 
+  select(school_name, achievement) %>% 
+  mutate(achievement = parse_number(achievement)) %>% 
+  filter(!is.na(achievement))
+	
+datatable(ratings)
+```
+
+In the above code, we import the ratings, filter for only schools in Portland
+School District, spread the data out so we have column for the achievement 
+ratings, and then select only the two variables we really need - the school
+name and the achievement rating.This is a good start, but we don't yet have the 
+geographical coordinates of the schools. To do that, we'll get another dataset 
+from ODE that has the physical address of each school. We'll then transform 
+those addresses to lattitude and longitude using a bit of help from google. 
+First, the addresses:
+
+```{r import_addresses}
+addresses <- import("http://www.ode.state.or.us/pubs/labels/SchoolMail.xls",
+                    setclass = "tbl_df") %>% 
+  clean_names() %>% 
+  filter(city == "PORTLAND") %>% 
+  mutate(name = str_to_title(name)) %>% 
+  unite(address, c(address, city, state, zip), sep = " ") %>% 
+  select(name, address)
+              
+datatable(addresses)
+```
+
+We'll now join the *addresses* dataset with our *ratings* dataset, which we 
+know contains only the schools in Portland School District.
+
+```{r join}
+d <- inner_join(ratings, addresses, by = c("school_name" = "name"))
+d
+```
+
+Now, we can find the longitude and lattitude of each school using the physical
+address with the help of the *ggmap* package and, specifically, the `geocode`
+function.
+
+```{r lat_long}
+library(ggmap)
+lat_long <- geocode(d$address)
+d <- bind_cols(d, lat_long)
+datatable(d)
+```
+
+## Mapping the data
+To map the data, we'll use the *leaflet* package. We'll first write a quick
+function that tells leaflet what color we want the schools in our map to appear
+depending on their statewide achievement rating.
+
+```{r label, options}
+library(leaflet)
+
+get_col <- function(df, indicator) {
+  sapply(df[[as.character(indicator)]], function(rating) {
+    if(rating == 5) {
+      "green"
+    } else if(rating == 4) {
+      "lightgreen"
+    } else if(rating == 3) {
+      "white"
+    } else if(rating == 2) {
+      "lightred"
+    } else {
+      "red"
+    } })
+}
+```
+
+
+Next we'll map the Portland area using the *tidycensus* and *sf* packages. 
+`get_acs` function gets census tracts for  Multnomah County. The
+variable argument tells the function to get information about the median housing
+cost of the area. See other variables with the `load_variables` function from
+the package. The `colorNumeric` function creates a pallete according to the
+estimate for the tract with the viridis palette (which not only looks nice but
+has good properties for color blindness and printing in black and white).
+
+```{r tidycensus}
+library(tidycensus)
+library(sf)
+
+pdx_acs <- get_acs(geography = "tract", 
+                     variables = "B25077_001", 
+                     state = "OR",
+                     county = "Multnomah County",
+                     geometry = TRUE)
+
+pal <- colorNumeric(palette = "viridis", 
+                    domain = pdx_acs$estimate)
+```
+
+Finally, we produce the map. I'll come back to this tomorrow morning to explain 
+the rest of the code but it's currently near 11:00 PM and I'm tired so I'm going 
+to sleep.
+
+```{r icons}
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'black',
+  library = 'ion',
+  markerColor = get_col(d, "achievement")
+)
+
+cols <- gplots::col2hex(c("red", "pink", "white", "lightgreen", "darkgreen"))
+
+pdx_acs %>%
+  st_transform(crs = "+init=epsg:4326") %>%
+  leaflet() %>%
+  addProviderTiles(provider = "CartoDB.Positron") %>%
+  addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+              stroke = FALSE,
+              smoothFactor = 0,
+              fillOpacity = 0.7,
+              color = ~ pal(estimate)) %>%
+  addLegend("bottomright", 
+            pal = pal, 
+            values = ~ estimate,
+            title = "Median Home Value",
+            labFormat = labelFormat(prefix = "$"),
+            opacity = 1) %>% 
+  addAwesomeMarkers(data = d, 
+                    ~lon, 
+                    ~lat, 
+                    icon = icons, 
+                    popup= ~school_name) %>% 
+  addLegend("bottomright", 
+            colors = rev(cols),
+            labels = 5:1,
+            title = "Achievement Ratings",
+            opacity = 1)
+```

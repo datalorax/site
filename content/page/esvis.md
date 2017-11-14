@@ -22,6 +22,7 @@ Or the development version from from github with:
 # install.packages("devtools")
 devtools::install_github("DJAnderson07/esvis")
 ```
+------------
 
 # Blog Posts
 * [Introduction to esvis](../../post/esvis-part-1)

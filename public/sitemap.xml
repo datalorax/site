@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/mapping-statewide-school-ratings-with-us-census-tracts/</loc>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/esvis-part-1/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
   </url>
@@ -26,7 +31,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -36,7 +41,7 @@
   
   <url>
     <loc>/tags/data_vis/</loc>
-    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -83,7 +88,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -101,7 +106,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
