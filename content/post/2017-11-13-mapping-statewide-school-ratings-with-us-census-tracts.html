@@ -163,10 +163,10 @@ cols &lt;- gplots::col2hex(c(&quot;red&quot;, &quot;pink&quot;, &quot;white&quot
             labels = 5:1,
             title = &quot;Achievement Ratings&quot;,
             opacity = 1)</code></pre>
-<iframe seamless src="../map_schools/index.html" width="100%" height="500">
+<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools.html" width="100%" height="500">
 </iframe>
 <p>One of the nice things about this map is that it’s fully interactive. And that’s particularly helpful here because to really see the relation you’ll need to zoom in quite a bit. Because we added the optional <code>popup</code> argument to <code>addPolygons</code> and <code>addAwesomeMarkers</code>, we’re able to click to identify a specific census tract or the name of a specific school. If we wanted the plot to render differently we could change the provider. For example, you could produce a nice terrain map with <code>provider = &quot;Stamen.TerrainBackground&quot;</code>. All the different options are available <a href="http://leaflet-extras.github.io/leaflet-providers/preview/index.html">here</a>, where you can preview a map before applying it to yours.</p>
 <p>Note that we have a very clear and very strong relation here - essentially all the red, pink, and white schools are in the more purple tracts, correpsonding to lower median housing price areas. This is powerful information but it is important that it’s not confused to mean that the lowest quality schools are located in the more impoverished areas. This information tells us very little about the quality of the school and, indeed, if we look at estimates of growth (shown below without all the code) there is a much less strong correlation. That is, the ratings schools receive on the amount of growth students make is less correlated with the median housing cost in the area than is absolute achievement, although there does still appear to be some correlation.</p>
-<iframe seamless src="../map_schools_growth/index.html" width="100%" height="500">
+<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools_growth.html" width="100%" height="500">
 </iframe>
 </div>

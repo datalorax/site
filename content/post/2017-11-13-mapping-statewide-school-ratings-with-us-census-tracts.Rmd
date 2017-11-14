@@ -14,9 +14,8 @@ library(sf)
 census_api_key("ac18b213ae634ec1118b8649112eca6d68c69128")
 
 library(knitr)
-opts_chunk$set(message = FALSE, warning = FALSE, cache = TRUE, 
-               cache.comments = FALSE, autodep = TRUE)
-dep_auto()
+opts_chunk$set(message = FALSE, warning = FALSE, cache = FALSE)
+
 ```
 In this post, I'd like to share some work related to geo-spatial mapping, 
 statewide school ratings, and US Census Bureau data using census tracts. 
@@ -271,10 +270,13 @@ map_schools <- pdx_acs %>%
 
 library(htmlwidgets)
 library(htmltools)
+old <- getwd()
+setwd("../../public/post/2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/")
 saveWidget(map_schools, "map_schools.html")
+setwd(old)
 ```
 
-<iframe seamless src="../map_schools/index.html" width="100%" height="500"></iframe>
+<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools.html" width="100%" height="500"></iframe>
 
 One of the nice things about this map is that it's fully interactive. And
 that's particularly helpful here because to really see the relation you'll need
@@ -341,9 +343,10 @@ map_schools_growth <- pdx_acs %>%
             title = "Growth Ratings",
             opacity = 1)
 
-library(htmlwidgets)
-library(htmltools)
+old <- getwd()
+setwd("../../public/post/2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/")
 saveWidget(map_schools_growth, "map_schools_growth.html")
+setwd(old)
 ```
 
-<iframe seamless src="../map_schools_growth/index.html" width="100%" height="500"></iframe>
+<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools_growth.html" width="100%" height="500"></iframe>
