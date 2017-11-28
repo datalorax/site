@@ -30,6 +30,16 @@
     </item>
     
     <item>
+      <title>Beyond the course</title>
+      <link>/page/classr/slides/w10p1/w10p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/classr/slides/w10p1/w10p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  A reminder: The R learning curve Agenda  Introduction to functions Introduction to Lists Introduction to the purrr package for working with lists Artificial example Walk through a real script (at least some of it)  Before we get started&amp;hellip;  There&amp;rsquo;s SO MUCH we still haven&amp;rsquo;t talked about
+ Haven&amp;rsquo;t even discussed modeling! Version control (git/github) Functional programming (get a bit today) Object oriented programming  We also briefly discussed a few important topics</description>
+    </item>
+    
+    <item>
       <title>Conference Presentations</title>
       <link>/page/conference_pres/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -56,7 +66,16 @@ Edward Tufte</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>daniela@uoregon.edu (Daniel Anderson)</author>
       <guid>/page/classr/classr/</guid>
-      <description>   Week Lecture Content Slides (pdf)     1 1 Oh the places you&amp;rsquo;ll go! An intro to R w1p1   1 2 Lab 1: Intro to R Markdown w1p2   2 1 Intro to dplyr w2p1   2 2 Lab 2: Data Import w2p2   3 1 Intro to ggplot2 w3p1   3 2 Lab 3: Data Viz Best Practices w3p2   4 1 Intro to tidy data w4p1   4 2 Lab 4: More on Tidy Data w4p2   5 1 More dplyr and R Markdown w5p1   5 2 Lab 5: Tidy data and Data Visualization w5p2   6 1 Guest Lecture with Scott Chamberlain    6 2 Review w6p2   7 1 Joins: Part 1 w7p1   7 2 Joins: Part 2 w7p2   8 1 forthcoming    8 2 forthcoming    9 1 forthcoming    9 2 forthcoming    10 1 forthcoming    10 2 forthcoming     </description>
+      <description>   Week Lecture Content Slides (pdf)     1 1 Oh the places you&amp;rsquo;ll go! An intro to R w1p1   1 2 Lab 1: Intro to R Markdown w1p2   2 1 Intro to dplyr w2p1   2 2 Lab 2: Data Import w2p2   3 1 Intro to ggplot2 w3p1   3 2 Lab 3: Data Viz Best Practices w3p2   4 1 Intro to tidy data w4p1   4 2 Lab 4: More on Tidy Data w4p2   5 1 More dplyr and R Markdown w5p1   5 2 Lab 5: Tidy data and Data Visualization w5p2   6 1 Guest Lecture with Scott Chamberlain    6 2 Review w6p2   7 1 Joins: Part 1 w7p1   7 2 Joins: Part 2 w7p2   8 1 Intro to Strings w8p1   8 2 Intro to Regular Expressions w8p2   9 1 Factors and Dates w9p1   9 2 Student Presentations (no lecture)    10 1 Topics Beyond the Class w10p1   10 2 Student Presentations (no lecture)     </description>
+    </item>
+    
+    <item>
+      <title>Factors and Dates</title>
+      <link>/page/classr/slides/w9p1/w9p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/classr/slides/w9p1/w9p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of factors  creating/modifying when you do/do not want factors  Basics of Dates  Specifically, we&amp;rsquo;ll focus date calculations   Disclaimer  We&amp;rsquo;re obviously not going to cover all there is to know about factors and dates in one smashed-together two-hour lecture. If we had more time, we&amp;rsquo;d spend a week on each.</description>
     </item>
     
     <item>
@@ -86,6 +105,24 @@ Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, 
       <author>daniela@uoregon.edu (Daniel Anderson)</author>
       <guid>/page/classr/slides/w4p1/w4p1/</guid>
       <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few models and look at some extensions (the broom package) Practice a bit, if time allows (it probably won&amp;rsquo;t)  A little story first      It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Regular Expressions</title>
+      <link>/page/classr/slides/w8p2/w8p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/classr/slides/w8p2/w8p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of regular expressions  You&amp;rsquo;re not expected to be an expert from one brief lecture  Provide resources for learning more Purpose: Generally to make you aware of them  Disclaimer  Before we get started, I think it&amp;rsquo;s worth mentioning this is NOT a specialty area for me. Still working hard myself to understand all of this Today is mostly about exposure and awareness  Resources (Some of which I&amp;rsquo;ll reference and others I won&amp;rsquo;t) * Sanchez: Handling and Processing Strings in R (available here) * Li and Bryan: Regular Expression in R (available here)</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Strings</title>
+      <link>/page/classr/slides/w8p1/w8p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/classr/slides/w8p1/w8p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of string data String operators  Cover both stringr and base functions  Special characters Pattern matching  Before we get started  In many cases, I&amp;rsquo;ve opted to show both base and stringr functions stringr is part of the tidyverse, and has some nice functionality, but many of the base functions are so common I think I&amp;rsquo;d be doing you a disservice if I didn&amp;rsquo;t also introduce them.</description>
     </item>
     
     <item>
@@ -124,6 +161,16 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
       <author>daniela@uoregon.edu (Daniel Anderson)</author>
       <guid>/page/classr/slides/w4p2/w4p2/</guid>
       <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review and discuss tidy data in more depth Practice tidying data  Reasons to prefer tidy data  More efficient storage and retrieval More scalable The tidyverse of tools will work much more efficiently  Read in the hiv data  Make some manipulations (just dplyr variety) to make the data look like the below.</description>
+    </item>
+    
+    <item>
+      <title>Multiple regression with R</title>
+      <link>/page/talks/gina_mr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/page/talks/gina_mr/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
+ Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!</description>
     </item>
     
     <item>
@@ -171,7 +218,7 @@ The purpose of esvis is primarily to visualize differences in two or more distri
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>daniela@uoregon.edu (Daniel Anderson)</author>
       <guid>/page/teaching/</guid>
-      <description> Fall 2017  EDLD 610: Exploring Data with R (4 Credits). CRN: 17214  Spring 2017  EDLD 610: Exploring Data with R (4 Credits). CRN: 37117  Winter 2017  A taste of R: Mini-course on R (4 workshops, 2 hours each).  Part One - An Introduction to &amp;ldquo;R&amp;rdquo; What is it and Why You Should Care Part Two - An Introduction to Tidy Data and the Tidyverse Part 3 - Data Visualization (ggplot) Part 4 - Lists and an Applied Example   </description>
+      <description> Fall 2017  EDLD 610: Exploring Data with R (4 Credits). CRN: 17214  Spring 2017  EDLD 610: Exploring Data with R (4 Credits). CRN: 37117  Winter 2017  A taste of R: Mini-course on R (4 workshops, 2 hours each).  Part One - An Introduction to &amp;ldquo;R&amp;rdquo; What is it and Why You Should Care Part Two - An Introduction to Tidy Data and the Tidyverse Part 3 - Data Visualization (ggplot) Part 4 - Lists and an Applied Example   Guest Lectures  Multiple Regression with R  </description>
     </item>
     
     <item>

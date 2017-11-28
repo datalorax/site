@@ -19,10 +19,10 @@ comments: false
 | 6  | 2      | [Review](../slides/w6p2/w6p2/) | [w6p2](../slides/w6p2/w6p2-Review.pdf)
 | 7  | 1      | [Joins: Part 1](../slides/w7p1/w7p1/) | [w7p1](../slides/w7p1/w7p1-Joins.pdf)
 | 7  | 2      | [Joins: Part 2](../slides/w7p2/w7p2/) | [w7p2](../slides/w7p2/w7p2-more_joins.pdf)
-| 8  | 1      | forthcoming |  
-| 8  | 2      | forthcoming | 
-| 9  | 1      | forthcoming | 
-| 9  | 2      | forthcoming | 
-| 10 | 1      | forthcoming | 
-| 10 | 2      | forthcoming | 
+| 8  | 1      | [Intro to Strings](../slides/w8p1/w8p1/) |  [w8p1](../slides/w8p1/w8p1-intro_strings.pdf)
+| 8  | 2      | [Intro to Regular Expressions](../slides/w8p2/w8p2/) | [w8p2](../slides/w8p2/w8p2-intro_regex.pdf) 
+| 9  | 1      | [Factors and Dates](../slides/w9p1/w9p1/) | [w9p1](../slides/w9p1/w9p1-factors_dates.pdf) 
+| 9  | 2      | Student Presentations (no lecture) | 
+| 10 | 1      | [Topics Beyond the Class](../slides/w10p1/w10p1/) | [w10p1](../slides/w10p1/w10p1-behond_class.pdf) 
+| 10 | 2      | Student Presentations (no lecture) | 
 

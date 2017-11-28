@@ -15,3 +15,6 @@ comments: false
 	+ [Part Two - An Introduction to Tidy Data and the Tidyverse](https://youtu.be/17Qkn40cbb4)
 	+ [Part 3 - Data Visualization (ggplot)](https://youtu.be/8zTmGhRLEXo)
 	+ [Part 4 - Lists and an Applied Example](https://youtu.be/H7uvo360Tio)
+
+## Guest Lectures
+* [Multiple Regression with R](../talks/gina_mr/) 
