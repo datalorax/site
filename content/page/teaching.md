@@ -18,3 +18,5 @@ comments: false
 
 ## Guest Lectures
 * [Multiple Regression with R](../talks/gina_mr/) 
+	+ [slides (pdf)](../talks/guest_lecture_mr.pdf) 
+	+ [example data](../talks/assets_gina_mr/data/synthetic_data.csv)
