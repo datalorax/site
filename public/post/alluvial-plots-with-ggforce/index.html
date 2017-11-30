@@ -209,10 +209,7 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an <a href="https://en.wikipedia.org/wiki/Alluvial_diagram">alluvial</a> diagram is a type of flow plot that is essentially equivalent to a <a href="https://developers.google.com/chart/interactive/docs/gallery/sankey">sankey</a> diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent <a href="https://github.com/thomasp85/ggforce">ggforce</a> package written by <a href="https://twitter.com/thomasp85">Thomas Lin Pedersen</a>, who’s not only incredibly talented, but also a good follow on twitter.</p>
-<div class="figure">
-<img src="../2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot2-1.png" />
-
-</div>
+<p><img src="/post/2017-11-29-alluvial-plots-with-ggforce_files/figure-html/first_plot-1.png" width="864" /></p>
 <div id="context" class="section level2">
 <h2>Context</h2>
 <p>In schools across the country students who are struggling academically may be screened and evaluated to determine if they have a specific learning disability (SLD). Unfortunately, the protocols for making these determinations are not always consistent. We were interested, therefore, in examining the extent to which students shift into and out of the SLD classification over time. In this particular example, we only have data for middle school students (Grades 6-8), although <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.839.1628&amp;rep=rep1&amp;type=pdf">similar research</a> has examined other grades.</p>
@@ -305,7 +302,7 @@ pd</code></pre>
 <pre class="r"><code>ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
   geom_parallel_sets(aes(fill = Pattern), alpha = 0.6) +
   geom_parallel_sets_axes(axis.width = 0.1, fill = &quot;gray70&quot;) +
-  geom_parallel_sets_labels(color = &#39;White&#39;, size = 6) +
+  geom_parallel_sets_labels(color = &#39;White&#39;, size = 3.5) +
   scale_fill_brewer(palette = &quot;Dark2&quot;) +
   labs(x = &quot;&quot;, y = &quot;&quot;) +
   scale_x_discrete(expand = c(0.05,0.05)) +

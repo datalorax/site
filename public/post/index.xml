@@ -40,16 +40,5 @@
 install.packages(&amp;quot;esvis&amp;quot;) or if you’d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>/post/2017-11-29-alluvial-plots-with-ggforce/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
-      <guid>/post/2017-11-29-alluvial-plots-with-ggforce/</guid>
-      <description>Alluvial Diagrams with ggforce Daniel Anderson
-2017-11-29
-Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn&amp;rsquo;t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I&amp;rsquo;ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who&amp;rsquo;s not only incredibly talented, but also a good follow on twitter.</description>
-    </item>
-    
   </channel>
 </rss>
