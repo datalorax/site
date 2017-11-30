@@ -1,15 +1,6 @@
----
-title: Alluvial Diagrams with ggforce
-author: Daniel Anderson
-date: '2017-11-29'
-slug: alluvial-plots-with-ggforce
-categories: []
-tags:
-  - data_vis
-output:
-  html_document:
-    keep_md: true
----
+# Alluvial Diagrams with ggforce
+Daniel Anderson  
+2017-11-29  
 Today I wanted to quickly share my first real attempt at making an alluvial 
 diagram. For those not familiar (and I wasn't previously) an 
 [alluvial](https://en.wikipedia.org/wiki/Alluvial_diagram) diagram is a type of
@@ -22,7 +13,7 @@ alluvial diagram below, I'll be using the development version of the excellent
 [Thomas Lin Pedersen](https://twitter.com/thomasp85), who's not only incredibly
 talented, but also a good follow on twitter.
 
-![](../2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot2-1.png)
+![](./2017-11-29-alluvial-plots-with-ggforce_files/alluvial_plot_blog.svg)
 
 ## Context
 In schools across the country students who are struggling academically may be
@@ -48,12 +39,30 @@ large. The data are available [here](../data/synthetic_data2.csv), and you can
 read the file in directly using the following block of code, (which also cleans
 up the names a bit and selects only the relevant variables).
 
-```{r load_data, message = FALSE}
+
+```r
 library(tidyverse)
 d <- read_csv("http://www.dandersondata.com/post/data/synthetic_data2.csv") %>% 
   janitor::clean_names() %>% 
   select(sid, grade, sld, ld33)
 d
+```
+
+```
+## # A tibble: 11,298 x 4
+##         sid grade   sld   ld33
+##       <int> <int> <int>  <chr>
+##  1 12931993     6     0  Never
+##  2  5757142     6     0  Never
+##  3  7720394     6     0  Never
+##  4  7035071     6     0  Never
+##  5  7782160     6     0  Never
+##  6  8306796     6     0  Never
+##  7  8213712     6     1 Always
+##  8  3808246     6     0  Never
+##  9  2539721     6     0  Never
+## 10  6730043     6     0  Never
+## # ... with 11,288 more rows
 ```
 The *sld* column is a dummy vector indicating if the given student (*sid*) was
 identified with a specific learning disability in that grade (1) or not (0). The
@@ -63,7 +72,8 @@ never, or sometimes identified as SLD.
 ## The alluvial plot
 
 We first need to install the development version of *ggforce*.
-```{r install_ggforce, eval = FALSE}
+
+```r
 devtools::install_github("thomasp85/ggforce")
 ```
 
@@ -90,7 +100,8 @@ which "flow" students in that group were in.
 Note - I saved this all in an object `pd`, which is a general convention I use
 that stands for plot data.
 
-```{r data_prep}
+
+```r
 pd <- d %>% 
   filter(ld33 != "Never") %>%
   mutate(sld = ifelse(sld == 0, "Non-SLD", "SLD"),
@@ -102,11 +113,26 @@ pd <- d %>%
 pd
 ```
 
+```
+## # A tibble: 7 x 5
+## # Groups:   Grade 6, Grade 7, Grade 8 [7]
+##   `Grade 6` `Grade 7` `Grade 8`     n             Pattern
+##       <chr>     <chr>     <chr> <int>               <chr>
+## 1   Non-SLD   Non-SLD       SLD    16 Non-SLD/Non-SLD/SLD
+## 2   Non-SLD       SLD   Non-SLD     1 Non-SLD/SLD/Non-SLD
+## 3   Non-SLD       SLD       SLD    19     Non-SLD/SLD/SLD
+## 4       SLD   Non-SLD   Non-SLD    17 SLD/Non-SLD/Non-SLD
+## 5       SLD   Non-SLD       SLD     1     SLD/Non-SLD/SLD
+## 6       SLD       SLD   Non-SLD    20     SLD/SLD/Non-SLD
+## 7       SLD       SLD       SLD   217         SLD/SLD/SLD
+```
+
 Now we're getting close, but the actual format `ggforce` needs the data in is a
 bit more complex. Luckily, the package provides a helper function. We just need
 to tell it, basically, which columns we want along the x-axis.
 
-```{r gather_set_data}
+
+```r
 library(ggforce)
 pd <- pd %>% 
   gather_set_data(1:3)
@@ -114,16 +140,37 @@ pd <- pd %>%
 pd
 ```
 
+```
+## # A tibble: 21 x 8
+## # Groups:   Grade 6, Grade 7, Grade 8 [7]
+##    `Grade 6` `Grade 7` `Grade 8`     n             Pattern    id       x
+##        <chr>     <chr>     <chr> <int>               <chr> <int>   <chr>
+##  1   Non-SLD   Non-SLD       SLD    16 Non-SLD/Non-SLD/SLD     1 Grade 6
+##  2   Non-SLD       SLD   Non-SLD     1 Non-SLD/SLD/Non-SLD     2 Grade 6
+##  3   Non-SLD       SLD       SLD    19     Non-SLD/SLD/SLD     3 Grade 6
+##  4       SLD   Non-SLD   Non-SLD    17 SLD/Non-SLD/Non-SLD     4 Grade 6
+##  5       SLD   Non-SLD       SLD     1     SLD/Non-SLD/SLD     5 Grade 6
+##  6       SLD       SLD   Non-SLD    20     SLD/SLD/Non-SLD     6 Grade 6
+##  7       SLD       SLD       SLD   217         SLD/SLD/SLD     7 Grade 6
+##  8   Non-SLD   Non-SLD       SLD    16 Non-SLD/Non-SLD/SLD     1 Grade 7
+##  9   Non-SLD       SLD   Non-SLD     1 Non-SLD/SLD/Non-SLD     2 Grade 7
+## 10   Non-SLD       SLD       SLD    19     Non-SLD/SLD/SLD     3 Grade 7
+## # ... with 11 more rows, and 1 more variables: y <chr>
+```
+
 And now we're all ready to go. The set of functions *ggforce* provides to
 produce the alluvial plot is `geom_parallel_sets`. The basic plot can now be 
 produced with
 
-```{r alluvial_plot1, fig.width = 9, fig.height = 7}
+
+```r
 ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
     geom_parallel_sets(aes(fill = Pattern), alpha = 0.6) +
     geom_parallel_sets_axes(axis.width = 0.1, fill = "gray70") +
     geom_parallel_sets_labels(color = 'White', size = 3)
 ```
+
+![](2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot1-1.png)<!-- -->
 
 And we're basically there!
 
@@ -134,7 +181,8 @@ whether it's really needed at all. Also, the
 `scale_x_discrete(expand = c(0.05,0.05))` argument is important and removes a 
 bunch of white space on the left and right margins.
 
-```{r alluvial_plot2, fig.width = 9, fig.height = 7}
+
+```r
 ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
   geom_parallel_sets(aes(fill = Pattern), alpha = 0.6) +
   geom_parallel_sets_axes(axis.width = 0.1, fill = "gray70") +
@@ -151,3 +199,7 @@ ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
     legend.direction = "horizontal"
     )
 ```
+
+![](2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot2-1.png)<!-- -->
+
+![](2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot_save-1.png)<!-- -->

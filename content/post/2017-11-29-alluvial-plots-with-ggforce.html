@@ -6,12 +6,18 @@ slug: alluvial-plots-with-ggforce
 categories: []
 tags:
   - data_vis
+output:
+  html_document:
+    keep_md: true
 ---
 
 
 
 <p>Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an <a href="https://en.wikipedia.org/wiki/Alluvial_diagram">alluvial</a> diagram is a type of flow plot that is essentially equivalent to a <a href="https://developers.google.com/chart/interactive/docs/gallery/sankey">sankey</a> diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent <a href="https://github.com/thomasp85/ggforce">ggforce</a> package written by <a href="https://twitter.com/thomasp85">Thomas Lin Pedersen</a>, who’s not only incredibly talented, but also a good follow on twitter.</p>
-<p>** insert plot **</p>
+<div class="figure">
+<img src="../2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot2-1.png" />
+
+</div>
 <div id="context" class="section level2">
 <h2>Context</h2>
 <p>In schools across the country students who are struggling academically may be screened and evaluated to determine if they have a specific learning disability (SLD). Unfortunately, the protocols for making these determinations are not always consistent. We were interested, therefore, in examining the extent to which students shift into and out of the SLD classification over time. In this particular example, we only have data for middle school students (Grades 6-8), although <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.839.1628&amp;rep=rep1&amp;type=pdf">similar research</a> has examined other grades.</p>
@@ -20,7 +26,7 @@ tags:
 <h2>The data</h2>
 <p>The actual dataset is rather large, and contains statewide testing records for all students in the state of Oregon across Grades 6-8 for three cohorts. For the purposes of this blogpost, I first simulated new data (so I could share it here) using the <a href="https://cran.r-project.org/web/packages/synthpop/vignettes/synthpop.pdf">synthpop</a> package, which is pretty impressive and perfect for this sort of purpose (I unfortunately am not allowed to share the real data publicly). I then took a random sample of 5% of the students in the synthetic data so it wouldn’t be so large. The data are available <a href="../data/synthetic_data2.csv">here</a>, and you can read the file in directly using the following block of code, (which also cleans up the names a bit and selects only the relevant variables).</p>
 <pre class="r"><code>library(tidyverse)
-d &lt;- read_csv(&quot;/Users/Daniel/Teaching/guest_lecture_Gina/synthetic_data2.csv&quot;) %&gt;% 
+d &lt;- read_csv(&quot;http://www.dandersondata.com/post/data/synthetic_data2.csv&quot;) %&gt;% 
   janitor::clean_names() %&gt;% 
   select(sid, grade, sld, ld33)
 d</code></pre>
@@ -97,7 +103,7 @@ pd</code></pre>
 <pre class="r"><code>ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
     geom_parallel_sets(aes(fill = Pattern), alpha = 0.6) +
     geom_parallel_sets_axes(axis.width = 0.1, fill = &quot;gray70&quot;) +
-    geom_parallel_sets_labels(color = &#39;White&#39;, size = 6)</code></pre>
+    geom_parallel_sets_labels(color = &#39;White&#39;, size = 3)</code></pre>
 <p><img src="/post/2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot1-1.png" width="864" /></p>
 <p>And we’re basically there!</p>
 <p>A bit of cleaning up will make the plot even a bit nicer. Here I’ve used <code>theme_void</code> to remove most of the extras like axes, but added back in the labels on the x-axis. I’ve also repositioned the legend, and it’s debatable whether it’s really needed at all. Also, the <code>scale_x_discrete(expand = c(0.05,0.05))</code> argument is important and removes a bunch of white space on the left and right margins.</p>

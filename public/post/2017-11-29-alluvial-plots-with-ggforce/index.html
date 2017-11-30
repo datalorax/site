@@ -5,24 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Alluvial Diagrams with ggforce</title>
-  <meta property="og:title" content="Alluvial Diagrams with ggforce" />
-  <meta name="twitter:title" content="Alluvial Diagrams with ggforce" />
-  <meta name="description" content="Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who’s not only incredibly talented, but also a good follow on twitter.">
-  <meta property="og:description" content="Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who’s not only incredibly talented, but also a good follow on twitter.">
-  <meta name="twitter:description" content="Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an alluvial diagram is a type of flow plot that is essentially …">
+  <title>Data Science in Education</title>
+  <meta property="og:title" content="Data Science in Education" />
+  <meta name="twitter:title" content="Data Science in Education" />
+  <meta name="description" content="Alluvial Diagrams with ggforce Daniel Anderson
+2017-11-29
+Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn&rsquo;t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I&rsquo;ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who&rsquo;s not only incredibly talented, but also a good follow on twitter.">
+  <meta property="og:description" content="Alluvial Diagrams with ggforce Daniel Anderson
+2017-11-29
+Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn&rsquo;t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I&rsquo;ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who&rsquo;s not only incredibly talented, but also a good follow on twitter.">
+  <meta name="twitter:description" content="Alluvial Diagrams with ggforce Daniel Anderson
+2017-11-29
+Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn&rsquo;t previously) an …">
   <meta name="author" content="Daniel Anderson"/>
   <meta property="og:image" content="/img/scatter.png" />
   <meta name="twitter:image" content="/img/scatter.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@DJAnderson_07" />
   <meta name="twitter:creator" content="@DJAnderson_07" />
-  <meta property="og:url" content="/post/alluvial-plots-with-ggforce/" />
+  <meta property="og:url" content="/post/2017-11-29-alluvial-plots-with-ggforce/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Data Science in Education" />
 
   <meta name="generator" content="Hugo 0.24.1" />
-  <link rel="canonical" href="/post/alluvial-plots-with-ggforce/" />
+  <link rel="canonical" href="/post/2017-11-29-alluvial-plots-with-ggforce/" />
   <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Data Science in Education">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -175,32 +181,7 @@
 
 
 
-  
-
-  <header class="header-section ">
-    
-    <div class="intro-header no-img">
-      
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-heading">
-              <h1>Alluvial Diagrams with ggforce</h1>
-                
-                
-                  <span class="post-meta">
-  Posted on November 29, 2017
-  
-</span>
-
-
-                
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+  <div class="intro-header"></div>
 
 
     
@@ -208,23 +189,59 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an <a href="https://en.wikipedia.org/wiki/Alluvial_diagram">alluvial</a> diagram is a type of flow plot that is essentially equivalent to a <a href="https://developers.google.com/chart/interactive/docs/gallery/sankey">sankey</a> diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent <a href="https://github.com/thomasp85/ggforce">ggforce</a> package written by <a href="https://twitter.com/thomasp85">Thomas Lin Pedersen</a>, who’s not only incredibly talented, but also a good follow on twitter.</p>
-<div class="figure">
-<img src="../2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot2-1.png" />
+        
 
-</div>
-<div id="context" class="section level2">
-<h2>Context</h2>
-<p>In schools across the country students who are struggling academically may be screened and evaluated to determine if they have a specific learning disability (SLD). Unfortunately, the protocols for making these determinations are not always consistent. We were interested, therefore, in examining the extent to which students shift into and out of the SLD classification over time. In this particular example, we only have data for middle school students (Grades 6-8), although <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.839.1628&amp;rep=rep1&amp;type=pdf">similar research</a> has examined other grades.</p>
-</div>
-<div id="the-data" class="section level2">
-<h2>The data</h2>
-<p>The actual dataset is rather large, and contains statewide testing records for all students in the state of Oregon across Grades 6-8 for three cohorts. For the purposes of this blogpost, I first simulated new data (so I could share it here) using the <a href="https://cran.r-project.org/web/packages/synthpop/vignettes/synthpop.pdf">synthpop</a> package, which is pretty impressive and perfect for this sort of purpose (I unfortunately am not allowed to share the real data publicly). I then took a random sample of 5% of the students in the synthetic data so it wouldn’t be so large. The data are available <a href="../data/synthetic_data2.csv">here</a>, and you can read the file in directly using the following block of code, (which also cleans up the names a bit and selects only the relevant variables).</p>
-<pre class="r"><code>library(tidyverse)
+<h1 id="alluvial-diagrams-with-ggforce">Alluvial Diagrams with ggforce</h1>
+
+<p>Daniel Anderson<br />
+2017-11-29<br />
+Today I wanted to quickly share my first real attempt at making an alluvial
+diagram. For those not familiar (and I wasn&rsquo;t previously) an
+<a href="https://en.wikipedia.org/wiki/Alluvial_diagram">alluvial</a> diagram is a type of
+flow plot that is essentially equivalent to a
+<a href="https://developers.google.com/chart/interactive/docs/gallery/sankey">sankey</a>
+diagram. The difference is that while sankey diagrams show flow for different
+categorical variables, alluvial plots show change over time. To produce the
+alluvial diagram below, I&rsquo;ll be using the development version of the excellent
+<a href="https://github.com/thomasp85/ggforce">ggforce</a> package written by
+<a href="https://twitter.com/thomasp85">Thomas Lin Pedersen</a>, who&rsquo;s not only incredibly
+talented, but also a good follow on twitter.</p>
+
+<p><img src="./2017-11-29-alluvial-plots-with-ggforce_files/alluvial_plot_blog.svg" alt="" /></p>
+
+<h2 id="context">Context</h2>
+
+<p>In schools across the country students who are struggling academically may be
+screened and evaluated to determine if they have a specific learning disability
+(SLD). Unfortunately, the protocols for making these determinations are not
+always consistent. We were interested, therefore, in examining the extent to
+which students shift into and out of the SLD classification over time. In this
+particular example, we only have data for middle school students (Grades 6-8),
+although
+<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.839.1628&amp;rep=rep1&amp;type=pdf">similar research</a>
+has examined other grades.</p>
+
+<h2 id="the-data">The data</h2>
+
+<p>The actual dataset is rather large, and contains statewide testing records for
+all students in the state of Oregon across Grades 6-8 for three cohorts. For
+the purposes of this blogpost, I first simulated new data (so I could share it
+here) using the
+<a href="https://cran.r-project.org/web/packages/synthpop/vignettes/synthpop.pdf">synthpop</a>
+package, which is pretty impressive and perfect for this sort of purpose (I
+unfortunately am not allowed to share the real data publicly). I then took a
+random sample of 5% of the students in the synthetic data so it wouldn&rsquo;t be so
+large. The data are available <a href="../data/synthetic_data2.csv">here</a>, and you can
+read the file in directly using the following block of code, (which also cleans
+up the names a bit and selects only the relevant variables).</p>
+
+<pre><code class="language-r">library(tidyverse)
 d &lt;- read_csv(&quot;http://www.dandersondata.com/post/data/synthetic_data2.csv&quot;) %&gt;% 
   janitor::clean_names() %&gt;% 
   select(sid, grade, sld, ld33)
-d</code></pre>
+d
+</code></pre>
+
 <pre><code>## # A tibble: 11,298 x 4
 ##         sid grade   sld   ld33
 ##       &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;chr&gt;
@@ -238,22 +255,47 @@ d</code></pre>
 ##  8  3808246     6     0  Never
 ##  9  2539721     6     0  Never
 ## 10  6730043     6     0  Never
-## # ... with 11,288 more rows</code></pre>
-<p>The <em>sld</em> column is a dummy vector indicating if the given student (<em>sid</em>) was identified with a specific learning disability in that grade (1) or not (0). The <em>ld33</em> column has an odd name, but basically states if the student was always, never, or sometimes identified as SLD.</p>
-</div>
-<div id="the-alluvial-plot" class="section level2">
-<h2>The alluvial plot</h2>
+## # ... with 11,288 more rows
+</code></pre>
+
+<p>The <em>sld</em> column is a dummy vector indicating if the given student (<em>sid</em>) was
+identified with a specific learning disability in that grade (1) or not (0). The
+<em>ld33</em> column has an odd name, but basically states if the student was always,
+never, or sometimes identified as SLD.</p>
+
+<h2 id="the-alluvial-plot">The alluvial plot</h2>
+
 <p>We first need to install the development version of <em>ggforce</em>.</p>
-<pre class="r"><code>devtools::install_github(&quot;thomasp85/ggforce&quot;)</code></pre>
-<p>Next, we need to do a bit of data prep. Below I: * <code>filter()</code> for only students who were <em>ever</em> identified as SLD - i.e., I’m eliminating students who were always identified as Non-SLD, because that group encompasses the majority of students and makes the rest of the patterns difficult to see.</p>
+
+<pre><code class="language-r">devtools::install_github(&quot;thomasp85/ggforce&quot;)
+</code></pre>
+
+<p>Next, we need to do a bit of data prep. Below I:
+* <code>filter()</code> for only students who were <em>ever</em> identified as SLD - i.e., I&rsquo;m
+eliminating students who were always identified as Non-SLD, because that group
+encompasses the majority of students and makes the rest of the patterns difficult
+to see.</p>
+
 <ul>
-<li><p>Recode <code>ld</code> and <code>grade</code> so they are character vectors. This is not only helpful in making the plot look nice, but actually vital in getting it to produce (I failed over and over again because I skipped this step in my initial attempts).</p></li>
-<li><p><code>spread</code> the data out so there’s a column specifying the <em>ld</em> status for each student in each grade.</p></li>
-<li><p><code>count</code> the number of unique patterns across grades. This will be used to provide the widths of the alluvial plot.</p></li>
-<li><p><code>mutate</code> to create a new pattern variable that states, in a single variable, which “flow” students in that group were in.</p></li>
+<li><p>Recode <code>ld</code> and <code>grade</code> so they are character vectors. This is not only
+helpful in making the plot look nice, but actually vital in getting it to
+produce (I failed over and over again because I skipped this step in my
+initial attempts).</p></li>
+
+<li><p><code>spread</code> the data out so there&rsquo;s a column specifying the <em>ld</em> status for each
+student in each grade.</p></li>
+
+<li><p><code>count</code> the number of unique patterns across grades. This will be used to
+provide the widths of the alluvial plot.</p></li>
+
+<li><p><code>mutate</code> to create a new pattern variable that states, in a single variable,
+which &ldquo;flow&rdquo; students in that group were in.</p></li>
 </ul>
-<p>Note - I saved this all in an object <code>pd</code>, which is a general convention I use that stands for plot data.</p>
-<pre class="r"><code>pd &lt;- d %&gt;% 
+
+<p>Note - I saved this all in an object <code>pd</code>, which is a general convention I use
+that stands for plot data.</p>
+
+<pre><code class="language-r">pd &lt;- d %&gt;% 
   filter(ld33 != &quot;Never&quot;) %&gt;%
   mutate(sld = ifelse(sld == 0, &quot;Non-SLD&quot;, &quot;SLD&quot;),
          grade = paste0(&quot;Grade &quot;, grade)) %&gt;% 
@@ -261,7 +303,9 @@ d</code></pre>
   group_by(`Grade 6`, `Grade 7`, `Grade 8`) %&gt;% 
   count() %&gt;% 
   mutate(Pattern = paste(`Grade 6`, `Grade 7`, `Grade 8`, sep = &quot;/&quot;))
-pd</code></pre>
+pd
+</code></pre>
+
 <pre><code>## # A tibble: 7 x 5
 ## # Groups:   Grade 6, Grade 7, Grade 8 [7]
 ##   `Grade 6` `Grade 7` `Grade 8`     n             Pattern
@@ -272,13 +316,20 @@ pd</code></pre>
 ## 4       SLD   Non-SLD   Non-SLD    17 SLD/Non-SLD/Non-SLD
 ## 5       SLD   Non-SLD       SLD     1     SLD/Non-SLD/SLD
 ## 6       SLD       SLD   Non-SLD    20     SLD/SLD/Non-SLD
-## 7       SLD       SLD       SLD   217         SLD/SLD/SLD</code></pre>
-<p>Now we’re getting close, but the actual format <code>ggforce</code> needs the data in is a bit more complex. Luckily, the package provides a helper function. We just need to tell it, basically, which columns we want along the x-axis.</p>
-<pre class="r"><code>library(ggforce)
+## 7       SLD       SLD       SLD   217         SLD/SLD/SLD
+</code></pre>
+
+<p>Now we&rsquo;re getting close, but the actual format <code>ggforce</code> needs the data in is a
+bit more complex. Luckily, the package provides a helper function. We just need
+to tell it, basically, which columns we want along the x-axis.</p>
+
+<pre><code class="language-r">library(ggforce)
 pd &lt;- pd %&gt;% 
   gather_set_data(1:3)
 
-pd</code></pre>
+pd
+</code></pre>
+
 <pre><code>## # A tibble: 21 x 8
 ## # Groups:   Grade 6, Grade 7, Grade 8 [7]
 ##    `Grade 6` `Grade 7` `Grade 8`     n             Pattern    id       x
@@ -293,19 +344,34 @@ pd</code></pre>
 ##  8   Non-SLD   Non-SLD       SLD    16 Non-SLD/Non-SLD/SLD     1 Grade 7
 ##  9   Non-SLD       SLD   Non-SLD     1 Non-SLD/SLD/Non-SLD     2 Grade 7
 ## 10   Non-SLD       SLD       SLD    19     Non-SLD/SLD/SLD     3 Grade 7
-## # ... with 11 more rows, and 1 more variables: y &lt;chr&gt;</code></pre>
-<p>And now we’re all ready to go. The set of functions <em>ggforce</em> provides to produce the alluvial plot is <code>geom_parallel_sets</code>. The basic plot can now be produced with</p>
-<pre class="r"><code>ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
+## # ... with 11 more rows, and 1 more variables: y &lt;chr&gt;
+</code></pre>
+
+<p>And now we&rsquo;re all ready to go. The set of functions <em>ggforce</em> provides to
+produce the alluvial plot is <code>geom_parallel_sets</code>. The basic plot can now be
+produced with</p>
+
+<pre><code class="language-r">ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
     geom_parallel_sets(aes(fill = Pattern), alpha = 0.6) +
     geom_parallel_sets_axes(axis.width = 0.1, fill = &quot;gray70&quot;) +
-    geom_parallel_sets_labels(color = &#39;White&#39;, size = 3)</code></pre>
-<p><img src="/post/2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot1-1.png" width="864" /></p>
-<p>And we’re basically there!</p>
-<p>A bit of cleaning up will make the plot even a bit nicer. Here I’ve used <code>theme_void</code> to remove most of the extras like axes, but added back in the labels on the x-axis. I’ve also repositioned the legend, and it’s debatable whether it’s really needed at all. Also, the <code>scale_x_discrete(expand = c(0.05,0.05))</code> argument is important and removes a bunch of white space on the left and right margins.</p>
-<pre class="r"><code>ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
+    geom_parallel_sets_labels(color = 'White', size = 3)
+</code></pre>
+
+<p><img src="2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot1-1.png" alt="" /><!-- --></p>
+
+<p>And we&rsquo;re basically there!</p>
+
+<p>A bit of cleaning up will make the plot even a bit nicer. Here I&rsquo;ve used
+<code>theme_void</code> to remove most of the extras like axes, but added back in the
+labels on the x-axis. I&rsquo;ve also repositioned the legend, and it&rsquo;s debatable
+whether it&rsquo;s really needed at all. Also, the
+<code>scale_x_discrete(expand = c(0.05,0.05))</code> argument is important and removes a
+bunch of white space on the left and right margins.</p>
+
+<pre><code class="language-r">ggplot(pd, aes(x = x, id = id, split = y, value = n)) +
   geom_parallel_sets(aes(fill = Pattern), alpha = 0.6) +
   geom_parallel_sets_axes(axis.width = 0.1, fill = &quot;gray70&quot;) +
-  geom_parallel_sets_labels(color = &#39;White&#39;, size = 6) +
+  geom_parallel_sets_labels(color = 'White', size = 6) +
   scale_fill_brewer(palette = &quot;Dark2&quot;) +
   labs(x = &quot;&quot;, y = &quot;&quot;) +
   scale_x_discrete(expand = c(0.05,0.05)) +
@@ -316,18 +382,21 @@ pd</code></pre>
     axis.text.y = element_text(size = 0),
     legend.position = &quot;bottom&quot;,
     legend.direction = &quot;horizontal&quot;
-    )</code></pre>
-<p><img src="/post/2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot2-1.png" width="864" /></p>
-</div>
+    )
+</code></pre>
+
+<p><img src="2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot2-1.png" alt="" /><!-- --></p>
+
+<p><img src="2017-11-29-alluvial-plots-with-ggforce_files/figure-html/alluvial_plot_save-1.png" alt="" /><!-- --></p>
 
       </article>
 
       <ul class="pager blog-pager">
         
-          <li class="previous">
-            <a href="/post/mapping-statewide-school-ratings-with-us-census-tracts/" data-toggle="tooltip" data-placement="top" title="Mapping Statewide School Ratings with US Census Tracts">&larr; Previous Post</a>
-          </li>
         
+          <li class="next">
+            <a href="/post/esvis-part-1/" data-toggle="tooltip" data-placement="top" title="esvis: Part 1">Next Post &rarr;</a>
+          </li>
         
       </ul>
 
@@ -337,9 +406,9 @@ pd</code></pre>
             <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'http-www-dandersondata-com';
-    var disqus_identifier = '\/post\/alluvial-plots-with-ggforce\/';
-    var disqus_title = 'Alluvial Diagrams with ggforce';
-    var disqus_url = '\/post\/alluvial-plots-with-ggforce\/';
+    var disqus_identifier = '\/post\/2017-11-29-alluvial-plots-with-ggforce\/';
+    var disqus_title = '';
+    var disqus_url = '\/post\/2017-11-29-alluvial-plots-with-ggforce\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
