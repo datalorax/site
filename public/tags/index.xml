@@ -21,5 +21,23 @@
       <description></description>
     </item>
     
+    <item>
+      <title>Esvis</title>
+      <link>/tags/esvis/</link>
+      <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/tags/esvis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mapping</title>
+      <link>/tags/mapping/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/tags/mapping/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

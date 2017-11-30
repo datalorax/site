@@ -6,6 +6,7 @@ slug: mapping-statewide-school-ratings-with-us-census-tracts
 categories: []
 tags:
   - data_vis
+  - mapping
 ---
 
 ```{r setup, include = FALSE}
@@ -27,7 +28,9 @@ between socio-economic status and student achievement, but less is known about
 how statewide ratings for schools relate to the demographics of the 
 corresponding area. Fair warning - this is a rather long post, so you'll have to have a bit
 of endurance to get through it all (I considered splitting it into two posts
-but it felt less cohesive).
+but it felt less cohesive). We'll be using R to produce the following map.
+
+<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools.html" width="100%" height="500"></iframe>
 
 This post uses the [tidyverse](https://www.tidyverse.org), [Thomas 
 Leeper](http://thomasleeper.com)'s [rio](https://github.com/leeper/rio) package 
@@ -112,14 +115,18 @@ function. This takes a bit of time.
 
 ```{r lat_long}
 library(ggmap)
-lat_long <- geocode(d$address, source = "dsk")
+lat_long <- geocode(d$address)
 d <- bind_cols(d, lat_long)
 d[ ,c(1, 4:5)]
 ```
 
-Note - I changed the source to "dsk", which stands for *Data Science Toolkit*,
-because I was getting some missing values (~19%) when using google (the default) 
-and I received no missing data with `source = "dsk"`
+Note - an earlier draft of this post had specified `source = "dsk"` when running
+the `geocode` function. I was getting some missing values (~19%) when using 
+google (the default) and I received no missing data with `source = "dsk"`. 
+However, it seems the Data Science Toolkit website is fairly frequently 
+overwhelmed. Last time I tried this it took forever and failed, so I suppose
+the best option may depend on the availability of the servers at time you run 
+the function.
 
 ## Mapping the data
 To map the data, we'll use the *leaflet* and *sf* packages. We'll first write a 

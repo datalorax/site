@@ -208,7 +208,9 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>In this post, I’d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a <a href="https://steinhardt.nyu.edu/scmsAdmin/media/users/lec321/Sirin_Articles/Sirin_2005.pdf">strong relation</a> between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area. Fair warning - this is a rather long post, so you’ll have to have a bit of endurance to get through it all (I considered splitting it into two posts but it felt less cohesive).</p>
+        <p>In this post, I’d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a <a href="https://steinhardt.nyu.edu/scmsAdmin/media/users/lec321/Sirin_Articles/Sirin_2005.pdf">strong relation</a> between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area. Fair warning - this is a rather long post, so you’ll have to have a bit of endurance to get through it all (I considered splitting it into two posts but it felt less cohesive). We’ll be using R to produce the following map.</p>
+<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools.html" width="100%" height="500">
+</iframe>
 <p>This post uses the <a href="https://www.tidyverse.org">tidyverse</a>, <a href="http://thomasleeper.com">Thomas Leeper</a>’s <a href="https://github.com/leeper/rio">rio</a> package for data import and <a href="https://github.com/sfirke">Sam Firke</a>’s <a href="https://github.com/sfirke/janitor">janitor</a> package for quick cleaning up of column names. The <a href="https://rstudio.github.io/leaflet/">leaflet</a> packages, is used for mapping, as well the terrific <a href="https://github.com/walkerke/tidycensus">tidycensus</a> package by <a href="https://walkerke.github.io">Kyle Walker</a>, and the<br />
 <a href="https://github.com/dkahle/ggmap">ggmap</a> package is used for pulling lattitude and longitude data from physical addresses. Finally, this post builds off a <a href="https://juliasilge.com/blog/using-tidycensus/">wonderful post</a> by <a href="https://juliasilge.com">Julia Silge</a>.</p>
 <div id="the-data" class="section level2">
@@ -277,24 +279,24 @@ addresses</code></pre>
 <pre class="r"><code>d &lt;- inner_join(achievement, addresses, by = c(&quot;school_name&quot; = &quot;name&quot;))</code></pre>
 <p>Now, we can find the longitude and lattitude of each school using the physical address with the help of the <em>ggmap</em> package and, specifically, the <code>geocode</code> function. This takes a bit of time.</p>
 <pre class="r"><code>library(ggmap)
-lat_long &lt;- geocode(d$address, source = &quot;dsk&quot;)
+lat_long &lt;- geocode(d$address)
 d &lt;- bind_cols(d, lat_long)
 d[ ,c(1, 4:5)]</code></pre>
 <pre><code>## # A tibble: 81 x 3
 ##                      school_name       lon      lat
 ##                            &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1   Abernethy Elementary School -122.6512 45.50561
-##  2   Ainsworth Elementary School -122.6989 45.50983
-##  3     Alameda Elementary School -122.6378 45.54816
-##  4      Arleta Elementary School -122.5957 45.48605
-##  5       Astor Elementary School -122.7297 45.57833
-##  6    Atkinson Elementary School -122.6038 45.50535
-##  7  Rosa Parks Elementary School -122.7134 45.58695
-##  8       Beach Elementary School -122.6849 45.55832
-##  9        Beaumont Middle School -122.6215 45.54822
-## 10 Boise-Eliot Elementary School -122.6725 45.54817
+##  1   Abernethy Elementary School -122.6515 45.50576
+##  2   Ainsworth Elementary School -122.7001 45.50995
+##  3     Alameda Elementary School -122.6373 45.54771
+##  4      Arleta Elementary School -122.5968 45.48616
+##  5       Astor Elementary School -122.7303 45.57785
+##  6    Atkinson Elementary School -122.6049 45.50503
+##  7  Rosa Parks Elementary School -122.7129 45.58781
+##  8       Beach Elementary School -122.6856 45.55763
+##  9        Beaumont Middle School -122.6209 45.54885
+## 10 Boise-Eliot Elementary School -122.6727 45.54786
 ## # ... with 71 more rows</code></pre>
-<p>Note - I changed the source to “dsk”, which stands for <em>Data Science Toolkit</em>, because I was getting some missing values (~19%) when using google (the default) and I received no missing data with <code>source = &quot;dsk&quot;</code></p>
+<p>Note - an earlier draft of this post had specified <code>source = &quot;dsk&quot;</code> when running the <code>geocode</code> function. I was getting some missing values (~19%) when using google (the default) and I received no missing data with <code>source = &quot;dsk&quot;</code>. However, it seems the Data Science Toolkit website is fairly frequently overwhelmed. Last time I tried this it took forever and failed, so I suppose the best option may depend on the availability of the servers at time you run the function.</p>
 </div>
 <div id="mapping-the-data" class="section level2">
 <h2>Mapping the data</h2>

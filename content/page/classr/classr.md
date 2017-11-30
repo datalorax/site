@@ -23,6 +23,6 @@ comments: false
 | 8  | 2      | [Intro to Regular Expressions](../slides/w8p2/w8p2/) | [w8p2](../slides/w8p2/w8p2-intro_regex.pdf) 
 | 9  | 1      | [Factors and Dates](../slides/w9p1/w9p1/) | [w9p1](../slides/w9p1/w9p1-factors_dates.pdf) 
 | 9  | 2      | Student Presentations (no lecture) | 
-| 10 | 1      | [Topics Beyond the Class](../slides/w10p1/w10p1/) | [w10p1](../slides/w10p1/w10p1-behond_class.pdf) 
+| 10 | 1      | [Topics Beyond the Class](../slides/w10p1/w10p1/) | [w10p1](../slides/w10p1/w10p1-beyond_class.pdf) 
 | 10 | 2      | Student Presentations (no lecture) | 
 
