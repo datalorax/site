@@ -26,3 +26,4 @@ devtools::install_github("DJAnderson07/esvis")
 
 # Blog Posts
 * [Introduction to esvis](../../post/esvis-part-1)
+* [Binned Effect Size Plots](../../post/esvis-binned-effect-size-plots)

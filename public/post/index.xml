@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
     <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
-    <lastBuildDate>Wed, 29 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>esvis: Binned Effect Size Plots</title>
+      <link>/post/esvis-binned-effect-size-plots/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/post/esvis-binned-effect-size-plots/</guid>
+      <description>In this post, I’d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We’ll start with a quick example from the package, and then move to a simulated data example.
+Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.</description>
+    </item>
     
     <item>
       <title>Alluvial Diagrams with ggforce</title>
