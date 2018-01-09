@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidyeval on Data Science in Education</title>
+    <link>/tags/tidyeval/</link>
+    <description>Recent content in Tidyeval on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
+    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
+    <lastBuildDate>Tue, 09 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tidyeval/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A tidyeval use case</title>
+      <link>/post/a-tidyeval-use-case/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/post/a-tidyeval-use-case/</guid>
+      <description>A relatively routine process for me is to combine multiple files into a single data frame by row. For example, the data might be stored in separate CSV files by grade and content area, but I want to load them all and treat it as a single data frame with a grade and content indicator. A good default for this sort of process, is to keep all the variables that are present in any data file, and pad with missingness for the files that don’t have that specific variable.</description>
+    </item>
+    
+  </channel>
+</rss>

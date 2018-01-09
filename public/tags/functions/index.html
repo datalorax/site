@@ -5,21 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Data Science in Education</title>
-  <meta property="og:title" content="Data Science in Education" />
-  <meta name="twitter:title" content="Data Science in Education" />
+  <title>Functions</title>
+  <meta property="og:title" content="Functions" />
+  <meta name="twitter:title" content="Functions" />
   <meta name="author" content="Daniel Anderson"/>
   <meta property="og:image" content="/img/scatter.png" />
   <meta name="twitter:image" content="/img/scatter.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@DJAnderson_07" />
   <meta name="twitter:creator" content="@DJAnderson_07" />
-  <meta property="og:url" content="/" />
+  <meta property="og:url" content="/tags/functions/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Data Science in Education" />
 
   <meta name="generator" content="Hugo 0.24.1" />
-  <link rel="canonical" href="/" />
+  <link rel="canonical" href="/tags/functions/" />
   <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Data Science in Education">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -165,54 +165,14 @@
 
 
     
-  
-  
-  
-
-
-
-
-  
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/bg.jpg" data-img-desc-1="Toketee falls, Umpqua National Forest"></div>
-  
-
-  <header class="header-section has-img">
-    
-      <div class="intro-header big-img">
-        
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="page-heading">
-                <h1>Data Science in Education</h1>
-                  
-                    
-                      <hr class="small">
-                      <span class="page-subheading">A blog by Daniel Anderson</span>
-                    
-                  
-                  
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="img-desc" style="display: inline;"></span>
-      </div>
-    
+  <header class="header-section ">
     <div class="intro-header no-img">
-      
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>Data Science in Education</h1>
-                
-                  
-                    <hr class="small">
-                    <span class="page-subheading">A blog by Daniel Anderson</span>
-                  
-                
-                
+              <h1>#Functions</h1>
+              <hr class="small">
             </div>
           </div>
         </div>
@@ -220,28 +180,23 @@
     </div>
   </header>
 
-
     
-  <div role="main" class="container">
+  <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
-
         <div class="posts-list">
-          
           
             <article class="post-preview">
               <a href="/post/a-tidyeval-use-case/">
                 <h2 class="post-title">A tidyeval use case</h2>
+
                 
               </a>
 
-              <span class="post-meta">
-  Posted on January 9, 2018
-  
-</span>
-
-
+              <p class="post-meta">
+                Posted on January 9, 2018
+              </p>
               <div class="post-entry">
                 
                   A relatively routine process for me is to combine multiple files into a single data frame by row. For example, the data might be stored in separate CSV files by grade and content area, but I want to load them all and treat it as a single data frame with a grade and content indicator. A good default for this sort of process, is to keep all the variables that are present in any data file, and pad with missingness for the files that don’t have that specific variable.
@@ -251,139 +206,19 @@
 
               
                 <span class="post-meta">
-                
-                  #<a href="/tags/tidyeval/">tidyeval</a>&nbsp;
-                
-                  #<a href="/tags/data-manipulations/">data manipulations</a>&nbsp;
-                
-                  #<a href="/tags/functions/">functions</a>&nbsp;
-                
+                  
+                    #<a href="/tags/tidyeval/">tidyeval</a>&nbsp;
+                  
+                    #<a href="/tags/data-manipulations/">data manipulations</a>&nbsp;
+                  
+                    #<a href="/tags/functions/">functions</a>&nbsp;
+                  
                 </span>
               
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/esvis-binned-effect-size-plots/">
-                <h2 class="post-title">esvis: Binned Effect Size Plots</h2>
-                
-              </a>
 
-              <span class="post-meta">
-  Posted on January 4, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  In this post, I’d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We’ll start with a quick example from the package, and then move to a simulated data example.
-Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.
-                  <a href="/post/esvis-binned-effect-size-plots/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                
-                  #<a href="/tags/esvis/">esvis</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/alluvial-plots-with-ggforce/">
-                <h2 class="post-title">Alluvial Diagrams with ggforce</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on November 29, 2017
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who’s not only incredibly talented, but also a good follow on twitter.
-                  <a href="/post/alluvial-plots-with-ggforce/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/mapping-statewide-school-ratings-with-us-census-tracts/">
-                <h2 class="post-title">Mapping Statewide School Ratings with US Census Tracts</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on November 13, 2017
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  In this post, I’d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.
-                  <a href="/post/mapping-statewide-school-ratings-with-us-census-tracts/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                
-                  #<a href="/tags/mapping/">mapping</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/esvis-part-1/">
-                <h2 class="post-title">esvis: Part 1</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on November 5, 2017
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  This is the first of a series of posts to introduce my new esvis R package, why I think it’s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it’s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
-install.packages(&quot;esvis&quot;) or if you’d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.
-                  <a href="/post/esvis-part-1/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                
-                  #<a href="/tags/esvis/">esvis</a>&nbsp;
-                
-                </span>
-              
             </article>
           
         </div>
-
         
       </div>
     </div>

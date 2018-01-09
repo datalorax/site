@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/a-tidyeval-use-case/</loc>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/esvis-binned-effect-size-plots/</loc>
     <lastmod>2018-01-04T00:00:00+00:00</lastmod>
   </url>
@@ -44,8 +49,14 @@
   </url>
   
   <url>
+    <loc>/tags/data-manipulations/</loc>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2018-01-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -71,6 +82,12 @@
   
   <url>
     <loc>/page/classr/slides/w9p1/w9p1/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/functions/</loc>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -130,7 +147,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-01-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -148,7 +165,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-01-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -158,6 +175,12 @@
   
   <url>
     <loc>/page/classr/slides/w5p2/w5p2/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/tidyeval/</loc>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>

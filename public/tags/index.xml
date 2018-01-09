@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
     <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
-    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Manipulations</title>
+      <link>/tags/data-manipulations/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/tags/data-manipulations/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Data_vis</title>
@@ -31,11 +40,29 @@
     </item>
     
     <item>
+      <title>Functions</title>
+      <link>/tags/functions/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/tags/functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Mapping</title>
       <link>/tags/mapping/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       <author>daniela@uoregon.edu (Daniel Anderson)</author>
       <guid>/tags/mapping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tidyeval</title>
+      <link>/tags/tidyeval/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <guid>/tags/tidyeval/</guid>
       <description></description>
     </item>
     
