@@ -4,7 +4,9 @@ comments: false
 ---
 
 ## Peer-Reviewed Journal Articles
-9.	Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., Kennedy, P. (in press). Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement. Learning Disabilities Research & Practice.
+10.	Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., Kennedy, P. (in press). Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement. Learning Disabilities Research & Practice.
+
+9. Park, B. J., Anderson, D., Tindal, G., & Alonzo, J. (2017). A Validity Argument for a Mathematics Curriculum-Based Measure: Implications for Response to Intervention Decision-Making. Journal of Educational Administration and Policy, 2, 5-18. http://doi.org/10.22553/keas/2017.2.1.5
 
 8.	Anderson, D., Kahn, J, and Tindal, G. (2017). [Exploring the Robustness of a Unidimensional Item Response Theory Model with Empirically Multidimensional Data](../pubs/AndersonKahnTindal_17.pdf). Applied Measurement in Education. 30, 163-177. doi: [10.1080&#8203;/08957347.2017.1316277](http://www.tandfonline.com/doi/abs/10.1080/08957347.2017.1316277?journalCode=hame20)
 
