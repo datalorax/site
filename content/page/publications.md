@@ -4,7 +4,7 @@ comments: false
 ---
 
 ## Peer-Reviewed Journal Articles
-10.	Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., Kennedy, P. (2018). [Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement](..pubs/FienAnderson_18.pdf). Learning Disabilities Research & Practice, *33*, 37-50. [doi: 10.1111&#8203;/ldrp.12161](http://onlinelibrary.wiley.com/doi/10.1111/ldrp.12161/full)
+10.	Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., Kennedy, P. (2018). [Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement](../pubs/FienAnderson_18.pdf). Learning Disabilities Research & Practice, *33*, 37-50. [doi: 10.1111&#8203;/ldrp.12161](http://onlinelibrary.wiley.com/doi/10.1111/ldrp.12161/full)
 
 9. Park, B. J., Anderson, D., Tindal, G., & Alonzo, J. (2017). [A Validity Argument for a Mathematics Curriculum-Based Measure: Implications for Response to Intervention Decision-Making](../pubs/ParkAnderson_17.pdf). Journal of Educational Administration and Policy, *2*, 5-18. http://doi.org/10.22553/keas/2017.2.1.5
 
