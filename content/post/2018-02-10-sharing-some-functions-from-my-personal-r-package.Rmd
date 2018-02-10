@@ -1,0 +1,130 @@
+---
+title: Sharing some functions from my personal R package
+author: Daniel Anderson
+date: '2018-02-10'
+slug: sharing-some-functions-from-my-personal-r-package
+categories: []
+tags: [sundry]
+---
+
+In this post I basically just wanted to share some recent developments that I've made to my personal R package [{sundry}](https://github.com/DJAnderson07/sundry). All of the recent advancements have been made to work with the tidyverse, so things like `group_by` should work seamlessly. If you feel like giving the package a whirl, I'd love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN. You can install it with `devtools::install_github("DJAnderson_07/sundry")`
+
+## Batch reading data
+Probably my favorite new function is `read_files`, which is basically meant to make batch reading in files easy. It uses `purrr::map_df` by default, so all the data frames are bound into a single data frame. And, the part I think is really neat, is that it leverages the power of the [{rio}](https://github.com/leeper/rio) package so you don't really have to worry much about file types. In fact, the files you read in can all be of different types and it's no big deal. Here's an example, from the README. 
+
+First, we'll load the tidyverse and sundry, then split the iris dataset by species.
+
+```{r split_data, message = FALSE}
+library(sundry)
+library(tidyverse)
+by_species <- iris %>%
+  split(.$Species) %>%
+  map(select, -Species)
+
+str(by_species)
+```
+
+Next, we'll export each dataset from the split as different file types. Note that for each dataset, I'm not only writing the file out in a different format (csv, EXCEL, and SPSS), but I'm also only writing out specific columns (which are not all in common). So these are all fairly different files at this point, but we can imagine them all being part of the same study.
+
+```{r write_files}
+rio::export(by_species$setosa[ ,1:2], "setosa.csv")
+rio::export(by_species$versicolor[ ,2:4], "versicolor.xlsx")
+rio::export(by_species$virginica[ ,2:3], "virginica.sav")
+```
+
+Now, we can import all of these datasets back into R with the `sundry::read_files` function.
+
+```{r read_files}
+d <- read_files()
+d
+d %>% 
+  count(file)
+```
+
+This can be a little tricky though, because sometimes you might have the same file in multiple formats, or you may want to only read in data some datasets from a directory but not all. That's where the optional `pat` argument comes in. For example, let's write out one additional csv file, and then read in only the csv files.
+
+```{r read_files2}
+rio::export(by_species$virginica[ ,2:3], "virginica.csv")
+d2 <- read_files(pat = "csv")
+head(d2)
+tail(d2)
+```
+
+Finally, we'll clean up a bit by deleting all the files we wrote out for this example
+
+```{r delete_files}
+fs::file_delete(c("setosa.csv", "versicolor.xlsx", 
+                  "virginica.sav", "virginica.csv"))
+```
+
+## Quick descriptive statistics
+I'm sure there are other packages that do similar things, but I often find myself just needing quick descriptives for a variable. That's where `sundry::descrips` comes in helpful. It's relatively straightforward. You just supply the columns you want descriptive statistics on and, by default, it returns the number of cases, min and max values, as well as the mean and standard deviation.
+
+```{r descrips1}
+storms %>% 
+  descrips(wind, pressure)
+```
+
+The function also works well with `dplyr::group_by`
+
+```{r descrips_group_by}
+storms %>% 
+  group_by(year) %>% 
+  descrips(wind, pressure)
+```
+
+And finally, if you want different functions, you can supply them via the optional `.funs` argument. Below, we'll calculate the 25th, 50th, and 75th percentiles instead.
+
+```{r descrips_funs}
+storms %>% 
+  group_by(year) %>% 
+  descrips(wind, pressure,
+           .funs = funs(qtile25 = quantile(., 0.25),
+                        median, 
+                        qtile75 = quantile(., 0.75)))
+```
+
+## Remove rows with complete missing data across a set of variables
+In many datasets I work with, there are sets of variables that have complete missing data. I want to remove any rows that are missing acrross all of these variables. This is different from `janitor::remove_empty_rows`, because these rows may have valid data on other variables, just not across the set of variables I'm interested in. Below is an example from the Oregon Department of Education on schools, where the number and percent of students scoring in each statewide proficiency category on the statewide test are missing if the *n* size is too small (for confidentiality purposes).
+
+```{r read_ode_data}
+d <- rio::import("http://www.oregon.gov/ode/educator-resources/assessment/TestResults2017/pagr_schools_ela_tot_ecd_ext_gnd_lep_1617.xlsx",
+            setclass = "tbl_df",
+            na = c("--", "*")) %>% 
+  janitor::clean_names()
+
+d %>% 
+  select(district_id, number_level_4:percent_level_1)
+```
+
+Note that there are many more columns here, but I'm only showing the ones that I'm interested in. I want to remove and rows that are missing across these variables, which I can do with `sundry::rm_empty_rows`.
+
+```{r rm_empty_rows}
+d %>% 
+  rm_empty_rows(number_level_4:percent_level_1) %>% 
+  select(district_id, number_level_4:percent_level_1) 
+```
+
+In the above, rows with partial missing data across the set of columns are still returned. The function can also be provided without any column arguments, and the function will then mimic the behavior or `janitor::remove_empty_rows`. 
+
+## Filter by functions
+For plotting purposes, in particular, I often find myself needing to filter a dataset according to values that can be obtained from functions, such as the min and the max. Below is an example, where the dataset is filtered to return only the rows where the wind speed is equal to the minimum or the maximum wind speed.
+
+```{r filter_by_funs1}
+storms %>%
+  filter_by_funs(wind, funs(min, max)) %>% 
+  select(fun, name, year, wind) 
+```
+
+So in this case, the minimum wind speed is 10, and the maximum is 160. The first 9 rows all match the minimum wind speed, while the 10th and 11th rows match the max. You can quickly identify which function the row was selected on by the *fun* column that is added to the data frame. Again, this function works well with `dplyr::group_by`, and should work with any function.
+
+```{r filter_by_funs2}
+storms %>%
+  group_by(year) %>% 
+  filter_by_funs(wind, funs(min, max)) %>% 
+  select(fun, name, year, wind) %>% 
+  arrange(year)
+```
+
+## Conclusions
+There are a few other functions in the package that might be helfpul, but I didn't want this post to get too long. I would love any feedback!
