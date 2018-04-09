@@ -5,11 +5,29 @@
     <link>/categories/</link>
     <description>Recent content in Categories on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
-    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R Code</title>
+      <link>/categories/r-code/</link>
+      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/r-code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R Packages</title>
+      <link>/categories/r-packages/</link>
+      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/r-packages/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

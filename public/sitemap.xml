@@ -1,205 +1,347 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>/vita/conference_pres/</loc>
+    <lastmod>2018-04-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/license/</loc>
+    <lastmod>2018-02-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
   
   <url>
     <loc>/post/sharing-some-functions-from-my-personal-r-package/</loc>
     <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/post/a-tidyeval-use-case/</loc>
     <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/post/esvis-binned-effect-size-plots/</loc>
     <lastmod>2018-01-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/post/alluvial-plots-with-ggforce/</loc>
     <lastmod>2017-11-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/post/mapping-statewide-school-ratings-with-us-census-tracts/</loc>
     <lastmod>2017-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/post/esvis-part-1/</loc>
     <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/about/</loc>
+    <loc>/talks/eugene_rug/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w5p1/w5p1/</loc>
+    <loc>/about/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w10p1/w10p1/</loc>
+    <loc>/vita/classr/slides/w5p1/w5p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/classr/slides/w10p1/w10p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/conference_pres/</loc>
+    <loc>/tags/census-data/</loc>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/custom-functions/</loc>
+    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/data-manipulations/</loc>
-    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w3p2/w3p2/</loc>
-  </url>
-  
-  <url>
-    <loc>/tags/data_vis/</loc>
+    <loc>/tags/data-visualization/</loc>
     <lastmod>2018-01-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/classr/slides/w3p2/w3p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/esvis/</loc>
     <lastmod>2018-01-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/classr/classr/</loc>
+    <loc>/vita/classr/classr/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w9p1/w9p1/</loc>
+    <loc>/vita/classr/slides/w9p1/w9p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/tags/functions/</loc>
-    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <loc>/tags/flow-diagram/</loc>
+    <lastmod>2017-11-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w2p2/w2p2/</loc>
+    <loc>/vita/classr/slides/w2p2/w2p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w3p1/w3p1/</loc>
+    <loc>/vita/classr/slides/w3p1/w3p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w4p1/w4p1/</loc>
+    <loc>/vita/classr/slides/w4p1/w4p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w8p2/w8p2/</loc>
+    <loc>/vita/classr/slides/w8p2/w8p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w8p1/w8p1/</loc>
+    <loc>/vita/classr/slides/w8p1/w8p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w7p1/w7p1/</loc>
+    <loc>/vita/classr/slides/w7p1/w7p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w1p2/w1p2/</loc>
+    <loc>/vita/classr/slides/w1p2/w1p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/mapping/</loc>
     <lastmod>2017-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w7p2/w7p2/</loc>
+    <loc>/vita/classr/slides/w7p2/w7p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w4p2/w4p2/</loc>
+    <loc>/vita/classr/slides/w4p2/w4p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/talks/gina_mr/</loc>
+    <loc>/talks/gina/gina_mr/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w1p1/w1p1/</loc>
+    <loc>/vita/classr/slides/w1p1/w1p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/</loc>
+    <loc>/tags/package-development/</loc>
+    <lastmod>2018-01-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
     <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/publications/</loc>
+    <loc>/vita/publications/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w6p2/w6p2/</loc>
+    <loc>/categories/r-code/</loc>
+    <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/software/</loc>
+    <loc>/categories/r-packages/</loc>
+    <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/classr/slides/w6p2/w6p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/software/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/sundry/</loc>
     <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/teaching/</loc>
+    <loc>/talks/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w5p2/w5p2/</loc>
+    <loc>/talks/vita/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/teaching/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/classr/slides/w5p2/w5p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/tidyeval/</loc>
     <lastmod>2018-01-09T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/classr/slides/w2p1/w2p1/</loc>
+    <loc>/vita/</loc>
+    <lastmod>2018-04-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/esvis/</loc>
+    <loc>/vita/vita/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/classr/slides/w2p1/w2p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/esvis/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>

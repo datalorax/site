@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Developing Your First R Package</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Developing Your First R Package
+## A Case Study with esvis
+### Daniel Anderson
+### 2018/12/12
+
+---
+
+
+
+
+# Want to follow along?
+
+If you'd like to follow along, pleae make sure you have the following packages installed
+
+
+```r
+install.packages(c("tidyverse", "esvis", 
+                   "devtools", "roxygen2", 
+                   "usethis"))
+```
+
+---
+# #whomi
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+
+&lt;a href="https://github.com/DJAnderson07"&gt; &lt;i class="fa fa-github fa-2x"&gt;&lt;/i&gt;&lt;/a&gt; 
+&lt;a href="https://twitter.com/DJAnderson_07"&gt; &lt;i class="fa fa-twitter fa-2x"&gt;&lt;/i&gt;&lt;/a&gt; 
+&lt;a href="https://stackoverflow.com/users/4959854/daniel-anderson"&gt; &lt;i class="fa fa-stack-overflow fa-2x"&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a href="http://www.brtprojects.org/employees/daniel-anderson/"&gt; &lt;i class="fa fa-address-card fa-2x"&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a href="mailto:daniela@uoregon.edu"&gt; &lt;i class="fa fa-envelope fa-2x"&gt;&lt;/i&gt;&lt;/a&gt;
+
+* Research Assistant Professor (newly) in the College of Education
+* Work a lot in growth modeling and measurement
+* Preacher of the R gospel
+* Dad of two amazing girls
+
+&lt;img src="img/me_girly.jpg" height="250px" align = "right"/&gt;
+
+---
+class: inverse
+background-image: url(img/fams.png)
+#.right[the fam]
+
+---
+# Some review
+* What is an R function?
+
+--
+  
+  + Anything that carries out an operation in R, including `+` and `&lt;-`
+
+--
+
+* What are the components of a function?
+
+--
+
+  + .red[Formals] (arguments), .red[Body] (everything between the braces), and .red[Environment] (where the function lives)
+  
+![fun_components](img/bodyFormals.png)
+
+---
+# When should you write a function?
+### Hadley's rule
+&gt; You should consider writing a function whenever you’ve copied and pasted a block of code more than twice (i.e. you now have three copies of the same code). 
+
+.right[[r4ds](http://r4ds.had.co.nz/functions.html)]
+
+&lt;img src="img/r4ds.png" height="200px" align = "right"/&gt;
+
+---
+background-image: url(img/hadley_rule.png)
+
+---
+# Bundle your functions
+Once you've written more than one function, you may want to bundle them. There are two general ways to do this:
+
+--
+
+.pull-left[
+.center[.Large[source?]]
+] 
+
+.pull-right[
+.center[.Large[Write a package]]
+]
+
+--
+
+&lt;center&gt;&lt;img src = "img/twopaths.png" width = 400 align = "middle" /&gt;&lt;/center&gt;
+
+---
+# Reasons to avoid `source`ing
+
+* Documentation is generally more sparse
+* Directory issues
+  + Which leads to reproducibility issues
+
+---
+# More importantly
+.Large[Bundling functions into a package is not that hard!]
+
+![](https://media.giphy.com/media/3ohzdTQaODeGPt90uk/source.gif)
+
+
+---
+class: inverse middle center
+# my journey with esvis
+
+---
+# Background
+### Effect sizes
+Standardized mean differences
+
+--
+
+* Assumes  reasonably normally distributed distributions (mean is a good indicator of central tendency)
+
+--
+
+* Differences in means may not reflect differences at all points in scale if variances are different
+
+--
+
+* Substantive interest may also lie with differences at other points in the distribution.
+
+---
+# Varying differences
+### Quick simulated example
+
+
+```r
+library(tidyverse)
+common_var &lt;- tibble(low  = rnorm(1000, 10, 1),
+                     high = rnorm(1000, 12, 1),
+                     var = "common")
+diff_var &lt;- tibble(low  = rnorm(1000, 10, 1),
+                   high = rnorm(1000, 12, 2),
+                   var = "diff")
+d &lt;- bind_rows(common_var, diff_var)
+head(d)
+```
+
+```
+## # A tibble: 6 x 3
+##     low  high var   
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+## 1  9.34  11.3 common
+## 2 11.4   11.9 common
+## 3 10.2   12.7 common
+## 4  8.97  10.0 common
+## 5  9.09  12.2 common
+## 6  9.26  11.5 common
+```
+
+---
+# Restructure the data for plotting
+
+```r
+d &lt;- d %&gt;% 
+  gather(group, value, -var) 
+d
+```
+
+```
+## # A tibble: 4,000 x 3
+##    var    group value
+##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
+##  1 common low    9.34
+##  2 common low   11.4 
+##  3 common low   10.2 
+##  4 common low    8.97
+##  5 common low    9.09
+##  6 common low    9.26
+##  7 common low    9.59
+##  8 common low    8.43
+##  9 common low   10.4 
+## 10 common low    8.54
+## # ... with 3,990 more rows
+```
+
+---
+# Plot the distributions
+
+
+```r
+theme_set(theme_minimal())
+
+ggplot(d, aes(value, color = group)) +
+  geom_density(lwd = 1.5) +
+  facet_wrap(~var)
+```
+
+![](eugene_rug_files/figure-html/plot_dists-1.png)&lt;!-- --&gt;
+
+---
+# Binned effect sizes
+
+1. Cut the distributions into `\(n\)` bins (based on percentiles)
+2. Calculate the mean difference between paired bins
+3. Divide each mean difference by the overall pooled standard deviation
+
+$$
+d\_{[i]} = \frac{\bar{X}\_{foc\_{[i]}} - \bar{X}\_{ref\_{[i]}}}
+        {\sqrt{\frac{(n\_{foc} - 1)Var\_{foc} + (n\_{ref} - 1)Var\_{ref}}
+                  {n\_{foc} + n\_{ref} - 2}}}
+$$
+
+--
+### visualize it!
+
+---
+# Back to the simultated example
+
+
+```r
+common &lt;- filter(d, var == "common")
+diff   &lt;- filter(d, var == "diff")
+```
+
+
+```r
+library(esvis)
+qtile_es(value ~ group, common)
+```
+
+```
+##   ref_group foc_group low_qtile high_qtile midpoint        es         se
+## 1      high       low      0.00       0.33    0.165 -2.104952 0.09719010
+## 2      high       low      0.33       0.66    0.495 -2.029476 0.09581695
+## 3      high       low      0.66       0.99    0.825 -2.015857 0.09559891
+```
+
+```r
+qtile_es(value ~ group, diff)
+```
+
+```
+##   ref_group foc_group low_qtile high_qtile midpoint         es         se
+## 1      high       low      0.00       0.33    0.165 -0.6356662 0.07991291
+## 2      high       low      0.33       0.66    0.495 -1.2900559 0.08556516
+## 3      high       low      0.66       0.99    0.825 -1.9406182 0.09441205
+```
+
+---
+# Visualize it
+.pull-left[
+### Common Variance
+
+```r
+binned_plot(value ~ group, common)
+```
+
+![](eugene_rug_files/figure-html/sim_binned_plot_common-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+### Different Variance
+
+```r
+binned_plot(value ~ group, diff)
+```
+
+![](eugene_rug_files/figure-html/sim_binned_plot_diff-1.png)&lt;!-- --&gt;
+]
+
+---
+# Wait a minute...
+
+.pull-left[
+* The *esvis* package will (among other things) calculate and visually display binned effect sizes.
+* But how did we get from an idea, to functions, to a package?
+]
+
+.pull-right[![confused](http://www.lovethispic.com/uploaded_images/286476-I-m-Confused.jpg)]
+
+---
+class: inverse middle center
+# taking a step back
+
+---
+# Package Creation
+### The (a) recipe
+1. Come up with .red[~~a brilliant~~] an idea 
+  + .small[.grey[can be boring and mundane but just something you do a lot]]
+--
+
+2. Write a function! .small[.grey[or more likely, a set of functions]]
+--
+
+3. Create package skelton
+--
+
+4. Document your function
+--
+
+5. Install/fiddle/install
+--
+
+6. Write tests for your functions
+--
+
+7. Host your package somewhere public .grey[(GitHub is probably best)] and promote it - leverage the power of open source!
+--
+
+8. Use tools .grey[(which we'll talk about momentarily)] to help automate many of the steps, and make the whole thing less painful
+
+---
+# Some resources 
+We surely won't get through all the steps tonight. In my mind, the best resources are:
+
+.pull-left[
+### Advanced R
+&lt;img src = "https://images-na.ssl-images-amazon.com/images/I/41Qkod8KOBL._SX329_BO1,204,203,200_.jpg" height = 280 /&gt;
+]
+
+.pull-right[
+### R Packages
+&lt;img src = "http://r-pkgs.had.co.nz/cover.png" height = 280 /&gt;
+]
+
+--
+
+.footnote[For a really quick but really good intro, see [Hilary Parker's](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/comment-page-2/) blog post]
+
+
+
+---
+# Our package
+We're going to write a package today! Let's keep it really simple...
+
+1. Idea: Report basic descriptive statistics for a vector, `x`: `n`, `mean`, and `sd`. Let's also have it report on the number of missing observations. 
+
+---
+# Our function
+* Let's have it return either (a) a named vector, or (b) a dataframe .grey[.small[(whichever you prefer is fine)]]
+* What will be the formal arguments?
+* What will the body look like?
+
+--
+### Want to give it a go?
+
+---
+# The approach I took...
+
+
+```r
+describe &lt;- function(x) {
+  n     &lt;- as.integer(length(na.omit(x)))
+  nmiss &lt;- as.integer(sum(is.na(x)))
+  mn    &lt;- mean(x, na.rm = TRUE)
+  stdev &lt;- sd(x, na.rm = TRUE)
+  
+  out &lt;- tibble::tibble(n_valid   = n, 
+                        n_missing = nmiss, 
+                        mean      = mn, 
+                        sd        = stdev)
+  out
+}
+```
+
+---
+# Informal testing
+
+
+```r
+describe(rnorm(100))
+```
+
+```
+## # A tibble: 1 x 4
+##   n_valid n_missing   mean    sd
+##     &lt;int&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     100         0 0.0732 0.891
+```
+
+```r
+describe(c(rnorm(1000, 10, 4), rep(NA, 27)))
+```
+
+```
+## # A tibble: 1 x 4
+##   n_valid n_missing  mean    sd
+##     &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    1000        27  10.1  3.97
+```
+
+---
+class: inverse
+
+# Demo
+.large[
+Package skeleton: 
+* `usethis::create_package`
+* `usethis::use_r`
+* Use `roxygen2` special comments for documentation
+* Run `devtools::document`
+* Install and restart, play around
+]
+
+---
+# roxygen2 comments
+
+**Typical arguments**
+* `@param`: Describe the formal arguments. State argument name and the describe it.
+
+&gt; `#' @param x Vector to describe`
+
+* `@return`: What does the function return
+
+&gt; `#' @return A tibble with descriptive data`
+
+* `@example` or more commonly `@examples`: Provide examples of the use of your function.
+* `@export`: Export your function
+
+If you don't include `@export`, your function will be *internal*, meaning others can't access it easily. 
+
+---
+# Other docs
+
+* .bolder[`.gitignore`]: Files to ignore for git commits with some pre-slugged entries
+* .bolder[`NAMESPACE`]: Created by **{roxygen2}**. Don't edit it. If you need to, trash it and it will be reproduced. 
+* .bolder[`DESCRIPTION`]: Describes your package (more on next slide)
+* .bolder[`man/`]: The documentation files. Created by **{roxygen2}**. Don't edit.
+
+---
+# `DESCRIPTION`
+Metadata about the package. Default fields for our package are 
+
+```
+Package: practice
+Version: 0.0.0.9000
+Title: What the Package Does (One Line, Title Case)
+Description: What the package does (one paragraph).
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+RoxygenNote: 6.0.1
+```
+--
+
+This is where the information for `citation(package = "practice")` will come from.
+
+--
+
+Some advice - edit within RStudio, or a good text editor like [sublimetext](http://www.sublimetext.com). "Fancy" quotes and things can screw this up.
+
+---
+# Description File Fields
+&gt; The ‘Package’, ‘Version’, ‘License’, ‘Description’, ‘Title’, ‘Author’, and ‘Maintainer’ fields are mandatory, all other fields are optional.
+.right[[- Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file)]
+
+Some optional fields include
+* Imports and Suggests (we'll do this in a minute).
+* URL
+* BugReports
+* License (we'll have {usethis} create this for us).
+* LazyData
+
+---
+# `DESCRIPTION` for {esvis} 
+
+```
+Package: esvis
+Type: Package
+Title: Visualization and Estimation of Effect Sizes
+Version: 0.1.0.9000
+Authors@R: person("Daniel", "Anderson", email = "daniela@uoregon.edu", 
+	   role = c("aut", "cre"))
+Description: A variety of methods are provided to estimate and visualize
+    distributional differences in terms of effect sizes. Particular emphasis
+    is upon evaluating differences between two or more distributions across
+    the entire scale, rather than at a single point (e.g., differences in
+    means). For example, Probability-Probability (PP) plots display the
+    difference between two or more distributions, matched by their empirical
+    CDFs (see Ho and Reardon, 2012; &lt;doi:10.3102/1076998611411918&gt;), allowing
+    for examinations of where on the scale distributional differences are
+    largest or smallest. The area under the PP curve (AUC) is an effect-size
+    metric, corresponding to the probability that a randomly selected
+    observation from the x-axis distribution will have a higher value
+    than a randomly selected observation from the y-axis distribution. 
+    Binned effect size plots are also available, in which the distributions
+    are split into bins (set by the user) and separate effect sizes (Cohen's
+    d) are produced for each bin - again providing a means to evaluate the
+    consistency (or lack thereof) of the difference between two or more 
+    distributions at different points on the scale. Evaluation of empirical 
+    CDFs is also provided, with  built-in arguments for providing annotations 
+    to help evaluate distributional differences at specific points (e.g., 
+    semi-transparent shading). All function take a consistent argument 
+    structure. Calculation of specific effect sizes is also possible. The
+    following effect sizes are estimable: (a) Cohen's d, (b) Hedges' g, 
+    (c) percentage above a cut, (d) transformed (normalized) percentage above 
+    a cut, (e)  area under the PP curve, and (f) the V statistic (see Ho, 
+    2009; &lt;doi:10.3102/1076998609332755&gt;), which essentially transforms the 
+    area under the curve to standard deviation units. By default, effect sizes 
+    are calculated for all possible pairwise comparisons, but a reference 
+    group (distribution) can be specified.
+```
+
+---
+# `DESCRIPTION` for {esvis} .tiny[.grey[(continued)]]
+```
+Depends:
+    R (&gt;= 3.1)
+Imports:
+    sfsmisc
+URL: https://github.com/DJAnderson07/esvis
+BugReports: https://github.com/DJAnderson07/esvis/issues
+License: MIT + file LICENSE
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: 
+	testthat, 
+	viridisLite
+```
+
+---
+class: inverse
+# Demo
+* Change the author name. 
+  + Add a contributer just for fun.
+* Add a license. We'll go for MIT license using `usethis::use_mit_license("First and Last Name")`
+* Install and reload.
+
+---
+# Declare dependencies
+* The function **depends on** the [{tibble}](https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/) package. 
+* We have to declare this dependency
+
+--
+
+## My preferred approach
+* Create a package documentation page.
+  + roxygen parameters: 
+    - `#' @doctype Package`
+    - `#' @name pkg_name`
+* Declare all dependencies for your package there.
+* Only import the functions you need - not the entire package
+  + Use `#' importFrom pkg fun_name`
+
+---
+class: inverse center middle
+
+# Demo
+
+---
+# Write tests!
+
+* What does it mean to write tests?
+  + ensure your package does what you expect it to
+
+--
+
+* Why write tests?
+  + If you write a new function, and breaks an old one, that's good to know! 
+  + Reduces bugs, makes your package code more robust
+  
+--
+
+* How do you write tests?
+  + `usethis::use_testthat` sets up the infrastructure
+  + make assertions, e.g.: `testthat::expect_equal()`, `testthat::expect_warning()`, `testthat::expect_error()`
+
+---
+# Testing 
+
+We'll skip over testing for today, because we just don't have time to cover everything. A few good resources:
+
+.pull-left[
+&lt;img src = "https://images.tandf.co.uk/common/jackets/amazon/978149876/9781498763653.jpg" height = "375" /&gt;
+]
+
+.pull-right[
+[Richie Cotton's book](https://www.amazon.com/Testing-Code-Chapman-Hall-CRC/dp/1498763650)
+
+[r-pkgs Chapter](http://r-pkgs.had.co.nz/tests.html)
+
+[Karl Broman Blog Post](http://kbroman.org/pkg_primer/pages/tests.html)
+]
+
+---
+# Check your R package
+* Use `devtools::check()` to run the same checks CRAN will run on your R package.
+  + Use `devtools::build_win()` to run the checks on CRAN computers.
+* The first time, you'll likely get errors. Be patient. It will probably be .red[.Large[frustrating]], but ultimately worth the effort.
+
+--
+
+![](http://i.giphy.com/RhEvCHIeZAZ6E.gif)
+
+---
+class: inverse center middle
+# Let's check now!
+
+
+---
+class: center
+# 🎉 Hooray! 🎉
+### You have a package!
+
+&lt;img src = "https://thumbs.gfycat.com/TotalAffectionateHammerheadbird-max-1mb.gif" width = 600 height = 380 /&gt;
+
+---
+# A few other best practices
+* Create a `README` with `usethis::use_readme_rmd`.
+
+--
+
+* Try to get your [code coverage](https://en.wikipedia.org/wiki/Code_coverage) up above 80%.
+
+--
+
+* Automate wherever possible ({devtools} and {usethis} help a lot with this)
+
+--
+
+* Use the [{goodpractice}](https://github.com/MangoTheCat/goodpractice) package to help you package code be more robust, specifically with `goodpractice::gp()`. It will give you lots of good ideas
+
+--
+
+* Host on GitHub, and capitalize on integration with other systems (all free, but require registering for an account)
+  + [Travis CI](https://travis-ci.org)
+  + [Appveyor](https://www.appveyor.com)
+  + [codecov](https://codecov.io)
+  
+---
+class: inverse center middle
+
+# Any time left?
+
+### Why you should use git and GitHub
+
+---
+class: center middle
+
+&lt;i class="fa fa-github fa-5x"&gt;&lt;/i&gt;
+# [esvis](https://github.com/DJAnderson07/esvis)
+
+---
+# Quickly
+* Get started with `usethis::use_git`, followed by `usethis::use_github`.
+
+&gt; For this to work, you’ll need to set a GITHUB_PAT environment variable in your ~/.Renviron. Follow [Jenny Bryan’s](http://happygitwithr.com/github-pat.html#step-by-step) instructions, and use `edit_r_environ()` to easily access the right file for editing
+
+
+.green[Note: I haven't played around with this much. Standard git procedures will work too.]
+
+---
+# Create a `README`
+* Use standard R Markdown. Setup the infrastructure with `usethis::use_readme_rmd`. 
+* Write it just like a normal R Markdown doc and it should all flow into the `README`.
+
+&lt;img src = "img/esvis-README.png" height = 325 /&gt;
+
+---
+# Use Travis/Appveyor
+* Register for a free account
+* Run `usethis::use_travis` and `usethis::use_appveyor` to get started.
+  + Go to each respective website and "turn on" the repo
+  + Copy and paste the code to the badge into your `README`.
+  
+
+--
+
+* Now all your code will be automatically tested on Mac/Linux (Travis CI) and Windows (Appveyor)
+
+&lt;img src = "https://media.giphy.com/media/3ohzAu2U1tOafteBa0/giphy.gif" height = 200, align = "right" /&gt;
+
+
+---
+# codevoc
+You can test your code coverage each time you push a new commit by using [codecov](https://codecov.io). Initialize with `usethis::use_coverage()`. Overall setup process is pretty similar to Travis CI/Appveyor.
+
+Easily see what is/is not covered by tests!
+
+&lt;img src = "img/codecov.png" height = 325 /&gt;
+
+---
+class: inverse center middle
+
+# That's all
+### Thanks so much!
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "rainbow",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

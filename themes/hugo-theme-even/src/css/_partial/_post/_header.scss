@@ -1,0 +1,47 @@
+.post-header {
+  margin-bottom: 20px;
+
+  .post-title {
+    margin: 0;
+    font-size: $post-title-font-size;
+    font-weight: $post-title-font-weight;
+    font-family: $global-serif-font-family;
+    color: lighten($global-font-color, 5%);
+  }
+
+  .post-link {
+    @include underline-from-center;
+  }
+
+  .post-meta {
+    font-size: 14px;
+    color: $deputy-color;
+
+    .post-time {
+      font-size: 15px;
+    }
+
+    .post-category {
+      display: inline;
+
+      a {
+        color: inherit;
+
+        &::before {
+          content: '·';
+        }
+
+        &:hover {
+          color: $theme-color;
+        }
+      }
+    }
+
+    .more-meta {
+      &::before {
+        content: '·';
+      }
+    }
+
+  }
+}

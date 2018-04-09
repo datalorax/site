@@ -5,28 +5,46 @@
     <link>/tags/</link>
     <description>Recent content in Tags on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
-    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
-    <lastBuildDate>Tue, 09 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Mon, 13 Nov 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Census Data</title>
+      <link>/tags/census-data/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/census-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Custom Functions</title>
+      <link>/tags/custom-functions/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/custom-functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data Manipulations</title>
       <link>/tags/data-manipulations/</link>
-      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
+      
       <guid>/tags/data-manipulations/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Data_vis</title>
-      <link>/tags/data_vis/</link>
+      <title>Data Visualization</title>
+      <link>/tags/data-visualization/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
-      <guid>/tags/data_vis/</guid>
+      
+      <guid>/tags/data-visualization/</guid>
       <description></description>
     </item>
     
@@ -34,17 +52,17 @@
       <title>Esvis</title>
       <link>/tags/esvis/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/tags/esvis/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Functions</title>
-      <link>/tags/functions/</link>
-      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
-      <guid>/tags/functions/</guid>
+      <title>Flow Diagram</title>
+      <link>/tags/flow-diagram/</link>
+      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/flow-diagram/</guid>
       <description></description>
     </item>
     
@@ -52,8 +70,17 @@
       <title>Mapping</title>
       <link>/tags/mapping/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/tags/mapping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Package Development</title>
+      <link>/tags/package-development/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/package-development/</guid>
       <description></description>
     </item>
     
@@ -61,7 +88,7 @@
       <title>Sundry</title>
       <link>/tags/sundry/</link>
       <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/tags/sundry/</guid>
       <description></description>
     </item>
@@ -70,7 +97,7 @@
       <title>Tidyeval</title>
       <link>/tags/tidyeval/</link>
       <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/tags/tidyeval/</guid>
       <description></description>
     </item>

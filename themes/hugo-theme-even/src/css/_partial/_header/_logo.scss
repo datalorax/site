@@ -1,0 +1,26 @@
+// ==============================
+// Logo
+// =============================
+
+.logo-wrapper {
+  text-align: left;
+  position: fixed;
+  z-index: 100;
+  top: 10px;
+  left: 0;
+  padding-left: 10px;
+  .logo {
+    font-size: 36px;
+    font-family: $logo-font-family;
+    color: $global-font-color;
+    &:hover {
+        color: $theme-color;
+      }
+  }
+}
+
+@include max-screen() {
+  .logo-wrapper {
+    display: none;
+  }
+}

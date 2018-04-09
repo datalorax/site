@@ -1,452 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Archive - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <title>Posts</title>
-  <meta property="og:title" content="Posts" />
-  <meta name="twitter:title" content="Posts" />
-  <meta name="author" content="Daniel Anderson"/>
-  <meta property="og:image" content="/img/scatter.png" />
-  <meta name="twitter:image" content="/img/scatter.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@DJAnderson_07" />
-  <meta name="twitter:creator" content="@DJAnderson_07" />
-  <meta property="og:url" content="/post/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Data Science in Education" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-  <meta name="generator" content="Hugo 0.24.1" />
-  <link rel="canonical" href="/post/" />
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Data Science in Education">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="/css/highlight.min.css" />
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="A blog by Daniel Anderson" />
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
 
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="/post/" />
+<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Data Science in Education" />
+  <link href="/post/index.xml" rel="feed" type="application/rss+xml" title="Data Science in Education" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
 
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
-<div class="pswp__bg"></div>
 
-<div class="pswp__scroll-wrap">
-    
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    
-    <div class="pswp__ui pswp__ui--hidden">
-    <div class="pswp__top-bar">
-      
-      <div class="pswp__counter"></div>
-      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-      <button class="pswp__button pswp__button--share" title="Share"></button>
-      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-      
-      
-      <div class="pswp__preloader">
-        <div class="pswp__preloader__icn">
-          <div class="pswp__preloader__cut">
-            <div class="pswp__preloader__donut"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-      <div class="pswp__share-tooltip"></div>
-    </div>
-    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-    </button>
-    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-    </button>
-    <div class="pswp__caption">
-      <div class="pswp__caption__center"></div>
-    </div>
-    </div>
-    </div>
-</div>
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Posts" />
+<meta property="og:description" content="A blog by Daniel Anderson" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/post/" />
+
+
+
+<meta property="og:updated_time" content="2018-02-10T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Posts">
+<meta itemprop="description" content="A blog by Daniel Anderson">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:description" content="A blog by Daniel Anderson"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
 
 </head>
-
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Data Science in Education</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-        
-          
-            <li>
-              <a title="Blog" href="/">Blog</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="/page/about/">About</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Tags" href="/tags">Tags</a>
-            </li>
-          
-        
-          
-            <li class="navlinks-container">
-              <a class="navlinks-parent" href="javascript:void(0)">Vita</a>
-              <div class="navlinks-children">
-                
-                  <a href="/page/conference_pres">conference presentations</a>
-                
-                  <a href="/page/publications">publications</a>
-                
-                  <a href="/page/software">software</a>
-                
-                  <a href="/page/teaching">teaching</a>
-                
-              </div>
-            </li>
-          
-        
-          
-            <li>
-              <a title="esvis" href="/page/esvis/">esvis</a>
-            </li>
-          
-        
-
-        
-
-        
-      </ul>
-    </div>
-
-    <div class="avatar-container">
-      <div class="avatar-img-border">
-        
-          <a title="Data Science in Education" href="/">
-            <img class="avatar-img" src="/img/scatter.png" alt="Data Science in Education" />
-          </a>
-        
-      </div>
-    </div>
-
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Data Science in Education</a>
   </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/vita/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Data Science in Education</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/vita/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
 </nav>
 
+    </header>
 
-
-
-    
-  <header class="header-section ">
-    <div class="intro-header no-img">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>Posts</h1>
-              <hr class="small">
-            </div>
-          </div>
-        </div>
-      </div>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          
+<section id="archive" class="archive">
+    <div class="archive-title">
+      <span class="archive-post-counter">
+        6 Posts In Total
+      </span>
     </div>
-  </header>
-
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="/post/sharing-some-functions-from-my-personal-r-package/">
-                <h2 class="post-title">Sharing some functions from my personal R package</h2>
+      <div class="collection-title">
+        <h2 class="archive-year">2018</h2>
+      </div>
 
-                
-              </a>
+    <div class="archive-post">
+      <span class="archive-post-time">
+        02-10
+      </span>
+      <span class="archive-post-title">
+        <a href="/post/sharing-some-functions-from-my-personal-r-package/" class="archive-post-link">
+          Sharing some functions from my personal R package
+        </a>
+      </span>
+    </div>
+    
 
-              <p class="post-meta">
-                Posted on February 10, 2018
-              </p>
-              <div class="post-entry">
-                
-                  In this post I basically just wanted to share some recent developments that I’ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I’d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN.
-                  <a href="/post/sharing-some-functions-from-my-personal-r-package/" class="post-read-more">[Read More]</a>
-                
-              </div>
+    <div class="archive-post">
+      <span class="archive-post-time">
+        01-09
+      </span>
+      <span class="archive-post-title">
+        <a href="/post/a-tidyeval-use-case/" class="archive-post-link">
+          A tidyeval use case
+        </a>
+      </span>
+    </div>
+    
 
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/sundry/">sundry</a>&nbsp;
-                  
-                </span>
-              
+    <div class="archive-post">
+      <span class="archive-post-time">
+        01-04
+      </span>
+      <span class="archive-post-title">
+        <a href="/post/esvis-binned-effect-size-plots/" class="archive-post-link">
+          esvis: Binned Effect Size Plots
+        </a>
+      </span>
+    </div></section>
 
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/a-tidyeval-use-case/">
-                <h2 class="post-title">A tidyeval use case</h2>
+<nav class="pagination">
+  
+  <a class="next" href="/post/page/2/">
+      <span class="next-text">Next</span>
+      <i class="iconfont icon-right"></i>
+    </a>
+</nav>
 
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 9, 2018
-              </p>
-              <div class="post-entry">
-                
-                  A relatively routine process for me is to combine multiple files into a single data frame by row. For example, the data might be stored in separate CSV files by grade and content area, but I want to load them all and treat it as a single data frame with a grade and content indicator. A good default for this sort of process, is to keep all the variables that are present in any data file, and pad with missingness for the files that don’t have that specific variable.
-                  <a href="/post/a-tidyeval-use-case/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/tidyeval/">tidyeval</a>&nbsp;
-                  
-                    #<a href="/tags/data-manipulations/">data manipulations</a>&nbsp;
-                  
-                    #<a href="/tags/functions/">functions</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/esvis-binned-effect-size-plots/">
-                <h2 class="post-title">esvis: Binned Effect Size Plots</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 4, 2018
-              </p>
-              <div class="post-entry">
-                
-                  In this post, I’d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We’ll start with a quick example from the package, and then move to a simulated data example.
-Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.
-                  <a href="/post/esvis-binned-effect-size-plots/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                  
-                    #<a href="/tags/esvis/">esvis</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/alluvial-plots-with-ggforce/">
-                <h2 class="post-title">Alluvial Diagrams with ggforce</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on November 29, 2017
-              </p>
-              <div class="post-entry">
-                
-                  Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who’s not only incredibly talented, but also a good follow on twitter.
-                  <a href="/post/alluvial-plots-with-ggforce/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/mapping-statewide-school-ratings-with-us-census-tracts/">
-                <h2 class="post-title">Mapping Statewide School Ratings with US Census Tracts</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on November 13, 2017
-              </p>
-              <div class="post-entry">
-                
-                  In this post, I’d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.
-                  <a href="/post/mapping-statewide-school-ratings-with-us-census-tracts/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                  
-                    #<a href="/tags/mapping/">mapping</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/esvis-part-1/">
-                <h2 class="post-title">esvis: Part 1</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on November 5, 2017
-              </p>
-              <div class="post-entry">
-                
-                  This is the first of a series of posts to introduce my new esvis R package, why I think it’s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it’s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
-install.packages(&quot;esvis&quot;) or if you’d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.
-                  <a href="/post/esvis-part-1/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/data_vis/">data_vis</a>&nbsp;
-                  
-                    #<a href="/tags/esvis/">esvis</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
       </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/DJAnderson_07" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/DJAnderson07" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
   </div>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
-    <footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-              <li>
-                <a href="mailto:daniela@uoregon.edu" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/DJAnderson07" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/DJAnderson_07" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://stackoverflow.com/users/4959854/daniel-anderson" title="StackOverflow">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-          
-        </ul>
-        <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.dandersondata.com">Daniel Anderson</a>
-                      
-          
-          
-          &nbsp;&bull;&nbsp;
-          2018
-
-          
-            &nbsp;&bull;&nbsp;
-            <a href="/">Data Science in Education</a>
-          
-        </p>
-        
-        <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.24.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
-          
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script>
-<script src="/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script> renderMathInElement(document.body); </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
-<script src="/js/load-photoswipe.js"></script>
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
 
 
 
 
-  </body>
+
+
+
+
+</body>
 </html>
-

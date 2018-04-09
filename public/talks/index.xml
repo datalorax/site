@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Talks on Data Science in Education</title>
+    <link>/talks/</link>
+    <description>Recent content in Talks on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    
+	<atom:link href="/talks/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>/talks/eugene_rug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/eugene_rug/</guid>
+      <description>Developing Your First R Package   class: center, middle, inverse, title-slide # Developing Your First R Package ## A Case Study with esvis ### Daniel Anderson ### 2018/12/12 --- # Want to follow along? If you&#39;d like to follow along, pleae make sure you have the following packages installed ```r install.packages(c(&#34;tidyverse&#34;, &#34;esvis&#34;, &#34;devtools&#34;, &#34;roxygen2&#34;, &#34;usethis&#34;)) ``` --- # #whomi &amp;lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&#34;&amp;gt; &amp;lt;a href=&#34;https://github.com/DJAnderson07&#34;&amp;gt; &amp;lt;i class=&#34;fa fa-github fa-2x&#34;</description>
+    </item>
+    
+    <item>
+      <title>Multiple regression with R</title>
+      <link>/talks/gina/gina_mr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/gina/gina_mr/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
+ Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!</description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>/talks/vita/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/vita/</guid>
+      <description>Talks Spring 2018 Developing your first R package: A case study with esvis
+Winter 2017 A taste of R: Mini-course on R (4 workshops, 2 hours each).
+ This mini-course was aimed at introducing faculty members in the College of Education to R.  Part One - An Introduction to &amp;ldquo;R&amp;rdquo; What is it and Why You Should Care Part Two - An Introduction to Tidy Data and the Tidyverse Part 3 - Data Visualization (ggplot) Part 4 - Lists and an Applied Example   Multiple Regression with R</description>
+    </item>
+    
+  </channel>
+</rss>

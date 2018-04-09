@@ -5,20 +5,29 @@
     <link>/tags/data-manipulations/</link>
     <description>Recent content in Data Manipulations on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
-    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
-    <lastBuildDate>Tue, 09 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Sat, 10 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-manipulations/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Sharing some functions from my personal R package</title>
+      <link>/post/sharing-some-functions-from-my-personal-r-package/</link>
+      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/sharing-some-functions-from-my-personal-r-package/</guid>
+      <description>In this post I basically just wanted to share some recent developments that I&amp;rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&amp;rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github.</description>
+    </item>
+    
+    <item>
       <title>A tidyeval use case</title>
       <link>/post/a-tidyeval-use-case/</link>
       <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/a-tidyeval-use-case/</guid>
-      <description>A relatively routine process for me is to combine multiple files into a single data frame by row. For example, the data might be stored in separate CSV files by grade and content area, but I want to load them all and treat it as a single data frame with a grade and content indicator. A good default for this sort of process, is to keep all the variables that are present in any data file, and pad with missingness for the files that don’t have that specific variable.</description>
+      <description>A relatively routine process for me is to combine multiple files into a single data frame by row. For example, the data might be stored in separate CSV files by grade and content area, but I want to load them all and treat it as a single data frame with a grade and content indicator. A good default for this sort of process, is to keep all the variables that are present in any data file, and pad with missingness for the files that don&amp;rsquo;t have that specific variable.</description>
     </item>
     
   </channel>

@@ -1,227 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>esvis: Binned Effect Size Plots - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <title>esvis: Binned Effect Size Plots</title>
-  <meta property="og:title" content="esvis: Binned Effect Size Plots" />
-  <meta name="twitter:title" content="esvis: Binned Effect Size Plots" />
-  <meta name="description" content="In this post, I’d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We’ll start with a quick example from the package, and then move to a simulated data example.
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="In this post, I&amp;rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&amp;rsquo;ll start with a quick example from the package, and then move to a simulated data example.
+Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions." />
+
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="/post/esvis-binned-effect-size-plots/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="esvis: Binned Effect Size Plots" />
+<meta property="og:description" content="In this post, I&rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&rsquo;ll start with a quick example from the package, and then move to a simulated data example.
+Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/esvis-binned-effect-size-plots/" />
+
+
+
+<meta property="article:published_time" content="2018-01-04T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-01-04T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="esvis: Binned Effect Size Plots">
+<meta itemprop="description" content="In this post, I&rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&rsquo;ll start with a quick example from the package, and then move to a simulated data example.
 Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.">
-  <meta property="og:description" content="In this post, I’d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We’ll start with a quick example from the package, and then move to a simulated data example.
-Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.">
-  <meta name="twitter:description" content="In this post, I’d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two …">
-  <meta name="author" content="Daniel Anderson"/>
-  <meta property="og:image" content="/img/scatter.png" />
-  <meta name="twitter:image" content="/img/scatter.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@DJAnderson_07" />
-  <meta name="twitter:creator" content="@DJAnderson_07" />
-  <meta property="og:url" content="/post/esvis-binned-effect-size-plots/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Data Science in Education" />
 
-  <meta name="generator" content="Hugo 0.24.1" />
-  <link rel="canonical" href="/post/esvis-binned-effect-size-plots/" />
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Data Science in Education">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="/css/highlight.min.css" />
+
+<meta itemprop="datePublished" content="2018-01-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-01-04T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1168">
 
 
 
+<meta itemprop="keywords" content="Data Visualization,Package Development,esvis," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="esvis: Binned Effect Size Plots"/>
+<meta name="twitter:description" content="In this post, I&rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&rsquo;ll start with a quick example from the package, and then move to a simulated data example.
+Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions."/>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
 
-
-
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-<div class="pswp__bg"></div>
-
-<div class="pswp__scroll-wrap">
-    
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    
-    <div class="pswp__ui pswp__ui--hidden">
-    <div class="pswp__top-bar">
-      
-      <div class="pswp__counter"></div>
-      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-      <button class="pswp__button pswp__button--share" title="Share"></button>
-      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-      
-      
-      <div class="pswp__preloader">
-        <div class="pswp__preloader__icn">
-          <div class="pswp__preloader__cut">
-            <div class="pswp__preloader__donut"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-      <div class="pswp__share-tooltip"></div>
-    </div>
-    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-    </button>
-    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-    </button>
-    <div class="pswp__caption">
-      <div class="pswp__caption__center"></div>
-    </div>
-    </div>
-    </div>
-</div>
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
 
 </head>
-
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Data Science in Education</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-        
-          
-            <li>
-              <a title="Blog" href="/">Blog</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="/page/about/">About</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Tags" href="/tags">Tags</a>
-            </li>
-          
-        
-          
-            <li class="navlinks-container">
-              <a class="navlinks-parent" href="javascript:void(0)">Vita</a>
-              <div class="navlinks-children">
-                
-                  <a href="/page/conference_pres">conference presentations</a>
-                
-                  <a href="/page/publications">publications</a>
-                
-                  <a href="/page/software">software</a>
-                
-                  <a href="/page/teaching">teaching</a>
-                
-              </div>
-            </li>
-          
-        
-          
-            <li>
-              <a title="esvis" href="/page/esvis/">esvis</a>
-            </li>
-          
-        
-
-        
-
-        
-      </ul>
-    </div>
-
-    <div class="avatar-container">
-      <div class="avatar-img-border">
-        
-          <a title="Data Science in Education" href="/">
-            <img class="avatar-img" src="/img/scatter.png" alt="Data Science in Education" />
-          </a>
-        
-      </div>
-    </div>
-
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Data Science in Education</a>
   </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/vita/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Data Science in Education</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/vita/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
 </nav>
 
+    </header>
 
-
-
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  
-  
-  
+    <header class="post-header">
+      <h1 class="post-title">esvis: Binned Effect Size Plots</h1>
 
-
-
-
-  
-
-  <header class="header-section ">
-    
-    <div class="intro-header no-img">
-      
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-heading">
-              <h1>esvis: Binned Effect Size Plots</h1>
-                
-                
-                  <span class="post-meta">
-  Posted on January 4, 2018
-  
-</span>
-
-
-                
-            </div>
+      <div class="post-meta">
+        <span class="post-time"> 2018-01-04 </span>
+        <div class="post-category">
+            
+              <a href="/categories/r-code/"> R Code </a>
+            
+              <a href="/categories/r-packages/"> R Packages </a>
+            
           </div>
-        </div>
+        <span class="more-meta"> 1168 words </span>
+        <span class="more-meta"> 6 mins read </span>
+        
       </div>
-    </div>
-  </header>
-
+    </header>
 
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>In this post, I’d like to share one of the more unique plots from <em>esvis</em> - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We’ll start with a quick example from the package, and then move to a simulated data example.</p>
-<div id="quick-example" class="section level2">
-<h2>Quick example</h2>
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#quick-example">Quick example</a></li>
+<li><a href="#so-what-s-going-on-here">So what&rsquo;s going on here?</a></li>
+<li><a href="#simulated-example">Simulated Example</a></li>
+<li><a href="#some-limitations-and-future-development-work">Some limitations and future development work</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>In this post, I&rsquo;d like to share one of the more unique plots from <em>esvis</em> - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&rsquo;ll start with a quick example from the package, and then move to a simulated data example.</p>
+
+<h2 id="quick-example">Quick example</h2>
+
 <p>The API for esvis is consistent across functions, so we use the same <code>outcome ~ predictor</code> forumula as the first argument, followed by the <code>data</code> for all functions. To evaluate the difference between the achievement gap for students who are and are not eligible for free or reduced price lunch, using the built-in <em>benchmarks</em> dataset, we call</p>
-<pre class="r"><code>library(esvis)
-binned_plot(math ~ frl, benchmarks)</code></pre>
-<p><img src="/post/2018-01-04-esvis-binned-effect-size-plots_files/figure-html/frl1-1.png" width="672" /> By default, this provides the difference between students who are and are not eligible for free or reduced price lunch for the lower third, middle third, and upper third of the distribution, in terms of an effect size (Cohen’s <span class="math inline">\(d\)</span>). The standard error is also displayed by the shading, which is consistent across the scale because the sample size is relatively consistent across bins (by design), and the size of the standard error is driven primarily by the sample size.</p>
-<p>In this case, we see that the difference is pretty consistent across the scale, although there’s modest evidence that the gap is larger at the upper end of the scale. We can get a more nuanced view by making the quantile bins smaller - say, deciles.</p>
-<pre class="r"><code>binned_plot(math ~ frl, benchmarks, qtiles = seq(0, 1, .1))</code></pre>
-<p><img src="/post/2018-01-04-esvis-binned-effect-size-plots_files/figure-html/frl2-1.png" width="672" /> Notice that the size of the standard error has now increased because there’s fewer students in each bin, and we now have more convincing evidence that the gap is larger at the top of the scale. However, we also have to be careful here, because the smaller we make the bins, the fewer students there are represented in each bin from which to calculate the effect size. We can check these numbers quickly by feeding our same input into the <code>qtile_n</code> function.</p>
-<pre class="r"><code>qtile_n(math ~ frl, benchmarks, qtiles = seq(0, 1, .1))</code></pre>
-<pre><code>##                     group low_qtile high_qtile   n
+
+<pre><code class="language-r">library(esvis)
+binned_plot(math ~ frl, benchmarks)
+</code></pre>
+
+<p><img src="../2018-01-04-esvis-binned-effect-size-plots_files/figure-html/frl1-1.png" alt="" /><!-- -->
+By default, this provides the difference between students who are and are not eligible for free or reduced price lunch for the lower third, middle third, and upper third of the distribution, in terms of an effect size (Cohen&rsquo;s $d$). The standard error is also displayed by the shading, which is consistent across the scale because the sample size is relatively consistent across bins (by design), and the size of the standard error is driven primarily by the sample size.</p>
+
+<p>In this case, we see that the difference is pretty consistent across the scale, although there&rsquo;s modest evidence that the gap is larger at the upper end of the scale. We can get a more nuanced view by making the quantile bins smaller - say, deciles.</p>
+
+<pre><code class="language-r">binned_plot(math ~ frl, benchmarks, qtiles = seq(0, 1, .1))
+</code></pre>
+
+<p><img src="../2018-01-04-esvis-binned-effect-size-plots_files/figure-html/frl2-1.png" alt="" /><!-- -->
+Notice that the size of the standard error has now increased because there&rsquo;s fewer students in each bin, and we now have more convincing evidence that the gap is larger at the top of the scale. However, we also have to be careful here, because the smaller we make the bins, the fewer students there are represented in each bin from which to calculate the effect size. We can check these numbers quickly by feeding our same input into the <code>qtile_n</code> function.</p>
+
+<pre><code class="language-r">qtile_n(math ~ frl, benchmarks, qtiles = seq(0, 1, .1))
+</code></pre>
+
+<pre><code class="language-r">##                     group low_qtile high_qtile   n
 ## Non-FRL.(155,184] Non-FRL       0.0        0.1  84
 ## Non-FRL.(184,190] Non-FRL       0.1        0.2  91
 ## Non-FRL.(190,195] Non-FRL       0.2        0.3  84
@@ -241,177 +244,208 @@ binned_plot(math ~ frl, benchmarks)</code></pre>
 ## FRL.(197,200]         FRL       0.6        0.7 303
 ## FRL.(200,204]         FRL       0.7        0.8 322
 ## FRL.(204,209]         FRL       0.8        0.9 265
-## FRL.(209,237]         FRL       0.9        1.0 263</code></pre>
-<p>In this case, the sample size is getting small, but probably not so small that we wouldn’t trust the results.</p>
+## FRL.(209,237]         FRL       0.9        1.0 263
+</code></pre>
+
+<p>In this case, the sample size is getting small, but probably not so small that we wouldn&rsquo;t trust the results.</p>
+
 <p>We can also evaluate differences across multiple groups with the same basic syntax. By default, a reference group will be chosen (distribution with the highest mean) and all effect sizes will be plotted relative to that distribution.</p>
-<pre class="r"><code>binned_plot(reading ~ ethnicity, benchmarks)</code></pre>
-<p><img src="/post/2018-01-04-esvis-binned-effect-size-plots_files/figure-html/eth1-1.png" width="672" /> In this case, students identifying as White had the highest mean reading score, and are thus the reference group. We could change this with the optional <code>ref_group</code> argument. The standard errors become more useful here too because we can see the uncertainty of more than one effect size concurrently.</p>
-</div>
-<div id="so-whats-going-on-here" class="section level2">
-<h2>So what’s going on here?</h2>
-<p>The <code>binned_es</code> function does a couple of things. First, it splits each distribution according to the quantiles supplied, then calculated mean differences for each pair of quantiles, and finally, transforms the mean difference into a Cohen’s <span class="math inline">\(d\)</span> like effect size by dividing by the overall pooled standard deviation. More formally, the binned effect sizes are estimated by</p>
-<p><span class="math display">\[
+
+<pre><code class="language-r">binned_plot(reading ~ ethnicity, benchmarks)
+</code></pre>
+
+<p><img src="../2018-01-04-esvis-binned-effect-size-plots_files/figure-html/eth1-1.png" alt="" /><!-- -->
+In this case, students identifying as White had the highest mean reading score, and are thus the reference group. We could change this with the optional <code>ref_group</code> argument. The standard errors become more useful here too because we can see the uncertainty of more than one effect size concurrently.</p>
+
+<h2 id="so-what-s-going-on-here">So what&rsquo;s going on here?</h2>
+
+<p>The <code>binned_es</code> function does a couple of things. First, it splits each distribution according to the quantiles supplied, then calculated mean differences for each pair of quantiles, and finally, transforms the mean difference into a Cohen&rsquo;s $d$ like effect
+size by dividing by the overall pooled standard deviation. More formally, the binned effect sizes are estimated by</p>
+
+<p>$$
 d_{[i]} = \frac{\bar{X}_{foc_{[i]}} - \bar{X}_{ref_{[i]}}}
         {\sqrt{\frac{(n_{foc} - 1)Var_{foc} + (n_{ref} - 1)Var_{ref}}
                   {n_{foc} + n_{ref} - 2}}}
-\]</span> where <span class="math inline">\(ref\)</span> and <span class="math inline">\(foc\)</span> represent the reference and focal groups, respectively (e.g., students are are and are not eligible for free or reduced price lunch). The denominator is exactly equivalent to Cohen’s <span class="math inline">\(d\)</span>, and the only difference in the equation is that there are multiple mean differences (one for each bin).</p>
-</div>
-<div id="simulated-example" class="section level2">
-<h2>Simulated Example</h2>
-<p>To illustrate why the binned effect size plot is useful, let’s simulate some data. The first will include two normal distributions with the same variance, separated by means. The second, will include two normal distributions separated by the same difference in means, but where the variance of the first distribution is half that of the second.</p>
-<pre class="r"><code>library(tidyverse)
+$$
+where $ref$ and $foc$ represent the reference and focal groups, respectively (e.g., students are are and are not eligible for free or reduced price lunch). The denominator is exactly equivalent to Cohen&rsquo;s $d$, and the only difference in the equation is that there are multiple mean differences (one for each bin).</p>
+
+<h2 id="simulated-example">Simulated Example</h2>
+
+<p>To illustrate why the binned effect size plot is useful, let&rsquo;s simulate some data. The first will include two normal distributions with the same variance, separated by means. The second, will include two normal distributions separated by the same difference in means, but where the variance of the first distribution is half that of the second.</p>
+
+<pre><code class="language-r">library(tidyverse)
 common_var &lt;- tibble(low  = rnorm(1000, 10, 1),
                      high = rnorm(1000, 12, 1),
                      var = &quot;common&quot;)
 diff_var &lt;- tibble(low  = rnorm(1000, 10, 1),
                    high = rnorm(1000, 12, 2),
                    var = &quot;diff&quot;)
-d &lt;- bind_rows(common_var, diff_var)</code></pre>
-<p>Let’s do some quick data manipulations an plot them.</p>
-<pre class="r"><code>theme_set(theme_minimal())
+d &lt;- bind_rows(common_var, diff_var)
+</code></pre>
+
+<p>Let&rsquo;s do some quick data manipulations an plot them.</p>
+
+<pre><code class="language-r">theme_set(theme_minimal())
 d &lt;- d %&gt;% 
   gather(group, value, -var) 
 
 ggplot(d, aes(value, color = group)) +
   geom_density() +
-  facet_wrap(~var)</code></pre>
-<p><img src="/post/2018-01-04-esvis-binned-effect-size-plots_files/figure-html/manipulate_plot-1.png" width="672" /></p>
-<p>Just by looking at these distributions you can see that whether you’re comparing differences at the 10<sup>th</sup> percentile or the 90<sup>th</sup> percentile, the difference in the groups is going to be the same when the variance is common. But that’s not true when the variances are different. There’s essentially lno difference between the distributions at the bottom of the scale (e.g., 10<sup>th</sup> percentile), but there’s a large difference at the top of the scale. Let’s look at the binned effect size plot for each.</p>
-<pre class="r"><code>common &lt;- filter(d, var == &quot;common&quot;)
-binned_plot(value ~ group, common)</code></pre>
-<p><img src="/post/2018-01-04-esvis-binned-effect-size-plots_files/figure-html/sim_binned_plot1-1.png" width="672" /></p>
-<p>For the common variances, the binned effect size plot shows basically a straight line (as we’d expect), showing a two standard deviation difference. But what about when the variances are different?</p>
-<pre class="r"><code>diff &lt;- filter(d, var == &quot;diff&quot;)
-binned_plot(value ~ group, diff)</code></pre>
-<p><img src="/post/2018-01-04-esvis-binned-effect-size-plots_files/figure-html/sim_binned_plot2-1.png" width="672" /></p>
+  facet_wrap(~var)
+</code></pre>
+
+<p><img src="../2018-01-04-esvis-binned-effect-size-plots_files/figure-html/manipulate_plot-1.png" alt="" /><!-- --></p>
+
+<p>Just by looking at these distributions you can see that whether you&rsquo;re comparing differences at the 10^th^ percentile or the 90^th^ percentile, the difference in the groups is going to be the same when the variance is common. But that&rsquo;s not true when the variances are different. There&rsquo;s essentially lno difference between the distributions at the bottom of the scale (e.g., 10^th^ percentile), but there&rsquo;s a large difference at the top of the scale. Let&rsquo;s look at the binned effect size plot for each.</p>
+
+<pre><code class="language-r">common &lt;- filter(d, var == &quot;common&quot;)
+binned_plot(value ~ group, common)
+</code></pre>
+
+<p><img src="../2018-01-04-esvis-binned-effect-size-plots_files/figure-html/sim_binned_plot1-1.png" alt="" /><!-- --></p>
+
+<p>For the common variances, the binned effect size plot shows basically a straight line (as we&rsquo;d expect), showing a two standard deviation difference. But what about when the variances are different?</p>
+
+<pre><code class="language-r">diff &lt;- filter(d, var == &quot;diff&quot;)
+binned_plot(value ~ group, diff)
+</code></pre>
+
+<p><img src="../2018-01-04-esvis-binned-effect-size-plots_files/figure-html/sim_binned_plot2-1.png" alt="" /><!-- --></p>
+
 <p>Again, as we would expect (given that we simulated the data), we see a large difference in the estimated magnitude of the differences between the groups as we go up the scale.</p>
-</div>
-<div id="some-limitations-and-future-development-work" class="section level2">
-<h2>Some limitations and future development work</h2>
-<p>As you probably noticed from the simulation, you can currently only produce binned effect size plots from a single categorical variable defining the groups. That variable can have as many levels as you like, but the nice <code>facet_wrap</code> sort of output you can get with ggplot isn’t developed into esvis. As an aside, I’ve considered building esvis again pretty much from the ground up as a ggplot extension. I’d like to do that but, unfortunately, esvis is almost exclusively developed in my “spare” time (usually as I sit beside one of my daughters who’s having a hard time sleeping). So coming up with the time to do that has been challenging. When I began developing esvis I knew base graphics much better than ggplot, but that has since changed and I’ve really come to appreciate all that ggplot has to offer. But, as is, esvis is still pretty darn powerful for such simple syntax (at least I hope).</p>
+
+<h2 id="some-limitations-and-future-development-work">Some limitations and future development work</h2>
+
+<p>As you probably noticed from the simulation, you can currently only produce binned effect size plots from a single categorical variable defining the groups. That variable can have as many levels as you like, but the nice <code>facet_wrap</code> sort of output you can get with ggplot isn&rsquo;t developed into esvis. As an aside, I&rsquo;ve considered building esvis again pretty much from the ground up as a ggplot extension. I&rsquo;d like to do that but, unfortunately, esvis is almost exclusively developed in my &ldquo;spare&rdquo; time (usually as I sit beside one of my daughters who&rsquo;s having a hard time sleeping). So coming up with the time to do that has been challenging. When I began developing esvis I knew base graphics much better than ggplot, but that has since changed and I&rsquo;ve really come to appreciate all that ggplot has to offer. But, as is, esvis is still pretty darn powerful for such simple syntax (at least I hope).</p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2018-01-04</span>
+  </p>
+  
+  
 </div>
 
-      </article>
+    
+    
 
-      <ul class="pager blog-pager">
-        
-          <li class="previous">
-            <a href="/post/alluvial-plots-with-ggforce/" data-toggle="tooltip" data-placement="top" title="Alluvial Diagrams with ggforce">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="/post/a-tidyeval-use-case/" data-toggle="tooltip" data-placement="top" title="A tidyeval use case">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/data-visualization/">Data Visualization</a>
+          
+          <a href="/tags/package-development/">Package Development</a>
+          
+          <a href="/tags/esvis/">esvis</a>
+          
+        </div>
 
       
+      <nav class="post-nav">
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'http-www-dandersondata-com';
-    var disqus_identifier = '\/post\/esvis-binned-effect-size-plots\/';
-    var disqus_title = 'esvis: Binned Effect Size Plots';
-    var disqus_url = '\/post\/esvis-binned-effect-size-plots\/';
-
+          <a class="prev" href="/post/a-tidyeval-use-case/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">A tidyeval use case</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/alluvial-plots-with-ggforce/">
+            <span class="next-text nav-default">Alluvial Diagrams with ggforce</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
       
+      
+      if (window.location.hostname === 'localhost') return;
 
-    </div>
-  </div>
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/DJAnderson_07" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/DJAnderson07" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-    <footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-              <li>
-                <a href="mailto:daniela@uoregon.edu" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/DJAnderson07" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/DJAnderson_07" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://stackoverflow.com/users/4959854/daniel-anderson" title="StackOverflow">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-          
-        </ul>
-        <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.dandersondata.com">Daniel Anderson</a>
-                      
-          
-          
-          &nbsp;&bull;&nbsp;
-          2018
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
-          
-            &nbsp;&bull;&nbsp;
-            <a href="/">Data Science in Education</a>
-          
-        </p>
-        
-        <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.24.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
-          
-        </p>
-      </div>
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
   </div>
-</footer>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script>
-<script src="/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script> renderMathInElement(document.body); </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
-<script src="/js/load-photoswipe.js"></script>
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 
 
-  </body>
+
+
+
+
+</body>
 </html>
-

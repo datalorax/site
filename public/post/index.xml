@@ -5,8 +5,8 @@
     <link>/post/</link>
     <description>Recent content in Posts on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
-    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
     <lastBuildDate>Sat, 10 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
@@ -16,27 +16,27 @@
       <title>Sharing some functions from my personal R package</title>
       <link>/post/sharing-some-functions-from-my-personal-r-package/</link>
       <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/sharing-some-functions-from-my-personal-r-package/</guid>
-      <description>In this post I basically just wanted to share some recent developments that I’ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I’d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN.</description>
+      <description>In this post I basically just wanted to share some recent developments that I&amp;rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&amp;rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github.</description>
     </item>
     
     <item>
       <title>A tidyeval use case</title>
       <link>/post/a-tidyeval-use-case/</link>
       <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/a-tidyeval-use-case/</guid>
-      <description>A relatively routine process for me is to combine multiple files into a single data frame by row. For example, the data might be stored in separate CSV files by grade and content area, but I want to load them all and treat it as a single data frame with a grade and content indicator. A good default for this sort of process, is to keep all the variables that are present in any data file, and pad with missingness for the files that don’t have that specific variable.</description>
+      <description>A relatively routine process for me is to combine multiple files into a single data frame by row. For example, the data might be stored in separate CSV files by grade and content area, but I want to load them all and treat it as a single data frame with a grade and content indicator. A good default for this sort of process, is to keep all the variables that are present in any data file, and pad with missingness for the files that don&amp;rsquo;t have that specific variable.</description>
     </item>
     
     <item>
       <title>esvis: Binned Effect Size Plots</title>
       <link>/post/esvis-binned-effect-size-plots/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/esvis-binned-effect-size-plots/</guid>
-      <description>In this post, I’d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We’ll start with a quick example from the package, and then move to a simulated data example.
+      <description>In this post, I&amp;rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&amp;rsquo;ll start with a quick example from the package, and then move to a simulated data example.
 Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.</description>
     </item>
     
@@ -44,28 +44,28 @@ Quick example The API for esvis is consistent across functions, so we use the sa
       <title>Alluvial Diagrams with ggforce</title>
       <link>/post/alluvial-plots-with-ggforce/</link>
       <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/alluvial-plots-with-ggforce/</guid>
-      <description>Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn’t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I’ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who’s not only incredibly talented, but also a good follow on twitter.</description>
+      <description>Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn&amp;rsquo;t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I&amp;rsquo;ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who&amp;rsquo;s not only incredibly talented, but also a good follow on twitter.</description>
     </item>
     
     <item>
       <title>Mapping Statewide School Ratings with US Census Tracts</title>
       <link>/post/mapping-statewide-school-ratings-with-us-census-tracts/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
-      <description>In this post, I’d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.</description>
+      <description>In this post, I&amp;rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.</description>
     </item>
     
     <item>
       <title>esvis: Part 1</title>
       <link>/post/esvis-part-1/</link>
       <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/esvis-part-1/</guid>
-      <description>This is the first of a series of posts to introduce my new esvis R package, why I think it’s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it’s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
-install.packages(&amp;quot;esvis&amp;quot;) or if you’d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
+      <description>This is the first of a series of posts to introduce my new esvis R package, why I think it&amp;rsquo;s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it&amp;rsquo;s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
+install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
     </item>
     
   </channel>

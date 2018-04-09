@@ -5,8 +5,8 @@
     <link>/tags/regression/</link>
     <description>Recent content in Regression on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
-    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
     <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +16,7 @@
       <title>Hello R Markdown</title>
       <link>/post/2015-07-23-r-rmarkdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/2015-07-23-r-rmarkdown/</guid>
       <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:

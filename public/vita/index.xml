@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vita on Data Science in Education</title>
+    <link>/vita/</link>
+    <description>Recent content in Vita on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Tue, 03 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/vita/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Conference Presentations</title>
+      <link>/vita/conference_pres/</link>
+      <pubDate>Tue, 03 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/conference_pres/</guid>
+      <description>National and International Conferences  Anderson, D., and Stevens, J. J. (accepted). Exploring and visualizing achievement and school effects. Paper accepted for the annual meeting of the National Council on Measurement in Education, New York, NY.
+ Stegenga, S., Anderson, D., Munger, K., and Wennerstrom, E. K. (March, 2018). Big Data… and Babies!? A Mixed Methods Systematic Scoping Review of Strenghts, Challenges, and Implications of Big Data Use in Early Intervention and Eartly Childhood.</description>
+    </item>
+    
+    <item>
+      <title>Advanced dplyr and More on RMarkdown</title>
+      <link>/vita/classr/slides/w5p1/w5p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w5p1/w5p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Reviewing what we know Talk with your neighbor: How would you do each of the following using dplyr?  Extract only the first and third through ninth columns Extract the third column and any column that ends with &amp;ldquo;response&amp;rdquo; Reorder columns Extract only cases from students classified as English Language Learners (ELL) Create a new variable that represents the proportion of ELL students by grade Order the data in ascending or descending order Center a variable (i.</description>
+    </item>
+    
+    <item>
+      <title>Beyond the course</title>
+      <link>/vita/classr/slides/w10p1/w10p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w10p1/w10p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  A reminder: The R learning curve Agenda  Introduction to functions Introduction to Lists Introduction to the purrr package for working with lists Artificial example Walk through a real script (at least some of it)  Before we get started&amp;hellip;  There&amp;rsquo;s SO MUCH we still haven&amp;rsquo;t talked about
+ Haven&amp;rsquo;t even discussed modeling! Version control (git/github) Functional programming (get a bit today) Object oriented programming  We also briefly discussed a few important topics</description>
+    </item>
+    
+    <item>
+      <title>Data viz best practices</title>
+      <link>/vita/classr/slides/w3p2/w3p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w3p2/w3p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Discuss some of the underlying theory and empirical research behind data visualizaitons  What makes a figure good? What makes it bad?  Put it into practice with the lab Disclaimer - a lot of this will be based on Healy, Chapter 2   Above all else, show the data
+
+Edward Tufte</description>
+    </item>
+    
+    <item>
+      <title>Exploring Data with R</title>
+      <link>/vita/classr/classr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/classr/</guid>
+      <description>   Week Lecture Content Slides (pdf)     1 1 Oh the places you&amp;rsquo;ll go! An intro to R w1p1   1 2 Lab 1: Intro to R Markdown w1p2   2 1 Intro to dplyr w2p1   2 2 Lab 2: Data Import w2p2   3 1 Intro to ggplot2 w3p1   3 2 Lab 3: Data Viz Best Practices w3p2   4 1 Intro to tidy data w4p1   4 2 Lab 4: More on Tidy Data w4p2   5 1 More dplyr and R Markdown w5p1   5 2 Lab 5: Tidy data and Data Visualization w5p2   6 1 Guest Lecture with Scott Chamberlain    6 2 Review w6p2   7 1 Joins: Part 1 w7p1   7 2 Joins: Part 2 w7p2   8 1 Intro to Strings w8p1   8 2 Intro to Regular Expressions w8p2   9 1 Factors and Dates w9p1   9 2 Student Presentations (no lecture)    10 1 Topics Beyond the Class w10p1   10 2 Student Presentations (no lecture)     </description>
+    </item>
+    
+    <item>
+      <title>Factors and Dates</title>
+      <link>/vita/classr/slides/w9p1/w9p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w9p1/w9p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of factors  creating/modifying when you do/do not want factors  Basics of Dates  Specifically, we&amp;rsquo;ll focus date calculations   Disclaimer  We&amp;rsquo;re obviously not going to cover all there is to know about factors and dates in one smashed-together two-hour lecture. If we had more time, we&amp;rsquo;d spend a week on each.</description>
+    </item>
+    
+    <item>
+      <title>Importing Data</title>
+      <link>/vita/classr/slides/w2p2/w2p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w2p2/w2p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Discuss reading in data  The rio package, and when you may want some additional flexibility Other packages for reading in data  Lab  Use R Markdown Read in data from two different sources Conduct some basic manipulations   rio  Super nice package - most of the time, it just works, regardless of the source file type.</description>
+    </item>
+    
+    <item>
+      <title>Intro to ggplot2</title>
+      <link>/vita/classr/slides/w3p1/w3p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w3p1/w3p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the ggplot2 package  Note: There is a lot that we won&amp;rsquo;t cover today (it&amp;rsquo;s just an intro).
+The ggplot2 package Today, we&amp;rsquo;ll primarily be covering the basics of the ggplot2 package. Much of this presentation is based on examples from the new ggplot2 book.
+Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, but if you want access to it let me know)</description>
+    </item>
+    
+    <item>
+      <title>Intro to tidy data</title>
+      <link>/vita/classr/slides/w4p1/w4p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w4p1/w4p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few models and look at some extensions (the broom package) Practice a bit, if time allows (it probably won&amp;rsquo;t)  A little story first      It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Regular Expressions</title>
+      <link>/vita/classr/slides/w8p2/w8p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w8p2/w8p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of regular expressions  You&amp;rsquo;re not expected to be an expert from one brief lecture  Provide resources for learning more Purpose: Generally to make you aware of them  Disclaimer  Before we get started, I think it&amp;rsquo;s worth mentioning this is NOT a specialty area for me. Still working hard myself to understand all of this Today is mostly about exposure and awareness  Resources (Some of which I&amp;rsquo;ll reference and others I won&amp;rsquo;t) * Sanchez: Handling and Processing Strings in R (available here) * Li and Bryan: Regular Expression in R (available here)</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Strings</title>
+      <link>/vita/classr/slides/w8p1/w8p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w8p1/w8p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of string data String operators  Cover both stringr and base functions  Special characters Pattern matching  Before we get started  In many cases, I&amp;rsquo;ve opted to show both base and stringr functions stringr is part of the tidyverse, and has some nice functionality, but many of the base functions are so common I think I&amp;rsquo;d be doing you a disservice if I didn&amp;rsquo;t also introduce them.</description>
+    </item>
+    
+    <item>
+      <title>Joins</title>
+      <link>/vita/classr/slides/w7p1/w7p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w7p1/w7p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  To get started today, run the following code. We won&amp;rsquo;t use it a lot, but we will use it some.
+library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(nycflights13)  keys  Uniquely identify rows in a dataset. Variable(s) in common between two datasets to be joined. Primary keys: Uniquely identify observations in their dataset Foreign keys: Uniquely identify observations in other datasets.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1</title>
+      <link>/vita/classr/slides/w1p2/w1p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w1p2/w1p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Things to cover today  R Studio R Studio Projects Installing packages (specifically tidyverse) Reading in data (very briefly) The $ operator Super basics of manipulating data with dplyr R Markdown basics  R Studio [demo]
+ Customizing the look/feel  Theme Syntax highlighting Panes  Keyboard shortcuts Snippets (briefly)  (consider the daily download version: https://www.</description>
+    </item>
+    
+    <item>
+      <title>More on Joins (lab)</title>
+      <link>/vita/classr/slides/w7p2/w7p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w7p2/w7p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Load College scorecard data Load Earnings data Tidy and join Joins with data viz  semi- and anti-joins, mostly   Read in college scorecard data library(tidyverse) library(rio) library(janitor) scorecard &amp;lt;- import(&amp;quot;../../data/Most-Recent-Cohorts-Scorecard-Elements.csv&amp;quot;, setclass = &amp;quot;tbl_df&amp;quot;, na = c(&amp;quot;NULL&amp;quot;, &amp;quot;PrivacySuppressed&amp;quot;)) %&amp;gt;% clean_names() head(scorecard)  ## # A tibble: 6 x 122 ## unitid opeid opeid6 instnm city ## &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; ## 1 100654 100200 1002 Alabama A &amp;amp; M University Normal ## 2 100663 105200 1052 University of Alabama at Birmingham Birmingham ## 3 100690 2503400 25034 Amridge University Montgomery ## 4 100706 105500 1055 University of Alabama in Huntsville Huntsville ## 5 100724 100500 1005 Alabama State University Montgomery ## 6 100751 105100 1051 The University of Alabama Tuscaloosa ## # .</description>
+    </item>
+    
+    <item>
+      <title>More on tidy data</title>
+      <link>/vita/classr/slides/w4p2/w4p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w4p2/w4p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review and discuss tidy data in more depth Practice tidying data  Reasons to prefer tidy data  More efficient storage and retrieval More scalable The tidyverse of tools will work much more efficiently  Read in the hiv data  Make some manipulations (just dplyr variety) to make the data look like the below.</description>
+    </item>
+    
+    <item>
+      <title>Oh the places you&#39;ll go!</title>
+      <link>/vita/classr/slides/w1p1/w1p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w1p1/w1p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introductions Syllabus Introduce R Very basics of R (object assignment) R packages Guided practice (if time allows)  Overall purpose of today: Get you excited about R! Will be a lot of me showing, and not a lot of you doing. That will change quickly.
+Who are you?  Please introduce yourself.  Name/Program of study and things you&amp;rsquo;re interested in Prior experience with R Why do you want to learn R?</description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>/vita/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/publications/</guid>
+      <description>Peer-Reviewed Journal Articles  Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., Kennedy, P. (2018). Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement. Learning Disabilities Research &amp;amp; Practice, 33, 37-50. doi: 10.1111&amp;#8203;/ldrp.12161
+ Park, B. J., Anderson, D., Tindal, G., &amp;amp; Alonzo, J. (2017). A Validity Argument for a Mathematics Curriculum-Based Measure: Implications for Response to Intervention Decision-Making.</description>
+    </item>
+    
+    <item>
+      <title>Review</title>
+      <link>/vita/classr/slides/w6p2/w6p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w6p2/w6p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review where we&amp;rsquo;ve been  reading in data dplyr tidyr  Where to next? (briefly) Lab  Work on your final project   Tidyverse: Providing a grammar for&amp;hellip;  Graphics (ggplot) Data manipulations (dplyr) Tidying data (tidyr) Ever expanding specialized topics (not quite modeling yet, although there is some)  Reading in data rio makes it easy  Remember there are a bunch of different options you can specify</description>
+    </item>
+    
+    <item>
+      <title>Software</title>
+      <link>/vita/software/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/software/</guid>
+      <description>esvis Anderson, D. (2017). esvis: Visualization and Estimation of Effect Sizes. R package version 0.1.0. CRAN GitHub
+The purpose of esvis is primarily to visualize differences in two or more distributions. It is an implementation and extension of ideas discussed by Andrew Ho (see, for example, here). Non-parametric methods for effects sizes are also implemented. For an introduction to the package, see here. The package is under active development.</description>
+    </item>
+    
+    <item>
+      <title>Teaching</title>
+      <link>/vita/teaching/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/teaching/</guid>
+      <description>COE Data Science Specialization  I am currently in the process of leading the development of a five-course data science specialization in R for students in the College of Education at the University of Oregon, in collaboration with Drs. Alison Hill, Chester Ismay and Andrew Bray. Although the courses will be offered through the COE, it is anticipated that students from numerous social science departments will have an interest, given past enrollment in the R courses listed below.</description>
+    </item>
+    
+    <item>
+      <title>Tidy data, data viz, and summaries</title>
+      <link>/vita/classr/slides/w5p2/w5p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w5p2/w5p2/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }   Tidy data is particularly important for ggplot2 because the job of ggplot2 is to map variables to visual properties: if your data isn’t tidy, you’ll have a hard time visualising it.
+ Wickham, ggplot2 book, Chapter 9  Aesthetics  Aesthetics map a variable to a visual clue called a glyph When mapping a variable to a glyph, use aes().</description>
+    </item>
+    
+    <item>
+      <title>Vita</title>
+      <link>/vita/vita/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/vita/</guid>
+      <description>Vita All headers link to additional content Teaching I teach graduate courses in quantitative methods, usually with a data science focus, using R. I regularly post the materials from my courses on this website, which can be found by following the Teaching link.
+Publications My publications to date have mostly been focused in the area of Educational Measurement. I have co-authored 10 peer-reviewed journal articles, with 6 as lead author.</description>
+    </item>
+    
+    <item>
+      <title>dplyr (and a bit of checking in)</title>
+      <link>/vita/classr/slides/w2p1/w2p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/classr/slides/w2p1/w2p1/</guid>
+      <description>em { font-style: italic }   strong { font-weight: bold; }  First things first: Cool stuff share! A bit of background on my pick  Equations within RMD look beautiful, but can be a pain  Must use \LaTeX (see examples here: http://www.statpower.net/Content/310/R%20Stuff/SampleMarkdown.html)    
+ My pick: mathpix  See https://github.com/jonocarroll/mathpix   Generally works well regardless of surface (demo following)
+ Others? Tidyverse: Providing a grammar for&amp;hellip;  Graphics (ggplot) Data manipulations (dplyr, tidyr) Ever expanding specialized topics (not quite modeling yet, although there is some)  dplyr: A grammar for data wrangling Take a guess - what do you think the following do?</description>
+    </item>
+    
+    <item>
+      <title>esvis</title>
+      <link>/vita/esvis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/esvis/</guid>
+      <description>The esvis package is designed to visually compare two or more distributions across the entirety of the scale, rather than only by measures of central tendency (e.g., means). There are also some functions for estimating effect size, including Cohen&amp;rsquo;s d, Hedges&amp;rsquo; g, percentage above a cut, transformed (normalized) percentage above a cut, the area under the curve (conceptually equivalent to the probability that a randomly selected individual from Distribution A has a higher value than a randomly selected individual from Distribution B), and the V statistic, which essentially transforms the area under the curve to standard deviation units (see Ho, 2009).</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,8 +5,8 @@
     <link>/tags/sundry/</link>
     <description>Recent content in Sundry on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>daniela@uoregon.edu (Daniel Anderson)</managingEditor>
-    <webMaster>daniela@uoregon.edu (Daniel Anderson)</webMaster>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
     <lastBuildDate>Sat, 10 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/sundry/index.xml" rel="self" type="application/rss+xml" />
@@ -16,9 +16,9 @@
       <title>Sharing some functions from my personal R package</title>
       <link>/post/sharing-some-functions-from-my-personal-r-package/</link>
       <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
-      <author>daniela@uoregon.edu (Daniel Anderson)</author>
+      
       <guid>/post/sharing-some-functions-from-my-personal-r-package/</guid>
-      <description>In this post I basically just wanted to share some recent developments that I’ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I’d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN.</description>
+      <description>In this post I basically just wanted to share some recent developments that I&amp;rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&amp;rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github.</description>
     </item>
     
   </channel>

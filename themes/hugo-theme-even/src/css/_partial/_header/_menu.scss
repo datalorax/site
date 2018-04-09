@@ -1,0 +1,51 @@
+// ==============================
+// Menu
+// =============================
+
+.site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background: $white;
+  box-shadow: 0px 2px 2px $gray;
+  border-bottom: 2px solid $theme-color;
+  z-index: 90;
+  text-align: right;
+  transition: transform 300ms ease;
+  z-index: 99;
+
+  .menu {
+    display: inline-block;
+    position: relative;
+    padding-left: 0;
+    padding-right: 25px;
+    font-family: $global-serif-font-family;
+
+    .menu-item {
+      display: inline-block;
+      color: $theme-color;
+
+      & + .menu-item {
+        margin-left: $menu-item-margin-left;
+        z-index: 111;
+      }
+
+      @include underline-from-center;
+    }
+
+    .menu-item-link {
+      font-size: $menu-link-font-size;
+    }
+  }
+}
+
+@include max-screen() {
+  .site-navbar {
+    display: none;
+  }
+}
+
+
