@@ -160,12 +160,12 @@ head(d)
 ## # A tibble: 6 x 3
 ##     low  high var   
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
-## 1  9.42  11.6 common
-## 2  9.18  12.9 common
-## 3  9.48  11.7 common
-## 4 10.1   12.7 common
-## 5  8.92  12.1 common
-## 6  9.60  10.7 common
+## 1 10.4   11.4 common
+## 2  9.48  10.7 common
+## 3 11.7   10.4 common
+## 4  8.97  11.0 common
+## 5  9.96  12.1 common
+## 6  8.76  12.1 common
 ```
 
 ---
@@ -181,16 +181,16 @@ d
 ## # A tibble: 4,000 x 3
 ##    var    group value
 ##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
-##  1 common low    9.42
-##  2 common low    9.18
-##  3 common low    9.48
-##  4 common low   10.1 
-##  5 common low    8.92
-##  6 common low    9.60
-##  7 common low    9.90
-##  8 common low    8.64
-##  9 common low   11.7 
-## 10 common low   10.4 
+##  1 common low   10.4 
+##  2 common low    9.48
+##  3 common low   11.7 
+##  4 common low    8.97
+##  5 common low    9.96
+##  6 common low    8.76
+##  7 common low   10.1 
+##  8 common low   11.1 
+##  9 common low   11.9 
+## 10 common low    9.50
 ## # ... with 3,990 more rows
 ```
 
@@ -241,9 +241,9 @@ qtile_es(value ~ group, common)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint        es         se
-## 1      high       low      0.00       0.33    0.165 -2.003972 0.09555431
-## 2      high       low      0.33       0.66    0.495 -1.968289 0.09484502
-## 3      high       low      0.66       0.99    0.825 -2.020037 0.09566573
+## 1      high       low      0.00       0.33    0.165 -2.060092 0.09645691
+## 2      high       low      0.33       0.66    0.495 -2.072788 0.09651680
+## 3      high       low      0.66       0.99    0.825 -2.044473 0.09605817
 ```
 
 ```r
@@ -252,9 +252,9 @@ qtile_es(value ~ group, diff)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint         es         se
-## 1      high       low      0.00       0.33    0.165 -0.5560212 0.07946037
-## 2      high       low      0.33       0.66    0.495 -1.1399862 0.08393526
-## 3      high       low      0.66       0.99    0.825 -1.8396636 0.09286828
+## 1      high       low      0.00       0.33    0.165 -0.6429559 0.07995721
+## 2      high       low      0.33       0.66    0.495 -1.3213209 0.08592584
+## 3      high       low      0.66       0.99    0.825 -1.9278210 0.09421322
 ```
 
 ---
@@ -316,9 +316,19 @@ class: inverse middle center
 --
 
 7. Host your package somewhere public .grey[(GitHub is probably best)] and promote it - leverage the power of open source!
+
 --
 
-8. Use tools .grey[(which we'll talk about momentarily)] to help automate many of the steps, and make the whole thing less painful
+Use tools throughout .grey[(which we'll talk about momentarily)] to help automate many of the steps, and make the whole thing less painful
+
+---
+# A really good point
+
+&lt;blockquote class="twitter-tweet" data-conversation="none" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;1a) check that no one had the same idea 😇&lt;/p&gt;&amp;mdash; Maëlle Salmon 🐟 (@ma_salmon) &lt;a href="https://twitter.com/ma_salmon/status/983572108474241025?ref_src=twsrc%5Etfw"&gt;April 10, 2018&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;br/&gt;
+
+[And some further recommendations/good advice](http://www.masalmon.eu/2017/12/11/goodrpackages/)
 
 ---
 # Some resources 
@@ -506,9 +516,9 @@ describe(rnorm(100))
 
 ```
 ## # A tibble: 1 x 4
-##   n_valid n_missing    mean    sd
-##     &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
-## 1     100         0 -0.0249 0.980
+##   n_valid n_missing   mean    sd
+##     &lt;int&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     100         0 0.0203  1.10
 ```
 
 ```r
@@ -519,7 +529,7 @@ describe(c(rnorm(1000, 10, 4), rep(NA, 27)))
 ## # A tibble: 1 x 4
 ##   n_valid n_missing  mean    sd
 ##     &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1    1000        27  10.2  3.98
+## 1    1000        27  10.0  4.20
 ```
 
 ---
