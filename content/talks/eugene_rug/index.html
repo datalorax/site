@@ -160,12 +160,12 @@ head(d)
 ## # A tibble: 6 x 3
 ##     low  high var   
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
-## 1  9.21  13.0 common
-## 2 12.9   11.3 common
-## 3  9.01  11.5 common
-## 4  9.47  12.4 common
-## 5 10.4   12.5 common
-## 6 12.1   10.7 common
+## 1  9.42  11.6 common
+## 2  9.18  12.9 common
+## 3  9.48  11.7 common
+## 4 10.1   12.7 common
+## 5  8.92  12.1 common
+## 6  9.60  10.7 common
 ```
 
 ---
@@ -181,16 +181,16 @@ d
 ## # A tibble: 4,000 x 3
 ##    var    group value
 ##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
-##  1 common low    9.21
-##  2 common low   12.9 
-##  3 common low    9.01
-##  4 common low    9.47
-##  5 common low   10.4 
-##  6 common low   12.1 
-##  7 common low    9.98
-##  8 common low    9.92
-##  9 common low   11.5 
-## 10 common low    9.79
+##  1 common low    9.42
+##  2 common low    9.18
+##  3 common low    9.48
+##  4 common low   10.1 
+##  5 common low    8.92
+##  6 common low    9.60
+##  7 common low    9.90
+##  8 common low    8.64
+##  9 common low   11.7 
+## 10 common low   10.4 
 ## # ... with 3,990 more rows
 ```
 
@@ -241,9 +241,9 @@ qtile_es(value ~ group, common)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint        es         se
-## 1      high       low      0.00       0.33    0.165 -1.932976 0.09443641
-## 2      high       low      0.33       0.66    0.495 -2.011580 0.09553063
-## 3      high       low      0.66       0.99    0.825 -2.011645 0.09553166
+## 1      high       low      0.00       0.33    0.165 -2.003972 0.09555431
+## 2      high       low      0.33       0.66    0.495 -1.968289 0.09484502
+## 3      high       low      0.66       0.99    0.825 -2.020037 0.09566573
 ```
 
 ```r
@@ -252,9 +252,9 @@ qtile_es(value ~ group, diff)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint         es         se
-## 1      high       low      0.00       0.33    0.165 -0.5722382 0.07954781
-## 2      high       low      0.33       0.66    0.495 -1.2126983 0.08470375
-## 3      high       low      0.66       0.99    0.825 -1.8727399 0.09336777
+## 1      high       low      0.00       0.33    0.165 -0.5560212 0.07946037
+## 2      high       low      0.33       0.66    0.495 -1.1399862 0.08393526
+## 3      high       low      0.66       0.99    0.825 -1.8396636 0.09286828
 ```
 
 ---
@@ -506,9 +506,9 @@ describe(rnorm(100))
 
 ```
 ## # A tibble: 1 x 4
-##   n_valid n_missing   mean    sd
-##     &lt;int&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1     100         0 0.0238 0.957
+##   n_valid n_missing    mean    sd
+##     &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1     100         0 -0.0249 0.980
 ```
 
 ```r
@@ -519,7 +519,7 @@ describe(c(rnorm(1000, 10, 4), rep(NA, 27)))
 ## # A tibble: 1 x 4
 ##   n_valid n_missing  mean    sd
 ##     &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1    1000        27  10.1  3.91
+## 1    1000        27  10.2  3.98
 ```
 
 ---
@@ -663,19 +663,18 @@ class: inverse
 
 ---
 # Declare dependencies
-* The function **depends on** the [{tibble}](https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/) package. 
+* The function **depends on** the `tibble` function within the [{tibble}](https://www.tidyverse.org/articles/2018/01/tibble-1-4-2/) package. 
 * We have to declare this dependency
 
 --
 
 ## My preferred approach
-* Create a package documentation page.
-  + roxygen parameters: 
-    - `#' @doctype Package`
-    - `#' @name pkg_name`
-* Declare all dependencies for your package there.
-* Only import the functions you need - not the entire package
-  + Use `#' importFrom pkg fun_name`
+* Declare package dependencies: `usethis::use_package`
+* Create a package documentation page: `usethis::use_package_doc`
+  + Declare all dependencies for your package there
+  + Only import the functions you need - not the entire package
+      - Use `#' importFrom pkg fun_name`
+* Generally won't have to worry about namespacing (`tibble::tibble` becomes just plain old `tibble`). The likelihood of conflicts is also reduced, so long as you don't import the full package.
 
 ---
 class: inverse center middle
@@ -691,7 +690,7 @@ class: inverse center middle
 --
 
 * Why write tests?
-  + If you write a new function, and breaks an old one, that's good to know! 
+  + If you write a new function, and it breaks an old one, that's good to know! 
   + Reduces bugs, makes your package code more robust
   
 --
@@ -721,9 +720,10 @@ We'll skip over testing for today, because we just don't have time to cover ever
 # Check your R package
 * Use `devtools::check()` to run the same checks CRAN will run on your R package.
   + Use `devtools::build_win()` to run the checks on CRAN computers.
-* The first time, you'll likely get errors. Be patient. It will probably be .red[.Large[frustrating]], but ultimately worth the effort.
 
 --
+
+The first time, you'll likely get errors. Be patient. It will probably be .red[.Large[frustrating]], but ultimately worth the effort.
 
 ![](http://i.giphy.com/RhEvCHIeZAZ6E.gif)
 
@@ -749,7 +749,7 @@ class: center
 
 --
 
-* Automate wherever possible ({devtools} and {usethis} help a lot with this)
+* Automate wherever possible ([{devtools}](https://github.com/r-lib/devtools) and [{usethis}](https://github.com/r-lib/usethis) help a lot with this)
 
 --
 
