@@ -3,7 +3,7 @@ title: 'esvis: Part 1'
 author: Daniel Anderson
 date: '2017-11-05'
 slug: esvis-part-1
-categories: [R Code]
+categories: [R Code, R-Packages]
 tags:
   - Data Visualization
   - esvis

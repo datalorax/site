@@ -148,10 +148,10 @@ Standardized mean differences
 library(tidyverse)
 common_var &lt;- tibble(low  = rnorm(1000, 10, 1),
                      high = rnorm(1000, 12, 1),
-                     var = "common")
+                     var  = "common")
 diff_var &lt;- tibble(low  = rnorm(1000, 10, 1),
                    high = rnorm(1000, 12, 2),
-                   var = "diff")
+                   var  = "diff")
 d &lt;- bind_rows(common_var, diff_var)
 head(d)
 ```
@@ -160,12 +160,12 @@ head(d)
 ## # A tibble: 6 x 3
 ##     low  high var   
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
-## 1  9.34  11.3 common
-## 2 11.4   11.9 common
-## 3 10.2   12.7 common
-## 4  8.97  10.0 common
-## 5  9.09  12.2 common
-## 6  9.26  11.5 common
+## 1 10.3   11.0 common
+## 2  9.56  12.2 common
+## 3 11.2   12.7 common
+## 4  9.38  14.0 common
+## 5 10.9   13.5 common
+## 6 10.9   10.6 common
 ```
 
 ---
@@ -181,16 +181,16 @@ d
 ## # A tibble: 4,000 x 3
 ##    var    group value
 ##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
-##  1 common low    9.34
-##  2 common low   11.4 
-##  3 common low   10.2 
-##  4 common low    8.97
-##  5 common low    9.09
-##  6 common low    9.26
-##  7 common low    9.59
-##  8 common low    8.43
+##  1 common low   10.3 
+##  2 common low    9.56
+##  3 common low   11.2 
+##  4 common low    9.38
+##  5 common low   10.9 
+##  6 common low   10.9 
+##  7 common low   10.0 
+##  8 common low   10.3 
 ##  9 common low   10.4 
-## 10 common low    8.54
+## 10 common low    9.64
 ## # ... with 3,990 more rows
 ```
 
@@ -241,9 +241,9 @@ qtile_es(value ~ group, common)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint        es         se
-## 1      high       low      0.00       0.33    0.165 -2.104952 0.09719010
-## 2      high       low      0.33       0.66    0.495 -2.029476 0.09581695
-## 3      high       low      0.66       0.99    0.825 -2.015857 0.09559891
+## 1      high       low      0.00       0.33    0.165 -2.028976 0.09595443
+## 2      high       low      0.33       0.66    0.495 -1.990777 0.09519993
+## 3      high       low      0.66       0.99    0.825 -2.027402 0.09578368
 ```
 
 ```r
@@ -252,9 +252,9 @@ qtile_es(value ~ group, diff)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint         es         se
-## 1      high       low      0.00       0.33    0.165 -0.6356662 0.07991291
-## 2      high       low      0.33       0.66    0.495 -1.2900559 0.08556516
-## 3      high       low      0.66       0.99    0.825 -1.9406182 0.09441205
+## 1      high       low      0.00       0.33    0.165 -0.4875457 0.07911796
+## 2      high       low      0.33       0.66    0.495 -1.2632814 0.08526198
+## 3      high       low      0.66       0.99    0.825 -1.8780589 0.09344868
 ```
 
 ---
@@ -336,7 +336,7 @@ We surely won't get through all the steps tonight. In my mind, the best resource
 
 --
 
-.footnote[For a really quick but really good intro, see [Hilary Parker's](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/comment-page-2/) blog post]
+.footnote[For a really quick but really good intro, see [Hilary Parker's](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/) blog post]
 
 
 
@@ -374,6 +374,128 @@ describe &lt;- function(x) {
 }
 ```
 
+
+---
+# The approach I took...
+
+
+```r
+describe &lt;- function(x) {
+*  n     &lt;- as.integer(length(na.omit(x))) # Count number of valid cases
+  nmiss &lt;- as.integer(sum(is.na(x)))
+  mn    &lt;- mean(x, na.rm = TRUE)
+  stdev &lt;- sd(x, na.rm = TRUE)
+  
+  out &lt;- tibble::tibble(n_valid   = n, 
+                        n_missing = nmiss, 
+                        mean      = mn, 
+                        sd        = stdev)
+  out
+}
+```
+
+
+---
+# The approach I took...
+
+
+```r
+describe &lt;- function(x) {
+  n     &lt;- as.integer(length(na.omit(x))) 
+*  nmiss &lt;- as.integer(sum(is.na(x))) # Count the number of missing
+  mn    &lt;- mean(x, na.rm = TRUE)
+  stdev &lt;- sd(x, na.rm = TRUE)
+  
+  out &lt;- tibble::tibble(n_valid   = n, 
+                        n_missing = nmiss, 
+                        mean      = mn, 
+                        sd        = stdev)
+  out
+}
+```
+
+
+---
+# The approach I took...
+
+
+```r
+describe &lt;- function(x) {
+  n     &lt;- as.integer(length(na.omit(x)))
+  nmiss &lt;- as.integer(sum(is.na(x)))
+*  mn    &lt;- mean(x, na.rm = TRUE) # Calculate mean
+  stdev &lt;- sd(x, na.rm = TRUE)
+  
+  out &lt;- tibble::tibble(n_valid   = n, 
+                        n_missing = nmiss, 
+                        mean      = mn, 
+                        sd        = stdev)
+  out
+}
+```
+
+
+---
+# The approach I took...
+
+
+```r
+describe &lt;- function(x) {
+  n     &lt;- as.integer(length(na.omit(x)))
+  nmiss &lt;- as.integer(sum(is.na(x)))
+  mn    &lt;- mean(x, na.rm = TRUE)
+*  stdev &lt;- sd(x, na.rm = TRUE) # Standard deviation
+  
+  out &lt;- tibble::tibble(n_valid   = n, 
+                        n_missing = nmiss, 
+                        mean      = mn, 
+                        sd        = stdev)
+  out
+}
+```
+
+
+
+---
+# The approach I took...
+
+
+```r
+describe &lt;- function(x) {
+  n     &lt;- as.integer(length(na.omit(x)))
+  nmiss &lt;- as.integer(sum(is.na(x)))
+  mn    &lt;- mean(x, na.rm = TRUE)
+  stdev &lt;- sd(x, na.rm = TRUE)
+  
+*  out &lt;- tibble::tibble(n_valid   = n,     # Bundle it all
+*                        n_missing = nmiss, 
+*                        mean      = mn, 
+*                        sd        = stdev)
+  out
+}
+```
+
+
+
+---
+# The approach I took...
+
+
+```r
+describe &lt;- function(x) {
+  n     &lt;- as.integer(length(na.omit(x)))
+  nmiss &lt;- as.integer(sum(is.na(x)))
+  mn    &lt;- mean(x, na.rm = TRUE)
+  stdev &lt;- sd(x, na.rm = TRUE)
+  
+  out &lt;- tibble::tibble(n_valid   = n, 
+                        n_missing = nmiss, 
+                        mean      = mn, 
+                        sd        = stdev)
+*  out # Return the tibble
+}
+```
+
 ---
 # Informal testing
 
@@ -386,7 +508,7 @@ describe(rnorm(100))
 ## # A tibble: 1 x 4
 ##   n_valid n_missing   mean    sd
 ##     &lt;int&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1     100         0 0.0732 0.891
+## 1     100         0 0.0118  1.16
 ```
 
 ```r
@@ -700,7 +822,7 @@ class: inverse center middle
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "rainbow",
+"highlightStyle": "atelier-dune-light",
 "highlightLines": true,
 "countIncrementalSlides": false
 });

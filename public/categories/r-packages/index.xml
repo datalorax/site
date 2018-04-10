@@ -31,5 +31,15 @@
 Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.</description>
     </item>
     
+    <item>
+      <title>esvis: Part 1</title>
+      <link>/post/esvis-part-1/</link>
+      <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/esvis-part-1/</guid>
+      <description>This is the first of a series of posts to introduce my new esvis R package, why I think it&amp;rsquo;s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it&amp;rsquo;s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
+install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
+    </item>
+    
   </channel>
 </rss>

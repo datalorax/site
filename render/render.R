@@ -25,6 +25,7 @@ walk2(md_files, names, ~file_move(.x, glue("content/post/{.y}.md")))
 
 folder_dir <- dir_ls("render", type = "directory")
 folder_nms <- gsub(".+\\/", "", folder_dir)
-walk2(folder_dir, folder_nms, ~file_move(.x, glue("static/post/{.y}")))
 
+file_delete(glue("static/post/{folder_nms}"))
+walk2(folder_dir, folder_nms, ~file_move(.x, glue("static/post/{.y}")))
 file_delete(dir_ls("render", glob = "*.txt-e"))
