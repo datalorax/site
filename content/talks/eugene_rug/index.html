@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Developing Your First R Package
 ## A Case Study with esvis
 ### Daniel Anderson
-### 2018/12/12
+### 04-10-2018
 
 ---
 
@@ -160,12 +160,12 @@ head(d)
 ## # A tibble: 6 x 3
 ##     low  high var   
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
-## 1 10.3   11.0 common
-## 2  9.56  12.2 common
-## 3 11.2   12.7 common
-## 4  9.38  14.0 common
-## 5 10.9   13.5 common
-## 6 10.9   10.6 common
+## 1  9.21  13.0 common
+## 2 12.9   11.3 common
+## 3  9.01  11.5 common
+## 4  9.47  12.4 common
+## 5 10.4   12.5 common
+## 6 12.1   10.7 common
 ```
 
 ---
@@ -181,16 +181,16 @@ d
 ## # A tibble: 4,000 x 3
 ##    var    group value
 ##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
-##  1 common low   10.3 
-##  2 common low    9.56
-##  3 common low   11.2 
-##  4 common low    9.38
-##  5 common low   10.9 
-##  6 common low   10.9 
-##  7 common low   10.0 
-##  8 common low   10.3 
-##  9 common low   10.4 
-## 10 common low    9.64
+##  1 common low    9.21
+##  2 common low   12.9 
+##  3 common low    9.01
+##  4 common low    9.47
+##  5 common low   10.4 
+##  6 common low   12.1 
+##  7 common low    9.98
+##  8 common low    9.92
+##  9 common low   11.5 
+## 10 common low    9.79
 ## # ... with 3,990 more rows
 ```
 
@@ -241,9 +241,9 @@ qtile_es(value ~ group, common)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint        es         se
-## 1      high       low      0.00       0.33    0.165 -2.028976 0.09595443
-## 2      high       low      0.33       0.66    0.495 -1.990777 0.09519993
-## 3      high       low      0.66       0.99    0.825 -2.027402 0.09578368
+## 1      high       low      0.00       0.33    0.165 -1.932976 0.09443641
+## 2      high       low      0.33       0.66    0.495 -2.011580 0.09553063
+## 3      high       low      0.66       0.99    0.825 -2.011645 0.09553166
 ```
 
 ```r
@@ -252,9 +252,9 @@ qtile_es(value ~ group, diff)
 
 ```
 ##   ref_group foc_group low_qtile high_qtile midpoint         es         se
-## 1      high       low      0.00       0.33    0.165 -0.4875457 0.07911796
-## 2      high       low      0.33       0.66    0.495 -1.2632814 0.08526198
-## 3      high       low      0.66       0.99    0.825 -1.8780589 0.09344868
+## 1      high       low      0.00       0.33    0.165 -0.5722382 0.07954781
+## 2      high       low      0.33       0.66    0.495 -1.2126983 0.08470375
+## 3      high       low      0.66       0.99    0.825 -1.8727399 0.09336777
 ```
 
 ---
@@ -508,7 +508,7 @@ describe(rnorm(100))
 ## # A tibble: 1 x 4
 ##   n_valid n_missing   mean    sd
 ##     &lt;int&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1     100         0 0.0118  1.16
+## 1     100         0 0.0238 0.957
 ```
 
 ```r
@@ -519,7 +519,7 @@ describe(c(rnorm(1000, 10, 4), rep(NA, 27)))
 ## # A tibble: 1 x 4
 ##   n_valid n_missing  mean    sd
 ##     &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1    1000        27  10.1  3.97
+## 1    1000        27  10.1  3.91
 ```
 
 ---
