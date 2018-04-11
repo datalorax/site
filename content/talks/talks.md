@@ -20,7 +20,7 @@ A taste of R: Mini-course on R (4 workshops, 2 hours each).
 	+ [Part 3 - Data Visualization (ggplot)](https://youtu.be/8zTmGhRLEXo)
 	+ [Part 4 - Lists and an Applied Example](https://youtu.be/H7uvo360Tio)
 
-[Multiple Regression with R](../talks/index.html) 
+[Multiple Regression with R](../gina/gina_mr/index.html) 
 
-* [slides (pdf)](../talks/guest_lecture_mr.pdf) 
-* [example data](../talks/assets_gina_mr/data/synthetic_data.csv)
+* [slides (pdf)](../gina/guest_lecture_mr.pdf) 
+* [example data](../gina/assets_gina_mr/data/synthetic_data.csv)

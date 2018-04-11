@@ -17,7 +17,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/eugene_rug/</guid>
-      <description>Developing Your First R Package   class: center, middle, inverse, title-slide # Developing Your First R Package ## A Case Study with esvis ### Daniel Anderson ### 2018/12/12 --- # Want to follow along? If you&#39;d like to follow along, pleae make sure you have the following packages installed ```r install.packages(c(&#34;tidyverse&#34;, &#34;esvis&#34;, &#34;devtools&#34;, &#34;roxygen2&#34;, &#34;usethis&#34;)) ``` --- # #whomi &amp;lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&#34;&amp;gt; &amp;lt;a href=&#34;https://github.com/DJAnderson07&#34;&amp;gt; &amp;lt;i class=&#34;fa fa-github fa-2x&#34;</description>
+      <description>Developing Your First R Package   class: center, middle, inverse, title-slide # Developing Your First R Package ## A Case Study with esvis ### Daniel Anderson ### 04-10-2018 --- # Want to follow along? If you&#39;d like to follow along, pleae make sure you have the following packages installed ```r install.packages(c(&#34;tidyverse&#34;, &#34;esvis&#34;, &#34;devtools&#34;, &#34;roxygen2&#34;, &#34;usethis&#34;)) ``` --- # #whomi &amp;lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&#34;&amp;gt; &amp;lt;a href=&#34;https://github.com/DJAnderson07&#34;&amp;gt; &amp;lt;i class=&#34;fa fa-github fa-2x&#34;</description>
     </item>
     
     <item>
@@ -32,10 +32,10 @@
     
     <item>
       <title>Talks</title>
-      <link>/talks/vita/</link>
+      <link>/talks/talks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/talks/vita/</guid>
+      <guid>/talks/talks/</guid>
       <description>Talks Spring 2018 Developing your first R package: A case study with esvis
 Winter 2017 A taste of R: Mini-course on R (4 workshops, 2 hours each).
  This mini-course was aimed at introducing faculty members in the College of Education to R.  Part One - An Introduction to &amp;ldquo;R&amp;rdquo; What is it and Why You Should Care Part Two - An Introduction to Tidy Data and the Tidyverse Part 3 - Data Visualization (ggplot) Part 4 - Lists and an Applied Example   Multiple Regression with R</description>
