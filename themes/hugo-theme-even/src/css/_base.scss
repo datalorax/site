@@ -22,6 +22,7 @@ body {
 @include max-screen() {
   body {
     border-top: 0;
+    margin: 40px 0px 0px 0px;
   }
 }
 
@@ -73,7 +74,6 @@ a {
 @include max-screen() {
   .container {
     width: 100%;
-    box-shadow: -1px -5px 5px $gray;
   }
 }
 

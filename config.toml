@@ -1,5 +1,5 @@
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-baseURL = "http://localhost:1313/"
+baseURL = "http://www.dandersondata.com"
 languageCode = "en"
 defaultContentLanguage = "en"                             # en / zh-cn / ... (This field determines which i18n file to use)
 title = "Data Science in Education"
@@ -20,18 +20,7 @@ copyright = "Daniel Anderson"            # default: author.name ↓
   changefreq = "weekly"
   priority = 0.5
   filename = "sitemap.xml"
-
-#[[menu.main]]
-#    identifier = "vita_docs"
-#    name = "Vita2"
-#    weight = 3
-
-#[[menu.main]]
-#    parent = "vita_docs"
-#    name = "conference presentations"
-#    url = "vita/conference_pres"
-#    weight = 1
-
+  
 [[menu.main]]
   name = "Archives"
   weight = 20
@@ -79,36 +68,12 @@ copyright = "Daniel Anderson"            # default: author.name ↓
   linkToMarkDown = false    # Only effective when hugo will output .md files.           
   contentCopyright = ''     # e.g. '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
 
-  #changyanAppid = ""        # Changyan app id           
-  #changyanAppkey = ""       # Changyan app key
-  #livereUID = ""            # LiveRe UID                
-  #baidu_push = false        # baidu push                
-  #baidu_analytics = ""      # Baidu Analytics
-  #baidu_verification = ""   # Baidu Verification
-  #google_verification = ""  # Google_Verification       
-
-  # Link custom CSS and JS assets
-  #   (relative to /static/css and /static/js respectively)
-  #customCSS = []
-  #customJS = []
-
   [params.publicCDN]        # load these files from public cdn    
     enable = false
     jquery = '<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>'
     slideout = '<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>'
     fancyboxJs = '<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>'
     fancyboxCss = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">'
-
-#  [params.busuanzi]         # count web traffic by busuanzi           
-#    enable = false
-#    siteUV = true
-#    sitePV = true
-#    pagePV = true
-
-#  [params.reward]                                         # 文章打赏
-#    enable = false
-#    wechat = "/path/to/your/wechat-qr-code.png"           # 微信二维码
-#    alipay = "/path/to/your/alipay-qr-code.png"           # 支付宝二维码
 
   [params.social]                                         # 社交链接
     a-email = "mailto:daniela@uoregon.edu"
@@ -117,20 +82,3 @@ copyright = "Daniel Anderson"            # default: author.name ↓
     g-github = "https://github.com/DJAnderson07"
 
 
-# 将下面这段配置取消注释可以使 hugo 生成 .md 文件
-# Uncomment these options to make hugo output .md files.
-#[mediaTypes]
-#  [mediaTypes."text/plain"]
-#    suffix = "md"
-#
-#[outputFormats.MarkDown]
-#  mediaType = "text/plain"
-#  isPlainText = true
-#  isHTML = false
-#
-#[outputs]
-#  home = ["HTML", "RSS"]
-#  page = ["HTML", "MarkDown"]
-#  section = ["HTML", "RSS"]
-#  taxonomy = ["HTML", "RSS"]
-#  taxonomyTerm = ["HTML"]

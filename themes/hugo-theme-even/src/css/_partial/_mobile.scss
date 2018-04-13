@@ -49,21 +49,22 @@
 }
 
 .mobile-menu {
-  background: #534E47;
+  background: #E5EDF1;
+  border-top: 3px solid $theme-color;
 
   .mobile-menu-list {
     position: relative;
     list-style: none;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 0;
-    border-top: 1px solid #fefefe;
+    
 
     .mobile-menu-item {
       padding: 10px 30px;
-      border-bottom: 1px solid #fefefe;
-      color: #fefefe;
+      color: $global-font-color;
       &:hover {
         background-color: $theme-color;
+        color: #fefefe;
       }
     }
 
