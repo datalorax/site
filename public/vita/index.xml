@@ -190,8 +190,9 @@ Who are you?  Please introduce yourself.  Name/Program of study and things you&a
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/software/</guid>
-      <description>esvis Anderson, D. (2017). esvis: Visualization and Estimation of Effect Sizes. R package version 0.1.0. CRAN GitHub
-The purpose of esvis is primarily to visualize differences in two or more distributions. It is an implementation and extension of ideas discussed by Andrew Ho (see, for example, here). Non-parametric methods for effects sizes are also implemented. For an introduction to the package, see here. The package is under active development.</description>
+      <description>Author I have authored the following R packages.
+esvis Anderson, D. (2017). esvis: Visualization and Estimation of Effect Sizes. R package version 0.1.0. CRAN GitHub
+The purpose of esvis is primarily to visualize differences in two or more distributions. It is an implementation and extension of ideas discussed by Andrew Ho (see, for example, here). Non-parametric methods for effects sizes are also implemented. For an introduction to the package, see here.</description>
     </item>
     
     <item>

@@ -3,6 +3,9 @@ title: Software
 comments: false
 ---
 
+# Author 
+I have authored the following R packages.
+
 ## [esvis]((https://github.com/DJAnderson07/esvis) )
 Anderson, D. (2017). esvis: Visualization and Estimation of Effect Sizes. R package version 0.1.0. [CRAN](https://CRAN.R-project.org/package=esvis.) [GitHub](https://github.com/DJAnderson07/esvis) 
 
@@ -17,3 +20,18 @@ This was my first ever R package and some of the underlying code is not terribly
 Anderson, D. (2016). sundry: A sundry of convenience functions. R package version 0.0.0.9000. [GitHub](https://github.com/DJAnderson07/sundry)
 
 The *sundry* package is just a sundry of functions that I find useful when working interactively with R. Many of the functions are unique to things I work with. For example, the `collapse_dems` function collapses inconsistent time-series demographic information to the most common category (or randomly assigns when the categories are equal). The `bind_rows_drop` function binds all rows of a list of data frames while dropping all columns that are not represented in all data frames. It is a personal R package that is unlikely to ever make it to CRAN, but if you find any of the functions helpful, I'd love to hear! 
+
+# Contributer
+In addition to authoring the above packages, I am a contributer to the following packages.
+
+## [xaringan](https://CRAN.R-project.org/package=xaringan)
+Xie, Y. (2018). xaringan: Presentation ninja. R package version 0.6.3.
+[GitHub](https://github.com/yihui/xaringan)
+
+Contributed a University of Oregon theme to the package with custom CSS code. See a preview of the theme [here](http://www.dandersondata.com/talks/eugene_rug/). Note that at present, the theme is only available on the development version of the package (i.e., only through GitHub).
+
+## [tidyLPA](https://CRAN.R-project.org/package=tidyLPA)
+Rosenberg, J. M. (2018). tidyLPA: Easily Carry Out Latent
+  Profile Analysis. R package version 0.1.3.
+  
+Contributed to the plotting features of the `compare_solutions_mplus` function. I have also suggested some code cleanups related to the `NAMESPACE` to help avoid conflicts and make the code more readable overall.
