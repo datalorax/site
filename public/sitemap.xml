@@ -65,6 +65,12 @@
   </url>
   
   <url>
+    <loc>/talks/ncme18/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

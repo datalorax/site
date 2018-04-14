@@ -9,7 +9,11 @@ comments: false
 </p>
 
 ## Spring 2018
-[Developing your first R package: A case study with *esvis*](../eugene_rug/)
+* [Exploring and Visualizing School Achievement and School Effects](../ncme18/)
+	+ Presentation at the annual meeting of the [*National Council on Measurement in Education*](https://www.ncme.org), 2018.
+* [Developing your first R package: A case study with *esvis*](../eugene_rug/)
+	+ Talk for the [Eugene R Users Group](https://www.meetup.com/meetup-group-cwPiAlnB/)
+
 
 ## Winter 2017
 A taste of R: Mini-course on R (4 workshops, 2 hours each).

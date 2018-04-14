@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exploring and Visualizing School Achievement and School Effects</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson   Joseph Stevens" />
+    <meta name="date" content="2018-04-16" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Exploring and Visualizing School Achievement and School Effects
+### Daniel Anderson &lt;br/> Joseph Stevens
+### 04/16/18
+
+---
+
+
+
+
+# Introduction
+* Much recent focus on open data in research generally
+* Open data tend to be rare in educational research
+  + Privacy concerns
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+--
+.Large[.bolder[.center[NCLB Required Publicly Available Data]]]
+
+
+--
+* School-level data 
+* Percent proficent in each of at least four proficiency categories
+* Disaggregated by student subgroups
+
+---
+# Making Comparisons
+
+.pull-left[
+### Want 
+* Compare differences in achievement between student groups
+  + .grey[.smaller[(i.e., evaluate acheivement gaps)]]
+* Understand overall differences between groups
+]
+
+--
+
+.pull-right[
+### Problem
+* Data have been "coarsened"
+* Percent proficient comparisons do not work well&lt;sup&gt;.gray[.tiny[(1)]]&lt;/sup&gt;
+]
+
+.footnote[.gray[(1)] Ho, A. D. [(2008)](http://journals.sagepub.com/doi/abs/10.3102/0013189X08323842). The problem with “proficiency”: Limitations of statistics and policy under No Child Left Behind. *Educational Researcher*, *37*, 351-360.]
+
+---
+# Working with Coarsened Data
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+* Simulate some data from two distributions
+  + Group 1: `\(n = 200\)`, `\(\mu = 200\)`, `\(\sigma = 10\)`
+  + Group 2: `\(n = 500\)`, `\(\mu = 210\)`, `\(\sigma = 8\)`
+
+* Cut Scores: 190, 205, 215 .gray[.tiny[(totally made up)]]
+
+&lt;img src="anderson_pres_ncme18_files/figure-html/sim-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Reardon &amp; Ho Method&lt;sup&gt;.gray[.tiny[(2)]]&lt;/sup&gt;
+* Calculate the empirical CDF of each distribution
+* Pair the ECDFs
+* Calculate the area under the paired curve
+* Transform it to an effect-size measure (standard deviation units)
+
+.footnote[(2) Reardon, S. F., &amp; Ho, A. D. [(2015)](http://journals.sagepub.com/doi/abs/10.3102/1076998615570944). Practical issues in estimating achievement gaps from coarsened data. *Journal of Educational and Behavioral Statistics*, *40*, 158–189.]
+
+--
+
+.pull-left[
+![](anderson_pres_ncme18_files/figure-html/sim_ecdf-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+![](anderson_pres_ncme18_files/figure-html/sim_pp-1.png)&lt;!-- --&gt;
+]
+
+---
+# Transformation to effect size
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+.Large[
+$$
+V = \sqrt{2}\Phi^{-1}(AUC)
+$$
+]
+
+* `\(V\)` = Cohen's `\(d\)` under the assumption of respective normality
+* In this case, Cohen's `\(d\)` = -1.08 and `\(V\)` = -1.07.
+
+--
+
+### Why does this all matter?
+
+--
+* If we know the proportion of students scoring at multiple points in the scale, we can approximate the ECDF.
+* We can use the approximated ECDFs to estimate `\(V\)`
+
+---
+# Simulated example again
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+### proportions
+
+&lt;img src="anderson_pres_ncme18_files/figure-html/props-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse
+
+# Purpose
+
+--
+
+* Evaluate `\(V\)` with empirical data
+
+--
+
+  + Compare estimates from full data and manually coarsened data. Compare results to Cohen'd `\(d\)` estimated with full data.
+
+--
+
+* Apply these methods to publicly available data to investigate between-school differences in achievement gaps
+
+--
+
+  + Specifically using geo-spatial mapping, overlaying data about the surrounding area
+  
+  
+---
+class: inverse middle center
+
+# Data Sources
+
+---
+# Student-level
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+* National Center on Assessment and Accountability in Special Education ([NCAASE](http://ncaase.com))
+  + Large inter-state collaborative
+* Secure data
+* Data for this study included all student records in reading and mathematics across Grades 3-8 in the 2012-13 school years
+  + ~37,000 students
+  + ~62% White, 25% Hispanic/Latino, 5% Multiethnic
+
+---
+# Publicly available data
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+Oregon and California 
+* Percentage scoring in each proficiency category by school
+.pull-left[
+### California
+Available from two different websites (see [here](https://caaspp.cde.ca.gov/sb2017/ResearchFileList) and [here](https://www.cde.ca.gov/ds/si/ds/pubschls.asp))
+![](anderson_pres_ncme18_files/img/ca_web.png)
+]
+.pull-right[
+### Oregon
+Available from statewide website (see [here](http://www.oregon.gov/ode/educator-resources/assessment/Pages/
+Assessment-Group-Reports.aspx))
+![](anderson_pres_ncme18_files/img/or_web.png)
+]
+
+---
+# Census Data
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+* Geographic coordinates of **census tracts** for Alameda county
+  + Areas with between approximately 1,200 to 8,000 people, with an optimum size of 4,000 people
+* American Community Survey: 2016
+  + Median Housing Cost
+  + Number of individuals identifying as Black
+  + Number of individuals with income to poverty ration &gt; 2.0
+
+---
+# Procedures
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+### Comparing Effect Sizes
+* Estimate *`V`* by school in Oregon
+  + Full data and manually coarsened data
+* Estimate Cohen's `\(d\)` by school in Oregon
+* Compare all estimates
+
+--
+
+.pull-left[
+`\(V_c\)` = `\(V\)` continuous data estimate
+]
+
+.pull-right[
+`\(V_d\)` = `\(V\)` discrete data estimate
+]
+
+---
+# Evaluating Achievement Gaps
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+* Use publicly available data
+* Evaluate distribution of school-level achievement gaps
+  + Black-White achievement gap in California
+  + Hispanic-White achievement gap in Oregon
+* Follow-up with geographic investigations of school-level achievment gaps for Alameda county
+  + Overlay census tract information to visually examine geo-spatial relations
+  
+---
+class: inverse center middle
+
+# Results
+
+---
+# Comparing `\(V_c\)` and `\(d\)`
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+Both continuous: `\(r = 0.87/0.86\)`.
+![](anderson_pres_ncme18_files/img/vd_bivariate_continuous.png)
+
+---
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+
+.pull-left[
+### Comparing `\(V_d\)` and `\(d\)`
+.center[
+`\(r = 0.73/0.72\)`
+]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vd_bivariate_discrete.png" height = 450/&gt;
+]
+
+.pull-right[
+### Comparing `\(V_c\)` and `\(V_d\)`
+.center[
+`\(r = 0.83/0.89\)`
+]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vv_bivariate.png" height = 450/&gt;
+]
+
+
+---
+## Distribution of differences: `\(V_c\)` and `\(d\)`
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+.pull-left[
+  .center[
+    `\(\mu = -0.12, \sigma = 0.15\)` 
+  ]
+]
+
+.pull-right[
+  .left[
+    `\(\mu = -0.16, \sigma = 0.16\)`
+  ]
+]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vd_distributions_continuous.png" height = 375/&gt;
+
+
+---
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+.pull-left[
+### Comparing `\(V_d\)` and `\(d\)`
+  .center[
+    `\(\mu = -0.10/-0.13, \sigma = 0.21/0.23\)`
+  ]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vd_distributions_discrete.png" height = 425/&gt;
+
+]
+
+.pull-right[
+### Comparing `\(V_d\)` and `\(V_c\)`
+  .center[
+    `\(\mu = 0.02/0.03, \sigma = 0.17/0.15\)`
+  ]
+  
+&lt;img src = "./anderson_pres_ncme18_files/img/vv_distributions.png" height = 425/&gt;
+]
+
+---
+class: inverse center middle
+
+# Substantive Investigations
+
+---
+# Achievement Gap Distributions
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+.grey[Reminder: School-level Distributions]
+
+&lt;center&gt;&lt;img src = "./anderson_pres_ncme18_files/img/school_achievement_gaps.png" height = 425/&gt;&lt;/center&gt;
+
+---
+# Alameda County
+### Median Housing Cost
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+&lt;iframe seamless src="./anderson_pres_ncme18_files/maps/alameda_housing.html" width="100%" height="425"&gt;&lt;/iframe&gt;
+
+---
+# Alameda County
+### `\(n\)` Identifying as Black 
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+&lt;iframe seamless src="./anderson_pres_ncme18_files/maps/alameda_black.html" width="100%" height="425"&gt;&lt;/iframe&gt;
+
+---
+# Alameda County
+### `\(n\)` Income/Poverty Ratio &gt; 2.0
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+
+&lt;iframe seamless src="./anderson_pres_ncme18_files/maps/alameda_poverty.html" width="100%" height="425"&gt;&lt;/iframe&gt;
+
+---
+# Conclusions
+* Effect size appeared well estimated from coarsened data
+  + `\(V\)` was similar to Cohen's `\(d\)` with these, empirical data
+* The vast majority, but not all, schools had sizeable estimated achievement gaps
+* Clear geographic clustering of achievement gaps was evident
+  + Did Not appear to depend on the Census data investigated here
+
+.footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)]
+  
+---
+class: inverse center middle
+
+# Thanks so much!
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+
+&lt;a href="https://github.com/DJAnderson07"&gt; &lt;i class="fa fa-github fa-2x"&gt;&lt;/i&gt;&lt;/a&gt; 
+&lt;a href="https://twitter.com/DJAnderson_07"&gt; &lt;i class="fa fa-twitter fa-2x"&gt;&lt;/i&gt;&lt;/a&gt; 
+&lt;a href="https://stackoverflow.com/users/4959854/daniel-anderson"&gt; &lt;i class="fa fa-stack-overflow fa-2x"&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a href="http://www.brtprojects.org/employees/daniel-anderson/"&gt; &lt;i class="fa fa-address-card fa-2x"&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a href="mailto:daniela@uoregon.edu"&gt; &lt;i class="fa fa-envelope fa-2x"&gt;&lt;/i&gt;&lt;/a&gt;
+
+Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

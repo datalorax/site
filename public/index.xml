@@ -99,6 +99,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     </item>
     
     <item>
+      <title></title>
+      <link>/talks/ncme18/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/ncme18/</guid>
+      <description>Exploring and Visualizing School Achievement and School Effects   class: center, middle, inverse, title-slide # Exploring and Visualizing School Achievement and School Effects ### Daniel Anderson  Joseph Stevens ### 04/16/18 --- # Introduction * Much recent focus on open data in research generally * Open data tend to be rare in educational research + Privacy concerns .footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)] -- .Large[.bolder[.center[NCLB Required Publicly Available Data]]] -- * School-level data * Percent proficent in each of at least four proficiency categories * Disaggregated by student subgroups --- # Making Comparisons .</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -296,9 +305,8 @@ The purpose of esvis is primarily to visualize differences in two or more distri
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/talks/</guid>
-      <description>Talks Spring 2018 Developing your first R package: A case study with esvis
-Winter 2017 A taste of R: Mini-course on R (4 workshops, 2 hours each).
- This mini-course was aimed at introducing faculty members in the College of Education to R.  Part One - An Introduction to &amp;ldquo;R&amp;rdquo; What is it and Why You Should Care Part Two - An Introduction to Tidy Data and the Tidyverse Part 3 - Data Visualization (ggplot) Part 4 - Lists and an Applied Example   Multiple Regression with R</description>
+      <description>Talks Spring 2018  Exploring and Visualizing School Achievement and School Effects  Presentation at the annual meeting of the National Council on Measurement in Education, 2018.  Developing your first R package: A case study with esvis  Talk for the Eugene R Users Group   Winter 2017 A taste of R: Mini-course on R (4 workshops, 2 hours each).
+ This mini-course was aimed at introducing faculty members in the College of Education to R.</description>
     </item>
     
     <item>
