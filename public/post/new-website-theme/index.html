@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>New Website Theme! - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="This post has needed to be writtend for a little while, but I&amp;rsquo;ve been busy with the actual work of redesigning my website (in fact, I have a number of posts that are backlogged). This post will have a little bit of code (all of it CSS, rather than R), but mostly it&amp;rsquo;s just about my journey and things I&amp;rsquo;ve learned.
+Getting started with Blogdown In Yihui&amp;rsquo;s introduction to blogdown he advocates for simpler themes." />
+
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="/post/new-website-theme/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="New Website Theme!" />
+<meta property="og:description" content="This post has needed to be writtend for a little while, but I&rsquo;ve been busy with the actual work of redesigning my website (in fact, I have a number of posts that are backlogged). This post will have a little bit of code (all of it CSS, rather than R), but mostly it&rsquo;s just about my journey and things I&rsquo;ve learned.
+Getting started with Blogdown In Yihui&rsquo;s introduction to blogdown he advocates for simpler themes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/new-website-theme/" />
+
+
+
+<meta property="article:published_time" content="2018-04-14T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-04-14T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="New Website Theme!">
+<meta itemprop="description" content="This post has needed to be writtend for a little while, but I&rsquo;ve been busy with the actual work of redesigning my website (in fact, I have a number of posts that are backlogged). This post will have a little bit of code (all of it CSS, rather than R), but mostly it&rsquo;s just about my journey and things I&rsquo;ve learned.
+Getting started with Blogdown In Yihui&rsquo;s introduction to blogdown he advocates for simpler themes.">
+
+
+<meta itemprop="datePublished" content="2018-04-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-04-14T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1094">
+
+
+
+<meta itemprop="keywords" content="css,blogdown," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="New Website Theme!"/>
+<meta name="twitter:description" content="This post has needed to be writtend for a little while, but I&rsquo;ve been busy with the actual work of redesigning my website (in fact, I have a number of posts that are backlogged). This post will have a little bit of code (all of it CSS, rather than R), but mostly it&rsquo;s just about my journey and things I&rsquo;ve learned.
+Getting started with Blogdown In Yihui&rsquo;s introduction to blogdown he advocates for simpler themes."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Data Science in Education</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Data Science in Education</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">New Website Theme!</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-04-14 </span>
+        <div class="post-category">
+            
+              <a href="/categories/website/"> website </a>
+            
+          </div>
+        <span class="more-meta"> 1094 words </span>
+        <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#getting-started-with-blogdown">Getting started with Blogdown</a></li>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#stuck-in-indecisive-theme-hell">Stuck in indecisive theme hell</a></li>
+<li><a href="#my-journey-into-the-land-of-css-sort-of">My journey into the land of CSS (sort of)</a></li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>This post has needed to be writtend for a little while, but I&rsquo;ve been busy with the actual work of redesigning my website (in fact, I have a number of posts that are backlogged). This post will have a little bit of code (all of it CSS, rather than R), but mostly it&rsquo;s just about my journey and things I&rsquo;ve learned.</p>
+
+<h1 id="getting-started-with-blogdown">Getting started with Blogdown</h1>
+
+<p>In Yihui&rsquo;s <a href="https://slides.yihui.name/2018-blogdown-rstudio-conf-Yihui-Xie.html#11">introduction to blogdown</a> he advocates for simpler themes. Specifically, he states</p>
+
+<p><blockquote>
+My advice on themes (you won&rsquo;t listen anyway):</p>
+
+<ul>
+<li><p>you will naturually have strong desire for fancier themes, but I recommend you to try simpler themes in the beginning</p></li>
+
+<li><p>spend more time on creating the content</p></li>
+
+<li><p>you will be bored by your favorite theme someday, no matter how good it looks for now
+</blockquote>
+This is kind of a funny quote, but also very true - I didn&rsquo;t listen to him, and it caused me a lot of pain. Why? Because prior to this redesign I&rsquo;d never even dipped a toe into CSS. It reminded me of this O&rsquo;Rly book <a href="https://twitter.com/dataandme">Mara Averick</a>.</p></li>
+</ul>
+
+<p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">It&#39;s Friday- why not make it survivable with another round of <a href="https://twitter.com/ThePracticalDev?ref_src=twsrc%5Etfw">@ThePracticalDev</a> covers? <a href="https://twitter.com/hashtag/nerdhumor?src=hash&amp;ref_src=twsrc%5Etfw">#nerdhumor</a> <a href="https://t.co/7tqL6N9WLz">pic.twitter.com/7tqL6N9WLz</a></p>&mdash; Mara Averick (@dataandme) <a href="https://twitter.com/dataandme/status/764079203499343872?ref_src=twsrc%5Etfw">August 12, 2016</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p>(specficialy the &ldquo;Changing Stuff and Seeing What Happens&rdquo; book, whichc is a little hard to see in the above)</p>
+
+<h1 id="motivation">Motivation</h1>
+
+<p>When I first launched my website, I spent a <strong>long</strong> time looking at themes. I eventually settled on <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>, which is a port of <a href="https://deanattali.com">Dean Attali&rsquo;s</a> <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>. It&rsquo;s really a great theme. It&rsquo;s beautiful, it&rsquo;s clean, and it&rsquo;s actually relatively simple. This partly explains why it&rsquo;s been so successful, with, at the time of this writing the original Jekyll version having 1,096 stars on GitHub and the Hugo port having 239 stars.</p>
+
+<p>So if I&rsquo;m such a fan of Beautiful Jekyll/Hugo why did I opt to change? There are three basic reasons:</p>
+
+<ol>
+<li>Code blocks wrapped the code onto the next line when it extended passed the block (I later learned this is called overflow, but changing that parameter didn&rsquo;t seem to help). This was not <em>that</em> big of a deal in the grand scheme of things, but was a small annoyance.</li>
+<li>The success of the theme. This may sound silly but the theme is so popular that I was constantly running into other websites out there that looked, essentially, exactly like mine. I wanted to be different.</li>
+<li>I wanted to learn something new. I like pretty things and making things pretty so I wanted to learn at least the basics of CSS. I knew I wasn&rsquo;t going to be able to start fully from scratch, though, so I decided to start with a theme I liked and then modify it until I got to a point I was satisfied.
+<br /></li>
+</ol>
+
+<h1 id="stuck-in-indecisive-theme-hell">Stuck in indecisive theme hell</h1>
+
+<p>Once I decided to adopt and hopefully modify a new theme I spent <strong>hours</strong> exploring themes. The process regularly reminded me of the <a href="https://en.wikipedia.org/wiki/The_Paradox_of_Choice">paradox of choice</a>, where I essentially became paralyzed because there were too many choices! There were always parts of different themes I liked but also parts I didn&rsquo;t like. I even went so far as transfering my entire site to a new theme, then abandoning it &ndash; on more than one occassion.</p>
+
+<p>Finally, I settled on the <a href="https://github.com/olOwOlo/hugo-theme-even">even</a> theme. It had a lot of things I liked. I&rsquo;m a sucker for fancy animations and the <em>even</em> theme has a lot. On the home page, you&rsquo;ll see links underline from center on hover, the table of contents on posts (like this one) floats with the page, tags grow marginally, and when there are figures or images you can click to zoom and it will pull out in a nice panel where you can select which image you want to look at. All of this had me like</p>
+
+<p><img src="http://68.media.tumblr.com/53346ceedde5b6d29c0558bb1e932858/tumblr_or91vaey0D1rmp6e8o1_540.gif" alt="" /></p>
+
+<p>Of course, there were things I didn&rsquo;t like too, or at least things that I wished were different.</p>
+
+<h1 id="my-journey-into-the-land-of-css-sort-of">My journey into the land of CSS (sort of)</h1>
+
+<p>If you look at my site compared to the <a href="https://themes.gohugo.io/theme/hugo-theme-even/">example site</a> for <em>even</em> you will see that they, obviously, look very different, although there are some strong similarities too. Interestingly (to me anyway), <em>even</em> usess a varient of CSS, called <a href="https://sass-lang.com">SASS</a>. This led to some initial confusion for me because I had at least a tiny bit of understanding of CSS, but no idea what SASS even was (I&rsquo;d never heard of it before). Basically, SASS just allows you to parametrize things a little easier and write more succinct code which eventually gets tranlated to CSS anyway (for a really basic intro, see <a href="https://sass-lang.com/guide">here</a>).</p>
+
+<p>Some of the changes I made were easy. For example, I just had to change one line to get the background color to be different (which dramatically changed the look and feel of the site). Others were more complicated. For example, I really like <a href="https://www.w3schools.com/howto/howto_css_fixed_menu.asp">sticky headers</a>. Luckily, SASS makes this pretty easy, but it still took me hours to figure out, and then basically just as long to tweak it to how I wanted. The original code for the navigation bar looked like this</p>
+
+<pre><code class="language-css">.site-navbar {
+  float: right;
+
+  .menu {
+    display: inline-block;
+    position: relative;
+    padding-left: 0;
+    padding-right: 25px;
+    font-family: $global-serif-font-family;
+
+    .menu-item {
+      display: inline-block;
+
+      &amp; + .menu-item {
+        margin-left: $menu-item-margin-left;;
+      }
+
+      @include underline-from-center;
+    }
+
+    .menu-item-link {
+      font-size: $menu-link-font-size;
+    }
+  }
+}
+</code></pre>
+
+<p>and I changed it to</p>
+
+<pre><code class="language-css">
+.site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background: $white;
+  box-shadow: 0px 2px 2px $gray;
+  border-bottom: 2px solid $theme-color;
+  z-index: 90;
+  text-align: right;
+  transition: transform 300ms ease;
+  z-index: 99;
+
+  .menu {
+    display: inline-block;
+    position: relative;
+    padding-left: 0;
+    padding-right: 25px;
+    font-family: $global-serif-font-family;
+
+    .menu-item {
+      display: inline-block;
+      color: $theme-color;
+
+      &amp; + .menu-item {
+        margin-left: $menu-item-margin-left;
+        z-index: 111;
+      }
+
+      @include underline-from-center;
+    }
+
+    .menu-item-link {
+      font-size: $menu-link-font-size;
+    }
+  }
+}
+</code></pre>
+
+<p>This took <strong>a lot</strong> of trial and error, but eventually I got there. And that&rsquo;s essentially the approach I took throughout. Try some stuff, see what happens, try again, and eventually settle on something.</p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>I would not recommend the approach I took. I think Yihui&rsquo;s advice is sound, and you should probably listen to him. That said, if you already know some CSS, then all this would probably have been a lot easier for you than it was for me. And, if you are trying to learn CSS, I think redesigning an existing website is a good strategy. It is sort of a trial-by-fire approach that is slow and can be frustrating, but also rewarding because you can (eventually) get everything the way you like it to be.</p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2018-04-14</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/css/">css</a>
+          
+          <a href="/tags/blogdown/">blogdown</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/sharing-some-functions-from-my-personal-r-package/">
+            <span class="next-text nav-default">Sharing some functions from my personal R package</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/DJAnderson_07" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/DJAnderson07" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme based on 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

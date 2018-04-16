@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/post/new-website-theme/</loc>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/vita/conference_pres/</loc>
     <lastmod>2018-04-03T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -89,6 +96,13 @@
   </url>
   
   <url>
+    <loc>/tags/blogdown/</loc>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -97,6 +111,13 @@
   <url>
     <loc>/tags/census-data/</loc>
     <lastmod>2017-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/css/</loc>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -117,7 +138,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-04-03T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -243,7 +264,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -289,7 +310,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -336,6 +357,13 @@
     <loc>/vita/vita/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/website/</loc>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
   </url>
   
   <url>

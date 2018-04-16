@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogdown on Data Science in Education</title>
+    <link>/tags/blogdown/</link>
+    <description>Recent content in Blogdown on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Sat, 14 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/blogdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>New Website Theme!</title>
+      <link>/post/new-website-theme/</link>
+      <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/new-website-theme/</guid>
+      <description>This post has needed to be writtend for a little while, but I&amp;rsquo;ve been busy with the actual work of redesigning my website (in fact, I have a number of posts that are backlogged). This post will have a little bit of code (all of it CSS, rather than R), but mostly it&amp;rsquo;s just about my journey and things I&amp;rsquo;ve learned.
+Getting started with Blogdown In Yihui&amp;rsquo;s introduction to blogdown he advocates for simpler themes.</description>
+    </item>
+    
+  </channel>
+</rss>

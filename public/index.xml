@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Tue, 03 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New Website Theme!</title>
+      <link>/post/new-website-theme/</link>
+      <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/new-website-theme/</guid>
+      <description>This post has needed to be writtend for a little while, but I&amp;rsquo;ve been busy with the actual work of redesigning my website (in fact, I have a number of posts that are backlogged). This post will have a little bit of code (all of it CSS, rather than R), but mostly it&amp;rsquo;s just about my journey and things I&amp;rsquo;ve learned.
+Getting started with Blogdown In Yihui&amp;rsquo;s introduction to blogdown he advocates for simpler themes.</description>
+    </item>
     
     <item>
       <title>Conference Presentations</title>
