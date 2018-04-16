@@ -32,17 +32,43 @@
 
   blockquote {
     margin: 2em 0;
-    padding: 10px 20px;
+    font-family: $content-blockquote-font-family;
+    padding: 10px 70px 2px 70px;
     position: relative;
-    color: rgba(#34495e, 0.8);
     background-color: $content-blockquote-backgroud;
-    border-left: $content-blockquote-border-left;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
+    border-top: $content-blockquote-border;
+    border-bottom: $content-blockquote-border;
 
     p {
       margin: 0;
     }
   }
+
+blockquote:before {
+  color: rgba($theme-color, .8);
+  font-family: 'Philosopher', cursive;
+  content: open-quote;
+  font-size: 8em;
+  line-height: 0.01em;
+  position: absolute;
+  margin-right: 0.25em;
+  left: -0.05em;
+  top: 0.37em;
+  z-index: 50;
+}
+
+blockquote:after {
+  color: rgba($theme-color, .8);
+  font-family: 'Philosopher', cursive;
+  content: close-quote;
+  font-size: 8em;
+  line-height: 0.01em;
+  position: absolute;
+  margin-right: 0em;
+  right: 0em;
+  bottom: 0em;
+  z-index: 50;
+}
 
   img {
     display: inline-block;

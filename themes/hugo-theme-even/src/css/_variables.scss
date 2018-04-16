@@ -1,5 +1,5 @@
 @import url(https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css);
-@import url(https://fonts.googleapis.com/css?family=Parisienne|PT+Sans|Philosopher|Tangerine);
+@import url(https://fonts.googleapis.com/css?family=Parisienne|PT+Sans|Philosopher|Tangerine|Poiret+One);
 
 // ==============================
 // Variables
@@ -180,13 +180,17 @@ $content-headings-anchor: "" !default;
 $content-link-border: 1px solid $theme-color !default;
 
 // Background color of the blockquote.
-$content-blockquote-backgroud: rgba($theme-color, 0.05) !default;
+$content-blockquote-backgroud: lighten(#534E47, 70%) !default;
 
 // Border left of the blockquote.
-$content-blockquote-border-left: 10px solid rgba(251, 1, 217, 0.3) !default;
+$content-blockquote-border: 5px solid rgba($theme-color, .8) !default;
 
 // Border color of the table.
 $content-table-border-color: darken($deputy-color, 3%) !default;
+
+// Font family for the block quote
+$content-blockquote-font-family: 'Poiret One', cursive;
+
 
 // ========== Code ========== //
 // Color of the code.
