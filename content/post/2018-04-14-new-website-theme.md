@@ -28,7 +28,7 @@ This is kind of a funny quote, but also very true - I didn't listen to him, and 
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">It&#39;s Friday- why not make it survivable with another round of <a href="https://twitter.com/ThePracticalDev?ref_src=twsrc%5Etfw">@ThePracticalDev</a> covers? <a href="https://twitter.com/hashtag/nerdhumor?src=hash&amp;ref_src=twsrc%5Etfw">#nerdhumor</a> <a href="https://t.co/7tqL6N9WLz">pic.twitter.com/7tqL6N9WLz</a></p>&mdash; Mara Averick (@dataandme) <a href="https://twitter.com/dataandme/status/764079203499343872?ref_src=twsrc%5Etfw">August 12, 2016</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
-(specficialy the "Changing Stuff and Seeing What Happens" book, whichc is a little hard to see in the above)
+(specficialy the "Changing Stuff and Seeing What Happens" book, which is a little hard to see in the above)
 
 # Motivation
 When I first launched my website, I spent a **long** time looking at themes. I eventually settled on [Beautiful Hugo](https://github.com/halogenica/beautifulhugo), which is a port of [Dean Attali's](https://deanattali.com) [Beautiful Jekyll](https://deanattali.com/beautiful-jekyll/). It's really a great theme. It's beautiful, it's clean, and it's actually relatively simple. This partly explains why it's been so successful, with, at the time of this writing the original Jekyll version having 1,096 stars on GitHub and the Hugo port having 239 stars.
