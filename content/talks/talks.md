@@ -9,6 +9,8 @@ comments: false
 </p>
 
 ## Spring 2018
+* [Contributing to Open Source with Pretty Slides](../cascadia18/)
+	+ Lightning talk at the Cascadia R Conference, June 2, 2018.
 * [Exploring and Visualizing School Achievement and School Effects](../ncme18/)
 	+ Presentation at the annual meeting of the [*National Council on Measurement in Education*](https://www.ncme.org), 2018.
 * [Developing your first R package: A case study with *esvis*](../eugene_rug/)

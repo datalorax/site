@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contribute to Open Source with Pretty Slides</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="date" content="2018-06-02" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Contribute to Open Source with Pretty Slides
+## (And a short preview of a WIP package)
+### Daniel Anderson
+### June 2, 2018
+
+---
+
+class: center, middle
+
+# xaringan
+
+### /ʃæ.'riŋ.ɡæn/
+
+---
+# What it is
+
+.pull-left[
+* HTML-based slides
+* Produced with R Markdown
+* Styled with CSS
+]
+
+.pull-right[
+![](assets/img/rmd.png)
+]
+
+---
+# Themes
+This is the `uo` theme
+See All the available themes with `xaringan:::list_css()`
+
+
+```r
+names(xaringan:::list_css())
+```
+
+```
+##  [1] "default-fonts"    "default"          "duke-blue"       
+##  [4] "hygge-duke"       "hygge"            "metropolis-fonts"
+##  [7] "metropolis"       "rladies-fonts"    "rladies"         
+## [10] "robot-fonts"      "robot"            "rutgers-fonts"   
+## [13] "rutgers"          "tamu-fonts"       "tamu"            
+## [16] "uo-fonts"         "uo"
+```
+
+---
+# Specify a theme
+
+.pull-left[
+.grey[.Large[**Default YAML**]]
+```
+---
+title: "Presentation Ninja"
+subtitle: "⚔&lt;br/&gt;with xaringan"
+author: "Yihui Xie"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```
+]
+
+.pull-right[
+.grey[.Large[**Add a theme**]]
+```
+---
+title: "Presentation Ninja"
+subtitle: "⚔&lt;br/&gt;with xaringan"
+author: "Yihui Xie"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+* css: ["default", "uo", "uo-fonts"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```
+]
+
+---
+# Where do the themes live?
+CSS Files
+
+![](assets/img/css-files.png)
+
+---
+# How do you contribute your own theme?
+
+&lt;br/&gt;
+### My advice
+1. Start with an existing theme
+1. Modify the CSS 
+  + Change .large[.bolder[.red[c].blue[o].green[l].yellow[o].purple[r].orange[s]]]!
+  + Change fonts! (see [here](https://github.com/yihui/xaringan/wiki/Changing-fonts), 
+  import fonts with [google fonts](https://fonts.google.com))
+  + Consider changes to the background
+
+---
+# Look at CSS for [existing themes](https://github.com/yihui/xaringan/tree/master/inst/rmarkdown/templates/xaringan/resources)
+
+![](assets/img/existing-themes.png)
+
+---
+# Basically this
+
+.center[&lt;img src = "https://i.pinimg.com/736x/33/fb/06/33fb067593a2a949e349a4e899c508d3--programming-humor-o-reilly.jpg",
+ height = 480 /&gt;]
+
+---
+# Once you've settled on a theme
+1. Pull out just the parts of your theme that are different from the default theme
+  + Name the css file what you want your theme to be called (keep it simple and all lower case)
+1. Put all of your fonts in a separate file, called `themename-fonts.css`.
+
+--
+
+### When you're sure you're ready to contribute
+1. Fork the [xaringan](https://github.com/yihui/xaringan) repo, and clone your 
+fork locally.
+1. Add your css files to `xaringan/inst/rmarkdown/templates/xaringan/resources`
+1. Push the files to your fork
+1. Submit a PR
+
+---
+class: inverse center middle
+
+## Quick new package preview
+
+---
+# [slidex](https://github.com/datalorax/slidex)
+
+https://github.com/datalorax/slidex
+
+Transition PowerPoint slides to xaringan slides
+* Currently exports one function: 
+
+
+```r
+convert_pptx("path/to/pptx", author = "Your Name")
+```
+
+--
+
+* Still a WIP - not perfect but can do a lot
+  + Maintains bulleting (basically)
+  + Maintains and reproduces tables 
+  + Maintains images
+  + Maintains links
+  + Easy selection of existing themes (additional `theme` argument).
+  
+---
+class: inverse
+background-image: url(assets/mov/slidex-preview.mov)
+background-size: contain
+
+&lt;!-- ![](assets/mov/slidex-preview.mov) --&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
