@@ -14,10 +14,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: $global-lineheight;
   color: $global-font-color;
-  background: #E5EDF1;
+  background: 
+    url(https://earlymoments.com/upload/EarlyMoments/dr-seuss-photos/truffula-trees-thumb.png) bottom left no-repeat,
+    url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/652/confectionary.png);
+  background-attachment:fixed;
   scroll-behavior: smooth;
 }
-
 
 @include max-screen() {
   body {
