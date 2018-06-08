@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Peeking behind the curtain with {slidex} - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="I gave a lightning talk (slides here) this past weekend at the second annual Cascadia R Conference that was focused on created and contributing new themes to the {xaringan} package, which is essentially a really well thought out and well-organized R Markdown wrapper around the remark.js package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, {slidex}, for converting Microsoft PowerPoint slides to R Markdown, and specifically {xaringan}, with a single function." />
+
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="/post/peeking-behind-the-curtain-with-slidex/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Peeking behind the curtain with {slidex}" />
+<meta property="og:description" content="I gave a lightning talk (slides here) this past weekend at the second annual Cascadia R Conference that was focused on created and contributing new themes to the {xaringan} package, which is essentially a really well thought out and well-organized R Markdown wrapper around the remark.js package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, {slidex}, for converting Microsoft PowerPoint slides to R Markdown, and specifically {xaringan}, with a single function." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/peeking-behind-the-curtain-with-slidex/" />
+
+
+
+<meta property="article:published_time" content="2018-06-08T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-06-08T08:18:58-07:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Peeking behind the curtain with {slidex}">
+<meta itemprop="description" content="I gave a lightning talk (slides here) this past weekend at the second annual Cascadia R Conference that was focused on created and contributing new themes to the {xaringan} package, which is essentially a really well thought out and well-organized R Markdown wrapper around the remark.js package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, {slidex}, for converting Microsoft PowerPoint slides to R Markdown, and specifically {xaringan}, with a single function.">
+
+
+<meta itemprop="datePublished" content="2018-06-08T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-06-08T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1081">
+
+
+
+<meta itemprop="keywords" content="slidex," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Peeking behind the curtain with {slidex}"/>
+<meta name="twitter:description" content="I gave a lightning talk (slides here) this past weekend at the second annual Cascadia R Conference that was focused on created and contributing new themes to the {xaringan} package, which is essentially a really well thought out and well-organized R Markdown wrapper around the remark.js package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, {slidex}, for converting Microsoft PowerPoint slides to R Markdown, and specifically {xaringan}, with a single function."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Data Science in Education</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Data Science in Education</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Peeking behind the curtain with {slidex}</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-06-08 </span>
+        <div class="post-category">
+            
+              <a href="/categories/r-packages/"> R Packages </a>
+            
+          </div>
+        <span class="more-meta"> 1081 words </span>
+        <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#peeking-behind-the-curtain">Peeking behind the curtain</a>
+<ul>
+<li><a href="#all-microsoft-files-are-xml-code">All Microsoft Files are XML Code</a></li>
+<li><a href="#what-do-we-do-with-the-xml-code">What do we do with the xml code?</a></li>
+</ul></li>
+<li><a href="#what-s-next-for-slidex">What&rsquo;s next for slidex</a></li>
+<li><a href="#feedback-and-collaboration-welcome">Feedback and collaboration welcome</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>I gave a lightning talk (slides <a href="http://www.datalorax.com/talks/cascadia18/">here</a>) this past weekend at the second annual <a href="https://cascadiarconf.com">Cascadia R Conference</a> that was focused on created and contributing new themes to the <a href="https://github.com/yihui/xaringan">{xaringan}</a> package, which is essentially a really well thought out and well-organized R Markdown wrapper around the <a href="https://github.com/gnab/remark">remark.js</a> package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, <a href="https://github.com/datalorax/slidex">{slidex}</a>, for converting Microsoft PowerPoint slides to R Markdown, and specifically <em>{xaringan}</em>, with a single function.</p>
+
+<p><img src="../https://github.com/datalorax/slidex/raw/master/docs/slidex-preview.gif" alt="" /></p>
+
+<p>The response to this package has been incredible. These are some of my favorite comments from twitter.</p>
+
+<p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">This is legit badass! <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/blackmagic?src=hash&amp;ref_src=twsrc%5Etfw">#blackmagic</a> <a href="https://t.co/UAwGS5YWjh">https://t.co/UAwGS5YWjh</a></p>&mdash; Indrajeet Patil (@patilindrajeets) <a href="https://twitter.com/patilindrajeets/status/1003282765763305472?ref_src=twsrc%5Etfw">June 3, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I love this new package 📦! It worked wonderful for me and I also see it as an excellent teaching and collaboration tool for those who may not be as familiar with <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a>! Thanks <a href="https://twitter.com/datalorax_?ref_src=twsrc%5Etfw">@datalorax_</a> 👏</p>&mdash; Sondra Stegenga (@stegso) <a href="https://twitter.com/stegso/status/1003287890065932288?ref_src=twsrc%5Etfw">June 3, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><blockquote class="twitter-tweet" data-lang="en"><p lang="nl" dir="ltr">disbelief</p>&mdash; Jan Stanstrup (@JanStanstrup) <a href="https://twitter.com/JanStanstrup/status/1003390986964389898?ref_src=twsrc%5Etfw">June 3, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Amazing!! <a href="https://t.co/Tf9Je9tu2M">https://t.co/Tf9Je9tu2M</a></p>&mdash; Henrique Laureano (@hap_laureano) <a href="https://twitter.com/hap_laureano/status/1003617692400738304?ref_src=twsrc%5Etfw">June 4, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p>And of course, the one that absolutely took the cake, for me, was this comment by Yihui Xie, who is the author of <em>{xaringan}</em>, as well as many other amazing packages (and if you&rsquo;re reading this blog, you probably know who he is).</p>
+
+<p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I don&#39;t usually share stuff like this but I kind of can&#39;t help myself in this case. Absolutely floored by comment from <a href="https://twitter.com/xieyihui?ref_src=twsrc%5Etfw">@xieyihui</a> about my new R package, slidex, for converting slides from PPTX to <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/xaringan?src=hash&amp;ref_src=twsrc%5Etfw">#xaringan</a>. WIP version here: <a href="https://t.co/jck4z0eTMU">https://t.co/jck4z0eTMU</a> <a href="https://t.co/0GNkWG1KhQ">pic.twitter.com/0GNkWG1KhQ</a></p>&mdash; Daniel Anderson (@datalorax<em>) &lt;a href=&ldquo;<a href="https://twitter.com/datalorax">https://twitter.com/datalorax</a></em>/status/1003867459999285248?ref_src=twsrc%5Etfw&rdquo;&gt;June 5, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<h1 id="peeking-behind-the-curtain">Peeking behind the curtain</h1>
+
+<p>A common sentiment from a those tweets - as well as the interactions I&rsquo;ve had offline with others - is the feeling that something magical is happening. So I wanted to use this post to basically show what is happening, and that it&rsquo;s actually not nearly as complicated as it probably seems.</p>
+
+<h2 id="all-microsoft-files-are-xml-code">All Microsoft Files are XML Code</h2>
+
+<p>Honestly, I can&rsquo;t remember how I stumbled across this, but any Microsoft file (.docx, .pptx, etc.) is essentially just a collection of XML files in the background. You can access these files by just zipping/unzipping the file.</p>
+
+<p>On <a href="https://github.com/datalorax/slidex/">GitHub</a>, you can see all the source code for the package. In the <a href="https://github.com/datalorax/slidex/blob/master/R/utils.R">utils.R</a> file you&rsquo;ll see all the internals for the package. Notice the second function in the file is called <code>extract_xml</code>. The key parts of this function are</p>
+
+<pre><code class="language-r">ppt &lt;- basename(path)
+
+xml_folder &lt;- paste0(gsub(&quot;\\.pptx| &quot;, &quot;&quot;, ppt), &quot;_xml&quot;)
+dir.create(xml_folder, showWarnings = FALSE)
+
+file.copy(path, file.path(xml_folder, ppt))
+file.rename(file.path(xml_folder, ppt),
+            gsub(&quot;\\.pptx&quot;, &quot;\\.zip&quot;, file.path(xml_folder, ppt)))
+
+unzip(gsub(&quot;\\.pptx&quot;, &quot;\\.zip&quot;, file.path(xml_folder, ppt)), 
+      exdir = xml_folder)
+</code></pre>
+
+<p>The <code>basename</code> function peels off the the name of the PPTX from the file path. The next two lines create a new folder in the directory (which gets removed later) that is the name of the PPTX with <code>_xml</code> appended. The PPTX is then copied to that folder and the extension is changed from <code>&quot;.pptx&quot;</code> to <code>&quot;.zip&quot;</code>. Finally, The last line unzips the file and&hellip; voila! We have all the XML code.</p>
+
+<p><img src="../2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/xml-code.png" alt="" /></p>
+
+<h2 id="what-do-we-do-with-the-xml-code">What do we do with the xml code?</h2>
+
+<p>The good news is, we now have literally everything that was used to produce the original slides. If you go into the ppt folder, you&rsquo;ll see there&rsquo;s a folder called &ldquo;media&rdquo;. This is where all the images are. <em>{slidex}</em> just moves this into an assets folder in the main directory and renames the folder &ldquo;img&rdquo;.</p>
+
+<p>Inside the &ldquo;ppt&rdquo; folder is another folder called &ldquo;slides&rdquo;. In this folder is one xml file for each slide.</p>
+
+<p><img src="../2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/slide-xml.png" alt="" /></p>
+
+<p>Just looking at these, they are almost entirely incomprehensible. For example, here&rsquo;s a screenshot of the xml code for the second slide (the first non-title slide).</p>
+
+<p><img src="../2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/jumbled-xml.png" alt="" /></p>
+
+<p>This can be <em>so much more readable</em> by simply reading it into R, using the xml2 package, and then immediately writing it back out.</p>
+
+<pre><code class="language-r">library(xml2)
+xml &lt;- read_xml(&quot;slide2.xml&quot;)
+write_xml(xml, &quot;slide2.xml&quot;)
+</code></pre>
+
+<p>These does the linting for the file and makes it look like this</p>
+
+<p><img src="../2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/linted-xml.png" alt="" /></p>
+
+<p>Note that this is just a small portion of the xml because it&rsquo;s now far too long to fit into a single screenshot, but you can see the structure of the xml tree <em>far</em> more clearly. That doesn&rsquo;t mean it&rsquo;s completely obvious where things live, but at least it&rsquo;s no longer completely incomprehensible either. For example, in the above, the text &ldquo;Here&rsquo;s the title for the first slide&rdquo; lives in <code>//p:txBody/a:p/a:r/a:t</code>. From there, it&rsquo;s just a lot of data wrangling to try to figure out how to parse things correctly.</p>
+
+<p>Althought not shown in the screenshot above, a lot of information also lives in the attributes. That&rsquo;s how slidex pulls the bullet levels, for example.</p>
+
+<h1 id="what-s-next-for-slidex">What&rsquo;s next for slidex</h1>
+
+<p>The next big step for slidex is to get it on CRAN. There are a few simple features I&rsquo;d like to add in before submitting, but given the amount of interest there has been, and the relative scarcity (knock on wood) of complaints that the package isn&rsquo;t working, I think version 0.1 can ship to CRAN soon.</p>
+
+<p>What are the simple extension? They&rsquo;re all listed in the README on the GitHub page, but I&rsquo;ll repeat them here.</p>
+
+<p>First, I&rsquo;d like slidex to pull notes from slides. This should be pretty straightfoward. I&rsquo;m thinking I&rsquo;ll have the notes be written out in their own file, but also probably embed them within the slides themselves, given that <em>{xaringan}</em> supports notes.</p>
+
+<p>Second, in many of my trials converting PPTX files I ran into files with <code>&quot;.emf&quot;</code> extensions. Honestly, I&rsquo;m not sure where these come from, but I know they&rsquo;re a proprietery Microsoft format. These can be converted to <code>&quot;.png&quot;</code> files using <a href="https://www.libreoffice.org">libreoffice</a>, so I&rsquo;d like to build in a function that checks if libreoffice is installed, asks the user to install it if not, and then converts the files to pngs. Similarly, I&rsquo;d like to use libreoffice to convert <code>&quot;.ppt&quot;</code> files to <code>&quot;.pptx&quot;</code> files so any Microsoft PowerPoint can be converted, rather than just those with the &ldquo;x&rdquo; on their extension (which stands for xml).</p>
+
+<p>Third, and finally, I&rsquo;d like slides with a two-panel layout to maintain that layout. This one I initially thought would be pretty straightforward but the more I think about it the less convinced of that I am. So it may have to wait until version 0.2.</p>
+
+<h1 id="feedback-and-collaboration-welcome">Feedback and collaboration welcome</h1>
+
+<p>Have you used slidex? I&rsquo;d love any feedback you have. Similarly, if you think slidex is a neat tool and want to contribute to it, I&rsquo;d love your help!</p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2018-06-08</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/slidex/">slidex</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/why-i-think-you-should-write-an-r-package/">
+            <span class="next-text nav-default">Writing an R Package Basics (and why I think you should)</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/DJAnderson_07" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/DJAnderson07" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme based on 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

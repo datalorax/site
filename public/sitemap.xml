@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/post/peeking-behind-the-curtain-with-slidex/</loc>
+    <lastmod>2018-06-08T08:18:58-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/post/why-i-think-you-should-write-an-r-package/</loc>
     <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -151,7 +158,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-08T08:18:58-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -277,7 +284,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-08T08:18:58-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -297,7 +304,7 @@
   
   <url>
     <loc>/categories/r-packages/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-08T08:18:58-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -306,6 +313,13 @@
     <loc>/vita/classr/slides/w6p2/w6p2/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/slidex/</loc>
+    <lastmod>2018-06-08T08:18:58-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
   </url>
   
   <url>
