@@ -16,7 +16,7 @@ output:
 
 I gave a lightning talk (slides [here](http://www.datalorax.com/talks/cascadia18/)) this past weekend at the second annual [Cascadia R Conference](https://cascadiarconf.com) that was focused on created and contributing new themes to the [{xaringan}](https://github.com/yihui/xaringan) package, which is essentially a really well thought out and well-organized R Markdown wrapper around the [remark.js](https://github.com/gnab/remark) package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, [{slidex}](https://github.com/datalorax/slidex), for converting Microsoft PowerPoint slides to R Markdown, and specifically *{xaringan}*, with a single function. 
 
-![](https://github.com/datalorax/slidex/raw/master/docs/slidex-preview.gif)
+<img src="https://github.com/datalorax/slidex/raw/master/docs/slidex-preview.gif"/>
 
 The response to this package has been incredible. These are some of my favorite comments from twitter.
 
@@ -31,8 +31,7 @@ The response to this package has been incredible. These are some of my favorite 
 
 And of course, the one that absolutely took the cake, for me, was this comment by Yihui Xie, who is the author of *{xaringan}*, as well as many other amazing packages (and if you're reading this blog, you probably know who he is).
 
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I don&#39;t usually share stuff like this but I kind of can&#39;t help myself in this case. Absolutely floored by comment from <a href="https://twitter.com/xieyihui?ref_src=twsrc%5Etfw">@xieyihui</a> about my new R package, slidex, for converting slides from PPTX to <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/xaringan?src=hash&amp;ref_src=twsrc%5Etfw">#xaringan</a>. WIP version here: <a href="https://t.co/jck4z0eTMU">https://t.co/jck4z0eTMU</a> <a href="https://t.co/0GNkWG1KhQ">pic.twitter.com/0GNkWG1KhQ</a></p>&mdash; Daniel Anderson (@datalorax_) <a href="https://twitter.com/datalorax_/status/1003867459999285248?ref_src=twsrc%5Etfw">June 5, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-
+![](2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/yihui-comment.png)
 
 # Peeking behind the curtain
 A common sentiment from a those tweets - as well as the interactions I've had offline with others - is the feeling that something magical is happening. So I wanted to use this post to basically show what is happening, and that it's actually not nearly as complicated as it probably seems.
