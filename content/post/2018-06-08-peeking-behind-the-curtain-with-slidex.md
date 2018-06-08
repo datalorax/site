@@ -33,7 +33,7 @@ And of course, the one that absolutely took the cake, for me, was this comment b
 
 ![](../2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/yihui-comment.png)
 
-Overall, it's honestly been a little bit overwhelming, but also so much fun. It's the first time I've build something that has really gotten people excited. I hope to see {slidex} grow over time with input from the community.
+Overall, it's honestly been a little bit overwhelming, but also so much fun. It's the first time I've built something that has really gotten people excited. I hope to see {slidex} grow over time with input from the community.
 
 # Peeking behind the curtain
 A common sentiment from a those tweets - as well as the interactions I've had offline with others - is the feeling that something magical is happening. So I wanted to use this post to basically show what is happening, and that it's actually not nearly as complicated as it probably seems.
