@@ -91,11 +91,13 @@ The next big step for slidex is to get it on CRAN. There are a few simple featur
 
 What are the simple extension? They're all listed in the README on the GitHub page, but I'll repeat them here. 
 
-First, I'd like slidex to pull notes from slides. This should be pretty straightfoward. I'm thinking I'll have the notes be written out in their own file, but also probably embed them within the slides themselves, given that *{xaringan}* supports notes.
+First, I'd like slidex to pull notes from slides. This should be pretty straightforward. I'm thinking I'll have the notes be written out in their own file, but also probably embed them within the slides themselves, given that *{xaringan}* supports notes.
 
-Second, in many of my trials converting PPTX files I ran into files with `".emf"` extensions. Honestly, I'm not sure where these come from, but I know they're a proprietery Microsoft format. These can be converted to `".png"` files using [libreoffice](https://www.libreoffice.org), so I'd like to build in a function that checks if libreoffice is installed, asks the user to install it if not, and then converts the files to pngs. Similarly, I'd like to use libreoffice to convert `".ppt"` files to `".pptx"` files so any Microsoft PowerPoint can be converted, rather than just those with the "x" on their extension (which stands for xml).
+Second, in many of my trials converting PPTX files I ran into files with `".emf"` extensions. Honestly, I'm not sure where these come from, but I know they're a proprietary Microsoft format. These can be converted to `".png"` files using [libreoffice](https://www.libreoffice.org), so I'd like to build in a function that checks if libreoffice is installed, asks the user to install it if not, and then converts the files to pngs. Similarly, I'd like to use libreoffice to convert `".ppt"` files to `".pptx"` files so any Microsoft PowerPoint can be converted, rather than just those with the "x" on their extension (which stands for xml).
 
 Third, and finally, I'd like slides with a two-panel layout to maintain that layout. This one I initially thought would be pretty straightforward but the more I think about it the less convinced of that I am. So it may have to wait until version 0.2.
 
+Long-term, I'd really like to have *{slidex}* reproduce any plots in the slide. I've experimented with this and have found a few different ways of extracting the data from the charts, but it's still not entirely straightforward. I think it's doable, but probably not for version 0.1.
+
 # Feedback and collaboration welcome
-Have you used slidex? I'd love any feedback you have. Similarly, if you think slidex is a neat tool and want to contribute to it, I'd love your help!
+Have you used *{slidex}*? I'd love any feedback you have. Similarly, if you think slidex is a neat tool and want to contribute to it, I'd love your help!

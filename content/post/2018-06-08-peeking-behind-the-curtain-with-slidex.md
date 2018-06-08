@@ -14,7 +14,7 @@ output:
     keep_md: true
 ---
 
-I gave a lightning talk (slides [here](http://www.datalorax.com/talks/cascadia18/)) this past weekend at the second annual [Cascadia R Conference](https://cascadiarconf.com) that was focused on created and contributing new themes to the [{xaringan}](https://github.com/yihui/xaringan) package, which is essentially a really well thought out and well-organized R Markdown wrapper around the [remark.js](https://github.com/gnab/remark) package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, [{slidex}](https://github.com/datalorax/slidex), for converting Microsoft PowerPoint slides to R Markdown, and specifically *{xaringan}*, with a single function. 
+I gave a lightning talk (slides [here](http://www.datalorax.com/talks/cascadia18/)) this past weekend at the second annual [Cascadia R Conference](https://cascadiarconf.com) that was focused on creating and contributing new themes to the [{xaringan}](https://github.com/yihui/xaringan) package, which is essentially a really well thought out and well-organized R Markdown wrapper around the [remark.js](https://github.com/gnab/remark) package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, [{slidex}](https://github.com/datalorax/slidex), for converting Microsoft PowerPoint slides to R Markdown, and specifically *{xaringan}*, with a single function. 
 
 <img src="https://github.com/datalorax/slidex/raw/master/docs/slidex-preview.gif"/>
 
@@ -61,7 +61,7 @@ The `basename` function peels off the the name of the PPTX from the file path. T
 ![](../2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/xml-code.png)
 
 ## What do we do with the xml code?
-The good news is, we now have literally everything that was used to produce the original slides. If you go into the ppt folder, you'll see there's a folder called "media". This is where all the images are. *{slidex}* just moves this into an assets folder in the main directory and renames the folder "img". 
+The good news is, we now have literally everything that was used to produce the original slides. If you go into the ppt folder, you'll see there's a folder called "media". This is where all the images are, and *{slidex}* just moves them into an assets folder in the main directory and renames the folder "img". 
 
 Inside the "ppt" folder is another folder called "slides". In this folder is one xml file for each slide. 
 
@@ -80,24 +80,26 @@ xml <- read_xml("slide2.xml")
 write_xml(xml, "slide2.xml")
 ```
 
-These does the linting for the file and makes it look like this
+This does all the linting for the file and makes it look like this
 
 ![](../2018-06-08-peeking-behind-the-curtain-with-slidex_files/img/linted-xml.png)
 
-Note that this is just a small portion of the xml because it's now far too long to fit into a single screenshot, but you can see the structure of the xml tree *far* more clearly. That doesn't mean it's completely obvious where things live, but at least it's no longer completely incomprehensible either. For example, in the above, the text "Here's the title for the first slide" lives in `//p:txBody/a:p/a:r/a:t`. From there, it's just a lot of data wrangling to try to figure out how to parse things correctly.
+Note that this is just a small portion of the xml because it is now far too long to fit into a single screenshot, but you can see the structure of the xml tree *far* more clearly. That doesn't mean it's completely obvious where things live, but at least it's no longer completely incomprehensible either. For example, in the above, the text "Here's the title for the first slide" lives in `//p:txBody/a:p/a:r/a:t`. From there, it's just a lot of data wrangling to try to figure out how to parse things correctly.
 
-Althought not shown in the screenshot above, a lot of information also lives in the attributes. That's how slidex pulls the bullet levels, for example. 
+Although not shown in the screenshot above, a lot of information also lives in the attributes. That's how *{slidex}* pulls the bullet levels, for example. 
 
 # What's next for slidex
 The next big step for slidex is to get it on CRAN. There are a few simple features I'd like to add in before submitting, but given the amount of interest there has been, and the relative scarcity (knock on wood) of complaints that the package isn't working, I think version 0.1 can ship to CRAN soon.
 
 What are the simple extension? They're all listed in the README on the GitHub page, but I'll repeat them here. 
 
-First, I'd like slidex to pull notes from slides. This should be pretty straightfoward. I'm thinking I'll have the notes be written out in their own file, but also probably embed them within the slides themselves, given that *{xaringan}* supports notes.
+First, I'd like slidex to pull notes from slides. This should be pretty straightforward. I'm thinking I'll have the notes be written out in their own file, but also probably embed them within the slides themselves, given that *{xaringan}* supports notes.
 
-Second, in many of my trials converting PPTX files I ran into files with `".emf"` extensions. Honestly, I'm not sure where these come from, but I know they're a proprietery Microsoft format. These can be converted to `".png"` files using [libreoffice](https://www.libreoffice.org), so I'd like to build in a function that checks if libreoffice is installed, asks the user to install it if not, and then converts the files to pngs. Similarly, I'd like to use libreoffice to convert `".ppt"` files to `".pptx"` files so any Microsoft PowerPoint can be converted, rather than just those with the "x" on their extension (which stands for xml).
+Second, in many of my trials converting PPTX files I ran into files with `".emf"` extensions. Honestly, I'm not sure where these come from, but I know they're a proprietary Microsoft format. These can be converted to `".png"` files using [libreoffice](https://www.libreoffice.org), so I'd like to build in a function that checks if libreoffice is installed, asks the user to install it if not, and then converts the files to pngs. Similarly, I'd like to use libreoffice to convert `".ppt"` files to `".pptx"` files so any Microsoft PowerPoint can be converted, rather than just those with the "x" on their extension (which stands for xml).
 
 Third, and finally, I'd like slides with a two-panel layout to maintain that layout. This one I initially thought would be pretty straightforward but the more I think about it the less convinced of that I am. So it may have to wait until version 0.2.
 
+Long-term, I'd really like to have *{slidex}* reproduce any plots in the slide. I've experimented with this and have found a few different ways of extracting the data from the charts, but it's still not entirely straightforward. I think it's doable, but probably not for version 0.1.
+
 # Feedback and collaboration welcome
-Have you used slidex? I'd love any feedback you have. Similarly, if you think slidex is a neat tool and want to contribute to it, I'd love your help!
+Have you used *{slidex}*? I'd love any feedback you have. Similarly, if you think slidex is a neat tool and want to contribute to it, I'd love your help!
