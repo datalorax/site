@@ -24,13 +24,15 @@
     display: inline-block;
 
     .logo {
-      font-size: 22px;
+      font-size: 44px;
       line-height: $mobile-navbar-height;
       text-align: right;
       font-family: $logo-font-family;
+      color: $theme-color;
+      text-shadow: 2px 2px lighten(#5E5F62, 50%);
     }
     .logo:hover {
-        color: $theme-color;
+        color: #F20EB7;
     }
   }
 
