@@ -79,7 +79,7 @@ I joined a group addressing a topic I find myself dwelling on throughout the day
 
 <meta itemprop="datePublished" content="2018-06-19T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-06-19T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2367">
+<meta itemprop="wordCount" content="2369">
 
 
 
@@ -164,7 +164,7 @@ I joined a group addressing a topic I find myself dwelling on throughout the day
       <div class="post-meta">
         <span class="post-time"> 2018-06-19 </span>
         
-        <span class="more-meta"> 2367 words </span>
+        <span class="more-meta"> 2369 words </span>
         <span class="more-meta"> 12 mins read </span>
         
       </div>
@@ -192,7 +192,7 @@ I joined a group addressing a topic I find myself dwelling on throughout the day
 
 <p>This week I&rsquo;m at the Seattle branch of the <a href="https://compsocialscience.github.io/summer-institute/2018/seattle/">Summer Institute on Computational Social Science</a>. Today, we discussed digital trace data and spent some time thinking about different sources of digital trace data. One of the easiest sources is twitter, and thanks to <a href="https://twitter.com/kearneymw">Mike Kearney</a>, it&rsquo;s easily accessible in R via the <a href="http://rtweet.info">{rtweet}</a> package!</p>
 
-<p>I joined a group addressing a topic I find myself dwelling on throughout the day - the immigration crisis at the border. I worked with my colleague <a href="https://github.com/sondras">Sondra Stegenga</a>, an early childhood professional and researcher/data scientist, who is helping me write this post. Basically, we wanted to look into what people were saying about the issue on twitter. This is an immense issue of interest given our passions for education, which includes the impacts of early trauma and family supports on long term outcomes. Specifically, we know that early attachment and early relationships directly link to long term school and life outcomes (e.g. <a href="https://developingchild.harvard.edu/wp-content/uploads/2011/05/How-Early-Experiences-Shape-the-Development-of-Executive-Function.pdf">Building the Brain&rsquo;s Air Traffic Control - Center on the Developing Child at Harvard University</a> or <a href="http://www.who.int/maternal_child_adolescent/documents/924159134X/en/">The Importance of Caregiver-Child Interactions for the Survival and Healthy Development of Young Children - A Review</a>). Therefore, hearing about these separations not only rocks our souls from a foundational human level but we also know the likely long term negative impacts on the children, families, and our country and global community in the years to come.</p>
+<p>I joined a group addressing a topic I find myself dwelling on throughout the day - the immigration crisis at the border. I worked with my colleague <a href="https://github.com/sondras">Sondra Stegenga</a>, an early childhood professional and researcher/data scientist in training, who is helping me write this post. Basically, we wanted to look into what people were saying about the issue on twitter. This is an immense issue of interest given our passions for education, which includes the impacts of early trauma and family supports on long term outcomes. Specifically, we know that early attachment and early relationships directly link to long term school and life outcomes (e.g. <a href="https://developingchild.harvard.edu/wp-content/uploads/2011/05/How-Early-Experiences-Shape-the-Development-of-Executive-Function.pdf">Building the Brain&rsquo;s Air Traffic Control - Center on the Developing Child at Harvard University</a> or <a href="http://www.who.int/maternal_child_adolescent/documents/924159134X/en/">The Importance of Caregiver-Child Interactions for the Survival and Healthy Development of Young Children - A Review</a>). Therefore, hearing about these separations not only rocks our souls from a foundational human level but we also know the likely long term negative impacts on the children, families, and our country and global community in the years to come.</p>
 
 <h1 id="loading-the-packages-and-getting-the-data">Loading the Packages and Getting the Data</h1>
 
@@ -208,7 +208,7 @@ library(rtweet)
 <pre><code class="language-r">sep &lt;- search_tweets(&quot;#KeepFamilesTogether&quot;, n = 18000, include_rts = FALSE)
 </code></pre>
 
-<p>I&rsquo;ve since saved this file, which you can access [here](). You&rsquo;ll want to download it and then read it in using code similar to the below.</p>
+<p>I&rsquo;ve since saved this file, which you can access <a href="../2018-06-19-looking-into-keepfamiliestogether_files/data/keepfamiliestogether_2018-06-19.rds">here</a>. You&rsquo;ll want to download it and then read it in using code similar to the below.</p>
 
 <pre><code class="language-r">sep &lt;- readRDS(&quot;keepfamiliestogether_2018-06-19.rds&quot;) %&gt;% 
   as_tibble()
