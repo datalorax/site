@@ -18,7 +18,7 @@
       <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/peeking-behind-the-curtain-with-slidex/</guid>
-      <description>I gave a lightning talk (slides here) this past weekend at the second annual Cascadia R Conference that was focused on created and contributing new themes to the {xaringan} package, which is essentially a really well thought out and well-organized R Markdown wrapper around the remark.js package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, {slidex}, for converting Microsoft PowerPoint slides to R Markdown, and specifically {xaringan}, with a single function.</description>
+      <description>I gave a lightning talk (slides here) this past weekend at the second annual Cascadia R Conference that was focused on creating and contributing new themes to the {xaringan} package, which is essentially a really well thought out and well-organized R Markdown wrapper around the remark.js package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, {slidex}, for converting Microsoft PowerPoint slides to R Markdown, and specifically {xaringan}, with a single function.</description>
     </item>
     
   </channel>

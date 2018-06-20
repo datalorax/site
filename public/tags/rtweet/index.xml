@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rtweet on Data Science in Education</title>
+    <link>/tags/rtweet/</link>
+    <description>Recent content in Rtweet on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Tue, 19 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rtweet/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Looking into #KeepFamiliesTogether</title>
+      <link>/post/looking-into-keepfamiliestogether/</link>
+      <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/looking-into-keepfamiliestogether/</guid>
+      <description>This week I&amp;rsquo;m at the Seattle branch of the Summer Institute on Computational Social Science. Today, we discussed digital trace data and spent some time thinking about different sources of digital trace data. One of the easiest sources is twitter, and thanks to Mike Kearney, it&amp;rsquo;s easily accessible in R via the {rtweet} package!
+I joined a group addressing a topic I find myself dwelling on throughout the day - the immigration crisis at the border.</description>
+    </item>
+    
+  </channel>
+</rss>
