@@ -44,7 +44,7 @@ copyright = "Daniel Anderson"            # default: author.name ↓
   since = "2017"            # Site creation time          
 
   # site info (optional)                                  
-  logoTitle = "Data Science in Education"        # default: the title value  
+  logoTitle = "datalorax"        # default: the title value  
   keywords = ["Data Science", "Education","Data Visualization"]
   description = "A blog by Daniel Anderson"
 
