@@ -6,15 +6,19 @@
   text-align: left;
   position: fixed;
   z-index: 100;
-  top: 10px;
+  top: -5px;
+  padding-top: 0px;
   left: 10px;
-  padding-left: 10px;
+  padding-left: 30px;
+  bottom: 30px;
+  padding-bottom: 30px;
   .logo {
-    font-size: 36px;
+    font-size: 64px;
     font-family: $logo-font-family;
-    color: $global-font-color;
+    color: $theme-color;
+    text-shadow: 3px 3px $gray;
     &:hover {
-        color: $theme-color;
+        color: #F20EB7;
       }
   }
 }
