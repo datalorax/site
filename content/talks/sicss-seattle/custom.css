@@ -1,0 +1,11 @@
+.remark-slide-content:after {
+    content: "Slides available at: http://www.datalorax.com/talks/sicss-seattle";
+    color: #89999E;
+    text-align: left;
+    font-size: 15px;
+    position: absolute;
+    bottom: 2px;
+    left: 20px;
+    height: 30px;
+    width: 100%;
+}
