@@ -9,6 +9,9 @@ comments: false
 </p>
 
 ## Spring 2018
+* [Community Features and School Achievement Gaps](../sicss-seattle/)
+	+ Talk for the Summer Institute on Computational Social Science - Seattle,
+	June 22, 2018 .
 * [Contributing to Open Source with Pretty Slides](../cascadia18/)
 	+ Lightning talk at the Cascadia R Conference, June 2, 2018.
 * [Exploring and Visualizing School Achievement and School Effects](../ncme18/)
