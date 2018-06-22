@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Community Features and School Achievement Gaps</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="date" content="2018-06-22" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.0.12/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Community Features and School Achievement Gaps
+## And some other stuff
+### Daniel Anderson
+### June 22, 2018
+
+---
+
+
+
+
+# Introduction
+* Much recent focus on open data in research generally
+* Open data tend to be rare in educational research
+  + Privacy concerns
+
+--
+.Large[.bolder[.center[NCLB Required Publicly Available Data]]]
+
+--
+* School-level data 
+* Percent proficent in each of at least four proficiency categories
+* Disaggregated by student subgroups
+
+---
+# Illustrating one approach
+
+* Simulate some data from two distributions
+  + Group 1: `\(n = 200\)`, `\(\mu = 200\)`, `\(\sigma = 10\)`
+  + Group 2: `\(n = 500\)`, `\(\mu = 210\)`, `\(\sigma = 8\)`
+
+* Cut Scores: 190, 205, 215 .gray[.tiny[(totally made up)]]
+
+&lt;img src="sicss-pres_files/figure-html/sim-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Reardon &amp; Ho Method&lt;sup&gt;.gray[.tiny[(2)]]&lt;/sup&gt;
+* Calculate the empirical CDF of each distribution
+* Pair the ECDFs
+* Calculate the area under the paired curve
+* Transform it to an effect-size measure (standard deviation units)
+
+.footnote[(2) Reardon, S. F., &amp; Ho, A. D. [(2015)](http://journals.sagepub.com/doi/abs/10.3102/1076998615570944). Practical issues in estimating achievement gaps from coarsened data. *Journal of Educational and Behavioral Statistics*, *40*, 158–189.]
+
+--
+
+.pull-left[
+![](sicss-pres_files/figure-html/sim_ecdf-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+![](sicss-pres_files/figure-html/sim_pp-1.png)&lt;!-- --&gt;
+]
+
+---
+# Transformation to effect size
+
+.Large[
+$$
+V = \sqrt{2}\Phi^{-1}(AUC)
+$$
+]
+
+* `\(V\)` = Cohen's `\(d\)` under the assumption of respective normality
+* In this case, Cohen's `\(d\)` = -1.07 and `\(V\)` = -1.06.
+
+---
+# Why does this all matter?
+
+&lt;img src="sicss-pres_files/figure-html/props-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse
+
+# Purpose
+
+--
+
+* Evaluate `\(V\)` with empirical data
+
+--
+
+  + Compare estimates from full data and manually coarsened data. Compare results to Cohen'd `\(d\)` estimated with full data.
+
+--
+
+* Apply these methods to publicly available data to investigate between-school differences in achievement gaps
+
+--
+
+  + Specifically using geo-spatial mapping, overlaying data about the surrounding area
+  
+  
+---
+class: inverse center middle
+background-image: url(anderson_pres_ncme18_files/img/sky.jpg)
+background-size: cover
+
+# Results
+
+---
+# Comparing `\(V_c\)` and `\(d\)`
+
+Both continuous: `\(r = 0.87/0.86\)`.
+![](anderson_pres_ncme18_files/img/vd_bivariate_continuous.png)
+
+---
+
+.pull-left[
+### Comparing `\(V_d\)` and `\(d\)`
+.center[
+`\(r = 0.73/0.72\)`
+]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vd_bivariate_discrete.png" height = 450/&gt;
+]
+
+.pull-right[
+### Comparing `\(V_c\)` and `\(V_d\)`
+.center[
+`\(r = 0.83/0.89\)`
+]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vv_bivariate.png" height = 450/&gt;
+]
+
+
+---
+## Distribution of differences: `\(V_c\)` and `\(d\)`
+
+.pull-left[
+  .center[
+    `\(\mu = -0.12, \sigma = 0.15\)` 
+  ]
+]
+
+.pull-right[
+  .left[
+    `\(\mu = -0.16, \sigma = 0.16\)`
+  ]
+]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vd_distributions_continuous.png" height = 375/&gt;
+
+
+---
+
+.pull-left[
+### Comparing `\(V_d\)` and `\(d\)`
+  .center[
+    `\(\mu = -0.10/-0.13, \sigma = 0.21/0.23\)`
+  ]
+
+&lt;img src = "./anderson_pres_ncme18_files/img/vd_distributions_discrete.png" height = 425/&gt;
+
+]
+
+.pull-right[
+### Comparing `\(V_d\)` and `\(V_c\)`
+  .center[
+    `\(\mu = 0.02/0.03, \sigma = 0.17/0.15\)`
+  ]
+  
+&lt;img src = "./anderson_pres_ncme18_files/img/vv_distributions.png" height = 425/&gt;
+]
+
+---
+class: inverse center
+background-image: url(anderson_pres_ncme18_files/img/map.jpg)
+background-size: cover
+
+# Substantive Investigations
+
+---
+# Achievement Gap Distributions
+
+.grey[Reminder: School-level Distributions]
+
+&lt;center&gt;&lt;img src = "anderson_pres_ncme18_files/img/school_achievement_gaps.png" height = 425/&gt;&lt;/center&gt;
+
+---
+# Alameda County
+### Median Housing Cost
+
+&lt;iframe seamless src="anderson_pres_ncme18_files/maps/alameda_housing.html" width="100%" height="425"&gt;&lt;/iframe&gt;
+
+---
+# Alameda County
+### `\(n\)` Identifying as Black 
+
+&lt;iframe seamless src="anderson_pres_ncme18_files/maps/alameda_black.html" width="100%" height="425"&gt;&lt;/iframe&gt;
+
+---
+# Alameda County
+### `\(n\)` Income/Poverty Ratio &gt; 2.0
+
+&lt;iframe seamless src="anderson_pres_ncme18_files/maps/alameda_poverty.html" width="100%" height="425"&gt;&lt;/iframe&gt;
+
+---
+# Conclusions
+* Effect size appeared well estimated from coarsened data
+  + `\(V\)` was similar to Cohen's `\(d\)` with these empirical data
+* The vast majority, but not all, schools had sizeable estimated achievement gaps
+* Clear geographic clustering of achievement gaps was evident
+  + Did Not appear to depend on the Census data investigated here
+
+---
+class: inverse right
+background-image: url(anderson_pres_ncme18_files/img/quickly.jpg)
+background-size: cover
+
+# Really quick: These slides!
+
+---
+# Reproducibility &amp; Transparency
+* I care a lot about it
+* Slides are pretty (I think)
+* Super customizable (css)
+* Open source, transparent
+* [slidex](https://github.com/datalorax/slidex) helps you transition from Microsoft Powerpoint!
+
+---
+class: inverse
+background-image: url(https://github.com/datalorax/slidex/raw/master/docs/slidex-preview.gif)
+background-size: contain
+
+---
+class: inverse left
+background-image: url(anderson_pres_ncme18_files/img/thanks.jpg)
+background-size: cover
+
+# Thanks so much!
+
+
+[&lt;i class="fab  fa-github ">&lt;/i> datalorax](https://github.com/datalorax)
+
+[&lt;i class="fab  fa-twitter ">&lt;/i> datalorax_](https://twitter.com/datalorax_)
+
+[&lt;i class="fas  fa-globe ">&lt;/i> datalorax.com](http://www.datalorax.com/)
+
+[&lt;i class="fas  fa-envelope ">&lt;/i> daniela@uoregon.edu](mailto:daniela@uoregon.edu)
+
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+
+.Large[
+  .center[
+Slides available at [datalorax.com/talks/sicss-seattle](http://www.datalorax.com/talks/sicss-seattle)
+  ]
+]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
