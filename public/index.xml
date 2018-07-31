@@ -164,6 +164,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     </item>
     
     <item>
+      <title></title>
+      <link>/vita/educ611/slides/class1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/educ611/slides/class1/</guid>
+      <description>Course Overview, Research Basics, &amp;amp; Intro to Validty   class: center, middle, inverse, title-slide # Course Overview, Research Basics, &amp;amp; Intro to Validty ## EDUC 611: Class 1 ### Daniel Anderson ### Shawn Irvin ### August 31, 2018 --- class: inverse, bottom background-image: url(assets/img/welcome.jpg) background-size: cover --- # Who am I? .pull-left[ * Research Assistant Professor: Behavioral Research and Teaching * Dad (two daughters: 6 and 4) * Primary areas of interest + 💗💗R💗💗 and computational research + Open data, open science, and reproducible workflows + Growth modeling, achievement gaps, and variance between educational institutions ] .</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -353,6 +362,16 @@ Who are you?  Please introduce yourself.  Name/Program of study and things you&a
       <description>Author I have authored the following R packages.
 esvis Anderson, D. (2017). esvis: Visualization and Estimation of Effect Sizes. R package version 0.1.0. CRAN GitHub
 The purpose of esvis is primarily to visualize differences in two or more distributions. It is an implementation and extension of ideas discussed by Andrew Ho (see, for example, here). Non-parametric methods for effects sizes are also implemented. For an introduction to the package, see here.</description>
+    </item>
+    
+    <item>
+      <title>Survey of Educational Research Methods</title>
+      <link>/vita/educ611/educ611/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/educ611/educ611/</guid>
+      <description>This is a course I co-taught during the summer of 2018. The topics on which I lectured were:
+ Research basics and threats to internal/external validity Sampling and measurement Quantitative research: RCTs &amp;amp; quasi-experimental designs Review, Article Critique, and midterm  Each of the above links to the lecture slides.</description>
     </item>
     
     <item>

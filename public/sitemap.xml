@@ -111,6 +111,12 @@
   </url>
   
   <url>
+    <loc>/vita/educ611/slides/class1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -360,6 +366,12 @@
     <lastmod>2018-02-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/educ611/educ611/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
