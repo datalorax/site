@@ -3,6 +3,8 @@ title: Survey of Educational Research Methods
 comments: false
 ---
 
+# Survey of Educational Research Methods
+
 This is a course I co-taught during the summer of 2018. The topics on which I
 lectured were:
 
