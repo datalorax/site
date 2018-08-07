@@ -41,6 +41,15 @@
     </item>
     
     <item>
+      <title></title>
+      <link>/vita/educ611/slides/class3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/educ611/slides/class3/</guid>
+      <description>Measurement &amp;amp; Experimental/Quasi-Experimental Designs   class: center, middle, inverse, title-slide # Measurement &amp;amp; Experimental/Quasi-Experimental Designs ### Daniel Anderson ### Shawn Irvin ### August 7, 2018 --- class:inverse right background-image:url(assets/img/clock.jpg) background-size:cover # Timing Measurement until 5:15 Measurement Activity until 5:40 Causal inference until 6:05 .lightblue[**Break until 6:15**] Experimental Design until 6:30 RCTs until 7:00 Intro to quasi-experiments until 7:20 .yellow[Research Design Activity until 7:40] Midterm Discussion until 8:00 --- class:inverse right background-image:url(assets/img/measurement.</description>
+    </item>
+    
+    <item>
       <title>Advanced dplyr and More on RMarkdown</title>
       <link>/vita/classr/slides/w5p1/w5p1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -220,7 +229,7 @@ The purpose of esvis is primarily to visualize differences in two or more distri
       
       <guid>/vita/educ611/educ611/</guid>
       <description>Survey of Educational Research Methods This is a course I co-taught during the summer of 2018. The topics on which I lectured were:
- Course overview and research basics Validity, sampling, and measurement Quantitative research: RCTs &amp;amp; quasi-experimental designs Review, Article Critique, and midterm  Each of the above links to the lecture slides.</description>
+ Course overview and research basics Validity, and sampling Measurement, RCTs, &amp;amp; quasi-experimental designs Review, Article Critique, and midterm  Each of the above links to the lecture slides.</description>
     </item>
     
     <item>

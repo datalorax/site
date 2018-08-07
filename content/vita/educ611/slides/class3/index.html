@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Measurement &amp; Experimental/Quasi-Experimental Designs</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="author" content="Shawn Irvin" />
+    <meta name="date" content="2018-08-07" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Measurement &amp; Experimental/Quasi-Experimental Designs
+### Daniel Anderson
+### Shawn Irvin
+### August 7, 2018
+
+---
+
+class:inverse right
+background-image:url(assets/img/clock.jpg)
+background-size:cover
+
+# Timing
+
+Measurement until 5:15
+
+Measurement Activity until 5:40
+
+Causal inference until  6:05
+
+.lightblue[**Break until 6:15**]
+
+Experimental Design until 6:30
+
+RCTs until 7:00
+
+Intro to quasi-experiments until 7:20
+
+.yellow[Research Design Activity until 7:40]
+
+Midterm Discussion until 8:00
+
+
+
+---
+class:inverse right
+background-image:url(assets/img/measurement.jpg)
+background-size:cover
+
+# Measurement 
+### (Instrumentation)
+
+---
+# Review
+
+What is a construct again?
+
+---
+class:inverse 
+background-image:url(assets/img/construct.png)
+background-size:cover
+
+
+---
+# Contrasting vocabulary
+
+.pull-left[
+### Research Design
+]
+
+.pull-right[
+  .right[
+### Measurement
+  ]
+]
+
+.center[
+### Validity
+]
+
+--
+
+* How have we been defining validity so far?
+
+--
+
+* How do you think this differs for measurement?
+
+--
+
+* What does a test score really represent?
+
+--
+### Classical test theory definition
+
+`$$X = T + E$$`
+
+
+---
+#  How do we go about saying a test is valid? 
+
+--
+
+### We don’t!
+
+--
+
+* Validity is not a property of the test. Validity is...
+
+&gt; an overall evaluative judgment of the *degree*  to which empirical evidence and theoretical rationales support the adequacy and appropriateness of *interpretations* *and* *actions*  on the basis of test scores or other modes of assessment 
+
+(Messick , 1995, p. 741, emphasis added)
+
+So, what does that mean?
+
+---
+#  Validity 
+
++ Collect **evidence** that a test *does* or *does not* do what it’s supposed 
+to do under the intended circumstances. 
++ How do we do that?
+
+---
+#  Types of Validity Evidence 
+
++ Face Validity
+
+--
+
+  + The test “looks” like it should. Key stakeholders believe the test to be an adequate measure.
+
+--
+
++ Criterion-related Validity 
+
+--
+
+  + Assessment relates to key criteria. Predictive and concurrent relations.
+
+--
+
++ Content Validity
+
+--
+
+  + The critical content for the test is appropriately sampled.
+
+--
+
++ Construct Validity
+
+--
+
+  + Holistic judgment. How well does the test measure the intended construct? 
+
+---
+
++ Consequential Validity
+
+--
+
+  + Social consequences of the use of a particular test (debated).
+
+
+---
+#  Types of Validity Evidence 
+
++ .content-box-yellow[Criterion-related Validity (Predictive &amp; Concurrent)
+  + Assessment relates to key criteria.
+]
+
+---
+background-image:url(assets/img/criterval.png)
+background-size:contain
+
+
+---
+#  Validity and Test Bias 
+
++ Can a test be valid if specific groups of students (e.g., students eligible for free or reduced lunch as opposed to those who are not ) routinely score lower than others?
+
+--
+
++ What makes a test biased? How does bias relate to validity?
+
+---
+#  Test Bias 
+
++ How do we evaluate if a test is biased?
+  + One approach: Differential item functioning.
+  + Another approach: Invariance testing.
+
+---
+class: bottom 
+background-image:url(https://shiny.cs.cas.cz/ShinyItemAnalysisV110/lord_udif.png)
+background-size:contain
+
+# DIF
+
+---
+class:inverse right
+background-image:url(assets/img/ud.png)
+background-size:contain
+
+#  Universal Design
+
+
+---
+#  UD for Assessment 
+
+Considers *all* characteristics of test-takers.
++ Precisely defined constructs.
++ Accessible, non-biased items.
++ Items amendable to accommodations.
++ Simple, clear, and intuitive instructions and procedures.
++ Maximum readability and comprehensibility.
++ Maximum legibility of text, tables, figures, and illustrations
+
+(see Thompson, Johnstone, and Thurlow, 2002)
+
+---
+#  Reliability 
+
+Before we talk about test reliability, let's talk about customer reviews!
+
+
+Which would you buy?
+
+--
+
+![](assets/img/unreliable.png)
+
+![](assets/img/reliable.png)
+
+
+---
+# Reliability 
+
+Just as a test cannot be valid if it is biased, a test cannot be valid if it is not reliable.
++ What is reliability?
+
+&gt; reliability is concerned solely with how the scores resulting from a measurement procedure would be expected to vary across replications of that procedure” 
+
+( Haertel , 2006).
+
+--
+
++ Can a test be reliable but not valid?
+
+--
+
++ How do we document test reliability?
+
+
+---
+# Internal Consistency
+
+.pull-left[
+Coefficient alpha
++ Commonly referred to as Cronbach’s alpha
++ Ranges from 0-1.0
++ Measures the degree to which items “hang together”
+]
+
+.pull-right[
+![](assets/img/cronbach.png)
+]
+
+---
+# Acceptable values?
+
+* Depends on context, but generally at least &gt; 0.7, with higher values indicating more consistency
+
+* High stakes test should be *at least* 0.80
+
+--
+### Hint:
+This is an easy area to critique studies. Often no reliability reported.
+
+---
+#  Other types of reliability 
+
++ Test-retest reliability
+  + Scores correlated
+
+--
+
++ Alternate-form reliability
+  + Scores correlated
+
+--
+
++ Split-half reliability
+  + Coefficient alpha calculated for each half, halves correlated
+
+--
+
++ Inter-rater reliability
+  + How consistently do different raters judge the same artifact?
+
+--
+
++ IRT-based indicators
+  + My favorite: Conditional reliability
+  
+---
+class:inverse right
+background-image:url(assets/img/tif.png)
+background-size:cover
+
+
+---
+# How does the TIF arise?
+* Information is maximized when person ability matches item difficulty
+* Evaluate distribution of item difficulties with person abilities
+
+
+--
+
+.center[
+&lt;img src = assets/img/ipdens.png  height="400" /&gt;
+]
+
+
+---
+# Qualitative approach?
+
+* Qualitative research also measures things, just not quantitatively
+* Validity argument still remains, but the focus is different
+  + Generally on the procedures, etc.
+  + Reliability can still be a concern (e.g., different coding practices between researchers could lead to different themes emerging)
++ Qualitative research often still uses surveys or focus groups with guided questions
+  + Validity of questions needs to be established
+
+
+---
+class:inverse
+background-image:url(assets/img/tan-bg.jpg)
+background-size:cover
+
+# Article activity
+
+### On your own (15 minutes)
+* Cite the article using APA style
+* Record the following:
+
+.pull-left[
+
+* What quantitative measure(s) were used
+  + What validity evidence was provided
+  + What reliability evidence was provided
+  + What is missing?
+
+]
+
+.pull-right[
+
+* Identify the sampling plan
+  + Was a probability or non-probability sample used?
+  + Name the specific plan (may have to go back to last week's slides)
+]
+
+### In groups (10 minutes)
+* Share out - briefly describe your article and what you found .
+
+
+---
+class:inverse middle center
+background-image:url(assets/img/design.jpg)
+background-size:cover
+
+.content-box-gray40[
+# Research Design and Causality
+]
+
+---
+# Thinking about cause
+
+.Large[
+.center[
+`\(A \rightarrow B\)`
+]
+]
+
+Certain things *cause* other things... right? 🤔
+
+* Five minute discussion with your neighbor:
+  + What does it mean for something cause something else?
+  + What's an example of something your are *certain* causes something else?
+
+---
+# Why is defining cause difficult?
+
+.content-box-yellow[A specific outcome may occur because of any of multiple causes.]
+
+--
+
+### Example from Shadish, Cook, &amp; Campbell
+
+Forest fires can be caused by:
+* A match
+* Lightning strike
+* Smoldering campfire
+
+---
+# But
+
+* None of the listed causes is *necessary* for a forest fire
+    + Could be started many other ways.
+* Whether any of the listed causes actually causes the fire also **depends
+upon** specific *conditions* 
+    + e.g., a match must be hot enough, come into contact with materials that
+    will ignite,
+    etc.
+
+--
+### So what are we doing in research?
+
+Usually we want to understand if ***X*** causes ***Y*** under conditions ***Z***.
+
+
+---
+# Inus condition
+
+&gt; an *insufficient* but *nonredunant* part of an *unnecessary* but *sufficient* condition
+
+-Mackie 1974
+
+--
+
+* *Insufficient* - can't start a fire without other conditions
+* *Nonredundant* - adds something uniquely fire-promoting
+* *Unnecessary* but *sufficient* - part of the sufficient condition in combination with the full constelation of factors
+
+---
+# What about an effect?
+* Best understood through a *counterfactual*
+  + What would have happened if the presumed cause were not present?
+
+`$$Effect = Y_{observed} - Y_{notobserved}$$`
+
+--
+### But we only observe one condition
+
+
+---
+
+&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;How’s your weekend going, &lt;a href="https://twitter.com/hashtag/epibookclub?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#epibookclub&lt;/a&gt;? It’s about to get better with &lt;a href="https://twitter.com/hashtag/bookofwhy?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#bookofwhy&lt;/a&gt; Chapter 8 —Counterfactuals! &lt;br&gt;&lt;br&gt;What’s a counterfactual? The amount of fun you would have had this weekend if I hadn’t discussed this chapter 😄🤣 &lt;a href="https://t.co/Z79v2lSavk"&gt;pic.twitter.com/Z79v2lSavk&lt;/a&gt;&lt;/p&gt;&amp;mdash; Ellie Murray (@EpiEllie) &lt;a href="https://twitter.com/EpiEllie/status/1026244040071831553?ref_src=twsrc%5Etfw"&gt;August 5, 2018&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt; 
+
+
+---
+class:inverse center
+background-image:url(assets/img/talking.jpg)
+background-size:cover
+
+### How do we estimate an effect? 
+### How do we establish causality?
+
+---
+class:inverse
+background-image:url(assets/img/network.jpg)
+background-size:cover
+
+# Establishing a causal relationship
+
+.green[
+  .Large[
+
+1. The cause precedes the effect
+
+2. The cause is related to the effect
+
+3. We can find no plausible alternative explanation for the effect
+
+  ]
+]
+
+
+---
+class: center bottom
+background-image:url(assets/img/experiment.jpg)
+background-size:cover
+
+&lt;br/&gt;
+
+.content-box-gray[
+
+# Experimental Design
+
+]
+
+---
+# Basics
+
+1. Manipulate the presumed cause and observe the outcome after
+2. We see if the presumed cause and outcome covary
+3. Use methods to reduce the plausibility of alternative outcomes
+
+
+---
+# Correlation
+
+You've probably heard correlation does not imply causation (or some variant of
+that)
+
+--
+
+This is true. See [here](http://www.tylervigen.com/spurious-correlations)
+
+
+---
+# Manipulation
+
+* Experiments are powerful for causal inference
+* But, limited in that the causal mechanism *must* be manipulable
+* Not everything we're interested in is as potential causes are manipulable 
+
+---
+class:inverse center
+background-image:url(assets/img/smoking.jpg)
+background-size:cover
+
+# Does smoking cause cancer?
+
+--
+
+(and now you see why this can be tricky)
+
+
+
+---
+
+R. A. Fisher, the father of modern statistics and experimental design, [did not
+believe](https://priceonomics.com/why-the-father-of-modern-statistics-didnt-believe/) smoking caused cancer.
+
+![](https://pix-media.priceonomics-media.com/blog/1234/Fisher1946.JPG)
+
+
+
+---
+# Quick discussion in groups
+
+* Name 3 things in educational research that we're interested in, that is not
+amenable to experiments.
+
+* Name 3 things in educational research that we're interested in that are
+amenable to experiments.
+
+---
+# How do you run an experiment?
+
+1. Get a sample of participants
+2. Treat some, not others
+3. Estimate and evaluate counterfactual
+
+--
+
+### But what if the treated people are different than the untreated?
+
+--
+
+* Inferences about the counterfactual are threatened
+
+--
+
+* Much of experimental design is (a) establishing group equivalence, and (b)
+demonstrating control of the onset of the independent variable.
+
+---
+# Group equivalence 
+
+* What's the most straightforward way to establish group equivalence?
+
+--
+
+### Random assignment
+
+--
+
+.content-box-yellow[**But remember**]
+
+--
+
+* Random selection has *nothing* to do with causal inference
+* Random assignment has *everything* to do with causal inference
+
+--
+## Other procedures 
+.gray[(not as strong; we won't talk about them much)]
+* Matching
+* Statistical controls
+
+---
+class: inverse center middle
+background-image:url(assets/img/gold.jpg)
+background-size:cover
+
+# Randomized Control Trials
+
+.content-box-gray40[
+
+### The gold standard
+
+]
+
+---
+# Basic Design
+
+.Large[
+
+**Group 1:** `\(R\)` =&gt; `\(X\)` =&gt; `\(O\)`
+
+**Group 2:** `\(R\)` =&gt; &amp;emsp; =&gt; `\(O\)`
+
+]
+
+---
+# Variants of the Basics
+
+.Large[
+
+**Group 1:** `\(R\)` =&gt; `\(X_a\)` =&gt; `\(O\)`
+
+**Group 2:** `\(R\)` =&gt; `\(X_b\)` =&gt; `\(O\)`
+
+]
+
+--
+
+What is this design testing?
+
+--
+
+.Large[
+
+**Group 1:** `\(R\)` =&gt; `\(X_a\)` =&gt; `\(O\)`
+
+**Group 2:** `\(R\)` =&gt; `\(X_b\)` =&gt; `\(O\)`
+
+**Group 3:** `\(R\)` =&gt; &amp;emsp; =&gt; `\(O\)`
+
+]
+
+---
+# Risks to this design
+No pretest
+* If there is no attrition, then not having a pretest is not a big deal. 
+* But, there's nearly always attrition
+* We won't go into methods for handling attrition, but pre-test a is vital for
+all of them
+  + Essentially so you can see if attrition is differential
+
+---
+# RCTs w/Pre-Test
+
+.large[
+
+**Group 1:** `\(O\)` =&gt; `\(R\)` =&gt; `\(X\)` =&gt; `\(O\)`
+
+**Group 2:** `\(O\)` =&gt; `\(R\)` =&gt; &amp;emsp; =&gt; `\(O\)`
+
+]
+
+--
+
+----
+
+.large[
+
+**Group 1:** `\(O\)` =&gt; `\(R\)` =&gt; `\(X_a\)` =&gt; `\(O\)`
+
+**Group 2:** `\(O\)` =&gt; `\(R\)` =&gt; `\(X_b\)` =&gt; `\(O\)`
+
+]
+
+--
+
+----
+
+.large[
+
+**Group 1:** `\(O\)` =&gt; `\(R\)` =&gt; `\(X_a\)` =&gt; `\(O\)`
+
+**Group 2:** `\(O\)` =&gt; `\(R\)` =&gt; `\(X_b\)` =&gt; `\(O\)`
+
+**Group 3:** `\(O\)` =&gt; `\(R\)` =&gt; &amp;emsp; =&gt; `\(O\)`
+
+]
+
+
+---
+# Benefits of this design
+
+* Pre-test allows for better evaluations of differential attrition
+* Pre-test provides minimal basis for evaluating change
+  + Can guard against or evaluate maturation effects
+
+
+---
+# Longitudinal designs
+
+.Large[
+
+**Group 1:** `\(O...O\)` =&gt; `\(R\)` =&gt; `\(X\)` =&gt; `\(O...O\)`
+
+**Group 2:** `\(O...O\)` =&gt; `\(R\)` =&gt; &amp;emsp; =&gt; `\(O...O\)`
+
+]
+
+---
+### What are the main benefits of longitudinal designs?
+
+--
+![](https://stats.idre.ucla.edu/wp-content/uploads/2016/02/piecew3.jpg)
+
+
+---
+# Crossover designs
+
+.Large[
+
+**Group 1:** `\(O\)` =&gt; `\(R\)` =&gt; `\(X_a\)` =&gt; `\(O\)` =&gt; `\(X_b\)` =&gt; `\(O\)`
+
+**Group 2:** `\(O\)` =&gt; `\(R\)` =&gt; `\(X_b\)` =&gt; `\(O\)` =&gt; `\(X_a\)` =&gt; `\(O\)`
+
+]
+
+---
+### What's going on here?
+
+--
+![](https://psychobabeldotblog.files.wordpress.com/2017/08/img_4063.gif)
+
+---
+# Thinking more about random assignment
+
+* RCTs are **the most powerful** method of controlling for threats to internal
+validity and establishing causal inference under the conditions of the study
+
+--
+### Discussion
+
+.content-box-yellow[
+
+* When might RCTs be infeasible?
+* When might RCTs be more feasible?
+
+]
+
+---
+# Conditions that increase RCT feasibility
+
+* Demand outstrips supply
+* Innovation cannot be delivered to all units at once
+* Lotteries are expected
+  + Think school choice
+
+---
+# Cluster RCTs
+
+* Another way to increase buy-in is to deliver treatment to an entire school or
+classroom
+* In this case, the designs can stay the same, but the random assignment is at
+the cluster level
+* Analysis is more complicated, but we won't worry about that for now
+
+
+---
+class:inverse center bottom
+background-image:url(assets/img/spices.jpg)
+background-size:cover
+
+# Quasi-Experimental Designs
+
+
+---
+# Quasi-experiments
+* Lack random assignment
+* Have similar purposes and structural attributes to RCTs
+* Standards for causal inferences are the same as RCTs
+  + cause precedes effect
+  + cause and effect covary
+  + alternative explanations are implausible
+
+--
+
+----
+
+### Rely on three principles
+* Identification and study of plausible threats to internal validity
+* Primacy of control by design
+* Coherent pattern matching
+
+
+---
+# One-Group Post-test-only Design
+
+.Large[
+
+**Group 1:** `\(X\)` =&gt; `\(O\)`
+
+]
+
+--
+
+* Among the weakest designs
+* Susceptible to nearly every threat to internal validity
+* What's the one it's not?
+
+---
+# One-Group Pre-/Post-test Design
+
+.Large[
+
+**Group 1:** `\(O\)` =&gt; `\(X\)` =&gt; `\(O\)`
+
+]
+
+--
+
+* Provides weak counterfactual evidence
+* What are some threats to validity?
+
+--
+  * Maturation
+  * History
+  * Testing
+  * Attrition
+
+
+--
+### Causal inferences warranted?
+
+
+---
+# Multiple DVs
+
+.Large[
+
+**Group 1:** `\(O_{1a}\)`, `\(O_{1b}\)` =&gt; `\(X\)` =&gt; `\(O_{2a}\)`, `\(O_{2b}\)`
+
+]
+
+* DV a is expected to change with treatment
+* DV b is not expected to change with treatment
+
+--
+* What does this design help guard against?
+
+
+---
+# Treatment removal
+
+.Large[
+
+**Group 1:** `\(O\)` =&gt; `\(X\)` =&gt; `\(O\)` =&gt; `\(O\)` =&gt;  &amp;ensp; &lt;strike&gt;X&lt;/strike&gt;  &amp;ensp; =&gt; `\(O\)`
+
+]
+
+* What are some threats to validity here?
+
+--
+
+* Cyclical maturation
+  + What if second/fourth obs were recorded in the morning and first/third obs
+  were recorded in the afternoon?
+
+--
+
+* When might this design not be feasible?
+
+--
+  + Treatment effects are long lasting/do not show immediate effects
+
+---
+# What's an easy way to strengthen these designs?
+
+--
+
+Add a non-equivalent comparison group
+
+* Inferences cannot be as strong as randomly assigned groups, but provides
+another point of comparison. 
+* Can often reduce the plausibility of alternative threats to validity
+
+---
+# Other designs
+There are many other designs, including those that
+* Use comparison groups and pretests, but non-random assignment
+* Combine many design elements
+
+--
+&lt;br/&gt;
+
+If the design does not include random assignment, it is quasi-experimental. 
+
+* Not all designs created equal
+* The one-group post-test only design is considerably weaker than the removed
+treatment design, or many other designs with relevant controls and comparison
+conditions.
+
+--
+&lt;br/&gt;
+
+There are also many more interesting designs, which we'll talk about next class
+
+
+
+---
+# Research Design Activity
+
+Briefly discuss your article in your group. Then 
+
+* Identify the primary independent variable of interest
+  + Is it manipulable?
+* Identify if the article used a quasi- or experimental design
+* Identify at least one threat to internal validity
+* Name the design, if you can
+* Do the authors make causal claims? Are they warranted?
+
+
+---
+# Prepping for midterm
+
+* 20 points (10% of your total grade)
+* 22 questions total
+  + 5 multiple choice
+  + 17 free response
+* Developed from the slides - so review the slides
+* Questions will ask you to define terms, list criteria, compare/contrast, and
+identify elements of, and describe specific topics
+
+--
+
+### Questions?
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
