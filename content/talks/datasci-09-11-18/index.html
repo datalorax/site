@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My research and the COE</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="date" content="2018-09-11" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.0.12/css/fontawesome-all.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# My research and the COE
+### Daniel Anderson
+### September 11, 2018
+
+---
+
+
+
+
+![](ncaase-logo.png)
+
+### Large inter-state collaborative
+* Oregon, Arizona, Pennsylvania, North Carolina
+* Lots of data and data sharing agreements
+  + State testing data for every student in each state, Grades 3-8, in Reading and Math (some science)
+  + Number of years varies by state, but generally there's about a decade
+* Focus on growth-modeling, accountability policies, and between-school
+
+---
+class: bottom left
+background-image:url(growth-projections.png)
+background-size:contain
+
+# My dissertation
+
+---
+class: bottom left
+background-image:url(comp-effects.png)
+background-size:contain
+
+---
+# Challenges with NCAASE
+
+Computational perspective was generally not present
+* Flat file structures
+* GLM framework 
+* Secure data - not easily shareable/releasable 
+* Lots of good work (~25 publications), but plenty of areas for improvement
+
+
+---
+# Work stemming from NCAASE
+&lt;iframe seamless src="alameda_poverty.html" width="100%" height="500"&gt;&lt;/iframe&gt;
+
+---
+## "Epidemiological" work in education
+* Large-scale data sources incorporated with educational outcomes
+* Predict "disease" (e.g., achievement gaps)
+* Include different modeling strategies (e.g., machine learning)
+* Ideally, data are publicly available/shareable
+  + Increase transparency/reproducibility
+
+
+---
+# In closing
+### The COE more broadly
+* Many faculty represented in the [Prevention Science Institute](https://psi.uoregon.edu)
+  + See active projects [here](https://psi.uoregon.edu/activegrants.html)
+      + Adoption studies
+      + Drug abuse prevention
+      + Parent-training studies
+* fMRI work
+  + Reading comprehension
+  + Mathematics problem soloving
+* Lots of work on Autism Spectrum Disorder and other disabilities
+
+---
+class: center
+# Thanks
+
+[<i class="fab  fa-twitter "></i> datalorax_](https://twitter.com/datalorax_)
+
+[<i class="fab  fa-github "></i> datalorax](https://github.com/datalorax)
+
+[<i class="fas  fa-globe "></i> datalorax.com](http://www.datalorax.com)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

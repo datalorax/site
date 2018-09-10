@@ -138,6 +138,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     
     <item>
       <title></title>
+      <link>/talks/datasci-09-11-18/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/datasci-09-11-18/</guid>
+      <description>My research and the COE   class: center, middle, inverse, title-slide # My research and the COE ### Daniel Anderson ### September 11, 2018 --- ![](ncaase-logo.png) ### Large inter-state collaborative * Oregon, Arizona, Pennsylvania, North Carolina * Lots of data and data sharing agreements + State testing data for every student in each state, Grades 3-8, in Reading and Math (some science) + Number of years varies by state, but generally there&#39;s about a decade * Focus on growth-modeling, accountability policies, and between-school --- class: bottom left background-image:url(growth-projections.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/talks/eugene_rug/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -398,7 +407,7 @@ The purpose of esvis is primarily to visualize differences in two or more distri
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/talks/</guid>
-      <description>Talks Spring 2018  Community Features and School Achievement Gaps  Talk for the Summer Institute on Computational Social Science - Seattle, June 22, 2018 .  Contributing to Open Source with Pretty Slides  Lightning talk at the Cascadia R Conference, June 2, 2018.  Exploring and Visualizing School Achievement and School Effects  Presentation at the annual meeting of the National Council on Measurement in Education, 2018.  Developing your first R package: A case study with esvis  Talk for the Eugene R Users Group   Winter 2017 A taste of R: Mini-course on R (4 workshops, 2 hours each).</description>
+      <description>Talks Summer 2018  My Research and the COE  Talk for the University of Oregon&amp;rsquo;s Data Science Initiative in a joint meeting with Oregon Health and Science University.   Spring 2018  Community Features and School Achievement Gaps  Talk for the Summer Institute on Computational Social Science - Seattle, June 22, 2018 .  Contributing to Open Source with Pretty Slides  Lightning talk at the Cascadia R Conference, June 2, 2018.</description>
     </item>
     
     <item>

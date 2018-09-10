@@ -93,6 +93,12 @@
   </url>
   
   <url>
+    <loc>/talks/datasci-09-11-18/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/talks/eugene_rug/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

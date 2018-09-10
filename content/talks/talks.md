@@ -8,6 +8,11 @@ comments: false
       Talks
 </p>
 
+## Summer 2018
+* [My Research and the COE](../datasci-09-11-18)
+	+ Talk for the University of Oregon's Data Science Initiative in a joint
+	meeting with Oregon Health and Science University.
+
 ## Spring 2018
 * [Community Features and School Achievement Gaps](../sicss-seattle/)
 	+ Talk for the Summer Institute on Computational Social Science - Seattle,
