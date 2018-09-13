@@ -12,8 +12,11 @@ I am currently in the process of leading the development of a [five-course data 
 # Graduate Courses
 {{% /center %}}
 
+### Fall 2018
+[EDUC 610: Introduction to Data Science with R](../ds/ds1)
+
 #### Summer 2018
-[EDUC 612: Survey of Educational Research Methods](../educ611/educ611)
+[EDUC 611: Survey of Educational Research Methods](../educ611/educ611)
 
 * This summer I will be teaching this course for the first time. I will post the materials for the course here, as I develop them. The course is aimed at educational practitioners (teachers and administrators), and introduces students to concepts of research design and research methods.  
 

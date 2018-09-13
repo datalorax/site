@@ -24,6 +24,15 @@
     
     <item>
       <title></title>
+      <link>/vita/ds/ds1-slides/w1p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w1p1/</guid>
+      <description>Oh the places you’ll go!   class: center, middle, inverse, title-slide # Oh the places you’ll go! ## An introduction to the course and beyond ### Daniel Anderson ### Week 1, Class 1 --- # Agenda * Introductions * Syllabus * Introduce R ### Overall purpose of today: * Understand the course requirements * Get you excited about R! + This week will be a lot of me showing, and not a lot of you doing.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/vita/educ611/slides/class1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -124,6 +133,15 @@ Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, 
       
       <guid>/vita/classr/slides/w4p1/w4p1/</guid>
       <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few models and look at some extensions (the broom package) Practice a bit, if time allows (it probably won&amp;rsquo;t)  A little story first      It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Data Science with R</title>
+      <link>/vita/ds/ds1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1/</guid>
+      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture    The table above will be updated as the class goes along</description>
     </item>
     
     <item>
