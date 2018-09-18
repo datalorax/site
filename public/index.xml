@@ -209,6 +209,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     </item>
     
     <item>
+      <title></title>
+      <link>/vita/mr/mr-slides/w1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/mr/mr-slides/w1/</guid>
+      <description>Welcome to Multiple Regression!   class: center, middle, inverse, title-slide # Welcome to Multiple Regression! ### Daniel Anderson ### Week 1 --- # Agenda * 👋 * What we&#39;re up to in this class * Brief intro to R * Review + Variance/covariance + Correlations - And why visualizations are important + Simple linear regression --- # Who am I? .pull-left[ * Research Assistant Professor: Behavioral Research and Teaching * Dad (two daughters: 6 and 4) * Primary areas of interest + 💗💗R💗💗 and computational research + Open data, open science, and reproducible workflows + Growth modeling, achievement gaps, and variance between educational institutions ] .</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -357,6 +366,15 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
       
       <guid>/vita/classr/slides/w4p2/w4p2/</guid>
       <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review and discuss tidy data in more depth Practice tidying data  Reasons to prefer tidy data  More efficient storage and retrieval More scalable The tidyverse of tools will work much more efficiently  Read in the hiv data  Make some manipulations (just dplyr variety) to make the data look like the below.</description>
+    </item>
+    
+    <item>
+      <title>Multiple Regression in Educational Research</title>
+      <link>/vita/mr/mr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/mr/mr/</guid>
+      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression    The table above will be updated as the class goes along</description>
     </item>
     
     <item>

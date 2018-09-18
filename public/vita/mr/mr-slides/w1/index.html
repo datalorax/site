@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Multiple Regression!</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.0.12/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="ninjutsu.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Welcome to Multiple Regression!
+### Daniel Anderson
+### Week 1
+
+---
+
+# Agenda 
+
+* 👋
+* What we're up to in this class
+* Brief intro to R
+* Review
+  + Variance/covariance
+  + Correlations
+    - And why visualizations are important
+  + Simple linear regression 
+
+---
+# Who am I?
+.pull-left[
+* Research Assistant Professor: Behavioral Research and Teaching
+* Dad (two daughters: 6 and 4)
+* Primary areas of interest
+  + 💗💗R💗💗 and computational research 
+  + Open data, open science, and reproducible workflows
+  + Growth modeling, achievement gaps, and variance between educational institutions
+]
+
+.pull-right[
+![](../img/thefam.jpg)
+]
+
+---
+# Who are you?
+* 40-ish of you would probs take too long for intros
+* Hopefully I'll get to know throughout the term
+
+--
+* Do you know your neighbors? 
+  * Let's take a few minutes for that
+  
+---
+# This class
+* Requirement for most of you, right?
+* Hopefully will be fun/interesting
+
+--
+* We will be using R throughout
+  + Don't be scared, it will be good
+
+--
+* How many people still need to get setup?
+
+---
+# Topic schedule
+### Weeks 1-5
+
+|       Week        | Topic                                              |
+| :---------------: | :------------------------------------------------- |
+| **1&lt;br/&gt;Sep 25**  | Review of simple linear regression and correlation |
+|  **2&lt;br/&gt;Oct 2**  | Multiple regression with continuous variables      |
+|  **3&lt;br/&gt;Oct 9**  | Multiple regression with categorical predictors    |
+| **4&lt;br/&gt;Oct 16**  | Partial and semipartial correlations               |
+| **5&lt;br/&gt;Oct 23**  | Regression diagnostics                             |
+
+---
+# Topic schedule
+### Weeks 6-10
+
+|       Week        | Topic                                              |
+| :---------------: | :------------------------------------------------- |
+| **6&lt;br/&gt;Oct 30**  | Curvilinear and Interaction effects                |
+|  **7&lt;br/&gt;Nov 6**  | Multimodel inference                               |
+| **8&lt;br/&gt;Nov 13**  | Prediction                                         |
+| **9&lt;br/&gt;Nov 20**  | Simulation for inference                           |
+| **10&lt;br/&gt;Nov 27** | Topics beyond the course                           |
+
+
+---
+# Readings
+I'll provide them all
+* Pedhazur 
+  + Old school but thorough 
+  + .gray[MR hasn't really changed since 1997 anyway]
+
+--
+* Gelman &amp; Hill
+  + More advanced, more modern
+
+--
+* Ismay &amp; Kim
+  + Mostly for R
+
+--
+* James et al.
+  + Very modern
+  + Focused on slightly different approach
+
+--
+* APA Manual
+  + 🤷
+
+---
+# 🎉 DataCamp 🎉
+* You should all have received an invite. Contact me if not.
+* Should help with learning R
+* Supplement the instruction in class
+* We'll use it as part of your homework
+
+.pull-left[
+![](../img/dc_flashcards.png)
+]
+
+.pull-right[
+![](../img/dc_topics.png)
+]
+
+---
+# DataCamp assignments
+
+![](../img/assignments.png)
+
+---
+# Labs
+Pretty much every class
+* Scenario-based
+* Will be through R (of course)
+* Will generally require more than just MR
+  + Data visualization
+  + Light programming - maybe?
+  
+---
+# Exercises 
+### 5 at 20 points each
+* Categorical coding
+* Partial and semi-partial correlations
+* Regression diagnostics
+* Interactions
+* Model comparisons
+
+---
+# Final Project
+### Stay tuned: More information to come
+* Will be available two weeks before finals week
+* Due **before midnight**, Tuesday, December 4
+* Will be scenario-based (responding to a reviewer) 
+
+---
+# Grading breakdown
+*	DataCamp: 5 points each = 70 points (22%)
+*	In-Class Labs: 5 points each = 50 points (16%)
+*	Exercises: 5 at 20 points each = 100 points (31%)
+*	Final Project: 100 points (31%)
+
+---
+class: inverse middle center
+background-image: url(../img/chalkboard.jpg)
+background-size: cover
+
+# What makes you nervous about this class?
+
+---
+class: inverse center middle
+background-image:url(../img/hands.jpg)
+background-size:cover
+
+# A few good reminders
+
+---
+class: inverse
+background-image: url(../img/failing.png)
+background-size: contain
+
+---
+class: inverse
+background-image: url(../img/impost-r.png)
+background-size: contain
+
+---
+class:middle
+
+&gt; "The bad news is that whenever you learn a new skill you're going to suck.
+It's going to be frustrating. The good news is that is typical and happens to
+everyone and it is only temporary. You can't go from knowing nothing to
+becoming an expert without going through a period of great frustration and
+great suckiness."
+
+Hadley Wickham
+
+---
+class: inverse center middle
+background-image: url(https://alison.rbind.io/img//headers/purple-sparkle-wide.png)
+background-size:cover
+
+.major-emph-green[Support]
+
+---
+# R-Ladies
+* [R-Ladies global](https://rladies.org)
+* [R-Ladies Portland](https://www.meetup.com/R-Ladies-PDX/)
+
+--
+
+# Twitter [&lt;i class="fab  fa-twitter ">&lt;/i>](https://twitter.com)
+Very active community. Peruse the [#rstats](https://twitter.com/hashtag/rstats?src=hash) 
+hashtag. A few recommendations for follows:
+.pull-left[
+* [Mara Averick](https://twitter.com/dataandme)
+* [R4DS learning community](https://twitter.com/R4DScommunity)
+* [Hadley Wickham](https://twitter.com/hadleywickham)
+* [Jenny Bryan](https://twitter.com/JennyBryan)
+* [Jesse Maegan](https://twitter.com/kierisi)
+* [Claus Wilke](https://twitter.com/ClausWilke)
+* [Josh Rosenberg](https://twitter.com/jrosenberg6432)
+* [Emily Robinson](https://twitter.com/robinson_es)
+]
+
+.pull-right[
+* [Maëlle Salmon](https://twitter.com/ma_salmon)
+* [Colin Fay](https://twitter.com/_ColinFay)
+* [David Robinson](https://twitter.com/drob?lang=en)
+* [Julia Silge](https://twitter.com/juliasilge)
+* [Emi Tanaka](https://twitter.com/statsgen)
+* [Alison Hill](https://twitter.com/apreshill)
+* [Chester Ismay](https://twitter.com/old_man_chester)
+]
+
+---
+# [R4DS](https://www.jessemaegan.com/post/r4ds-the-next-iteration/)
+* Online group of supportive people all trying to learn R 
+* Tidy Tuesday
+  + New data viz with open data each Tuesday. Follow along on Twitter.
+
+--
+
+# [RStudio Community](https://community.rstudio.com)
+* Similar to [stackoverflow](https://stackoverflow.com/questions/tagged/r) but
+friendlier. 
+* Often philosophical questions
+* Opinionated
+* RStudio-philosophy dominant (as is this class)
+
+---
+class: inverse center middle
+background-image: url(https://pbs.twimg.com/media/DKSnpQcWkAEhJ0E.jpg)
+
+.major-emph-green[Welcome to R]
+
+---
+# What is R?
+* A programming language
+* Tremendously powerful and flexible statistical software that happens to be free
+* No point-and-click interface
+* Incredible array of external "packages" available for specialized analyses, data visualizations, or to automate much of the data "munging" process
+
+---
+# Code-based interface
+
+![rstudio](../img/rstudio.png)
+
+---
+# Moving to code/programming
+
+--
+
+.pull-left[
+### Advantages
+* Flexibility
+  + Essentially anything is possible
+* Transparency
+  + Documented history of your analysis
+* Efficiency
+  + Many (most?) tasks can be automated
+]
+
+--
+
+.pull-right[
+### Disadvantages
+* Steep learning curve
+  + Absolutely requires a significant time investment
+  + Equivalent to learning a new language
+* You will lose patience with point-and-click interfaces
+* Likely to become "one of the converted"
+]
+
+---
+# The R Learning Curve
+
+.gray[(as seen by me)]
+
+![](w1_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+---
+# How to learn R?
+* Three most important ingredients: time, time, and more time
+* A sprinkling of dedication and determination help.
+* Be patient and forgiving with yourself. It will feel slow at first. Most people have not trained themselves to think in this way.
+
+
+---
+# R as a big calculator
+
+
+```r
+3 + 2
+```
+
+```
+## [1] 5
+```
+
+
+```r
+(1/-(3/2)^2) / 2^-1/9
+```
+
+```
+## [1] -0.09876543
+```
+
+---
+# Object Assignment
+ 
+.pull-left[
+
+### Assignment
+
+```r
+a &lt;- 3
+b &lt;- 2
+a + b
+```
+
+```
+## [1] 5
+```
+
+```r
+a / (a + b)
+```
+
+```
+## [1] 0.6
+```
+
+]
+
+--
+
+.pull-right[
+### Re-assignment
+
+
+```r
+a &lt;- 3
+a
+```
+
+```
+## [1] 3
+```
+
+```r
+a &lt;- 7
+a
+```
+
+```
+## [1] 7
+```
+
+]
+
+---
+# Object Assignment (continued)
+
+.pull-left[
+Objects can be of a variety of types.
+
+
+```r
+string &lt;- "Hello world!"
+logical &lt;- TRUE
+double &lt;- 3.2587021
+Integer &lt;- 6L
+```
+]
+
+.pull-right[
+In this case, we can't exactly do arithmetic with all of these. 
+  For example
+
+
+```r
+string + double
+```
+
+```
+## Error in string + double: non-numeric argument to binary operator
+```
+But, these objects can be extremely useful in programming.
+]
+
+---
+# Functions and getting help
+
+.pull-left[
+### R functions
+* Anything that carries out an operation in R is a function, even `+`. 
+* Functions (outside of primitive functions) are preceded by `()`
+    + e.g., `sum()`, `lm()`
+]
+
+.pull-right[
+### Getting help
+* `?` can be helpful, but often too advanced early on
+    + Helpful for understanding the formal arguments of a function
+    + Scroll down to the examples first
+* Google is your  best friend
+* Other resources discussed previously
+* Your classmates!
+* Me!
+]    
+
+---
+# Data frames
+
+* Equivalent of a spreadsheet (basically)
+  + I prefer tibbles, you probably will too
+* Access columns with `$`
+
+---
+# mtcars
+* Already in R when you launch
+
+
+```r
+head(mtcars)
+```
+
+```
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+```
+
+```r
+mtcars$cyl
+```
+
+```
+##  [1] 6 6 4 6 8 6 8 4 4 6 6 8 8 8 8 8 8 4 4 4 4 8 8 8 8 4 4 4 8 6 8 4
+```
+
+---
+# Refer to df each time
+
+
+```r
+mtcars$cyl + mtcars$hp
+```
+
+```
+##  [1] 116 116  97 116 183 111 253  66  99 129 129 188 188 188 213 223 238
+## [18]  70  56  69 101 158 158 253 183  70  95 117 272 181 343 113
+```
+
+```r
+mtcars$cyl + hp
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'hp' not found
+```
+
+---
+# Let's try
+
+[quick intro to R demo]
+
+* Open R, and run the following
+* Be careful about case - must match perfectly
+
+
+```r
+mtcars
+View(mtcars)
+```
+
+* Use `sum` to sum `hp`
+* Use `mean` to calculate the mean of `mpg`
+
+---
+# Orientation of this course w/R
+* This course will generally be oriented around the *tidyverse*. 
+    + Very conscious decision that I really believe is the correct one.
+    + The *tidyverse* is an alternative to base R functions
+* What we've been doing are part of base R
+* In tidyverse, you usually won't need `$`
+  + Will be helpful today
+
+---
+class: inverse bottom
+background-image: url(../img/alberta.jpg)
+background-size: cover
+
+# Review of some basics
+
+---
+# Assumed knowledge
+
+.pull-left[
+* Dependent vs. independent variables
+* Variable types
+  + Categorical 
+  + Dichotomous 
+  + Dummy 
+  + Continuous 
+* Interval/ratio scales
+
+]
+
+.pull-right[
+* Measures of central tendency
+  + Mean 
+  + Median 
+  + Mode
+* Variability 
+  + Variance
+  + Standard Deviation
+  + Range
+  + Interquartile range
+* ANOVA
+
+]
+
+--
+
+.major-emph-green[Come to office hours if this is confusing]
+
+---
+# Simple linear regression
+* One continuous DV, one IV (of any type)
+
+
+
+
+```r
+library(tidyverse)
+
+ggplot(mtcars, aes(x = disp, y = mpg)) +
+  geom_smooth(method = "lm", 
+              se = FALSE) +
+  geom_point(color = "gray40") 
+```
+
+![](w1_files/figure-html/mtcars-scatter-1.png)&lt;!-- --&gt;
+
+---
+# Stats is mostly about...
+* What are things like generally? 
+  + On average...
+  + Measures of central tendency
+
+--
+* How close are things to average, generally?
+  + Lots of variance around the mean? Not much?
+  + Standard deviations
+
+--
+* How do things go together
+  + If x goes up, does y also go up? (positive correlation)
+  + If x goes up, does y go down? (negative correlation)
+  + If x goes up, does y change at all? (no correlation)
+
+---
+# The mean
+
+Notation of Pedhazur:
+
+.Large[
+$$
+\bar{X} = \frac{\sum_{i=1}^nX_i}{n}
+$$
+]
+
+--
+Thinking about this through R code. Mean of mpg "by hand".
+
+
+```r
+sum(mtcars$mpg) / length(mtcars$mpg)
+```
+
+```
+## [1] 20.09062
+```
+
+--
+Does this match the mean R reports?
+
+
+```r
+mean(mtcars$mpg)
+```
+
+```
+## [1] 20.09062
+```
+
+---
+# Quick aside
+### Make it a function
+* Copy and paste the code from before
+* Swap out the specific variable for an argument `x`, that could be any variable
+
+
+```r
+my_mean &lt;- function(x) {
+  sum(x) / length(x)
+}
+```
+
+--
+
+### test it out
+
+.pull-left[
+
+
+```r
+my_mean(mtcars$cyl)
+```
+
+```
+## [1] 6.1875
+```
+
+```r
+my_mean(mtcars$disp)
+```
+
+```
+## [1] 230.7219
+```
+
+]
+
+.pull-right[
+
+
+```r
+mean(mtcars$cyl)
+```
+
+```
+## [1] 6.1875
+```
+
+```r
+mean(mtcars$disp)
+```
+
+```
+## [1] 230.7219
+```
+
+]
+
+
+---
+# Deviation scores
+Difference between a score and the mean of the vector. (don't worry too much
+about the code yet)
+
+
+```r
+mtcars$mean_mpg &lt;- mean(mtcars$mpg)
+mtcars$deviation &lt;- mtcars$mpg - mtcars$mean_mpg
+
+mtcars[c("mpg", "mean_mpg", "deviation")]
+```
+
+```
+##                      mpg mean_mpg deviation
+## Mazda RX4           21.0 20.09062  0.909375
+## Mazda RX4 Wag       21.0 20.09062  0.909375
+## Datsun 710          22.8 20.09062  2.709375
+## Hornet 4 Drive      21.4 20.09062  1.309375
+## Hornet Sportabout   18.7 20.09062 -1.390625
+## Valiant             18.1 20.09062 -1.990625
+## Duster 360          14.3 20.09062 -5.790625
+## Merc 240D           24.4 20.09062  4.309375
+## Merc 230            22.8 20.09062  2.709375
+## Merc 280            19.2 20.09062 -0.890625
+## Merc 280C           17.8 20.09062 -2.290625
+## Merc 450SE          16.4 20.09062 -3.690625
+## Merc 450SL          17.3 20.09062 -2.790625
+## Merc 450SLC         15.2 20.09062 -4.890625
+## Cadillac Fleetwood  10.4 20.09062 -9.690625
+## Lincoln Continental 10.4 20.09062 -9.690625
+## Chrysler Imperial   14.7 20.09062 -5.390625
+## Fiat 128            32.4 20.09062 12.309375
+## Honda Civic         30.4 20.09062 10.309375
+## Toyota Corolla      33.9 20.09062 13.809375
+## Toyota Corona       21.5 20.09062  1.409375
+## Dodge Challenger    15.5 20.09062 -4.590625
+## AMC Javelin         15.2 20.09062 -4.890625
+## Camaro Z28          13.3 20.09062 -6.790625
+## Pontiac Firebird    19.2 20.09062 -0.890625
+## Fiat X1-9           27.3 20.09062  7.209375
+## Porsche 914-2       26.0 20.09062  5.909375
+## Lotus Europa        30.4 20.09062 10.309375
+## Ford Pantera L      15.8 20.09062 -4.290625
+## Ferrari Dino        19.7 20.09062 -0.390625
+## Maserati Bora       15.0 20.09062 -5.090625
+## Volvo 142E          21.4 20.09062  1.309375
+```
+
+---
+# Variability
+* Deviation scores are the essence of variability
+* We'd like to summarize the variability through the deviation scores. What
+should we do?
+
+--
+### Try calculating the mean
+
+
+```r
+round(mean(mtcars$deviation), 10)
+```
+
+```
+## [1] 0
+```
+
+![](https://media.giphy.com/media/GUhiBgU0DbWsU/giphy.gif)
+
+---
+# Variance
+
+Sum of the **squared** deviations divided by `n - 1`.
+
+.Large[
+$$
+s_x^2 = \frac{\sum_i^{n}(X_i-\overline{X})^{2}}{n-1}
+$$
+]
+
+* Note we use `n - 1` and not `n` to correct for sampling variability. (makes
+it an unbiased estimate)
+* Another (more common) symbol for the variance is `\(\sigma^2\)`
+
+---
+# Standard deviation
+
+.Large[
+$$
+s_x = \sqrt{s^{2}}
+$$
+]
+
+The standard deviation is then just the square root of the variance! So, the
+standard deviation is, essentially, the average of the deviations.
+
+* Another (more common) symbol for the standard deviation is `\(\sigma\)`
+
+---
+class: inverse middle 
+background-image: url(../img/chalkboard.jpg)
+background-size: cover
+
+# Let's try! 
+
+### Together, we will:
+* Calculate the variance of `mpg` from `mtcars` "by hand" 
+* Transform it to a standard deviation
+* Evaluate if the estimate matches the result from `var(mtcars$mpg)`
+
+[demo]
+
+### On your own:
+* Calculate the variance and standard deviation of `mtcars$displ` "by hand"
+* Super extra bonus kudos if you can turn it into a function
+
+---
+# Transition to correlation
+
+![](w1_files/figure-html/correlations-1.png)&lt;!-- --&gt;
+
+---
+.pull-left[
+### Recall the variance
+  .Large[
+$$
+s^{2} = \frac{\sum_i^{n}(X_i-\overline{X})^{2}
+}{n-1}
+$$
+  ]
+]
+
+--
+
+.pull-right[
+### Could be rewritten
+  .Large[
+$$
+s^{2} = \frac{\sum_i^{n}(X_i-\overline{X})(X_i-\overline{X})}
+{n-1}
+$$
+  ]
+]
+
+--
+
+### Covariance
+.Large[
+$$
+s_{xy} = \frac{\sum_i^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{n-1}
+$$
+]
+
+
+---
+# Back to `mtcars`
+* Let's calculate the covariance of `mpg` and `displ`
+
+
+```r
+dev_mpg &lt;- mtcars$mpg - mean(mtcars$mpg)
+dev_mpg
+```
+
+```
+##  [1]  0.909375  0.909375  2.709375  1.309375 -1.390625 -1.990625 -5.790625
+##  [8]  4.309375  2.709375 -0.890625 -2.290625 -3.690625 -2.790625 -4.890625
+## [15] -9.690625 -9.690625 -5.390625 12.309375 10.309375 13.809375  1.409375
+## [22] -4.590625 -4.890625 -6.790625 -0.890625  7.209375  5.909375 10.309375
+## [29] -4.290625 -0.390625 -5.090625  1.309375
+```
+
+```r
+dev_disp &lt;- mtcars$disp - mean(mtcars$disp)
+dev_disp
+```
+
+```
+##  [1]  -70.721875  -70.721875 -122.721875   27.278125  129.278125
+##  [6]   -5.721875  129.278125  -84.021875  -89.921875  -63.121875
+## [11]  -63.121875   45.078125   45.078125   45.078125  241.278125
+## [16]  229.278125  209.278125 -152.021875 -155.021875 -159.621875
+## [21] -110.621875   87.278125   73.278125  119.278125  169.278125
+## [26] -151.721875 -110.421875 -135.621875  120.278125  -85.721875
+## [31]   70.278125 -109.721875
+```
+
+---
+
+
+```r
+multiplied &lt;- dev_mpg * dev_disp
+multiplied
+```
+
+```
+##  [1]   -64.31271   -64.31271  -332.49958    35.71729  -179.77739
+##  [6]    11.39011  -748.60114  -362.08177  -243.63208    56.21792
+## [11]   144.58854  -166.36646  -125.79614  -220.46021 -2338.13583
+## [16] -2221.84833 -1128.13989 -1871.29427 -1598.17864 -2204.27833
+## [21]  -155.90771  -400.66114  -358.37583  -809.97302  -150.76333
+## [26] -1093.81989  -652.52427 -1398.17677  -516.06833    33.48511
+## [31]  -357.75958  -143.66708
+```
+
+```r
+summed &lt;- sum(multiplied)
+summed
+```
+
+```
+## [1] -19626.01
+```
+
+```r
+summed / (length(mtcars$mpg) - 1)
+```
+
+```
+## [1] -633.0972
+```
+
+```r
+cov(mtcars$mpg, mtcars$disp)
+```
+
+```
+## [1] -633.0972
+```
+
+---
+# But what does this number mean?
+
+![](https://media3.giphy.com/media/3o7btPCcdNniyf0ArS/source.gif)
+
+---
+# Correlations can help
+
+Correlation = covariance(xy) / (sd(x) * sd(y))
+
+--
+
+.Large[.pull-left[
+$$
+r_{xy} = \frac{\frac{\sum_i^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{n-1}}
+{s_xs_y}
+$$
+]]
+
+--
+
+.Large[.pull-right[
+$$
+r_{xy} = \frac{\sum xy}{s_xs_y}
+$$
+]]
+
+---
+
+
+```r
+cov(mtcars$mpg, mtcars$disp) / 
+  (sd(mtcars$mpg) * sd(mtcars$disp))
+```
+
+```
+## [1] -0.8475514
+```
+
+
+--
+
+
+```r
+cor(mtcars$mpg, mtcars$disp)
+```
+
+```
+## [1] -0.8475514
+```
+
+---
+# Let's talk correlation
+* The previous correlation was -0.85. 
+  + What does this mean? 
+  + What does it look like?
+* Correlations range from -1 to +1
+  + What is the difference between a negative correlation and a positive one?
+
+---
+class: inverse middle center
+background-image: url(w1_files/figure-html/correlations-1.png)
+background-size: contain
+
+
+---
+# Your first ggplot lesson
+Follow along!
+
+[demo]
+
+Making a ggplot scatterplot  between car weight and miles per gallon. (I
+promise, we'll move away from cars after tonight)
+
+---
+# How do we interpret correlations?
+* Think about direction first
+  + What happens to `\(y\)` as `\(x\)` increases?
+* Magnitude takes some judgment
+  + Really will depend on your field/area of investigation
+  + Cohen's guidelines are used pretty regularly
+      + Small: .10
+      + Medium: .30
+      + Large: .50
+
+---
+class: inverse center
+background-image: url(../img/gears.jpg)
+background-size: cover
+# Regression
+
+---
+# Plot it first
+* Let's go back to our ggplot example
+* add `+ geom_smooth()`. What do you see? .gray[(hint: This is not linear
+regression)]
+* Now change to `+ geom_smooth(method = "lm")`. What changed? Can you guess
+  what `lm` stands for?
+* Try one more time, with `+ geom_smooth(method = "lm", se = FALSE)`. What has
+  canged now?
+
+---
+# Regression vs. Correlation
+* Regression is scale dependent
+* Coefficient represents the expected (on average) change in `\(y\)` given a
+  one-unit increase in `\(x\)`.
+* Standardized coefficient in simple linear regression = correlation 
+  coefficient.
+
+---
+# The regression model from before
+
+
+```r
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+![](w1_files/figure-html/wt-mpg-scatter-1.png)&lt;!-- --&gt;
+
+---
+# Take a guess
+* What sign will the regression coefficient have (positive/negative)?
+* What do you think the coefficient will be?
+  + What is the average change in `\(y\)` for a one unit increase in `\(x\)` (i.e., the
+  regression line)?
+
+---
+# Let's fit the model!
+
+* `lm` function stands for linear model.
+
+--
+
+
+```r
+m &lt;- lm(formula = mpg ~ wt, data = mtcars)
+```
+
+* Run the above and nothing happens. 🤨
+
+--
+
+* Have to print `m`, the object you stored the model in.
+
+
+```r
+m
+```
+
+```
+## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Coefficients:
+## (Intercept)           wt  
+##      37.285       -5.344
+```
+
+--
+* Doesn't show us much. How do we get more?
+
+---
+# Evaluating output
+* Use the `summary` function to see more of the model results
+
+
+```r
+summary(m)
+```
+
+```
+## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.046 on 30 degrees of freedom
+## Multiple R-squared:  0.7528,	Adjusted R-squared:  0.7446 
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+```
+
+---
+# Slightly nicer output
+
+
+```r
+library(arm)
+display(m)
+```
+
+```
+## lm(formula = mpg ~ wt, data = mtcars)
+##             coef.est coef.se
+## (Intercept) 37.29     1.88  
+## wt          -5.34     0.56  
+## ---
+## n = 32, k = 2
+## residual sd = 3.05, R-Squared = 0.75
+```
+
+--
+
+* What does all this mean?
+
+--
+
+* In this case, we're saying
+
+$$
+mpg = 37.29 + -5.34*wt
+$$
+
+
+---
+
+.Large[
+$$
+mpg = 37.29 + -5.34*wt
+$$
+]
+
+* What does 37.29 represent?
+* What about -5.34?
+
+--
+* This is our prediction for any one car.
+* The amount this is off, overall, is our residual variance.
+* the `predict` function will do this for us automatically (and is extremely
+  useful)
+
+--
+* Using the regression equation above, what `mpg` would we expect for a car 
+  with a weight of 2.62?
+
+---
+# Quickly
+* The `predict` function will use the model you feed it to predict new
+observations.
+* By default, the observations that were used to estimate the model
+
+
+```r
+predictions &lt;- predict(m)
+predictions
+```
+
+```
+##           Mazda RX4       Mazda RX4 Wag          Datsun 710 
+##           23.282611           21.919770           24.885952 
+##      Hornet 4 Drive   Hornet Sportabout             Valiant 
+##           20.102650           18.900144           18.793255 
+##          Duster 360           Merc 240D            Merc 230 
+##           18.205363           20.236262           20.450041 
+##            Merc 280           Merc 280C          Merc 450SE 
+##           18.900144           18.900144           15.533127 
+##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood 
+##           17.350247           17.083024            9.226650 
+## Lincoln Continental   Chrysler Imperial            Fiat 128 
+##            8.296712            8.718926           25.527289 
+##         Honda Civic      Toyota Corolla       Toyota Corona 
+##           28.653805           27.478021           24.111004 
+##    Dodge Challenger         AMC Javelin          Camaro Z28 
+##           18.472586           18.926866           16.762355 
+##    Pontiac Firebird           Fiat X1-9       Porsche 914-2 
+##           16.735633           26.943574           25.847957 
+##        Lotus Europa      Ford Pantera L        Ferrari Dino 
+##           29.198941           20.343151           22.480940 
+##       Maserati Bora          Volvo 142E 
+##           18.205363           22.427495
+```
+
+---
+# Other components
+
+* `\(R^2\)` = proportion of the variability captured by the model
+  + regression sum of squares divided by the total variance
+* Residual standard error = the standard deviation of the errors around the
+regression line (assuming they are normally distributed)
+  + regression sums of squares divided by the residual sum of squares
+
+---
+# Breaking the model down
+* If we know nothing else, our best guess for any individual observation would
+be the mean
+
+.pull-left[
+
+```r
+ggplot(mtcars, aes(x = 1, y = mpg)) +
+  geom_point() +
+  geom_hline(yintercept = mean(mtcars$mpg), 
+             color = "cornflowerblue",
+             size = 1.2)
+```
+]
+
+.pull-right[
+![](w1_files/figure-html/plot-mean2-1.png)&lt;!-- --&gt;
+]
+
+
+* The deviations from the mean are large. This is our residual variance
+
+---
+* Residual variance is reduced with a regression line
+* Variance reduction = `\(R^2\)`.
+* We can also determine reduction *because of the regression model* beyond what
+we would already know because of the mean
+  + `\(Y' - \overline{Y}\)`
+    + `\(\sum(Y' - \overline{Y}) = 0\)`
+  + `\(ss_{reg} = \sum (Y' - \overline{Y})^2\)`
+
+--
+
+* Residual variance = `\(Y - Y'\)`
+  + `\(ss_{res} = \sum (Y - Y')^2\)`
+* Total variance = `\(\sum y^2 = ss_{reg} + ss_{res}\)`
+
+--
+
+.Large[
+`\(R^2 = \frac{\sum (Y' - \overline{Y})^2}{(\sum (Y' - \overline{Y})^2) + (\sum (Y - Y'))} = \frac{ss_{reg}}{\sum y^2}\)`
+]
+
+
+---
+# Residual standard error
+
+.Large[
+$$
+e = \sqrt{\frac{\sum (Y - Y')^2}{df}} =  \sqrt{\frac{ss_{res}}{df}}
+$$
+
+]
+
+---
+# Let's do it!
+
+### Run the following
+
+
+```r
+predictions &lt;- predict(m)
+
+reg &lt;- predictions - mean(mtcars$mpg)
+ss_reg &lt;- sum(reg^2)
+
+res &lt;- mtcars$mpg - predictions
+ss_res &lt;- sum(res^2)
+
+r2 &lt;- ss_reg / (ss_reg + ss_res)
+e &lt;- sqrt(ss_res/30)
+```
+
+Does it match your output?
+
+---
+# Lab
+* Doubtful there's any time left, but if so, let's do some lab!
+* Make sure to turn in whatever you have through canvas before you leave
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

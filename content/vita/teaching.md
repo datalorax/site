@@ -13,6 +13,8 @@ I am currently in the process of leading the development of a [five-course data 
 {{% /center %}}
 
 ### Fall 2018
+[EDUC 610: Multiple Regression in Educational Research](../mr/mr)
+
 [EDUC 610: Introduction to Data Science with R](../ds/ds1)
 
 #### Summer 2018
