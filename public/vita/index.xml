@@ -33,6 +33,15 @@
     
     <item>
       <title></title>
+      <link>/vita/ds/ds1-slides/w1p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w1p2/</guid>
+      <description>Seeing the big picture   class: center, middle, inverse, title-slide # Seeing the big picture ## The R ecosystem, and other tools in the data science pipeline ### Daniel Anderson ### Week 1, Class 2 --- background-image: url(http://r4ds.had.co.nz/diagrams/data-science.png) background-size:contain # The data science pipeline -- ### How do we go about this? --- class: inverse center middle background-image: url(../img/sky.jpg) background-size: cover # R Packages --- # &#34;Out of the box&#34;</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/vita/educ611/slides/class1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
