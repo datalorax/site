@@ -944,7 +944,7 @@ $$
 
 .Large[.pull-right[
 $$
-r_{xy} = \frac{\sum xy}{s_xs_y}
+r\_{xy} = \frac{s\_{xy}}{s\_xs\_y}
 $$
 ]]
 
@@ -1139,8 +1139,15 @@ display(m)
 * What does all this mean?
 
 --
+* Remember the regression equation is
 
-* In this case, we're saying
+$$
+Y_i = a + bX_i + e
+$$
+
+--
+
+* In this case (for the fixed part), we're saying
 
 $$
 mpg = 37.29 + -5.34*wt
@@ -1176,33 +1183,25 @@ observations.
 
 
 ```r
-predictions &lt;- predict(m)
-predictions
+mtcars$predictions &lt;- predict(m)
+head(mtcars)
 ```
 
 ```
-##           Mazda RX4       Mazda RX4 Wag          Datsun 710 
-##           23.282611           21.919770           24.885952 
-##      Hornet 4 Drive   Hornet Sportabout             Valiant 
-##           20.102650           18.900144           18.793255 
-##          Duster 360           Merc 240D            Merc 230 
-##           18.205363           20.236262           20.450041 
-##            Merc 280           Merc 280C          Merc 450SE 
-##           18.900144           18.900144           15.533127 
-##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood 
-##           17.350247           17.083024            9.226650 
-## Lincoln Continental   Chrysler Imperial            Fiat 128 
-##            8.296712            8.718926           25.527289 
-##         Honda Civic      Toyota Corolla       Toyota Corona 
-##           28.653805           27.478021           24.111004 
-##    Dodge Challenger         AMC Javelin          Camaro Z28 
-##           18.472586           18.926866           16.762355 
-##    Pontiac Firebird           Fiat X1-9       Porsche 914-2 
-##           16.735633           26.943574           25.847957 
-##        Lotus Europa      Ford Pantera L        Ferrari Dino 
-##           29.198941           20.343151           22.480940 
-##       Maserati Bora          Volvo 142E 
-##           18.205363           22.427495
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                   mean_mpg deviation predictions
+## Mazda RX4         20.09062  0.909375    23.28261
+## Mazda RX4 Wag     20.09062  0.909375    21.91977
+## Datsun 710        20.09062  2.709375    24.88595
+## Hornet 4 Drive    20.09062  1.309375    20.10265
+## Hornet Sportabout 20.09062 -1.390625    18.90014
+## Valiant           20.09062 -1.990625    18.79325
 ```
 
 ---
@@ -1218,8 +1217,9 @@ regression line (assuming they are normally distributed)
 # Breaking the model down
 * If we know nothing else, our best guess for any individual observation would
 be the mean
+* The deviations from the mean are large. This is our residual variance.
 
-.pull-left[
+
 
 ```r
 ggplot(mtcars, aes(x = 1, y = mpg)) +
@@ -1228,36 +1228,138 @@ ggplot(mtcars, aes(x = 1, y = mpg)) +
              color = "cornflowerblue",
              size = 1.2)
 ```
-]
 
-.pull-right[
 ![](w1_files/figure-html/plot-mean2-1.png)&lt;!-- --&gt;
-]
 
-
-* The deviations from the mean are large. This is our residual variance
 
 ---
+# Add a predictor
+* When we add a predictor variable, we can then fit a regression line.
+* Deviations from the line are now smaller (i.e., the variance has been 
+  reduced).
+* The amount (proportion) the variance has been reduced, is `\(R^2\)`
+
+
+
+```r
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+![](w1_files/figure-html/plot-pred2-1.png)&lt;!-- --&gt;
+
+
+
+---
+# In equation form
 * Residual variance is reduced with a regression line
-* Variance reduction = `\(R^2\)`.
-* We can also determine reduction *because of the regression model* beyond what
-we would already know because of the mean
+* Proportion Variance reduction = `\(R^2\)`.
+* First estimate how much is learned **because of the regression model**
   + `\(Y' - \overline{Y}\)`
     + `\(\sum(Y' - \overline{Y}) = 0\)`
   + `\(ss_{reg} = \sum (Y' - \overline{Y})^2\)`
 
 --
-
-* Residual variance = `\(Y - Y'\)`
-  + `\(ss_{res} = \sum (Y - Y')^2\)`
-* Total variance = `\(\sum y^2 = ss_{reg} + ss_{res}\)`
+* Next estimate how much of the variance is "left over"
+  + Residual variance = `\(Y - Y'\)`
+    + `\(ss_{res} = \sum (Y - Y')^2\)`
 
 --
 
-.Large[
+* Finally, estimate the total variance
+  + `\(\sum y^2 = ss_{reg} + ss_{res}\)`
+
+--
+
+.large[
 `\(R^2 = \frac{\sum (Y' - \overline{Y})^2}{(\sum (Y' - \overline{Y})^2) + (\sum (Y - Y'))} = \frac{ss_{reg}}{\sum y^2}\)`
 ]
 
+---
+# Decomposition
+* Any individual observation is then composed of three components
+  + Mean of `\(Y\)`
+  + Difference between the regression equation and the mean of `\(Y\)`
+  + Difference between the regression equation and the individual point
+
+--
+$$
+Y = \overline{Y} + (Y' - \overline{Y}) + (Y - Y')
+$$
+
+
+---
+# Graphic decomposition
+
+![](w1_files/figure-html/graphic-decomposition1-1.png)&lt;!-- --&gt;
+
+---
+# Graphic decomposition
+
+![](w1_files/figure-html/graphic-decomposition2-1.png)&lt;!-- --&gt;
+
+---
+# Graphic decomposition
+
+![](w1_files/figure-html/graphic-decomposition3-1.png)&lt;!-- --&gt;
+
+---
+# Graphic decomposition
+
+![](w1_files/figure-html/graphic-decomposition4-1.png)&lt;!-- --&gt;
+
+---
+# Graphic decomposition
+
+![](w1_files/figure-html/graphic-decomposition5-1.png)&lt;!-- --&gt;
+
+---
+# Graphic decomposition
+
+![](w1_files/figure-html/graphic-decomposition6-1.png)&lt;!-- --&gt;
+
+---
+# Graphic decomposition
+
+![](w1_files/figure-html/graphic-decomposition7-1.png)&lt;!-- --&gt;
+
+---
+### Decomposition for Mazda RX4
+
+```r
+mtcars[1, ]
+```
+
+```
+##           mpg cyl disp  hp drat   wt  qsec vs am gear carb mean_mpg
+## Mazda RX4  21   6  160 110  3.9 2.62 16.46  0  1    4    4 20.09062
+##           deviation predictions
+## Mazda RX4  0.909375    23.28261
+```
+
+```r
+mean(mtcars$mpg)
+```
+
+```
+## [1] 20.09062
+```
+
+--
+$$
+Y = \overline{Y} + (Y' - \overline{Y}) + (Y - Y')
+$$
+
+--
+$$
+21 = 20.09 + (23.28 - 20.09) + (21 -23.28)
+$$
+
+--
+$$
+21 = 20.09 + 3.19 + -2.28
+$$
 
 ---
 # Residual standard error
@@ -1269,10 +1371,66 @@ $$
 
 ]
 
+* This equation, like all of statistics, tries to estimate the population-level
+  residual variance
+* We can approximate it (i.e., calculate it for our sample) by calculating the
+  standard deviation of our residuals
+
+---
+# Sample residual deviance
+
+
+```r
+mtcars$res &lt;- mtcars$mpg - mtcars$prediction
+head(mtcars)
+```
+
+```
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                   mean_mpg deviation predictions        res
+## Mazda RX4         20.09062  0.909375    23.28261 -2.2826106
+## Mazda RX4 Wag     20.09062  0.909375    21.91977 -0.9197704
+## Datsun 710        20.09062  2.709375    24.88595 -2.0859521
+## Hornet 4 Drive    20.09062  1.309375    20.10265  1.2973499
+## Hornet Sportabout 20.09062 -1.390625    18.90014 -0.2001440
+## Valiant           20.09062 -1.990625    18.79325 -0.6932545
+```
+
+---
+
+```r
+ggplot(mtcars, aes(x = res)) +
+  geom_histogram(bins = 20, alpha = 0.7)
+```
+
+![](w1_files/figure-html/sample-dev2-1.png)&lt;!-- --&gt;
+
+---
+
+```r
+sd(mtcars$res)
+```
+
+```
+## [1] 2.996352
+```
+
+```r
+summary(m)$sigma
+```
+
+```
+## [1] 3.045882
+```
+
 ---
 # Let's do it!
-
-### Run the following
 
 
 ```r
@@ -1287,8 +1445,10 @@ ss_res &lt;- sum(res^2)
 r2 &lt;- ss_reg / (ss_reg + ss_res)
 e &lt;- sqrt(ss_res/30)
 ```
-
-Does it match your output?
+### Run the following
+* Go line by line
+* Try to understand what each line does
+* Does it match your output? from `summary(m)`
 
 ---
 # Lab
