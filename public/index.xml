@@ -192,6 +192,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     
     <item>
       <title></title>
+      <link>/vita/ds/ds1-slides/w2p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w2p1/</guid>
+      <description>Introduction to data visualization   class: center, middle, inverse, title-slide # Introduction to data visualization ## Scatterplots with smooths, line plots ### Daniel Anderson ### Week 2, Class 1 --- # Agenda * Introduce ggplot2 * Discuss scatterplots and smooths * Discuss line plots * Lab --- # The *ggplot2* package Today, we&#39;ll primarily be covering the basics of the *ggplot2* package. &amp;lt;div align = &#34;left&#34;&amp;gt; &amp;lt;img src = .</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/vita/educ611/slides/class1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
