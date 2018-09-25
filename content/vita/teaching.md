@@ -15,12 +15,26 @@ I am currently in the process of leading the development of a [five-course data 
 ### Fall 2018
 [EDUC 610: Multiple Regression in Educational Research](../mr/mr)
 
+* Introduces PhD students in the College of Education to the foundations of
+	multiple regression. Topics covered include multiple regression with continuous and categorical independent variables, regression diagnostics, and interactions. Additional topics include inference based on simulation, contrasting inferential analyses with predictive analyses, and visualization of data/regression models
+
 [EDUC 610: Introduction to Data Science with R](../ds/ds1)
+
+* The first of a planned three-course sequence during the 2018-2019 school 
+  year, this course introduces social science researchers to the *tidyverse*
+  suite of packages and focuses on data wrangling, data visualization, and
+  reproducible research. The final project is a collaborative paper housed on
+  GitHub that is rendered in APA format (via the 
+  [{papaja}](https://github.com/crsh/papaja) package) and is fully 
+  reproducible.
+
 
 #### Summer 2018
 [EDUC 611: Survey of Educational Research Methods](../educ611/educ611)
 
-* This summer I will be teaching this course for the first time. I will post the materials for the course here, as I develop them. The course is aimed at educational practitioners (teachers and administrators), and introduces students to concepts of research design and research methods.  
+* This course was aimed at educational practitioners (teachers and
+administrators), and introduced students to concepts of research design and
+research methods.  
 
 #### Fall 2017
 [EDLD 610: Exploring Data with R](../classr/classr) (4 Credits). CRN: 17214
