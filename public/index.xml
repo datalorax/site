@@ -245,6 +245,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     </item>
     
     <item>
+      <title></title>
+      <link>/vita/mr/mr-slides/w2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/mr/mr-slides/w2/</guid>
+      <description>MR w/two continuous IVs   class: center, middle, inverse, title-slide # MR w/two continuous IVs ### Daniel Anderson ### Week 2 --- # Agenda * A little bit of R * Reading in data * *ggplot2* basics * A little more review of simple linear regression * Calculation of intercept &amp;amp; slope * Extending the SLR model --- class: inverse middle center background-image:url(../img/chalkboard.jpg) background-size:cover # What questions do you have?</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -401,7 +410,7 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/mr/mr/</guid>
-      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression   2 MR w/2 Continuous IVs    The table above will be updated as the class goes along</description>
     </item>
     
     <item>

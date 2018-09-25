@@ -1121,14 +1121,14 @@ summary(m)
 
 ```r
 library(arm)
-display(m)
+display(m, detail = TRUE)
 ```
 
 ```
 ## lm(formula = mpg ~ wt, data = mtcars)
-##             coef.est coef.se
-## (Intercept) 37.29     1.88  
-## wt          -5.34     0.56  
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 37.29     1.88   19.86    0.00   
+## wt          -5.34     0.56   -9.56    0.00   
 ## ---
 ## n = 32, k = 2
 ## residual sd = 3.05, R-Squared = 0.75
@@ -1276,18 +1276,6 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 `\(R^2 = \frac{\sum (Y' - \overline{Y})^2}{(\sum (Y' - \overline{Y})^2) + (\sum (Y - Y'))} = \frac{ss_{reg}}{\sum y^2}\)`
 ]
 
----
-# Decomposition
-* Any individual observation is then composed of three components
-  + Mean of `\(Y\)`
-  + Difference between the regression equation and the mean of `\(Y\)`
-  + Difference between the regression equation and the individual point
-
---
-$$
-Y = \overline{Y} + (Y' - \overline{Y}) + (Y - Y')
-$$
-
 
 ---
 # Graphic decomposition
@@ -1323,6 +1311,20 @@ $$
 # Graphic decomposition
 
 ![](w1_files/figure-html/graphic-decomposition7-1.png)&lt;!-- --&gt;
+
+---
+# Decomposition
+* Any individual observation is then composed of three components
+  + Mean of `\(Y\)`
+  + Difference between the regression equation and the mean of `\(Y\)`
+  + Difference between the regression equation and the individual point
+
+--
+$$
+Y = \overline{Y} + (Y' - \overline{Y}) + (Y - Y')
+$$
+
+
 
 ---
 ### Decomposition for Mazda RX4
@@ -1373,6 +1375,7 @@ $$
 
 * This equation, like all of statistics, tries to estimate the population-level
   residual variance
+* `\(df = n - k\)`
 * We can approximate it (i.e., calculate it for our sample) by calculating the
   standard deviation of our residuals
 

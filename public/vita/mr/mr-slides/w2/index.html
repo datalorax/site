@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MR w/two continuous IVs</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# MR w/two continuous IVs
+### Daniel Anderson
+### Week 2
+
+---
+
+
+
+
+# Agenda 
+
+* A little bit of R
+  * Reading in data
+  * *ggplot2* basics
+* A little more review of simple linear regression
+  * Calculation of intercept &amp; slope
+* Extending the SLR model
+
+
+---
+class: inverse middle center
+background-image:url(../img/chalkboard.jpg)
+background-size:cover
+
+# What questions do you have?
+
+---
+class: inverse bottom center
+background-image:url(../img/r.png)
+background-size:cover
+
+# Let's start out with some R
+
+---
+# Demo
+### Do it with me
+* Create a new project
+  + Place the Rmd file posted to canvas in the directory
+* Add a data folder
+  + Place the `elemapi.sav` data there
+* Import the data into R
+  + Use the `here` library
+* Explore it a bit
+
+---
+class: inverse bottom center
+background-image:url(../img/ggplot2.png)
+background-size:contain
+
+---
+# Some resources
+The *ggplot2* package is one of the most popular R packages. There are a plethora of resources to learn the syntax. 
+
+* Perhaps the most definitive, and indexes all the capabilities of ggplot2, along with multiple examples 
+  + http://docs.ggplot2.org/current/index.html#
+
+* RStudio cheat sheet can also be helpful
+  + https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+* R Graphics Cookbook
+  + http://www.cookbook-r.com/Graphs/
+
+---
+# Components
+Every *ggplot* plot has three components
+
+1. data
+  * The data used to produce the plot
+2. aesthetic mappings
+  * between variables and visual properties
+3. layer(s)
+  * usually through the `geom_*` function to produce geometric shape to be
+  rendered
+
+---
+# Basic syntax
+![ggplotBasicSyntax](../img/ggplotBasicSyntax.png)
+
+---
+# Quick demo
+* Couple different geoms
+* Understand common mistakes 
+  + And that it will take some trial &amp; error
+
+---
+class: inverse bottom right
+background-image:url(../img/idea.jpg)
+background-size:cover
+
+# Remembering SLR
+
+---
+# The data
+
+
+```r
+# Load the libraries
+library(rio)
+library(here)
+library(tidyverse)
+
+# Set the ggplot theme
+theme_set(theme_minimal(base_size = 25))
+
+# load the data
+d &lt;- import(here("data", "elemapi.sav"),
+            setclass = "tbl_df")
+```
+
+---
+
+```r
+d
+```
+
+```
+## # A tibble: 400 x 21
+##     snum  dnum api00 api99 growth meals   ell yr_rnd mobility acs_k3
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1   906    41   693   600     93    67     9      0       11     16
+##  2   889    41   570   501     69    92    21      0       33     15
+##  3   887    41   546   472     74    97    29      0       36     17
+##  4   876    41   571   487     84    90    27      0       27     20
+##  5   888    41   478   425     53    89    30      0       44     18
+##  6  4284    98   858   844     14    NA     3      0       10     20
+##  7  4271    98   918   864     54    NA     2      0       16     19
+##  8  2910   108   831   791     40    NA     3      0       44     20
+##  9  2899   108   860   838     22    NA     6      0       10     20
+## 10  2887   108   737   703     34    29    15      0       17     21
+## # ... with 390 more rows, and 11 more variables: acs_46 &lt;dbl&gt;,
+## #   not_hsg &lt;dbl&gt;, hsg &lt;dbl&gt;, some_col &lt;dbl&gt;, col_grad &lt;dbl&gt;,
+## #   grad_sch &lt;dbl&gt;, avg_ed &lt;dbl&gt;, full &lt;dbl&gt;, emer &lt;dbl&gt;, enroll &lt;dbl&gt;,
+## #   mealcat &lt;dbl&gt;
+```
+
+---
+# Research Question
+
+&gt; To what extent does the proportion of students eligible for free or reduced 
+  price lunch at the school predict its overall API rating in the year 2000?
+
+
+--
+* What's the IV? DV?
+
+--
+### The model
+$$
+Y_i = a + bX_i + e
+$$
+
+--
+### In this case...
+$$
+api00\_i = a + b(meals\_i) + e
+$$
+
+--
+We fit the model to estimate `\(a\)` and `\(b\)`.
+
+---
+# Fitting the model in R
+
+
+```r
+m1 &lt;- lm(api00 ~ meals, d)
+summary(m1)
+```
+
+```
+## 
+## Call:
+## lm(formula = api00 ~ meals, data = d)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -198.351  -46.467   -6.925   47.176  192.169 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 866.4821    11.3087   76.62   &lt;2e-16 ***
+## meals        -3.7617     0.1488  -25.28   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 64.3 on 313 degrees of freedom
+##   (85 observations deleted due to missingness)
+## Multiple R-squared:  0.6713,	Adjusted R-squared:  0.6702 
+## F-statistic: 639.1 on 1 and 313 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+# Coefficients
+* `\(a\)` = 866.48
+* `\(b\)` = -3.76
+
+--
+### What do these mean?
+
+--
+### Anybody remember how we estimate them?
+
+---
+# beta
+`covariance(x, y) / variance(x)`
+
+--
+.Large[
+$$
+b = \frac{s\_{xy}}{s\_{xx}}
+$$
+]
+
+--
+
+
+```r
+covariance &lt;- cov(d$api00, d$meals, 
+                  use = "complete.obs") 
+variance &lt;- var(d$meals, na.rm = TRUE)
+
+beta &lt;- covariance / variance
+beta
+```
+
+```
+## [1] -3.761746
+```
+
+
+---
+# Intercept
+
+`mean(y) - beta*(mean(x))`
+
+--
+.Large[
+$$
+a = \overline{y} - b\overline{x}
+$$
+]
+
+--
+
+
+```r
+mean(d$api00, na.rm = TRUE) - beta*mean(d$meals, na.rm = TRUE)
+```
+
+```
+## [1] 918.4443
+```
+
+--
+
+.Large[.Large[🤨]]
+
+Our intercept was estimated at 866.48. 
+
+What's going on here?
+
+
+---
+# Remove pairwise missing data
+
+
+```r
+pairwise &lt;- d %&gt;% 
+  select(api00, meals) %&gt;% 
+  na.omit()
+head(pairwise)
+```
+
+```
+## # A tibble: 6 x 2
+##   api00 meals
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1   693    67
+## 2   570    92
+## 3   546    97
+## 4   571    90
+## 5   478    89
+## 6   737    29
+```
+
+```r
+mean(pairwise$api00) - beta*mean(pairwise$meals)
+```
+
+```
+## [1] 866.4821
+```
+
+---
+# Your turn
+* Use ggplot to show the relation between `ell` and `api00`
+  + Overlay a **linear** relation
+* Fit the corresponding model
+* In small groups
+  + Discuss what `\(a\)` means
+    + Is this a meaningful value?
+  + Discuss what `\(b\)` means
+
+### If you have extra time
+* Try calculating the intercept/slope "by hand"
+
+---
+class: inverse middle center
+background-image:url(../img/umbrellas.jpg)
+background-size:cover
+
+.major-emph-green[Multiple Regression]
+
+---
+# The general equation
+
+.Large[
+$$
+Y\_i = b\_0 + b\_1(X\_{1i}) + b\_2(X\_{2i}) + ... + b\_k(X\_{ki}) + e
+$$
+]
+
+* Note the change in notation for the intercept
+  + Others use different notation
+
+---
+# The two-predictor case
+
+.Large[
+$$
+Y\_i = b\_0 + b\_1(X\_{1i}) + b\_2(X\_{2i}) + e
+$$
+]
+
+--
+
+* What does the intercept represent now?
+
+--
+
+* What does `\(b_1\)` represent?
+
+--
+* What about `\(b_2\)`?
+
+---
+background-image: url(../img/simple-multiple1.png)
+background-size: contain
+
+# SLR vs MR
+
+---
+background-image: url(../img/simple-multiple2.png)
+background-size: contain
+
+# SLR vs MR
+
+---
+background-image: url(../img/simple-multiple3.png)
+background-size: contain
+
+# SLR vs MR
+
+---
+background-image: url(../img/simple-multiple4.png)
+background-size: contain
+
+# SLR vs MR
+
+---
+# Let's fit a model
+### Research Question
+
+&gt; To what extent do school API ratings in in the year 2000 relate to the
+proportion of students receiving English language services **after controlling
+for the proportion of students in the school receiving free or reduced price
+lunch**?
+
+
+--
+### The model
+$$
+Y_i = b\_0 + b\_1meals\_i + b\_2ell\_i + e
+$$
+
+---
+# Fitting the model
+
+
+```r
+m2 &lt;- lm(api00 ~ meals + ell, d)
+summary(m2)
+```
+
+```
+## 
+## Call:
+## lm(formula = api00 ~ meals + ell, data = d)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -189.526  -42.105   -5.534   40.921  187.065 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 853.6110    11.1050  76.867  &lt; 2e-16 ***
+## meals        -3.0149     0.1996 -15.102  &lt; 2e-16 ***
+## ell          -1.0826     0.2025  -5.347 1.73e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 61.64 on 312 degrees of freedom
+##   (85 observations deleted due to missingness)
+## Multiple R-squared:  0.6988,	Adjusted R-squared:  0.6969 
+## F-statistic:   362 on 2 and 312 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+# Let's interpret
+
+
+```r
+library(arm)
+display(m2, detail = TRUE)
+```
+
+```
+## lm(formula = api00 ~ meals + ell, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 853.61    11.11   76.87    0.00  
+## meals        -3.01     0.20  -15.10    0.00  
+## ell          -1.08     0.20   -5.35    0.00  
+## ---
+## n = 315, k = 3
+## residual sd = 61.64, R-Squared = 0.70
+```
+
+* What does the intercept mean, in words?
+* What about each of the coefficients?
+* Using this model, what API score would you predict for a school with 50% of
+  students eligible for free or reduced price lunch, and 10% of students
+  receiving ELL services?
+
+---
+# Prediction
+
+"By hand" 
+
+`\(Y' = 853.61 + -3.01*50 + -1.08*10\)`
+
+`\(Y' = 692.31\)`
+
+--
+
+With code
+
+
+```r
+pred_frame = tibble(meals = 50,
+                    ell = 10)
+
+predict(m2, newdata = pred_frame)
+```
+
+```
+##        1 
+## 692.0383
+```
+
+---
+# Make a range of predictions
+"See" the difference 
+
+
+```r
+pred_frame2 = tibble(meals = rep(seq(0, 100, 1), 6),
+                     ell = rep(seq(0, 25, 5), each = 101))
+```
+
+.pull-left[
+
+```r
+head(pred_frame2)
+```
+
+```
+## # A tibble: 6 x 2
+##   meals   ell
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     0     0
+## 2     1     0
+## 3     2     0
+## 4     3     0
+## 5     4     0
+## 6     5     0
+```
+]
+
+.pull-right[
+
+```r
+tail(pred_frame2)
+```
+
+```
+## # A tibble: 6 x 2
+##   meals   ell
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1    95    25
+## 2    96    25
+## 3    97    25
+## 4    98    25
+## 5    99    25
+## 6   100    25
+```
+
+]
+
+---
+# Make predictions
+
+
+```r
+pred_frame2$pred &lt;- predict(m2, pred_frame2)
+```
+
+
+.pull-left[
+
+```r
+head(pred_frame2)
+```
+
+```
+## # A tibble: 6 x 3
+##   meals   ell  pred
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0     0  854.
+## 2     1     0  851.
+## 3     2     0  848.
+## 4     3     0  845.
+## 5     4     0  842.
+## 6     5     0  839.
+```
+]
+
+.pull-right[
+
+```r
+tail(pred_frame2)
+```
+
+```
+## # A tibble: 6 x 3
+##   meals   ell  pred
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    95    25  540.
+## 2    96    25  537.
+## 3    97    25  534.
+## 4    98    25  531.
+## 5    99    25  528.
+## 6   100    25  525.
+```
+
+]
+
+
+---
+# Plot predictions
+
+
+```r
+ggplot(pred_frame2, aes(meals, pred, color = factor(ell))) +
+  geom_line(size = 1.25)
+```
+
+![](w2_files/figure-html/pred-plot-1.png)&lt;!-- --&gt;
+
+--
+
+Notice all the lines are exactly parallel. That's the model we fit! 
+
+---
+# Regression plane visualization
+
+[demo]
+
+
+```r
+library(rgl)
+colors2 &lt;- RColorBrewer::brewer.pal(2, "Accent")
+
+# Plot 3d scatter
+plot3d(x = d$meals, 
+       y = d$ell, 
+       z = d$api00, 
+       col = colors2[1])
+
+# Overlay the regression plane
+planes3d(coef(m2)["meals"], 
+         coef(m2)["ell"], 
+         -1,
+         coef(m2)["(Intercept)"], 
+         col = colors2[2])
+```
+
+---
+# Calculating MR Slopes
+
+.red[
+.Large[
+$$
+b = \frac{\sum\_{xy}}{\sum\_x^2}
+$$
+]]
+
+--
+
+.Large[
+$$
+ b\_{y1.2}=\frac{(\sum x\_2^2)(\sum x\_1y)-(\sum x_1x_2)(\sum x_2y)}{
+ (\sum x\_1^2)(\sum x\_2^2)-(\sum x\_1x\_2)^2} 
+$$
+]
+
+### Let's label the parts!
+
+--
+Can you predict how `\(b_{y2.1}\)` would be calculated?
+
+
+---
+# Thinking about this more
+
+--
+
+* Basically, we want to evaluate *only* the unique variance between `\(x_1\)` and
+`\(y\)`, and `\(x_2\)` and `\(y\)`
+
+--
+
+  + In other words, we want to **remove shared variance**
+
+--
+* We can estimate the multiple regression coefficients with multiple simple
+linear regression models
+
+
+---
+# Step 0: Setup the dataframe
+* Remove all missing data from the variables we'll use, so we have a consistent
+data source
+
+
+```r
+listwise &lt;- d %&gt;% 
+  dplyr::select(api00, meals, ell) %&gt;% 
+  na.omit()
+
+head(listwise)
+```
+
+```
+## # A tibble: 6 x 3
+##   api00 meals   ell
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1   693    67     9
+## 2   570    92    21
+## 3   546    97    29
+## 4   571    90    27
+## 5   478    89    30
+## 6   737    29    15
+```
+
+---
+# Step 1
+We'll focus on `\(b_{y1.2}\)` first
+* Fit a model with `\(x_1\)` predicting `\(x_2\)`
+
+--
+### Why?
+
+--
+
+
+```r
+shared1 &lt;- lm(meals ~ ell, listwise)
+display(shared1, detail = TRUE)
+```
+
+```
+## lm(formula = meals ~ ell, data = listwise)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 45.19     1.83   24.65    0.00   
+## ell          0.71     0.04   17.32    0.00   
+## ---
+## n = 315, k = 2
+## residual sd = 17.45, R-Squared = 0.49
+```
+
+---
+# Step 2
+* Extract the residuals from this model
+* Store the residuals as a new variable in the data frame
+
+--
+### Why?
+
+--
+
+
+```r
+listwise$resid_x1x2 &lt;- residuals(shared1)
+```
+
+---
+# Step 3
+### Final step
+
+Can you predict?
+
+--
+* Use the residuals to predict the outcome
+
+
+```r
+x1x2_mod &lt;- lm(api00 ~ resid_x1x2, listwise)
+```
+
+--
+
+
+```r
+coef(x1x2_mod)
+```
+
+```
+## (Intercept)  resid_x1x2 
+##  595.660317   -3.014936
+```
+
+```r
+coef(m2)
+```
+
+```
+## (Intercept)       meals         ell 
+##  853.610992   -3.014936   -1.082591
+```
+
+---
+# Thinking more about shared variance
+* How would the SLR and MR coefficients differ if `\(r_{x_1x_2} = 0\)`?
+
+--
+### Answer: Not at all
+
+* This is part of why multiple regression is helpful
+
+---
+background-image:url(../img/shared-var.png)
+background-size:contain
+
+
+---
+# What else does this imply?
+* Unless `\(r_{x_1x_2} = 0\)`, which is basically never, you **must** interpret 
+  the entire model together - not just a single coefficient.
+
+--
+### Example
+
+&gt; A one percent increase in the percentage of students in the school receiving 
+  free or reduced price meal subsidies corresponded to, on average, a 
+  3.01 point drop in API scores in the year 2000, 
+  **while holding the percentage of students receiving English language
+  services in the school constant**.
+
+---
+# Thinking back to this plot
+
+![](w2_files/figure-html/pred-plot2-1.png)&lt;!-- --&gt;
+
+--
+* As long as we stay within a constant level for ELL, the slope is the same, 
+and the expected change is the same. 
+
+--
+* If we vary ELL with meals, the predicted API would be different.
+
+---
+class: inverse middle center
+background-image:url(../img/celebrate.jpg)
+background-size:cover
+
+# Testing the coefficients
+
+---
+# Variance of the estimate
+Recall the residual standard error 
+
+.Large[
+$$
+s\_{y.x} = \sqrt{\frac{\sum (Y - Y')^2}{df}} =  \sqrt{\frac{ss_{res}}{df}}
+$$
+
+$$
+df = n - k - 1
+$$
+
+]
+
+.gray[(I'm using Pedhazur's notation here)]
+
+--
+
+### In the simple linear regression case
+* The standard error of the `\(b\)` is
+
+$$
+s\_b = \frac{s\_{y.x}}{\sqrt{\sum x^2}}
+$$
+
+---
+In words... the model residual standard error divided by the sum of the
+squared deviations
+
+--
+### Quick verification
+
+
+```r
+display(m1)
+```
+
+```
+## lm(formula = api00 ~ meals, data = d)
+##             coef.est coef.se
+## (Intercept) 866.48    11.31 
+## meals        -3.76     0.15 
+## ---
+## n = 315, k = 2
+## residual sd = 64.30, R-Squared = 0.67
+```
+
+```r
+ss_meals &lt;- sum((pairwise$meals - mean(pairwise$meals))^2)
+64.30 / sqrt(ss_meals)
+```
+
+```
+## [1] 0.1488035
+```
+
+(remember the pairwise df had all pairwise missing data removed)
+
+---
+# In the MR case
+* We have to remove the shared variance
+
+.Large[
+$$
+s\_{b\_{y1.2}} = \frac{s\_{y.x}}{\sqrt{\sum x\_1^2(1-r\_{x\_1x\_2}^2)}}
+$$
+]
+
+---
+# Quick verification
+
+
+```r
+display(m2)
+```
+
+```
+## lm(formula = api00 ~ meals + ell, data = d)
+##             coef.est coef.se
+## (Intercept) 853.61    11.11 
+## meals        -3.01     0.20 
+## ell          -1.08     0.20 
+## ---
+## n = 315, k = 3
+## residual sd = 61.64, R-Squared = 0.70
+```
+
+```r
+x1x2_cor &lt;- cor(listwise$meals, listwise$ell)
+
+61.64 / sqrt(ss_meals*(1 - x1x2_cor^2))
+```
+
+```
+## [1] 0.1996401
+```
+
+---
+# What is the standard error?
+
+--
+The variance of the estimate (standard deviation) over (theoretically) repeated
+samples. 
+
+---
+# Simulating the process
+
+[demo]
+
+
+```r
+samples &lt;- replicate(1000, 
+                     listwise[sample(1:nrow(listwise),
+                                     size = nrow(listwise),
+                                     replace = TRUE), ],
+                     simplify = FALSE)
+
+models &lt;- map(samples, ~lm(api00 ~ meals + ell, .))
+```
+
+The code is complicated, but I want to walk you through it conceptually (note,
+I'm not expecting you to be able to reproduce this).
+
+---
+
+
+```r
+boot_ests &lt;- map_df(models, 
+                    ~data.frame(coef = coef(.),
+                                param = c("intercept",
+                                          "b1_meals",
+                                          "b2_ell")), 
+                    .id = "iteration") %&gt;% 
+  spread(param, coef)
+head(boot_ests)
+```
+
+```
+##   iteration  b1_meals     b2_ell intercept
+## 1         1 -2.887655 -1.1002309  850.0554
+## 2        10 -3.255109 -0.7652632  857.2525
+## 3       100 -3.034718 -0.9545895  849.5115
+## 4      1000 -3.024273 -1.0862772  861.6184
+## 5       101 -3.136397 -1.0476945  858.4788
+## 6       102 -2.792762 -1.2275472  839.7342
+```
+
+```r
+boot_ests %&gt;% 
+  summarize(int_sd = sd(intercept),
+            b1_sd  = sd(b1_meals),
+            b2_sd  = sd(b2_ell))
+```
+
+```
+##    int_sd     b1_sd    b2_sd
+## 1 10.5418 0.1907114 0.193756
+```
+
+---
+# Visualizing the uncertainty
+
+![](w2_files/figure-html/visualize-uncertainty-1.png)&lt;!-- --&gt;
+
+These are bootstrapped standard errors
+
+---
+# The `\(t\)` statistic
+* The coefficients, divided by their standard error, provides a `\(t\)`-distributed
+statistic.
+
+--
+
+  + What's the difference between a `\(t\)` distribution and a normal distribution?
+
+---
+![](w2_files/figure-html/t-normal1-1.png)&lt;!-- --&gt;
+
+---
+![](w2_files/figure-html/t-normal2-1.png)&lt;!-- --&gt;
+
+---
+# Overall model test
+* The model `\(R^2\)` represents the proportion the residual variance has been
+reduced.
+
+.Large[
+$$
+R^2 = \frac{SS\_{reg}}{SS\_{y}}
+$$
+]
+
+* Often we want to know if this reduction is significantly different than zero.
+  We can evaluate this using an `\(F\)` test.
+
+.Large[
+$$
+F = \frac{SS\_{reg}/df\_{reg}}{SS\_{res}/df\_{res}}
+$$
+]
+
+---
+class: middle right
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/F-distribution_pdf.svg/325px-F-distribution_pdf.svg.png)
+background-size:contain
+
+# F Distribution
+
+---
+# Pop quiz
+
+Can the model `\(R^2\)` be significant even if none of the individual coefficients
+are?
+
+
+---
+# Confidence intervals
+
+.Large[
+$$
+b \pm t\_{(\frac{\alpha}{2},df)}s\_b
+$$
+]
+
+--
+### Introduction to distribution functions
+* `qt(p, df)` will return the `\(t\)` statistic for the given probability, `p`, 
+   with the corresponding `df`
+* `qnorm(p, mean, sd)` will do the same for a normal distribution with the
+   corresponding `mean`/`sd`.
+
+
+---
+# Illustrated example
+Below is the CDF for the `\(t\)` distribution with 5 degrees of freedom.
+
+.pull-left[
+
+```r
+cdf &lt;- data_frame(
+        t = seq(-5, 5, 0.01),
+        pt = pt(t, 5))
+
+ggplot(cdf, aes(t, pt)) +
+  geom_line(size = 2) 
+```
+]
+
+.pull-right[
+![](w2_files/figure-html/cdf1b-1.png)&lt;!-- --&gt;
+]
+
+--
+### What's the CDF again? 🤔
+
+---
+The `qt` function provides the `\(t\)` value (x-axis) for any probability (y-axis)
+
+![](w2_files/figure-html/cdf2-1.png)&lt;!-- --&gt;
+
+---
+class: middle
+
+.pull-left[
+![](w2_files/figure-html/cdf3-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+
+```r
+qt(0.025, 5)
+```
+
+```
+## [1] -2.570582
+```
+
+```r
+qt(0.975, 5)
+```
+
+```
+## [1] 2.570582
+```
+]
+
+---
+# Why does this matter?
+* This value is multiplied by the standard error to get confidence intervals
+
+
+```r
+confint(m2)
+```
+
+```
+##                  2.5 %     97.5 %
+## (Intercept) 831.760750 875.461235
+## meals        -3.407744  -2.622128
+## ell          -1.480965  -0.684217
+```
+
+```r
+-3.01 + qt(0.05/2, 312)*0.20
+```
+
+```
+## [1] -3.403519
+```
+
+```r
+-3.01 - qt(0.05/2, 312)*0.20
+```
+
+```
+## [1] -2.616481
+```
+
+---
+# Want it to match exactly?
+
+
+```r
+confint(m2)
+```
+
+```
+##                  2.5 %     97.5 %
+## (Intercept) 831.760750 875.461235
+## meals        -3.407744  -2.622128
+## ell          -1.480965  -0.684217
+```
+
+
+```r
+coef(m2)[2] + qt(0.025, m2$df.residual)* summary(m2)$coefficients[2, 2]
+```
+
+```
+##     meals 
+## -3.407744
+```
+
+```r
+coef(m2)[2] + qt(0.975, m2$df.residual)* summary(m2)$coefficients[2, 2]
+```
+
+```
+##     meals 
+## -2.622128
+```
+
+---
+# Using the bootstrap estimates
+
+
+```r
+boot_ests %&gt;% 
+  summarize(int_lower = quantile(intercept, 0.025),
+            int_upper = quantile(intercept, 0.975),
+            b1_lower = quantile(b1_meals, 0.025),
+            b1_upper = quantile(b1_meals, 0.975),
+            b2_lower = quantile(b2_ell, 0.025),
+            b2_upper = quantile(b2_ell, 0.975))
+```
+
+```
+##   int_lower int_upper  b1_lower  b1_upper  b2_lower   b2_upper
+## 1  833.8494  874.6585 -3.416223 -2.661116 -1.468117 -0.6748065
+```
+
+```r
+confint(m2)
+```
+
+```
+##                  2.5 %     97.5 %
+## (Intercept) 831.760750 875.461235
+## meals        -3.407744  -2.622128
+## ell          -1.480965  -0.684217
+```
+
+---
+class: inverse middle center
+
+# Lab
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

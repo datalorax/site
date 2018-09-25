@@ -165,6 +165,12 @@
   </url>
   
   <url>
+    <loc>/vita/mr/mr-slides/w2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
