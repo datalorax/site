@@ -292,6 +292,9 @@ theme_set(theme_minimal())
 ```
 
 
+```r
+theme_set(theme_minimal(base_size = 25))
+```
 
 ---
 # Get a little fancy
@@ -471,7 +474,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
           /^\$\$(.|\s)+\$\$$/.test(text) ||
           /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
+        code.outerHTML = code.innerHTML;  
         continue;
       }
     }
@@ -479,7 +482,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
 })();
 </script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
+
 <script>
 (function () {
   var script = document.createElement('script');
