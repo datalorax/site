@@ -98,6 +98,8 @@ Every *ggplot* plot has three components
 * Understand common mistakes 
   + And that it will take some trial &amp; error
 
+If you want, see my other slides [here](http://www.datalorax.com/vita/ds/ds1-slides/w2p1/) and [here](http://www.datalorax.com/vita/ds/ds1-slides/w2p2/)
+
 ---
 class: inverse bottom right
 background-image:url(../img/idea.jpg)
@@ -215,6 +217,9 @@ summary(m1)
 
 --
 ### Anybody remember how we estimate them?
+
+--
+What about `\(R^2\)`
 
 ---
 # beta
@@ -384,6 +389,24 @@ background-size: contain
 # SLR vs MR
 
 ---
+# Thinking more about shared variance
+* How would the SLR and MR coefficients differ if `\(r_{x_1x_2} = 0\)`?
+
+--
+### Answer: Not at all
+
+* This is part of why multiple regression is helpful
+
+---
+background-image:url(../img/shared-var.png)
+background-size:contain
+
+
+---
+# What else does this imply?
+* Unless `\(r_{x_1x_2} = 0\)`, `\(R^2 \neq  r^2_{x1} + r^2_{x2}\)`
+
+---
 # Let's fit a model
 ### Research Question
 
@@ -485,18 +508,268 @@ predict(m2, newdata = pred_frame)
 
 ---
 # Make a range of predictions
-"See" the difference 
 
 
 ```r
-pred_frame2 = tibble(meals = rep(seq(0, 100, 1), 6),
+pred_frame2 &lt;- tibble(meals = seq(from = 0, to = 100, by = 10),
+                      ell = 10)
+pred_frame2
+```
+
+```
+## # A tibble: 11 x 2
+##    meals   ell
+##    &lt;dbl&gt; &lt;dbl&gt;
+##  1     0    10
+##  2    10    10
+##  3    20    10
+##  4    30    10
+##  5    40    10
+##  6    50    10
+##  7    60    10
+##  8    70    10
+##  9    80    10
+## 10    90    10
+## 11   100    10
+```
+
+---
+# Predict for each case
+
+* If we just use `predict`, it will return a *vector*
+
+--
+
+* .Large[🤔] What's a vector again?
+
+--
+
+
+```r
+predict(m2, newdata = pred_frame2)
+```
+
+```
+##        1        2        3        4        5        6        7        8 
+## 842.7851 812.6357 782.4864 752.3370 722.1877 692.0383 661.8889 631.7396 
+##        9       10       11 
+## 601.5902 571.4409 541.2915
+```
+
+---
+* Probably easier to see by adding it as a new variable
+
+
+```r
+pred_frame2$pred &lt;- predict(m2, newdata = pred_frame2)
+
+head(pred_frame2)
+```
+
+```
+## # A tibble: 6 x 3
+##   meals   ell     pred
+##   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1     0    10 842.7851
+## 2    10    10 812.6357
+## 3    20    10 782.4864
+## 4    30    10 752.3370
+## 5    40    10 722.1877
+## 6    50    10 692.0383
+```
+
+---
+# Quick aside
+
+* The {tidyverse} version would be to use `mutate`
+
+
+```r
+library(tidyverse)
+
+pred_frame2 &lt;- pred_frame2 %&gt;%
+  mutate(pred = predict(m2, newdata = pred_frame2))
+
+head(pred_frame2)
+```
+
+```
+## # A tibble: 6 x 3
+##   meals   ell     pred
+##   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1     0    10 842.7851
+## 2    10    10 812.6357
+## 3    20    10 782.4864
+## 4    30    10 752.3370
+## 5    40    10 722.1877
+## 6    50    10 692.0383
+```
+
+--
+
+* Look at the difference in `pred` for each row... what do you notice?
+
+---
+
+
+```r
+pred_frame2 %&gt;%
+  mutate(lag = lag(pred),
+         dif = pred - lag)
+```
+
+```
+## # A tibble: 11 x 5
+##    meals   ell     pred      lag       dif
+##    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1     0    10 842.7851  NA       NA      
+##  2    10    10 812.6357 842.7851 -30.14936
+##  3    20    10 782.4864 812.6357 -30.14936
+##  4    30    10 752.3370 782.4864 -30.14936
+##  5    40    10 722.1877 752.3370 -30.14936
+##  6    50    10 692.0383 722.1877 -30.14936
+##  7    60    10 661.8889 692.0383 -30.14936
+##  8    70    10 631.7396 661.8889 -30.14936
+##  9    80    10 601.5902 631.7396 -30.14936
+## 10    90    10 571.4409 601.5902 -30.14936
+## 11   100    10 541.2915 571.4409 -30.14936
+```
+
+---
+
+
+```r
+pred_frame2 %&gt;%
+  mutate(lag = lag(pred),
+         dif = pred - lag,
+         dif_per_unit = dif / 10)
+```
+
+```
+## # A tibble: 11 x 6
+##    meals   ell     pred      lag       dif dif_per_unit
+##    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+##  1     0    10 842.7851  NA       NA          NA       
+##  2    10    10 812.6357 842.7851 -30.14936    -3.014936
+##  3    20    10 782.4864 812.6357 -30.14936    -3.014936
+##  4    30    10 752.3370 782.4864 -30.14936    -3.014936
+##  5    40    10 722.1877 752.3370 -30.14936    -3.014936
+##  6    50    10 692.0383 722.1877 -30.14936    -3.014936
+##  7    60    10 661.8889 692.0383 -30.14936    -3.014936
+##  8    70    10 631.7396 661.8889 -30.14936    -3.014936
+##  9    80    10 601.5902 631.7396 -30.14936    -3.014936
+## 10    90    10 571.4409 601.5902 -30.14936    -3.014936
+## 11   100    10 541.2915 571.4409 -30.14936    -3.014936
+```
+
+--
+
+
+```r
+coef(m2)
+```
+
+```
+## (Intercept)       meals         ell 
+##  853.610992   -3.014936   -1.082591
+```
+
+
+---
+### Notice - we kept ell constant
+
+Let's try again, keeping meals constant
+
+
+```r
+pred_frame3 &lt;- tibble(meals = 50,
+                      ell = seq(0, 25, 5))
+head(pred_frame3)
+```
+
+```
+## # A tibble: 6 x 2
+##   meals   ell
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1    50     0
+## 2    50     5
+## 3    50    10
+## 4    50    15
+## 5    50    20
+## 6    50    25
+```
+
+---
+# Make the predictions
+
+
+```r
+pred_frame3 %&gt;%
+  mutate(pred = predict(m2, newdata = pred_frame3))
+```
+
+```
+## # A tibble: 6 x 3
+##   meals   ell     pred
+##   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1    50     0 702.8642
+## 2    50     5 697.4512
+## 3    50    10 692.0383
+## 4    50    15 686.6253
+## 5    50    20 681.2124
+## 6    50    25 675.7994
+```
+
+---
+
+
+```r
+pred_frame3 %&gt;%
+  mutate(pred = predict(m2, newdata = pred_frame3),
+         dif = pred - lag(pred),
+         dif_per_unit = dif / 5)
+```
+
+```
+## # A tibble: 6 x 5
+##   meals   ell     pred        dif dif_per_unit
+##   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;
+## 1    50     0 702.8642  NA           NA       
+## 2    50     5 697.4512  -5.412954    -1.082591
+## 3    50    10 692.0383  -5.412954    -1.082591
+## 4    50    15 686.6253  -5.412954    -1.082591
+## 5    50    20 681.2124  -5.412954    -1.082591
+## 6    50    25 675.7994  -5.412954    -1.082591
+```
+
+--
+
+```r
+coef(m2)
+```
+
+```
+## (Intercept)       meals         ell 
+##  853.610992   -3.014936   -1.082591
+```
+
+---
+# Lots of scenarios
+
+* First, make a whole bunch of scenarios
+  + Note, this is not code I would expect you to be able to replicate, this is
+    for instructional purposes only
+
+
+```r
+pred_frame4 = tibble(meals = rep(seq(0, 100, 1), 6),
                      ell = rep(seq(0, 25, 5), each = 101))
 ```
 
 .pull-left[
 
 ```r
-head(pred_frame2)
+head(pred_frame4)
 ```
 
 ```
@@ -515,7 +788,7 @@ head(pred_frame2)
 .pull-right[
 
 ```r
-tail(pred_frame2)
+tail(pred_frame4)
 ```
 
 ```
@@ -537,45 +810,46 @@ tail(pred_frame2)
 
 
 ```r
-pred_frame2$pred &lt;- predict(m2, pred_frame2)
+pred_frame4 &lt;- pred_frame4 %&gt;%
+  mutate(pred = predict(m2, newdata = pred_frame4))
 ```
 
 
 .pull-left[
 
 ```r
-head(pred_frame2)
+head(pred_frame4)
 ```
 
 ```
 ## # A tibble: 6 x 3
-##   meals   ell  pred
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0     0  854.
-## 2     1     0  851.
-## 3     2     0  848.
-## 4     3     0  845.
-## 5     4     0  842.
-## 6     5     0  839.
+##   meals   ell     pred
+##   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1     0     0 853.6110
+## 2     1     0 850.5961
+## 3     2     0 847.5811
+## 4     3     0 844.5662
+## 5     4     0 841.5512
+## 6     5     0 838.5363
 ```
 ]
 
 .pull-right[
 
 ```r
-tail(pred_frame2)
+tail(pred_frame4)
 ```
 
 ```
 ## # A tibble: 6 x 3
-##   meals   ell  pred
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1    95    25  540.
-## 2    96    25  537.
-## 3    97    25  534.
-## 4    98    25  531.
-## 5    99    25  528.
-## 6   100    25  525.
+##   meals   ell     pred
+##   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1    95    25 540.1273
+## 2    96    25 537.1124
+## 3    97    25 534.0974
+## 4    98    25 531.0825
+## 5    99    25 528.0676
+## 6   100    25 525.0526
 ```
 
 ]
@@ -586,7 +860,7 @@ tail(pred_frame2)
 
 
 ```r
-ggplot(pred_frame2, aes(meals, pred, color = factor(ell))) +
+ggplot(pred_frame4, aes(meals, pred, color = factor(ell))) +
   geom_line(size = 1.25)
 ```
 
@@ -600,6 +874,8 @@ Notice all the lines are exactly parallel. That's the model we fit!
 # Regression plane visualization
 
 [demo]
+
+.gray[(this is also not code you're expected to know)]
 
 
 ```r
@@ -726,7 +1002,21 @@ display(shared1, detail = TRUE)
 
 
 ```r
-listwise$resid_x1x2 &lt;- residuals(shared1)
+listwise &lt;- listwise %&gt;%
+  mutate(resid_x1x2 = residuals(shared1))
+head(listwise)
+```
+
+```
+## # A tibble: 6 x 4
+##   api00 meals   ell resid_x1x2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+## 1   693    67     9   15.42260
+## 2   570    92    21   31.90832
+## 3   546    97    29   31.23213
+## 4   571    90    27   25.65118
+## 5   478    89    30   22.52261
+## 6   737    29    15  -26.83454
 ```
 
 ---
@@ -765,26 +1055,10 @@ coef(m2)
 ```
 
 ---
-# Thinking more about shared variance
-* How would the SLR and MR coefficients differ if `\(r_{x_1x_2} = 0\)`?
+# Example Interpretation
+Remember, we must interpret the model as a whole
 
 --
-### Answer: Not at all
-
-* This is part of why multiple regression is helpful
-
----
-background-image:url(../img/shared-var.png)
-background-size:contain
-
-
----
-# What else does this imply?
-* Unless `\(r_{x_1x_2} = 0\)`, which is basically never, you **must** interpret 
-  the entire model together - not just a single coefficient.
-
---
-### Example
 
 &gt; A one percent increase in the percentage of students in the school receiving 
   free or reduced price meal subsidies corresponded to, on average, a 
@@ -805,399 +1079,34 @@ and the expected change is the same.
 * If we vary ELL with meals, the predicted API would be different.
 
 ---
-class: inverse middle center
-background-image:url(../img/celebrate.jpg)
+# Another visualization
+If we can use simple linear regression to get the MR coefficients, then we can *visualize* the MR relations more easily.
+
+
+```r
+ggplot(listwise, aes(resid_x1x2, api00)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+![](w2_files/figure-html/pred-res1-1.png)&lt;!-- --&gt;
+
+---
+# Or on the scale of the predictor
+
+
+```r
+library(visreg)
+visreg(m2)
+```
+
+![](w2_files/figure-html/visreg-1.png)&lt;!-- --&gt;![](w2_files/figure-html/visreg-2.png)&lt;!-- --&gt;
+
+---
+class: inverse middle
+background-image:url(../img/practice.jpg)
 background-size:cover
-
-# Testing the coefficients
-
----
-# Variance of the estimate
-Recall the residual standard error 
-
-.Large[
-$$
-s\_{y.x} = \sqrt{\frac{\sum (Y - Y')^2}{df}} =  \sqrt{\frac{ss_{res}}{df}}
-$$
-
-$$
-df = n - k - 1
-$$
-
-]
-
-.gray[(I'm using Pedhazur's notation here)]
-
---
-
-### In the simple linear regression case
-* The standard error of the `\(b\)` is
-
-$$
-s\_b = \frac{s\_{y.x}}{\sqrt{\sum x^2}}
-$$
-
----
-In words... the model residual standard error divided by the sum of the
-squared deviations
-
---
-### Quick verification
-
-
-```r
-display(m1)
-```
-
-```
-## lm(formula = api00 ~ meals, data = d)
-##             coef.est coef.se
-## (Intercept) 866.48    11.31 
-## meals        -3.76     0.15 
-## ---
-## n = 315, k = 2
-## residual sd = 64.30, R-Squared = 0.67
-```
-
-```r
-ss_meals &lt;- sum((pairwise$meals - mean(pairwise$meals))^2)
-64.30 / sqrt(ss_meals)
-```
-
-```
-## [1] 0.1488035
-```
-
-(remember the pairwise df had all pairwise missing data removed)
-
----
-# In the MR case
-* We have to remove the shared variance
-
-.Large[
-$$
-s\_{b\_{y1.2}} = \frac{s\_{y.x}}{\sqrt{\sum x\_1^2(1-r\_{x\_1x\_2}^2)}}
-$$
-]
-
----
-# Quick verification
-
-
-```r
-display(m2)
-```
-
-```
-## lm(formula = api00 ~ meals + ell, data = d)
-##             coef.est coef.se
-## (Intercept) 853.61    11.11 
-## meals        -3.01     0.20 
-## ell          -1.08     0.20 
-## ---
-## n = 315, k = 3
-## residual sd = 61.64, R-Squared = 0.70
-```
-
-```r
-x1x2_cor &lt;- cor(listwise$meals, listwise$ell)
-
-61.64 / sqrt(ss_meals*(1 - x1x2_cor^2))
-```
-
-```
-## [1] 0.1996401
-```
-
----
-# What is the standard error?
-
---
-The variance of the estimate (standard deviation) over (theoretically) repeated
-samples. 
-
----
-# Simulating the process
-
-[demo]
-
-
-```r
-samples &lt;- replicate(1000, 
-                     listwise[sample(1:nrow(listwise),
-                                     size = nrow(listwise),
-                                     replace = TRUE), ],
-                     simplify = FALSE)
-
-models &lt;- map(samples, ~lm(api00 ~ meals + ell, .))
-```
-
-The code is complicated, but I want to walk you through it conceptually (note,
-I'm not expecting you to be able to reproduce this).
-
----
-
-
-```r
-boot_ests &lt;- map_df(models, 
-                    ~data.frame(coef = coef(.),
-                                param = c("intercept",
-                                          "b1_meals",
-                                          "b2_ell")), 
-                    .id = "iteration") %&gt;% 
-  spread(param, coef)
-head(boot_ests)
-```
-
-```
-##   iteration  b1_meals     b2_ell intercept
-## 1         1 -2.887655 -1.1002309  850.0554
-## 2        10 -3.255109 -0.7652632  857.2525
-## 3       100 -3.034718 -0.9545895  849.5115
-## 4      1000 -3.024273 -1.0862772  861.6184
-## 5       101 -3.136397 -1.0476945  858.4788
-## 6       102 -2.792762 -1.2275472  839.7342
-```
-
-```r
-boot_ests %&gt;% 
-  summarize(int_sd = sd(intercept),
-            b1_sd  = sd(b1_meals),
-            b2_sd  = sd(b2_ell))
-```
-
-```
-##    int_sd     b1_sd    b2_sd
-## 1 10.5418 0.1907114 0.193756
-```
-
----
-# Visualizing the uncertainty
-
-![](w2_files/figure-html/visualize-uncertainty-1.png)&lt;!-- --&gt;
-
-These are bootstrapped standard errors
-
----
-# The `\(t\)` statistic
-* The coefficients, divided by their standard error, provides a `\(t\)`-distributed
-statistic.
-
---
-
-  + What's the difference between a `\(t\)` distribution and a normal distribution?
-
----
-![](w2_files/figure-html/t-normal1-1.png)&lt;!-- --&gt;
-
----
-![](w2_files/figure-html/t-normal2-1.png)&lt;!-- --&gt;
-
----
-# Overall model test
-* The model `\(R^2\)` represents the proportion the residual variance has been
-reduced.
-
-.Large[
-$$
-R^2 = \frac{SS\_{reg}}{SS\_{y}}
-$$
-]
-
-* Often we want to know if this reduction is significantly different than zero.
-  We can evaluate this using an `\(F\)` test.
-
-.Large[
-$$
-F = \frac{SS\_{reg}/df\_{reg}}{SS\_{res}/df\_{res}}
-$$
-]
-
----
-class: middle right
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/F-distribution_pdf.svg/325px-F-distribution_pdf.svg.png)
-background-size:contain
-
-# F Distribution
-
----
-# Pop quiz
-
-Can the model `\(R^2\)` be significant even if none of the individual coefficients
-are?
-
-
----
-# Confidence intervals
-
-.Large[
-$$
-b \pm t\_{(\frac{\alpha}{2},df)}s\_b
-$$
-]
-
---
-### Introduction to distribution functions
-* `qt(p, df)` will return the `\(t\)` statistic for the given probability, `p`, 
-   with the corresponding `df`
-* `qnorm(p, mean, sd)` will do the same for a normal distribution with the
-   corresponding `mean`/`sd`.
-
-
----
-# Illustrated example
-Below is the CDF for the `\(t\)` distribution with 5 degrees of freedom.
-
-.pull-left[
-
-```r
-cdf &lt;- data_frame(
-        t = seq(-5, 5, 0.01),
-        pt = pt(t, 5))
-
-ggplot(cdf, aes(t, pt)) +
-  geom_line(size = 2) 
-```
-]
-
-.pull-right[
-![](w2_files/figure-html/cdf1b-1.png)&lt;!-- --&gt;
-]
-
---
-### What's the CDF again? 🤔
-
----
-The `qt` function provides the `\(t\)` value (x-axis) for any probability (y-axis)
-
-![](w2_files/figure-html/cdf2-1.png)&lt;!-- --&gt;
-
----
-class: middle
-
-.pull-left[
-![](w2_files/figure-html/cdf3-1.png)&lt;!-- --&gt;
-]
-
-.pull-right[
-
-```r
-qt(0.025, 5)
-```
-
-```
-## [1] -2.570582
-```
-
-```r
-qt(0.975, 5)
-```
-
-```
-## [1] 2.570582
-```
-]
-
----
-# Why does this matter?
-* This value is multiplied by the standard error to get confidence intervals
-
-
-```r
-confint(m2)
-```
-
-```
-##                  2.5 %     97.5 %
-## (Intercept) 831.760750 875.461235
-## meals        -3.407744  -2.622128
-## ell          -1.480965  -0.684217
-```
-
-```r
--3.01 + qt(0.05/2, 312)*0.20
-```
-
-```
-## [1] -3.403519
-```
-
-```r
--3.01 - qt(0.05/2, 312)*0.20
-```
-
-```
-## [1] -2.616481
-```
-
----
-# Want it to match exactly?
-
-
-```r
-confint(m2)
-```
-
-```
-##                  2.5 %     97.5 %
-## (Intercept) 831.760750 875.461235
-## meals        -3.407744  -2.622128
-## ell          -1.480965  -0.684217
-```
-
-
-```r
-coef(m2)[2] + qt(0.025, m2$df.residual)* summary(m2)$coefficients[2, 2]
-```
-
-```
-##     meals 
-## -3.407744
-```
-
-```r
-coef(m2)[2] + qt(0.975, m2$df.residual)* summary(m2)$coefficients[2, 2]
-```
-
-```
-##     meals 
-## -2.622128
-```
-
----
-# Using the bootstrap estimates
-
-
-```r
-boot_ests %&gt;% 
-  summarize(int_lower = quantile(intercept, 0.025),
-            int_upper = quantile(intercept, 0.975),
-            b1_lower = quantile(b1_meals, 0.025),
-            b1_upper = quantile(b1_meals, 0.975),
-            b2_lower = quantile(b2_ell, 0.025),
-            b2_upper = quantile(b2_ell, 0.975))
-```
-
-```
-##   int_lower int_upper  b1_lower  b1_upper  b2_lower   b2_upper
-## 1  833.8494  874.6585 -3.416223 -2.661116 -1.468117 -0.6748065
-```
-
-```r
-confint(m2)
-```
-
-```
-##                  2.5 %     97.5 %
-## (Intercept) 831.760750 875.461235
-## meals        -3.407744  -2.622128
-## ell          -1.480965  -0.684217
-```
-
----
-class: inverse middle center
-
-# Lab
+# Let's practice!
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>
