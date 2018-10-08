@@ -11,7 +11,7 @@ comments: false
 | 1  | 2      | [Seeing the big picture](../ds1-slides/w1p2/)
 | 2  | 1      | [Intro to data viz 1](../ds1-slides/w2p1/)
 | 2  | 2      | [Intro to data viz 2](../ds1-slides/w2p2/)
-| 2  | 1      | [Intro to data wrangling 1](../ds1-slides/w3p1/)
-| 2  | 2      | [Data Import & data wrangling 2](../ds1-slides/w3p2/)
+| 3  | 1      | [Intro to data wrangling 1](../ds1-slides/w3p1/)
+| 3  | 2      | [Data Import & data wrangling 2](../ds1-slides/w3p2/)
 
 The table above will be updated as the class goes along
