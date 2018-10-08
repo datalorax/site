@@ -60,6 +60,24 @@
     
     <item>
       <title></title>
+      <link>/vita/ds/ds1-slides/w3p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w3p1/</guid>
+      <description>Introduction to data wrangling 1   class: center, middle, inverse, title-slide # Introduction to data wrangling 1 ## dplyr and friends ### Daniel Anderson ### Week 3, Class 1 --- # Agenda * Questions * Basic data wrangling * Lab --- # First: Cool stuff share! * Equations within RMD look beautiful, but can be a pain + Must use \LaTeX (see examples [here](http://www.statpower.net/Content/310/R%20Stuff/SampleMarkdown.html)) -- ``` $$ \int_0^{2\pi} \sin x-dx $$ ``` -- .</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/vita/ds/ds1-slides/w3p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w3p2/</guid>
+      <description>Introduction to data wrangling 2   class: center, middle, inverse, title-slide # Introduction to data wrangling 2 ## dplyr and friends ### Daniel Anderson ### Week 3, Class 2 --- # Agenda * Questions * Workflows (quickly) * Importing data * A little more dplyr * Lab --- # Reading in data * We&#39;ll use the [{here}](https://github.com/r-lib/here) package + Allows you to not worry about paths so much + Helps reproducibility -- * In your R Studio project directory + Create a new folder called &#34;</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/vita/educ611/slides/class1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -186,7 +204,7 @@ Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/ds/ds1/</guid>
-      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz   2 2 Intro to data viz    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz 1   2 2 Intro to data viz 2   2 1 Intro to data wrangling 1   2 2 Data Import &amp;amp; data wrangling 2    The table above will be updated as the class goes along</description>
     </item>
     
     <item>
