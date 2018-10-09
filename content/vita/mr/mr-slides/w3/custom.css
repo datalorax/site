@@ -1,6 +1,7 @@
-..hljs-atelier-dune-light .hljs:warn {
-    background: red;
+.code-bg-red .remark-code, .code-bg-red .remark-code * {
+ background-color:#ffe0e0!important;
 }
+
 
 .major-emph-yellow {
   display: block;

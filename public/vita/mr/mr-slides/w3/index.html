@@ -228,6 +228,7 @@ arm::display(m1c, detail = TRUE)
 * Dummy-coding by far most common
 * Some situations may warrant alternative coding schemes
 
+
 --
 ### See the scheme
 
@@ -292,8 +293,6 @@ contr.sum(5)
 ## 4    0    0    0    1
 ## 5   -1   -1   -1   -1
 ```
-
-### Which will become the reference group?
 
 ---
 
@@ -423,7 +422,7 @@ d &lt;- d %&gt;%
 
 contrasts(d$ses) &lt;- contr.sum(3)
 
-colnames(contrasts(d$ses)) &lt;- levels(d$ses)[-length(levels(d$ses))]
+*colnames(contrasts(d$ses)) &lt;- levels(d$ses)[-length(levels(d$ses))]
 contrasts(d$ses)
 ```
 
@@ -837,6 +836,8 @@ mean
 
 ---
 
+.code-bg-red[
+
 
 ```r
 group_means &lt;- d %&gt;%
@@ -867,11 +868,14 @@ predict(m2c, newdata = data.frame(race = "hispanic", prog = "vocation"))
 ##        1 
 ## 41.85871
 ```
+]
 
 ---
 # Intercept
 
 The intercept also no longer represents (exactly) the mean of the group means
+
+.code-bg-red[
 
 
 ```r
@@ -890,6 +894,8 @@ mean(group_means$mean)
 ```
 ## [1] 48.80636
 ```
+]
+
 
 --
 ### Why?
@@ -901,6 +907,9 @@ the categorical variables
 We'll talk about interactions more later. It is not the focus today, but...
 
 ---
+
+.code-bg-red[
+
 
 ```r
 m2d &lt;- lm(read ~ race + prog + race:prog, d)
@@ -927,7 +936,12 @@ arm::display(m2d, detail = TRUE)
 ## residual sd = 9.18, R-Squared = 0.24
 ```
 
+]
+
 ---
+
+.code-bg-red[
+
 
 ```r
 predict(m2d, newdata = data.frame(race = "hispanic", prog = "vocation"))
@@ -954,6 +968,7 @@ tail(group_means )
 ## 5 hispanic general  44.75   
 ## 6 hispanic vocation 42.55556
 ```
+]
 
 ---
 class: inverse right
