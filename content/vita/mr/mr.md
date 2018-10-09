@@ -9,5 +9,7 @@ comments: false
 |:--:|:------------------------:|
 | 1  |[Welcome to multiple regression](../mr-slides/w1/) |
 | 2  |[MR w/2 Continuous IVs](../mr-slides/w2/) |
+| 3  |[MR w/Categorical IVs](../mr-slides/w3/) |
+| 4  |[Uncertainty and model assumptions](../mr-slides/w4/) |
 
 The table above will be updated as the class goes along

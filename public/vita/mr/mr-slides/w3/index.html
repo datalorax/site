@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MR w/Categorical IVs</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# MR w/Categorical IVs
+### Daniel Anderson
+### Week 3
+
+---
+
+
+
+
+# Agenda 
+
+* Reminder on dummy/effect coding
+  + Factors in R
+* Example Scenarios
+* Lab
+
+
+---
+class: inverse middle center
+background-image:url(../img/chalkboard.jpg)
+background-size:cover
+
+# What questions do you have?
+
+---
+# First things first
+Let's get some data!
+
+[demo]
+
+Please follow along. We'll load the `hsb2.sav` file.
+
+
+
+---
+# Categorical Variables
+* So far we've dealt with only continuous IVs
+  + What if we have categorical variables?
+
+
+--
+### In many software...
+Define dummy variables
+
+
+--
+### In R
+Define the categorical variable as a factor!
+
+---
+# Quick dummy coding review
+* Create `k - 1` variables
+
+--
+
+* Each variable defined 0/1
+
+--
+
+* Remember - intercept represents expected value of `\(y\)` when **all** `\(x_i\)`
+  predictors are 0. 
+
+--
+
+Imagine we have a vector (variable), *gender*, that takes on the values 
+`"male"`, `"female"`, and `"non-binary"`. 
+
+--
+### What does the intercept represent
+
+$$
+y_i = b_0 + b_1(female) + b_2(nonbinary) + e
+$$
+
+--
+### Now what does the intercept represent
+$$
+y_i = b_0 + b_1(female) + b_2(nonbinary) + b_3(male) + e
+$$
+
+---
+class: center middle
+![](https://media-cdn.sueddeutsche.de/image/sz.1.2716352/640x360?v=1519613542000)
+
+---
+# Regression is flexible
+Any model you fit previously using ANOVA, you can no fit using regression
+* With all categorical variables, the models are formally equivalent
+
+---
+# Defining variables manually
+Generally in R, you'll never have to do this, but just as an exercise
+
+
+
+```r
+head(d)
+```
+
+```
+## # A tibble: 6 x 11
+##      id race  ses    schtyp prog     read write  math science socst Gender
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+## 1    70 white low    public general    57    52    41      47    57 Male  
+## 2   121 white middle public vocati…    68    59    53      63    61 Female
+## 3    86 white high   public general    44    33    54      58    31 Male  
+## 4   141 white high   public vocati…    63    44    47      53    56 Male  
+## 5   172 white middle public academ…    47    52    57      53    61 Male  
+## 6   113 white middle public academ…    44    52    51      63    61 Male
+```
+
+```r
+d &lt;- d %&gt;%
+  mutate(ses_low = ifelse(ses == "low", 1, 0),
+         ses_middle = ifelse(ses == "middle", 1, 0))
+```
+
+
+---
+# Fit the model
+
+
+```r
+m1a &lt;- lm(math ~ ses_low + ses_middle, d)
+arm::display(m1a, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ ses_low + ses_middle, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 56.17     1.19   47.24    0.00   
+## ses_low     -7.00     1.78   -3.94    0.00   
+## ses_middle  -3.96     1.51   -2.63    0.01   
+## ---
+## n = 200, k = 3
+## residual sd = 9.06, R-Squared = 0.07
+```
+
+
+--
+
+* What does the intercept represent here?
+* What about each slope?
+* What are the p-values testing?
+
+---
+# The R way
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(ses = factor(ses))
+```
+
+--
+
+
+```r
+m1b &lt;- lm(math ~ ses, d)
+arm::display(m1b, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ ses, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 56.17     1.19   47.24    0.00   
+## seslow      -7.00     1.78   -3.94    0.00   
+## sesmiddle   -3.96     1.51   -2.63    0.01   
+## ---
+## n = 200, k = 3
+## residual sd = 9.06, R-Squared = 0.07
+```
+
+* Notice the results are **exactly** the same as before. 
+* R has done the dummy-coding for us "automatically"
+
+
+---
+# Change the reference group?
+* What if instead of having "high" as the reference group, we wanted "low"?
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(ses = relevel(ses, ref = "low"))
+```
+
+--
+
+
+```r
+m1c &lt;- lm(math ~ ses, d)
+arm::display(m1c, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ ses, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 49.17     1.32   37.22    0.00   
+## seshigh      7.00     1.78    3.94    0.00   
+## sesmiddle    3.04     1.62    1.88    0.06   
+## ---
+## n = 200, k = 3
+## residual sd = 9.06, R-Squared = 0.07
+```
+
+* How do we interpret the intercept now?
+* What about each slope?
+
+---
+# Alternative coding schemes
+* Dummy-coding by far most common
+* Some situations may warrant alternative coding schemes
+
+--
+### See the scheme
+
+You can see the coding scheme for any variable with the `contrasts` function.
+
+
+```r
+contrasts(d$ses)
+```
+
+```
+##        high middle
+## low       0      0
+## high      1      0
+## middle    0      1
+```
+
+---
+* Note that the reference group is `low` **only** because we defined it that
+  way earlier
+* By default, whatever level appears first in the data becomes the reference
+  group
+
+---
+# Effect or sum coding
+The only real scheme I use regularly outside of dummy-coding
+* If data are balanced (mine rarely are)
+  + Coefficients represents the average difference between the *group* and 
+    *grand* means.
+* If data are unbalanced
+  + Coefficients represents the average difference between the group means and 
+    the **weighted** grand mean (i.e., the mean of the group means).
+  + If there is severe imbalance in the data, this is probably not a good 
+    coding scheme.
+--
+* No direct comparisons between groups
+* Can run model twice to get all tests relative to the grand mean
+
+---
+# The contrasts functions
+
+
+```r
+contr.sum(2)
+```
+
+```
+##   [,1]
+## 1    1
+## 2   -1
+```
+
+```r
+contr.sum(5)
+```
+
+```
+##   [,1] [,2] [,3] [,4]
+## 1    1    0    0    0
+## 2    0    1    0    0
+## 3    0    0    1    0
+## 4    0    0    0    1
+## 5   -1   -1   -1   -1
+```
+
+### Which will become the reference group?
+
+---
+
+```r
+contrasts(d$ses) &lt;- contr.sum(3)
+m1c1 &lt;- lm(math ~ ses, d)
+arm::display(m1c1, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ ses, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 52.52     0.67   78.55    0.00   
+## ses1        -3.35     1.01   -3.30    0.00   
+## ses2         3.65     0.96    3.81    0.00   
+## ---
+## n = 200, k = 3
+## residual sd = 9.06, R-Squared = 0.07
+```
+wait a minute... What's the reference group here?
+
+---
+
+```r
+contrasts(d$ses)
+```
+
+```
+##        [,1] [,2]
+## low       1    0
+## high      0    1
+## middle   -1   -1
+```
+Our approach set the last level to the reference group.
+
+--
+* Define a second variable with an alternative reference to get all 
+  comparisons w/the weighted grand mean.
+* Must explicitly change the order of the levels
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(ses_ = factor(ses, 
+                       levels = c("low", "middle", "high")))
+contrasts(d$ses_)
+```
+
+```
+##        middle high
+## low         0    0
+## middle      1    0
+## high        0    1
+```
+
+---
+
+```r
+contrasts(d$ses_) &lt;- contr.sum(3)
+m1c2 &lt;- lm(math ~ ses_, d)
+
+arm::display(m1c1, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ ses, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 52.52     0.67   78.55    0.00   
+## ses1        -3.35     1.01   -3.30    0.00   
+## ses2         3.65     0.96    3.81    0.00   
+## ---
+## n = 200, k = 3
+## residual sd = 9.06, R-Squared = 0.07
+```
+
+```r
+arm::display(m1c2, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ ses_, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 52.52     0.67   78.55    0.00   
+## ses_1       -3.35     1.01   -3.30    0.00   
+## ses_2       -0.31     0.86   -0.36    0.72   
+## ---
+## n = 200, k = 3
+## residual sd = 9.06, R-Squared = 0.07
+```
+
+---
+.pull-left[
+
+```r
+contrasts(d$ses)
+```
+
+```
+##        [,1] [,2]
+## low       1    0
+## high      0    1
+## middle   -1   -1
+```
+]
+
+.pull-right[
+
+```r
+contrasts(d$ses_)
+```
+
+```
+##        [,1] [,2]
+## low       1    0
+## middle    0    1
+## high     -1   -1
+```
+]
+
+---
+# Make it a little more clear
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(ses = factor(ses))
+
+contrasts(d$ses) &lt;- contr.sum(3)
+
+colnames(contrasts(d$ses)) &lt;- levels(d$ses)[-length(levels(d$ses))]
+contrasts(d$ses)
+```
+
+```
+##        low high
+## low      1    0
+## high     0    1
+## middle  -1   -1
+```
+
+---
+
+```r
+m1c4 &lt;- lm(math ~ ses, d)
+arm::display(m1c4, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ ses, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 52.52     0.67   78.55    0.00   
+## seslow      -3.35     1.01   -3.30    0.00   
+## seshigh      3.65     0.96    3.81    0.00   
+## ---
+## n = 200, k = 3
+## residual sd = 9.06, R-Squared = 0.07
+```
+
+--
+
+### Just be careful about interpreting the intercept
+
+---
+# Predicting Groups
+
+
+```r
+d %&gt;%
+  group_by(ses) %&gt;%
+  summarize(mean_math = mean(math))
+```
+
+```
+## # A tibble: 3 x 2
+##   ses    mean_math
+##   &lt;fct&gt;      &lt;dbl&gt;
+## 1 low     49.17021
+## 2 high    56.17241
+## 3 middle  52.21053
+```
+
+```r
+coef(m1c1)
+```
+
+```
+## (Intercept)        ses1        ses2 
+##   52.517718   -3.347505    3.654696
+```
+
+---
+
+```r
+coef(m1c1)[1] + coef(m1c1)[2]
+```
+
+```
+## (Intercept) 
+##    49.17021
+```
+
+```r
+coef(m1c1)[1] + coef(m1c1)[3]
+```
+
+```
+## (Intercept) 
+##    56.17241
+```
+
+```r
+coef(m1c1)[1] - coef(m1c1)[2] - coef(m1c1)[3]
+```
+
+```
+## (Intercept) 
+##    52.21053
+```
+
+---
+# Quickly
+
+### Factors versus strings
+
+Factors can only store predefined values
+
+
+```r
+colors &lt;- factor(c("black", "green", "blue", "blue", "black"))
+colors[6] &lt;- "blue"
+colors
+```
+
+```
+## [1] black green blue  blue  black blue 
+## Levels: black blue green
+```
+
+```r
+colors[7] &lt;- "purple"
+colors
+```
+
+```
+## [1] black green blue  blue  black blue  &lt;NA&gt; 
+## Levels: black blue green
+```
+
+---
+# Examples
+In what follows **we** (please follow along) will fit
+* An MR model with two categorical variables
+* An MR model with one categorical variable and one continuous variable
+
+--
+* We will change reference levels and contrast coding in each example to see 
+  how are results are changed.
+
+---
+class: inverse center middle
+# Example 1
+### Two categorical IVs
+
+---
+# The model 
+
+Let's fit a model with the programs type and race predicting reading scores
+
+--
+$$
+read_i = b_0 + b_1(race_i) + b_2(prog_i) + e
+$$
+
+--
+### In code
+
+```
+lm(read ~ race + prog, data = d)
+```
+
+--
+
+### Note the intercept is implied
+The following is exactly equivalent
+
+```
+lm(read ~ 1 + race + prog, data = d)
+```
+
+---
+# Data setup
+* Define the corresponding variables as factors
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(race = factor(race),
+         prog = factor(prog))
+head(d)
+```
+
+```
+## # A tibble: 6 x 14
+##      id race  ses    schtyp prog     read write  math science socst Gender
+##   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;chr&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+## 1    70 white low    public general    57    52    41      47    57 Male  
+## 2   121 white middle public vocati…    68    59    53      63    61 Female
+## 3    86 white high   public general    44    33    54      58    31 Male  
+## 4   141 white high   public vocati…    63    44    47      53    56 Male  
+## 5   172 white middle public academ…    47    52    57      53    61 Male  
+## 6   113 white middle public academ…    44    52    51      63    61 Male  
+## # ... with 3 more variables: ses_low &lt;dbl&gt;, ses_middle &lt;dbl&gt;, ses_ &lt;fct&gt;
+```
+
+---
+# Look at the variables
+
+.pull-left[
+
+```r
+ggplot(d, aes(race)) +
+  geom_bar(alpha = 0.7)
+```
+
+![](w3_files/figure-html/m2-vis1-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+
+```r
+ggplot(d, aes(prog)) +
+  geom_bar(alpha = 0.7)
+```
+
+![](w3_files/figure-html/m2-vis2-1.png)&lt;!-- --&gt;
+]
+
+
+---
+# Look some more
+
+.pull-left[
+
+```r
+ggplot(d, aes(race, read)) +
+  geom_boxplot()
+```
+
+![](w3_files/figure-html/m2-vis-boxplots-race-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+
+```r
+ggplot(d, aes(prog, read)) +
+  geom_boxplot()
+```
+
+![](w3_files/figure-html/m2-vis-boxplots-prog-1.png)&lt;!-- --&gt;
+]
+
+---
+# Look even more
+
+
+```r
+ggplot(d, aes(prog, read)) +
+  geom_boxplot() +
+* facet_wrap(~race)
+```
+
+![](w3_files/figure-html/m2-vis-boxplots-facet-1.png)&lt;!-- --&gt;
+
+---
+# Alternative portrayal
+
+
+```r
+ggplot(d, aes(prog, read, fill = race)) +
+  geom_boxplot() 
+```
+
+![](w3_files/figure-html/m2-vis-boxplots-fill-1.png)&lt;!-- --&gt;
+
+---
+# Model fit
+
+
+```r
+m2a &lt;- lm(read ~ race + prog, d)
+arm::display(m2a, detail = TRUE)
+```
+
+```
+## lm(formula = read ~ race + prog, data = d)
+##              coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  51.18     2.14   23.89    0.00   
+## raceasian     3.86     3.41    1.13    0.26   
+## racehispanic  0.05     2.74    0.02    0.99   
+## racewhite     6.33     2.16    2.93    0.00   
+## proggeneral  -6.27     1.61   -3.88    0.00   
+## progvocation -9.36     1.57   -5.98    0.00   
+## ---
+## n = 200, k = 6
+## residual sd = 9.04, R-Squared = 0.24
+```
+
+--
+### Let's interpret!
+* What does the intercept represent
+* What about each of the coefficients?
+
+---
+# Change reference level
+
+We'll change the reference level for each group to the largest group
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(race = relevel(race, ref = "white"),
+         prog = relevel(prog, ref = "academic"))
+```
+
+--
+.gray[(Notice I didn't actually change the reference group for `prog`)]
+
+---
+# Re-fit
+
+```r
+m2b &lt;- lm(read ~ race + prog, d)
+arm::display(m2b, detail = TRUE)
+```
+
+```
+## lm(formula = read ~ race + prog, data = d)
+##                  coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)      57.50     0.95   60.43    0.00   
+## raceafrican-amer -6.33     2.16   -2.93    0.00   
+## raceasian        -2.46     2.84   -0.87    0.39   
+## racehispanic     -6.28     2.00   -3.13    0.00   
+## proggeneral      -6.27     1.61   -3.88    0.00   
+## progvocation     -9.36     1.57   -5.98    0.00   
+## ---
+## n = 200, k = 6
+## residual sd = 9.04, R-Squared = 0.24
+```
+
+--
+* What changed
+* What does the intercept represent
+* What about each of the coefficients?
+
+---
+# Change the coding scheme
+
+
+```r
+contrasts(d$race) &lt;- contr.sum(4)
+contrasts(d$prog) &lt;- contr.sum(3)
+```
+
+---
+# Model fit
+
+.pull-left[
+
+```r
+contrasts(d$race)
+```
+
+```
+##              [,1] [,2] [,3]
+## white           1    0    0
+## african-amer    0    1    0
+## asian           0    0    1
+## hispanic       -1   -1   -1
+```
+
+```r
+contrasts(d$prog)
+```
+
+```
+##          [,1] [,2]
+## academic    1    0
+## general     0    1
+## vocation   -1   -1
+```
+]
+
+.pull-right[
+
+```r
+m2c &lt;- lm(read ~ race + prog, d)
+arm::display(m2c, detail = TRUE)
+```
+
+```
+## lm(formula = read ~ race + prog, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 48.52     1.01   48.19    0.00   
+## race1        3.77     1.12    3.36    0.00   
+## race2       -2.56     1.74   -1.47    0.14   
+## race3        1.30     2.18    0.60    0.55   
+## prog1        5.21     0.86    6.08    0.00   
+## prog2       -1.06     1.04   -1.01    0.31   
+## ---
+## n = 200, k = 6
+## residual sd = 9.04, R-Squared = 0.24
+```
+]
+
+
+--
+* What changed?
+* What does the intercept represent
+* What about each of the coefficients?
+
+---
+# Careful about interpretation
+The intercept is **not** the grand mean, unless the data are balanced. These 
+are not.
+
+
+```r
+mean(d$read)
+```
+
+```
+## [1] 52.23
+```
+
+---
+# Another complication
+When two categorical variables are in the model, you can't directly recover the
+mean
+
+* Let's try to predict the mean for students coded "hispanic" and "vocation"
+
+---
+
+
+```r
+group_means &lt;- d %&gt;%
+  group_by(race, prog) %&gt;%
+  summarize(mean = mean(read))
+
+tail(group_means)
+```
+
+```
+## # A tibble: 6 x 3
+## # Groups:   race [2]
+##   race     prog         mean
+##   &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;
+## 1 asian    academic 54.66667
+## 2 asian    general  48.25   
+## 3 asian    vocation 50      
+## 4 hispanic academic 50.72727
+## 5 hispanic general  44.75   
+## 6 hispanic vocation 42.55556
+```
+
+```r
+predict(m2c, newdata = data.frame(race = "hispanic", prog = "vocation"))
+```
+
+```
+##        1 
+## 41.85871
+```
+
+---
+# Intercept
+
+The intercept also no longer represents (exactly) the mean of the group means
+
+
+```r
+coef(m2c)[1]
+```
+
+```
+## (Intercept) 
+##    48.52485
+```
+
+```r
+mean(group_means$mean)
+```
+
+```
+## [1] 48.80636
+```
+
+--
+### Why?
+To correctly model all means, we need to also model the **interaction** between
+the categorical variables
+
+
+--
+We'll talk about interactions more later. It is not the focus today, but...
+
+---
+
+```r
+m2d &lt;- lm(read ~ race + prog + race:prog, d)
+arm::display(m2d, detail = TRUE)
+```
+
+```
+## lm(formula = read ~ race + prog + race:prog, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 48.81     1.19   41.03    0.00   
+## race1        3.44     1.33    2.59    0.01   
+## race2       -2.81     1.91   -1.47    0.14   
+## race3        2.17     2.84    0.76    0.45   
+## prog1        4.70     1.44    3.25    0.00   
+## prog2       -1.48     1.64   -0.90    0.37   
+## race1:prog1  0.68     1.61    0.42    0.67   
+## race2:prog1  0.30     2.42    0.12    0.90   
+## race3:prog1 -1.00     3.32   -0.30    0.76   
+## race1:prog2  0.55     1.87    0.29    0.77   
+## race2:prog2  0.48     2.78    0.17    0.86   
+## race3:prog2 -1.24     3.58   -0.35    0.73   
+## ---
+## n = 200, k = 12
+## residual sd = 9.18, R-Squared = 0.24
+```
+
+---
+
+```r
+predict(m2d, newdata = data.frame(race = "hispanic", prog = "vocation"))
+```
+
+```
+##        1 
+## 42.55556
+```
+
+```r
+tail(group_means )
+```
+
+```
+## # A tibble: 6 x 3
+## # Groups:   race [2]
+##   race     prog         mean
+##   &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;
+## 1 asian    academic 54.66667
+## 2 asian    general  48.25   
+## 3 asian    vocation 50      
+## 4 hispanic academic 50.72727
+## 5 hispanic general  44.75   
+## 6 hispanic vocation 42.55556
+```
+
+---
+class: inverse right
+background-image:url(../img/worry.jpg)
+background-size:cover
+
+# Don't worry
+(for now)
+
+---
+# Example 2
+
+### Hypothesis
+&gt; Students' program type and writing ability will relate to their mathematics
+scores.
+
+
+--
+### The model
+
+$$
+math_i = b_0 + b_1(prog_i) + b_2(write_i) + e
+$$
+
+---
+# Re-dummy
+Remember, we had previously defined `prog` with effect coding. Let's go back to
+dummy coding
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(prog = factor(prog))
+contrasts(d$prog)
+```
+
+```
+##          general vocation
+## academic       0        0
+## general        1        0
+## vocation       0        1
+```
+
+---
+# Model fit
+
+
+```r
+m3a &lt;- lm(math ~ prog + write, d)
+arm::display(m3a, detail = TRUE)
+```
+
+```
+## lm(formula = math ~ prog + write, data = d)
+##              coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  28.52     3.35    8.52    0.00   
+## proggeneral  -4.24     1.29   -3.29    0.00   
+## progvocation -5.55     1.33   -4.16    0.00   
+## write         0.50     0.06    8.62    0.00   
+## ---
+## n = 200, k = 4
+## residual sd = 7.06, R-Squared = 0.44
+```
+
+--
+### Let's interpret!
+* What does the intercept represent
+* What about each of the coefficients?
+
+
+---
+# Visualize it
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(pred_m3a = predict(m3a))
+
+ggplot(d, aes(write, math)) +
+  geom_point() +
+  geom_line(aes(y = pred_m3a, color = prog),
+            size = 1.5)
+```
+
+--
+
+![](w3_files/figure-html/viz-m3a-eval-1.png)&lt;!-- --&gt;
+
+---
+# Note differences
+
+
+```r
+ggplot(d, aes(write, math)) +
+  geom_point() +
+  geom_smooth(aes(color = prog),
+              method = "lm",
+              se = FALSE,
+              size = 1.5)
+```
+
+--
+
+![](w3_files/figure-html/viz-m3-int-eval-1.png)&lt;!-- --&gt;
+
+---
+# Change the reference level
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(prog = relevel(prog, ref = "vocation"))
+```
+
+### Try re-fitting the model
+
+--
+
+
+```r
+m3b &lt;- m3a &lt;- lm(math ~ prog + write, d)
+arm::display(m3b)
+```
+
+```
+## lm(formula = math ~ prog + write, data = d)
+##              coef.est coef.se
+## (Intercept)  22.97     2.90  
+## progacademic  5.55     1.33  
+## proggeneral   1.31     1.47  
+## write         0.50     0.06  
+## ---
+## n = 200, k = 4
+## residual sd = 7.06, R-Squared = 0.44
+```
+
+---
+class: inverse middle center
+
+# Lab
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
