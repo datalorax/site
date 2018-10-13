@@ -5,6 +5,9 @@ date: '2018-04-03'
 ---
 
 ## National and International Conferences
+28.	Anderson, D., and Tindal, G. (October, 2018). 
+[Changes in status and performance for students with learning disabilities](../pubs/Anderson_CLD.pdf). Poster presented at the annual meeting of the Council for Learning Disabilities, Portland, OR.
+
 27. Anderson, D., and Stevens, J. J. (April, 2018). [Exploring and visualizing achievement and school effects](http://www.dandersondata.com/talks/ncme18/). Paper presented at the annual meeting of the National Council on Measurement in Education, New York, NY.
 
 26.	Stegenga, S., Anderson, D., Munger, K., and Wennerstrom, E. K. (March, 2018). Big Data… and Babies!? A Mixed Methods Systematic Scoping Review of Strenghts, Challenges, and Implications of Big Data Use in Early Intervention and Eartly Childhood. Poster presented at the Conference on Research Innovations in Early Intervention, San Diego, CA.
