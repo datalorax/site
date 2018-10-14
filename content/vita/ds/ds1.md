@@ -13,5 +13,7 @@ comments: false
 | 2  | 2      | [Intro to data viz 2](../ds1-slides/w2p2/)
 | 3  | 1      | [Intro to data wrangling 1](../ds1-slides/w3p1/)
 | 3  | 2      | [Data Import & data wrangling 2](../ds1-slides/w3p2/)
+| 4  | 1      | [Dynamic Documents 1: Intro to R Markdown](../ds1-slides/w4p1/)
+| 4  | 2      | [Intro to git and GitHub](../ds1-slides/w4p2/)
 
 The table above will be updated as the class goes along
