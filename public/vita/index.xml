@@ -136,7 +136,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/mr/mr-slides/w4/</guid>
-      <description>Uncertainty and model assumptions   class: center, middle, inverse, title-slide # Uncertainty and model assumptions ### Daniel Anderson ### Week 4 --- # Agenda * Uncertainty + Standard errors + Confidence intervals &amp;amp; p values * Sample interpretations * Model Assumptions + LINE acronym for assumptions + Importance of exploring and visualizing your data first * Intro to model Diagnostics * Lab --- class: inverse middle center background-image:url(.</description>
+      <description>Uncertainty and significance testing   class: center, middle, inverse, title-slide # Uncertainty and significance testing ### Daniel Anderson ### Week 4 --- # Agenda * A little bit of R + Load some data + radiant demo * Uncertainty + Standard errors + Confidence intervals + p-values * Sample interpretations * Lab --- class: inverse middle center background-image:url(../img/chalkboard.jpg) background-size:cover # What questions do you have? --- # First thing&#39;s first Let&#39;s get some data!</description>
     </item>
     
     <item>
@@ -287,7 +287,7 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/mr/mr/</guid>
-      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression   2 MR w/2 Continuous IVs   3 MR w/Categorical IVs   4 Uncertainty and model assumptions    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression   2 MR w/2 Continuous IVs   3 MR w/Categorical IVs   4 Uncertainty and significance testing    The table above will be updated as the class goes along</description>
     </item>
     
     <item>

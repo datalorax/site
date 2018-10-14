@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Uncertainty and model assumptions</title>
+    <title>Uncertainty and significance testing</title>
     <meta charset="utf-8">
     <meta name="author" content="Daniel Anderson" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Uncertainty and model assumptions
+# Uncertainty and significance testing
 ### Daniel Anderson
 ### Week 4
 
@@ -24,15 +24,14 @@ class: center, middle, inverse, title-slide
 
 
 # Agenda 
-
+* A little bit of R
+  + Load some data
+  + radiant demo
 * Uncertainty 
   + Standard errors
-  + Confidence intervals &amp; p values
+  + Confidence intervals 
+  + p-values
 * Sample interpretations
-* Model Assumptions 
-  + LINE acronym for assumptions
-  + Importance of exploring and visualizing your data first 
-* Intro to model Diagnostics
 * Lab
 
 
@@ -53,13 +52,6 @@ Please follow along. We'll load the `hsb2.sav` file.
 
 
 
-
----
-class: inverse middle center
-background-image:url(../img/celebrate.jpg)
-background-size:cover
-
-# Testing for significance
 
 ---
 # Variance of the estimate
@@ -533,6 +525,15 @@ These are bootstrapped standard errors
 
 ]
 
+
+---
+class: inverse middle center
+background-image:url(../img/celebrate.jpg)
+background-size:cover
+
+# Testing for significance
+
+
 ---
 # The `\(t\)` statistic
 * The coefficients, divided by their standard error, provides a `\(t\)`-distributed
@@ -633,12 +634,19 @@ coefficients are?
   https://www.nature.com/articles/4812743.pdf?origin=ppub]
 
 ---
-# Confidence intervals
-Almost always preferable to p-values alone
+class: inverse center
+background-image:url(https://pics.me.me/overconfidence-this-is-going-to-end-in-disaster-and-you-31404205.png)
+background-size:cover
 
+# Confidence intervals
 
 --
 
+Almost always preferable to p-values alone
+
+
+---
+# How do we calculate 95% CIs?
 * Practically: `\(b \pm 2*s_b\)`
 
 --
@@ -920,358 +928,7 @@ confint(m3)
 ---
 class: inverse center middle
 
-# Model Assumptions
-
-![](http://imgs.xkcd.com/comics/when_you_assume.png)
-
-.footnote[credit: xkcd]
-
----
-# LINE
-
-* **.red[L]**inearity
-* **.red[I]**ndependence of residual errors
-* Multivariate **.red[N]**ormality
-* **.red[E]**qual variance of residual errors (homoscedasticity)
-
----
-# The issue
-
-&lt;div align = "center"&gt;
-&lt;img src = ../img/anscombe-quartet.png height = 500&gt;
-&lt;/div&gt;
-
----
-# Even better
-
-![](https://d2f99xq7vri1nk.cloudfront.net/DinoSequentialSmaller.gif)
-
-.footnote[https://www.autodeskresearch.com/publications/samestats]
-
---
-### Take home message
-Look at your data!
-
-
----
-# .red[L]inearity
-
-.code-bg-red[
-
-
-```r
-set.seed(8675309)
-x &lt;- 0:100
-y &lt;- 5 + 10*x + -0.07*x^2 + rnorm(length(x), 0, 20)
-sim_data &lt;- data_frame(x = x, y = y)
-sim_data
-```
-
-```
-## # A tibble: 101 x 2
-##        x          y
-##    &lt;int&gt;      &lt;dbl&gt;
-##  1     0  -14.93165
-##  2     1   29.36648
-##  3     2   12.37582
-##  4     3   74.95783
-##  5     4   65.18832
-##  6     5   72.99439
-##  7     6   63.02908
-##  8     7   85.02745
-##  9     8   91.96133
-## 10     9  107.4036 
-## # ... with 91 more rows
-```
-
-]
-
----
-
-.code-bg-red[
-
-
-```r
-ggplot(sim_data, aes(x, y)) +
-  geom_point() +
-  geom_smooth() 
-```
-
-![](w4_files/figure-html/smoothed-1.png)&lt;!-- --&gt;
-]
-
-
----
-# .red[I]ndependence of Observations
-
-.pull-left[
-* Important x-variable omitted 
-* Functional form not modeled correctly
-]
-
-.pull-right[
-![](../img/dependent-resids.png)
-]
-
-
----
-# Multivariate .red[N]ormality
-
-![](https://scipython.com/static/media/uploads/blog/multivariate_gaussian/bivariate_gaussian.png)
-
----
-![](https://i.stack.imgur.com/B4cuc.png)
-
----
-![](https://i.stack.imgur.com/qqG5Y.png)
-
----
-# Multivariate Outliers
-### Example
-
-&gt; In a longitudinal study, you find that the number of letters kindergarten
-students can .blue[name] and .blue[provide the correct sound for] both
-predict their .red[later (third grade) reading ability].
-
---
-
-A multivariate outlier would be a student who has an unexpected pattern across
-these three variables.
-
-
---
-e.g., low letter names, extremely high letter sounds, very low later reading achievement
-
----
-# .red[E]qual residual variance
-### Homoscedasticity
-.gray[Note I've hidden the code here to make the figure larger]
-
-
-![](w4_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
-
-
----
-class: inverse
-background-image:url(../img/magnify.jpg)
-background-size:cover
-
-# Intro to Diagnosing Assumptions
-
----
-# Linearity
-
-.code-bg-red[
-
-
-```r
-ggplot(sim_data, aes(x, y)) +
-  geom_point() +
-  geom_smooth() +
-  geom_smooth(method = "lm",
-              color = "magenta")
-```
-
-![](w4_files/figure-html/lin-1.png)&lt;!-- --&gt;
-
-]
-
----
-# With our actual data
-
-.pull-left[
-
-
-```r
-ggplot(d, aes(write, math)) +
-  geom_point() +
-  geom_smooth() +
-  geom_smooth(method = "lm",
-              color = "magenta")
-```
-
-![](w4_files/figure-html/linearity-eval1-1.png)&lt;!-- --&gt;
-]
-
-.pull-left[
-
-
-```r
-ggplot(d, aes(read, math)) +
-  geom_point() +
-  geom_smooth() +
-  geom_smooth(method = "lm",
-              color = "magenta")
-```
-
-![](w4_files/figure-html/linearity-eval2-1.png)&lt;!-- --&gt;
-]
-
-
-
----
-# Note
-This is good evidence, but doesn't guarantee that our MR model
-meets the assumptions
-
-
----
-# Homoscedasticity
-You can reproduce the prior plots without the nonlinear fit to visually 
-evaluate the variance around the regression line for consistency across the
-scale.
-
-
----
-# Univariate distributions
-
-
-```r
-ggplot(d, aes(read)) +
-  geom_histogram(alpha = 0.7)
-```
-
-![](w4_files/figure-html/hist1-1.png)&lt;!-- --&gt;
-
----
-# Univariate distributions
-
-
-```r
-ggplot(d, aes(write)) +
-  geom_histogram(alpha = 0.7)
-```
-
-![](w4_files/figure-html/hist2-1.png)&lt;!-- --&gt;
-
----
-# Univariate distributions
-
-
-```r
-ggplot(d, aes(math)) +
-  geom_histogram(alpha = 0.7)
-```
-
-![](w4_files/figure-html/hist3-1.png)&lt;!-- --&gt;
-
----
-# Quicker view
-(other similar functions exists)
-
-.pull-left[
-
-
-```r
-*library(GGally)
-ggscatmat(d, 
-          columns = c("math", 
-                      "read", 
-                      "write"))
-```
-]
-
-.pull-right[
-
-![](w4_files/figure-html/ggscatmat-eval-1.png)&lt;!-- --&gt;
-]
-
-
----
-# After fitting
-* PP-plots (evaluate normality again)
-* Linearity (standardized residual plots)
-* Independence of errors (standardized residual plots)
-* Equal Variance (standardized residual plots)
-
-
----
-# Inspecting residuals
-
-&gt; Plots of residuals versus fitted values and versus each of the predictors in
-turn are the most basic diagnostic graphs.
-
----
-
-## Let's try with our non-linear model
-
-
-```r
-# Fit model
-sim_mod &lt;- lm(y ~ x, sim_data)
-
-# Store residuals and fitted (predicted) values
-sim_data$resids &lt;- residuals(sim_mod)
-sim_data$fitted &lt;- predict(sim_mod)
-
-# Plot the relation
-ggplot(sim_data, aes(fitted, resids)) +
-  geom_point() +
-  geom_smooth() +
-  geom_hline(yintercept = 0,
-             size = 3, 
-             color = "gray40")
-```
-
----
-class: center middle
-
-![](w4_files/figure-html/resid-inspect2-eval-1.png)&lt;!-- --&gt;
-
----
-## What if we model it correctly?
-
-
-```r
-# Model curvilinear trend (we'll talk about this more later)
-sim_mod2 &lt;- lm(y ~ x + I(x^2), sim_data)
-
-# Store new residuals and fitted values
-sim_data$resids2 &lt;- residuals(sim_mod2)
-sim_data$fitted2 &lt;- predict(sim_mod2)
-
-# Plot relation
-ggplot(sim_data, aes(fitted2, resids2)) +
-  geom_point() +
-  geom_smooth() +
-  geom_hline(yintercept = 0,
-             color = "gray40",
-             size = 3)
-```
-
----
-class: center middle
-
-![](w4_files/figure-html/correct-curvelin-eval-1.png)&lt;!-- --&gt;
-
----
-# Automated methods
-
-
-```r
-par(mfrow = c(2, 2))
-plot(m2)
-```
-
-![](w4_files/figure-html/diag-auto-1.png)&lt;!-- --&gt;
-
----
-# QQ Plots
-* Last one for today
-* Select a specific plot with `which`
-
-
-```r
-plot(m2, which = 2)
-```
-
-![](w4_files/figure-html/qq-1.png)&lt;!-- --&gt;
----
-# Now: Lab
-
-### Next time
-* Other types of residuals
-* Outliers &amp; Influence
+# Lab
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>
