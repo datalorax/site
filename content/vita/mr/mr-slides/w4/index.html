@@ -34,6 +34,27 @@ class: center, middle, inverse, title-slide
 * Sample interpretations
 * Lab
 
+---
+# Thinking about learning objectives
+I would really like you to leave this class being able to do the following:
+1. Read in data to R
+1. Produce some basic visualizations of the data
+  + Distributions, scatterplots with linear models overlaid, boxplots, barplots
+
+
+--
+### Regression models
+.pull-left[
+Fit linear regression models with
+  + continuous and categorical variables
+  + interactions
+]
+.pull-right[
+Interpret models correctly
+  + coefficients
+  + model `\(R^2\)`
+  + SEs, CIs, and significance
+]
 
 ---
 class: inverse middle center
@@ -368,7 +389,14 @@ samples.
 Note - this is purely for demonstration. Please DO NOT follow along. If you're
 interested in the code, play with it after class and we can chat if you want.
 
+
 --
+### Bootstrapping
+
+![](../img/bootstrap.png)
+
+
+---
 
 .code-bg-red[
 
@@ -382,16 +410,6 @@ samples &lt;- replicate(1000,
                      simplify = FALSE)
 ```
 ]
-
-.gray[Trying something new - chunks in this background color indicate that you
-don't need to follow along, and it's generally not recommended]
-
-
----
-# What's the prior code doing?
-
-![](../img/bootstrap.png)
-
 
 ---
 # First 4 rows of first 2 datasets
@@ -462,6 +480,22 @@ head(boot_ests, 4)
 ## 3         3 0.4705402 0.3276435  10.79783
 ## 4         4 0.3903003 0.3739700  12.73905
 ```
+]
+
+
+---
+# Visualizing the estimates
+
+.code-bg-red[
+
+![](w4_files/figure-html/visualize-uncertainty-1.png)&lt;!-- --&gt;
+]
+
+---
+# Calculating the standard errors
+
+.code-bg-red[
+
 
 ```r
 boot_ests %&gt;% 
@@ -481,30 +515,20 @@ boot_ests %&gt;%
 
 
 ```r
-arm::display(m2)
+arm::display(m2, digits = 4)
 ```
 
 ```
 ## lm(formula = math ~ read + write, data = d)
 ##             coef.est coef.se
-## (Intercept) 12.87     2.82  
-## read         0.42     0.06  
-## write        0.34     0.06  
+## (Intercept) 12.8651   2.8216
+## read         0.4169   0.0565
+## write        0.3411   0.0611
 ## ---
 ## n = 200, k = 3
-## residual sd = 6.56, R-Squared = 0.52
+## residual sd = 6.5553, R-Squared = 0.52
 ```
 
----
-# Visualizing the uncertainty
-
-
-
-.code-bg-red[
-
-![](w4_files/figure-html/visualize-uncertainty-1.png)&lt;!-- --&gt;
-]
-These are bootstrapped standard errors
 
 ---
 # Another visualization
@@ -558,22 +582,26 @@ statistic.
 ---
 # Practical takeaways
 1. The size of the SE will depend on `\(n\)` because 
-`\(s_{y.x} = \sqrt{\frac{ss_{res}}{df}}\)` and `\(df = n - k - 1\)` (using Pedhazur's
-notation where `\(k\)` = number of predictors)
+`\(s_{y.x} = \sqrt{\frac{ss_{res}}{df}}\)` and `\(df = n - k - 1\)` 
 
 --
-2. Because `coef/se = t`, larger standard errors will result in smaller `\(t\)`
+1. The size of the SE will depend on the fit to the data because better fit =
+smaller `\(ss_{res}\)`
+
+--
+1. Because `coef/se = t`, larger standard errors will result in smaller `\(t\)`
 statistics.
 
 --
-3. Smaller sample sizes also require larger `\(t\)` to be significant
+1. Smaller sample sizes also require larger `\(t\)` to be significant
 
 
 --
 ### How do you get a larger `\(t\)`
 
 --
-Bigger coefficients, smaller standard errors
+Account for more variance (bigger effect size), smaller standard errors, bigger
+`\(n\)`
 
 ---
 # Overall model test
@@ -721,9 +749,7 @@ confint(m2)
 ]
 
 ---
-The `qt` function returns the exact `\(t\)` value, which in this case is 
--1.967596. Compare that to a `\(Z\)` value, of 
--1.959964 (because we have 312 `\(df\)`).
+The `qt` function returns the exact `\(t\)` value, which in this case is -1.972079. Compare that to a `\(Z\)` value, of -1.959964 (because we have 197 `\(df\)`).
 
 --
 
@@ -850,7 +876,7 @@ confident we can be.
 
 
 --
-* If the value is outside the bounds of the CI, it is "significant"
+* If the value is outside the alpha level, it is "significant"
   + i.e., we can claim that the observed result is unlikely due to random
     sampling variability
 
@@ -859,9 +885,6 @@ confident we can be.
 * The prior slide holds **only if we meet our model-assumptions**
   + If you don't meet your model assumptions, this is usually what gets messed
     up first.
-
-.gray[(we may do an activity later in the term to see how bad things have to
-       get before things become problematic)]
 
 ---
 # Before we move on

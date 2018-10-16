@@ -154,7 +154,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/mr/mr-slides/w4/</guid>
-      <description>Uncertainty and significance testing   class: center, middle, inverse, title-slide # Uncertainty and significance testing ### Daniel Anderson ### Week 4 --- # Agenda * A little bit of R + Load some data + radiant demo * Uncertainty + Standard errors + Confidence intervals + p-values * Sample interpretations * Lab --- class: inverse middle center background-image:url(../img/chalkboard.jpg) background-size:cover # What questions do you have? --- # First thing&#39;s first Let&#39;s get some data!</description>
+      <description>Uncertainty and significance testing   class: center, middle, inverse, title-slide # Uncertainty and significance testing ### Daniel Anderson ### Week 4 --- # Agenda * A little bit of R + Load some data + radiant demo * Uncertainty + Standard errors + Confidence intervals + p-values * Sample interpretations * Lab --- # Thinking about learning objectives I would really like you to leave this class being able to do the following: 1.</description>
     </item>
     
     <item>
