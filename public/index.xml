@@ -326,6 +326,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     </item>
     
     <item>
+      <title></title>
+      <link>/vita/mr/mr-slides/w5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/mr/mr-slides/w5/</guid>
+      <description>Model assumptions &amp;amp; Diagnostics   class: center, middle, inverse, title-slide # Model assumptions &amp;amp; Diagnostics ### Daniel Anderson ### Week 5 --- # Agenda * Model Assumptions + LINE acronym for assumptions + Importance of exploring and visualizing your data first * Model Diagnostics * Outliers * Lab --- class: inverse center middle # Model Assumptions ![](http://imgs.xkcd.com/comics/when_you_assume.png) .footnote[credit: xkcd] --- # .red[LINE] * **.red[L]**inearity * **.red[I]**ndependence of residual errors * Multivariate **.</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -482,7 +491,7 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/mr/mr/</guid>
-      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression   2 MR w/2 Continuous IVs   3 MR w/Categorical IVs   4 Uncertainty and significance testing    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression   2 MR w/2 Continuous IVs   3 MR w/Categorical IVs   4 Uncertainty and significance testing   5 Regression Diagnostics    The table above will be updated as the class goes along</description>
     </item>
     
     <item>

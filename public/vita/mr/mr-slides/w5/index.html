@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Model assumptions &amp; Diagnostics</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Model assumptions &amp; Diagnostics
+### Daniel Anderson
+### Week 5
+
+---
+
+
+
+# Agenda 
+* Model Assumptions 
+  + LINE acronym for assumptions
+  + Importance of exploring and visualizing your data first 
+* Model Diagnostics
+* Outliers
+* Lab
+
+
+---
+class: inverse center middle
+
+# Model Assumptions
+
+![](http://imgs.xkcd.com/comics/when_you_assume.png)
+
+.footnote[credit: xkcd]
+
+---
+# .red[LINE]
+
+* **.red[L]**inearity
+* **.red[I]**ndependence of residual errors
+* Multivariate **.red[N]**ormality
+* **.red[E]**qual variance of residual errors (homoscedasticity)
+
+---
+# The issue
+
+&lt;div align = "center"&gt;
+&lt;img src = ../img/anscombe-quartet.png height = 500&gt;
+&lt;/div&gt;
+
+---
+# Even better
+
+![](https://d2f99xq7vri1nk.cloudfront.net/DinoSequentialSmaller.gif)
+
+.footnote[https://www.autodeskresearch.com/publications/samestats]
+
+--
+### Take home message
+Look at your data!
+
+
+---
+# .red[L]inearity
+
+
+### Load the simulated data
+
+
+
+![](w5_files/figure-html/smoothed-1.png)&lt;!-- --&gt;
+
+
+---
+# .red[I]ndependence of Observations
+
+.pull-left[
+* Important x-variable omitted 
+* Functional form not modeled correctly
+]
+
+.pull-right[
+![](../img/dependent-resids.png)
+]
+
+
+---
+# Multivariate .red[N]ormality
+
+![](https://scipython.com/static/media/uploads/blog/multivariate_gaussian/bivariate_gaussian.png)
+
+---
+![](https://i.stack.imgur.com/B4cuc.png)
+
+---
+![](https://i.stack.imgur.com/qqG5Y.png)
+
+---
+# Multivariate Outliers
+### Example
+
+&gt; In a longitudinal study, you find that the number of letters kindergarten
+students can .blue[name] and .blue[provide the correct sound for] both
+predict their .red[later (third grade) reading ability].
+
+
+
+--
+### What's a multivariate outlier?
+
+An unexpected observation for the **combination** of variables
+
+
+--
+e.g., low letter names, extremely high letter sounds, very low later reading achievement
+
+(we'll talk more about outliers in a bit)
+
+
+---
+# .red[E]qual residual variance
+### Homoscedasticity
+
+![](w5_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+---
+# Let's fit a model
+Why is a common variance  assumed? Let's fit the following model and look at
+the output.
+
+$$
+read_i = b_0 + b_1(write_i) + b_2(program_i) + e_i
+$$
+
+---
+### Set Academic as reference group
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(prog = factor(prog),
+         prog = relevel(prog, ref = "academic"))
+```
+
+--
+
+
+```r
+m1 &lt;- lm(read ~ write + prog, d)
+```
+
+--
+
+
+```r
+arm::display(m1, detail = TRUE)
+```
+
+```
+## lm(formula = read ~ write + prog, data = d)
+##              coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  25.06     3.82    6.56    0.00   
+## write         0.55     0.07    8.33    0.00   
+## proggeneral  -3.68     1.47   -2.50    0.01   
+## progvocation -4.71     1.52   -3.10    0.00   
+## ---
+## n = 200, k = 4
+## residual sd = 8.05, R-Squared = 0.39
+```
+
+### Where's our estimate of the variation around the regression line?
+
+
+---
+class: inverse
+background-image:url(../img/magnify.jpg)
+background-size:cover
+
+# Diagnosing Assumptions
+
+---
+# .red[L]inearity
+
+
+### Load the simulated data
+
+
+```r
+sim_data &lt;- import(here("data", "simdata.csv"),
+                   setclass = "tbl_df")
+sim_data
+```
+
+```
+## # A tibble: 505 x 2
+##        x         y
+##    &lt;int&gt;     &lt;dbl&gt;
+##  1     0  0       
+##  2     0  0       
+##  3     0  0       
+##  4     0  1.766497
+##  5     0  0       
+##  6     1 29.36648 
+##  7     1 21.75338 
+##  8     1 46.27026 
+##  9     1 23.82996 
+## 10     1 44.41550 
+## # ... with 495 more rows
+```
+---
+## Plot linear/nonlinear smooths
+
+
+```r
+ggplot(sim_data, aes(x, y)) +
+  geom_point() +
+  geom_smooth() +
+  geom_smooth(method = "lm",
+              color = "magenta")
+```
+
+![](w5_files/figure-html/lin-1.png)&lt;!-- --&gt;
+
+---
+# Let's think about this model
+
+$$
+math_i = b_0 + b_1(write_i) + b_2(read_i) + e_i
+$$
+
+--
+### Fit it
+
+
+```r
+m2 &lt;- lm(math ~ write + read, d)
+```
+
+---
+# Do we meet linear assumption?
+
+.pull-left[
+
+
+```r
+ggplot(d, aes(write, math)) +
+  geom_point() +
+  geom_smooth() +
+  geom_smooth(method = "lm",
+              color = "magenta")
+```
+
+![](w5_files/figure-html/linearity-eval1-1.png)&lt;!-- --&gt;
+]
+
+.pull-left[
+
+
+```r
+ggplot(d, aes(read, math)) +
+  geom_point() +
+  geom_smooth() +
+  geom_smooth(method = "lm",
+              color = "magenta")
+```
+
+![](w5_files/figure-html/linearity-eval2-1.png)&lt;!-- --&gt;
+]
+
+
+---
+class: inverse middle
+# Note
+This is good evidence, but doesn't guarantee that our MR model
+meets the assumptions
+
+---
+# .red[I]ndependence of residual errors
+
+&gt; Plots of residuals versus fitted values and versus each of the predictors in
+turn are the most basic diagnostic graphs.
+
+--
+
+# Residuals
+
+### Ordinary residuals
+
+You tell me - what are ordinary residuals?
+
+--
+
+$$
+Y_i - Y'_i
+$$
+
+Plot these against our fitted values... what would we expect to see?
+
+
+--
+No relation
+
+
+---
+### Extract ordinary residuals
+
+
+```r
+resids &lt;- residuals(m1)
+```
+
+--
+### Compute fitted values
+
+
+```r
+fitted_vals &lt;- fitted(m1)
+```
+
+--
+(note `fitted(m1)` will return the same thing as `predict(m1)`. The `predict`
+is function can just do a lot of other things too)
+
+---
+# Plot the values
+
+First put them in a data frame
+
+
+```r
+m1_pd &lt;- data_frame(fitted = fitted_vals,
+                    residuals = resids)
+```
+
+---
+# Pass to `ggplot`
+
+
+```r
+ggplot(m1_pd, aes(fitted, residuals)) +
+  geom_point() +
+  geom_smooth()
+```
+
+![](w5_files/figure-html/diag-plot1-1.png)&lt;!-- --&gt;
+
+### Do you see any relation?
+
+
+---
+# Quick aside
+* `ggplot2::fortify` will extract this info for you automatically.
+
+
+```r
+pd &lt;- fortify(m1)
+head(pd)
+```
+
+```
+##   read write     prog       .hat   .sigma     .cooksd  .fitted    .resid
+## 1   57    52  general 0.02225245 8.057208 0.004243374 50.12417  6.875830
+## 2   68    59 vocation 0.03018947 7.998230 0.027968308 52.96775 15.032247
+## 3   44    33  general 0.04508198 8.066193 0.003659479 39.61867  4.381329
+## 4   63    44 vocation 0.02051809 7.962927 0.027696130 44.67394 18.326062
+## 5   47    52 academic 0.01075642 8.057685 0.001964456 53.80804 -6.808041
+## 6   44    52 academic 0.01075642 8.041634 0.004077204 53.80804 -9.808041
+##    .stdresid
+## 1  0.8635950
+## 2  1.8957400
+## 3  0.5568281
+## 4  2.2996898
+## 5 -0.8500978
+## 6 -1.2246979
+```
+
+---
+
+
+```r
+ggplot(pd, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_smooth()
+```
+
+![](w5_files/figure-html/diag-plot2-1.png)&lt;!-- --&gt;
+
+---
+
+## Let's try with our non-linear model
+
+
+```r
+sim_mod &lt;- lm(y ~ x, sim_data)
+
+ggplot(sim_mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_smooth()
+```
+
+--
+Notice you can actually skip the fortify part and it will do it internally
+
+---
+class: center middle
+
+![](w5_files/figure-html/resid-inspect2-eval-1.png)&lt;!-- --&gt;
+
+---
+class: inverse middle center
+
+![](https://media.giphy.com/media/QSMBLRAHZTLkQ/giphy.gif)
+### How that plot should make you feel
+
+---
+## What if we model it correctly?
+
+
+```r
+# Model curvilinear trend (we'll talk about this more later)
+sim_mod2 &lt;- lm(y ~ x + I(x^2), sim_data)
+
+ggplot(sim_mod2, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_smooth() 
+```
+
+---
+class: center middle
+
+![](w5_files/figure-html/correct-curvelin-eval-1.png)&lt;!-- --&gt;
+
+---
+# Automated methods
+
+
+```r
+plot(sim_mod2, which = 1)
+```
+
+![](w5_files/figure-html/diag-auto-1.png)&lt;!-- --&gt;
+
+--
+* There are 4 different plot produced automatically by calling `plot` on a
+regression model. Use `which` to select a specific plot.
+* See the ggplot versions [here](https://ggplot2.tidyverse.org/reference/fortify.lm.html) 
+using `fortify`.
+
+
+---
+# .red[N]ormality
+### Univariate distributions
+
+
+```r
+ggplot(d, aes(read)) +
+  geom_histogram(alpha = 0.7)
+```
+
+![](w5_files/figure-html/hist1-1.png)&lt;!-- --&gt;
+
+---
+# Univariate distributions
+
+
+```r
+ggplot(d, aes(write)) +
+  geom_histogram(alpha = 0.7)
+```
+
+![](w5_files/figure-html/hist2-1.png)&lt;!-- --&gt;
+
+---
+# Univariate distributions
+
+
+```r
+ggplot(d, aes(math)) +
+  geom_histogram(alpha = 0.7)
+```
+
+![](w5_files/figure-html/hist3-1.png)&lt;!-- --&gt;
+
+---
+# Quicker view
+(other similar functions exists)
+
+.pull-left[
+
+
+```r
+*library(GGally)
+ggscatmat(d, 
+          columns = c("math", 
+                      "read", 
+                      "write"))
+```
+]
+
+.pull-right[
+
+![](w5_files/figure-html/ggscatmat-eval-1.png)&lt;!-- --&gt;
+]
+
+---
+# After fitting the model
+Look at residuals again, but this time against a (theoretical) normal 
+distribution.
+
+
+```r
+ggplot(m2, aes(sample = .stdresid)) +
+  geom_qq(color = "gray60",
+          size = 4) +
+  stat_qq_line()
+```
+
+![](w5_files/figure-html/ggplot-qq-1.png)&lt;!-- --&gt;
+
+---
+# Or automatically
+
+
+```r
+plot(m2, which = 2)
+```
+
+![](w5_files/figure-html/base-qq-1.png)&lt;!-- --&gt;
+
+---
+# Note on qq-plots
+Preferable to looking *just* at univariate distributions because they help you
+understand if you're meeting **multivariate** normality
+
+
+
+---
+# .red[E]qual variance of residual errors
+### Homoscedasticity
+* Inspect plots of simple linear regressions before full model
+* Evaluate residuals against fitted models
+
+
+--
+### Overall
+The variance around the regression line should be relatively constant. If it's
+not, you likely have an omitted variable
+
+
+---
+class: inverse middle center
+
+# Outliers
+
+
+---
+# Biggest take home message
+### Not all outliers are created equal
+* What matters is how much an outlier **influences** your regression model.
+* Some "severe" outliers may have little influence on the regression line at all
+* Others may result in dramatic changes to the substantive inferences you make
+
+
+--
+### Dealing with influential outliers
+* Consider if the outliers are "real" or data entry errors
+* Consider the population you want to generalize to
+* Are they outliers? Or evidence of a nonlinear trend?
+
+--
+* Best practice for dealing with real outliers (from the viewpoint of me) is to
+report results with AND without the outliers included
+
+
+---
+# Outlier?
+
+![](w5_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+# Point included
+
+![](w5_files/figure-html/outlier1-excluded-1.png)&lt;!-- --&gt;
+
+---
+# Point excluded
+
+![](w5_files/figure-html/outlier1-included-1.png)&lt;!-- --&gt;
+
+
+---
+# Shown together
+
+![](w5_files/figure-html/outlier1-plot-1.png)&lt;!-- --&gt;
+
+
+---
+# Outlier?
+
+![](w5_files/figure-html/outlier2-1.png)&lt;!-- --&gt;
+
+---
+# Compare regressions
+
+![](w5_files/figure-html/outlier2-plot-1.png)&lt;!-- --&gt;
+
+
+---
+# Outlier?
+
+![](w5_files/figure-html/outlier3-1.png)&lt;!-- --&gt;
+
+---
+# Compare regressions
+
+![](w5_files/figure-html/outlier3-plot-1.png)&lt;!-- --&gt;
+
+---
+# Outlier?
+
+![](w5_files/figure-html/outlier4-1.png)&lt;!-- --&gt;
+
+---
+# Compare regressions
+
+![](w5_files/figure-html/outlier4-plot-1.png)&lt;!-- --&gt;
+
+---
+# Sample size
+* Generally, as sample size increases, the influnce of outliers becomes less
+
+--
+* In this case, we have a sample of 111. It was still
+relatively hard to get the line to change by a single point.
+
+---
+# Outlier points (plural)?
+
+![](w5_files/figure-html/outlier5-1.png)&lt;!-- --&gt;
+
+---
+
+![](w5_files/figure-html/outlier5-plot-1.png)&lt;!-- --&gt;
+
+---
+# Measuring influence
+
+--
+### Leverage
+
+* Also called hat values
+* High values indicate high "leverage" on the regression line/plane/space
+* Bounded between 0/1 (in models with an intercept)
+
+--
+
+.Large[
+$$
+h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum(x_i - \bar{x})^2}
+$$
+
+]
+
+---
+# Inspect leverage values
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(leverage = hatvalues(m2))
+
+ggplot(d, aes(id, leverage)) +
+  geom_label(aes(label = id))
+```
+
+![](w5_files/figure-html/leverage-plot-1.png)&lt;!-- --&gt;
+
+--
+Note you could use the fortified object here too, but I like to tag them with
+the IDs with `geom_label`.
+
+---
+# Fit model w/without id 103
+Use the `subset` function
+
+
+
+```r
+m2_no103 &lt;- lm(math ~ write + read, d,
+               subset = id != 103)
+coef(m2_no103)
+```
+
+```
+## (Intercept)       write        read 
+##  12.9107585   0.3432889   0.4137122
+```
+
+```r
+coef(m2)
+```
+
+```
+## (Intercept)       write        read 
+##  12.8650676   0.3411219   0.4169486
+```
+ 
+### Are our results substantively changed?
+
+---
+# Standardized residuals
+* Not a measure of influence
+
+.Large[
+$$
+e\_{Si} = \frac{e\_i}{s\_{y.x}\sqrt{1 - h\_i}}
+$$
+]
+
+* These are the residuals we use with QQ plots
+
+--
+* Really poor rule-of-thumb: Remove outliers where `\(e_{Si} \geq 3\)`. (don't do
+this)
+
+---
+# Cook's Distance
+* Measure of "how different" the regression line/plane/space is when the
+observation is/is not included
+
+--
+Conceptually
+
+.Large[
+$$
+b\_{(-i)} - b
+$$
+]
+
+Where `\(b_{(-i)}\)` represents the coefficient estimate with observation `\(i\)` 
+omitted. 
+
+--
+
+.Large[
+$$
+D\_i = \frac{e\_{Si}^2}{k + 1} \times \frac{h\_i}{1 - h\_i}
+$$
+]
+
+---
+# Evaluating Cook's D
+
+
+```r
+d &lt;- d %&gt;%
+  mutate(cook_d = cooks.distance(m2))
+
+ggplot(d, aes(id, cook_d)) +
+  geom_label(aes(label = id))
+```
+
+![](w5_files/figure-html/cook-d-plot-1.png)&lt;!-- --&gt;
+
+---
+## Remove the two most influential cases
+
+
+```r
+m2_rem_cd &lt;- lm(math ~ write + read, d,
+               subset = id != 126 &amp; id != 167)
+coef(m2_rem_cd)
+```
+
+```
+## (Intercept)       write        read 
+##  11.7850191   0.3462151   0.4329332
+```
+
+```r
+coef(m2)
+```
+
+```
+## (Intercept)       write        read 
+##  12.8650676   0.3411219   0.4169486
+```
+
+--
+* This changes our intercept by more than a point. Does this matter? May want
+to investigate further
+
+--
+* Also probably best to remove outliers one at a time, versus in chunks. (but
+if the chunks aren't affecting it, you're probably safe)
+
+
+---
+
+
+```r
+ggplot(d, aes(read, math)) +
+  geom_point(size = 4) +
+  geom_label(data = filter(d, id == 126 | id == 167),
+             aes(label = id))
+```
+
+![](w5_files/figure-html/cd-read-1.png)&lt;!-- --&gt;
+
+---
+
+
+```r
+ggplot(d, aes(write, math)) +
+  geom_point(size = 4) +
+  geom_label(data = filter(d, id == 126 | id == 167),
+             aes(label = id))
+```
+
+![](w5_files/figure-html/cd-write-1.png)&lt;!-- --&gt;
+
+---
+# Another look
+
+
+```r
+library(visreg) 
+
+par(mfrow = c(2, 2))
+visreg(m2)
+visreg(m2_rem_cd)
+```
+
+![](w5_files/figure-html/visreg-1.png)&lt;!-- --&gt;
+
+---
+# Important to keep in mind
+* No one plot can diagnose everything
+* Avoid rules of thumb
+* You can always report more than one result if the outliers are influential
+
+--
+### Other methods
+* Studentized deleted residuals rather than normal or standardized residuals
+  + Basically same as standardized, but w/observation not included in  
+  `\(s\_{y.x}\)`
+
+--
+* `\(dfbeta\)` is similar to Cook's D but for each coefficient individually. 
+
+--
+* Often evaluate leverage and Cook's D together.
+
+---
+
+
+```r
+ggplot(m1, aes(.hat, .cooksd)) +
+  geom_abline(slope = seq(0, 3, by = 0.5), colour = "gray80") +
+  geom_smooth(se = FALSE) +
+  geom_point()
+```
+
+![](w5_files/figure-html/leverage-distance-1.png)&lt;!-- --&gt;
+
+
+---
+class: inverse center middle
+# Lab
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
