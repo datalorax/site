@@ -15,5 +15,7 @@ comments: false
 | 3  | 2      | [Data Import & data wrangling 2](../ds1-slides/w3p2/)
 | 4  | 1      | [Dynamic Documents 1: Intro to R Markdown](../ds1-slides/w4p1/)
 | 4  | 2      | [Intro to git and GitHub](../ds1-slides/w4p2/)
+| 5  | 1      | [More git & intro to dynamic APA manuscripts](../ds1-slides/w5p1/)
+| 5  | 2      | [Advanced R Markdown](../ds1-slides/w5p2/)
 
 The table above will be updated as the class goes along
