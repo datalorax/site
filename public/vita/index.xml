@@ -185,6 +185,15 @@
     </item>
     
     <item>
+      <title></title>
+      <link>/vita/mr/mr-slides/w6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/mr/mr-slides/w6/</guid>
+      <description>Partial and Semi-Partial Correlations   class: center, middle, inverse, title-slide # Partial and Semi-Partial Correlations ### Daniel Anderson ### Week 6 --- # Agenda * Review Lab * A few more notes on model assumptions * Partial and semi-partial correlations * Lab --- class: inverse middle center background-image:url(../img/chalkboard.jpg) background-size:cover # What questions do you have? --- class: inverse middle center background-image:url(../img/wood.jpg) background-size:cover # Let&#39;s get some data --- # Residuals Last time, we talked about: -- * ordinary residuals: `\(Y&#39; - Y\)` -- * Standardized residuals: `\(e_{Si} = \frac{e_i}{s_{y.</description>
+    </item>
+    
+    <item>
       <title>Advanced dplyr and More on RMarkdown</title>
       <link>/vita/classr/slides/w5p1/w5p1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -332,7 +341,7 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/mr/mr/</guid>
-      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression   2 MR w/2 Continuous IVs   3 MR w/Categorical IVs   4 Uncertainty and significance testing   5 Regression Diagnostics    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Multiple Regression in Educational Research    Week Slides     1 Welcome to multiple regression   2 MR w/2 Continuous IVs   3 MR w/Categorical IVs   4 Uncertainty and significance testing   5 Regression Diagnostics   6 Partial and semipartial correlations    The table above will be updated as the class goes along</description>
     </item>
     
     <item>
