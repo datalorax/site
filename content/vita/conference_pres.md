@@ -63,7 +63,20 @@ date: '2018-04-03'
 1. Anderson, D. (May, 2010). Accountability plans and the growth model pilot program: An examination of state policy effects on the percentage of schools making adequate yearly progress. Poster presented at the annual meeting of the American Educational Research Association, Denver, CO.
 
 ## Regional Conference Presentations
-2. Anderson, D. (June, 2018). Contributing to open source with pretty slides. Presentation at the second annual Cascadia R Conference in Portland, OR. Slides available [here](http://www.datalorax.com/talks/cascadia18/).
+4. 	Anderson, D. (September, 2018). [My research and the COE]
+(http://www.datalorax.com/talks/datasci-09-11-18/). 
+Invited presentation for the University of Oregon’s Data Science Initiative in
+a joint meeting with Oregon Health and Science University.   
 
-1. Anderson, D. (June, 2017). esvis: An R package for effect size visualizations. Presentation at the inaugural Cascadia R Conference in Portland, OR. Slides available [here](https://djanderson07.github.io/cascadia_r_conf-slides/).
+3. Anderson, D. (June, 2018). [Contributing to open source with pretty slides]
+(http://www.datalorax.com/talks/cascadia18/). 
+Presentation at the second annual Cascadia R Conference in Portland, OR.
+
+2. Anderson, D. (April, 2018). [Developing your first R package: A case study
+with esvis](http://www.datalorax.com/talks/eugene_rug/). 
+Presentation for the Eugene R Users Group.
+
+1. Anderson, D. (June, 2017). [esvis: An R package for effect size
+visualizations](https://djanderson07.github.io/cascadia_r_conf-slides/).
+Presentation at the inaugural Cascadia R Conference in Portland, OR.
 

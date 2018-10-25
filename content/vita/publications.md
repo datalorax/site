@@ -4,9 +4,18 @@ comments: false
 ---
 
 ## Peer-Reviewed Journal Articles
-11. Tindal, G., & Anderson, D. (*in press*). Changes in Status-Service and
+13. Tindal, G., & Anderson, D. (*in press*). Changes in Status-Service and
 Performance over Time for Students with Specific Learning Disabilities.
 *Learning Disabilities Quarterly*.
+
+12. Nese, J. F. T., Farley, D., & Anderson, D. (*in press*). The instructional
+characteristics of small-group, Grade 1 reading interventions applied in
+schools. Learning Disabilities: Research and Practice. *Learning Disabilities:
+Research and Practice*.
+
+11. Rosenberg, J, Beymer, P. N., Anderson, D., and Schmidt, J. A. (2018).
+[tidyLPA: An R Package to Easily Carry Out Latent Profile Analysis (LPA) Using
+Open-Source or Commercial Software](https://www.theoj.org/joss-papers/joss.00978/10.21105.joss.00978.pdf). Journal of Open Source Software, 3(30), 978. doi: [10.21105/joss.00978](https://joss.theoj.org/papers/ccb887b4991abca9517847b016cdb33d)
 
 10.	Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., & Kennedy, P. (2018). 
 [Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement](../pubs/FienAnderson_18.pdf). *Learning Disabilities Research & Practice*, *33*, 37-50. [doi: 10.1111&#8203;/ldrp.12161](http://onlinelibrary.wiley.com/doi/10.1111/ldrp.12161/full)
