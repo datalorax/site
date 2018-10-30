@@ -264,6 +264,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     
     <item>
       <title></title>
+      <link>/vita/ds/ds1-slides/w6p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w6p2/</guid>
+      <description>Introduction to tidy data   class: center, middle, inverse, title-slide # Introduction to tidy data ## (AKA what we should have covered before Alison’s visit) ### Daniel Anderson ### Week 6, Class 2 --- # Agenda * Introduce the concept of tidy data * Tidy a simple dataset together with `tidyr` * Summarize and transform tidy data with `dplyr` * Lab -- ### Learning objectives for today * Understand the concept of tidy data is useful * Understand and be able to apply the `gather` function --- class: inverse middle center background-image:url(.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/vita/educ611/slides/class1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -435,7 +444,7 @@ Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/ds/ds1/</guid>
-      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz 1   2 2 Intro to data viz 2   3 1 Intro to data wrangling 1   3 2 Data Import &amp;amp; data wrangling 2   4 1 Dynamic Documents 1: Intro to R Markdown   4 2 Intro to git and GitHub   5 1 More git &amp;amp; intro to dynamic APA manuscripts   5 2 Advanced R Markdown    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz 1   2 2 Intro to data viz 2   3 1 Intro to data wrangling 1   3 2 Data Import &amp;amp; data wrangling 2   4 1 Dynamic Documents 1: Intro to R Markdown   4 2 Intro to git and GitHub   5 1 More git &amp;amp; intro to dynamic APA manuscripts   5 2 Advanced R Markdown   6 1 Guest Lecture: Alison Hill   6 2 Introduction to tidy data    The table above will be updated as the class goes along</description>
     </item>
     
     <item>
