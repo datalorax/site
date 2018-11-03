@@ -13,5 +13,6 @@ comments: false
 | 4  |[Uncertainty and significance testing](../mr-slides/w4/) |
 | 5  |[Regression Diagnostics](../mr-slides/w5/) |
 | 6  |[Partial and semipartial correlations](../mr-slides/w6/) |
+| 7  |[Interactions](../mr-slides/w7/) |
 
 The table above will be updated as the class goes along

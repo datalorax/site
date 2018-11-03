@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactions</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Interactions
+### Daniel Anderson
+### Week 7
+
+---
+
+
+
+# Agenda 
+* Review Exercise
+* Centering data
+* Standardized coefficients (briefly)
+* Interactions (this week and next)
+  + Interactions between two categorical variables
+  + Interactions between one categorical variable and one continuous variable
+  + Interactions between two continuous variables
+* Lab
+
+---
+class: inverse middle center
+background-image:url(../img/chalkboard.jpg)
+background-size:cover
+
+# What questions do you have?
+
+
+---
+class: inverse middle
+background-image:url(../img/wood.jpg)
+background-size:cover
+
+# Let's get setup
+
+### Tonight, we'll work with multiple data sources
+* diagnostics.sav
+* benchmarks.xlsx
+* hsb2.sav
+* glo_sim.sav
+
+
+---
+class: inverse right
+background-image:url(../img/bullseye.jpg)
+background-size:cover
+
+# Centering
+
+---
+# What the...🤔🤨🤯
+
+What does the intercept represent here?
+
+.Large[
+$$
+weight\_{yc} = b\_0 + b1(weight\_{m}) + e\_i
+$$
+]
+
+Where
+* `\(weight_{yc}\)` represents the weight of the youngest child, provided by the 
+  variable `ycweight`.
+* `\(weight_{m}\)` represents the weight of the mother, provided by the variable
+  `mweight`.
+
+---
+# Fit the model
+
+
+```r
+diag &lt;- import(here("data", "diagnostics.sav"),
+            setclass = "tbl_df") %&gt;%
+      characterize()
+      
+m1 &lt;- lm(ycweight ~ mweight, diag)
+arm::display(m1, detail = TRUE)  
+```
+
+```
+## lm(formula = ycweight ~ mweight, data = diag)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  7.84    29.08    0.27    0.79   
+## mweight      0.51     0.18    2.79    0.01   
+## ---
+## n = 24, k = 2
+## residual sd = 29.31, R-Squared = 0.26
+```
+
+```r
+confint(m1)
+```
+
+```
+##                   2.5 %     97.5 %
+## (Intercept) -52.4729616 68.1601370
+## mweight       0.1314643  0.8945276
+```
+
+---
+# What does this look like?
+
+
+```r
+ggplot(diag, aes(mweight, ycweight)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+![](w7_files/figure-html/scatter1-1.png)&lt;!-- --&gt;
+
+---
+# Backwards projection
+
+
+```r
+ggplot(diag, aes(mweight, ycweight)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              fullrange = TRUE) +
+  xlim(0, 245)
+```
+
+![](w7_files/figure-html/scatter2-1.png)&lt;!-- --&gt;
+
+---
+
+```r
+ggplot(diag, aes(mweight, ycweight)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              fullrange = TRUE) +
+  xlim(0, 245) +
+  geom_point(data = data.frame(mweight = 0,
+                               ycweight = coef(m1)[1]),
+             size = 7,
+             color = "magenta")
+```
+
+![](w7_files/figure-html/scatter3-1.png)&lt;!-- --&gt;
+
+---
+# Centering
+Basically, we want to move the y-axis so it represents a meaningful value
+
+--
+### How?
+Subtract a constant from each case
+
+
+--
+How about... 200! Why? 🤷
+
+--
+
+```r
+diag &lt;- diag %&gt;%
+  mutate(weight200 = mweight - 200)
+```
+
+---
+# Let's look at scatterplots
+
+
+```r
+ggplot(diag, aes(mweight, ycweight)) +
+  geom_point()
+```
+
+![](w7_files/figure-html/scatters1a-1.png)&lt;!-- --&gt;
+
+---
+# Let's look at scatterplots
+
+
+```r
+ggplot(diag, aes(weight200, ycweight)) +
+  geom_point()
+```
+
+![](w7_files/figure-html/scatters1b-1.png)&lt;!-- --&gt;
+
+---
+# Overlay linear regression line
+
+
+```r
+ggplot(diag, aes(mweight, ycweight)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+![](w7_files/figure-html/scatters2a-1.png)&lt;!-- --&gt;
+
+---
+# Overlay linear regression line
+
+
+```r
+ggplot(diag, aes(weight200, ycweight)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "magenta")
+```
+
+![](w7_files/figure-html/scatters2b-1.png)&lt;!-- --&gt;
+
+---
+class: inverse center middle
+# What is the centering impacting?
+
+
+---
+# Fit model
+
+
+```r
+m1c_200 &lt;- lm(ycweight ~ weight200, diag)
+arm::display(m1c_200, detail = TRUE)
+```
+
+```
+## lm(formula = ycweight ~ weight200, data = diag)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 110.44    10.26   10.77    0.00  
+## weight200     0.51     0.18    2.79    0.01  
+## ---
+## n = 24, k = 2
+## residual sd = 29.31, R-Squared = 0.26
+```
+
+--
+
+
+```r
+arm::display(m1, detail = TRUE)
+```
+
+```
+## lm(formula = ycweight ~ mweight, data = diag)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  7.84    29.08    0.27    0.79   
+## mweight      0.51     0.18    2.79    0.01   
+## ---
+## n = 24, k = 2
+## residual sd = 29.31, R-Squared = 0.26
+```
+
+
+---
+# Look back at our plots
+
+
+![](w7_files/figure-html/scatter-notcentered-ref-1.png)&lt;!-- --&gt;
+
+---
+# Look back at our plots
+
+![](w7_files/figure-html/scatter-centered-ref-1.png)&lt;!-- --&gt;
+
+---
+# More common
+* Center according to the mean
+
+--
+* Discuss in your tables, what would the intercept represent in the following
+model
+
+
+```r
+diag &lt;- diag %&gt;%
+  mutate(age_c = ycage - mean(ycage),
+         weight_c = mweight - mean(mweight))
+
+m2 &lt;- lm(ycweight ~ age_c + weight_c, diag)
+```
+
+---
+
+```r
+arm::display(m2, detail = TRUE)
+```
+
+```
+## lm(formula = ycweight ~ age_c + weight_c, data = diag)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 87.21     3.75   23.25    0.00   
+## age_c       10.44     1.77    5.92    0.00   
+## weight_c     0.43     0.12    3.69    0.00   
+## ---
+## n = 24, k = 3
+## residual sd = 18.38, R-Squared = 0.72
+```
+
+--
+### Example writeup for the intercept
+Both age and weight were grand-mean centered, leading the intercept to 
+represent the expected weight of the youngest child who were 10.54 years old 
+and had birth mothers who weighed 154.71 pounds (both representing the sample
+means).
+
+---
+class: inverse center middle
+# Standardized coefficients
+
+---
+# Standardization
+
+### Pop quiz
+What does it mean to standardize a variable?
+
+--
+* Transform the variable to have a mean of 0 (same as grand-mean centering)
+**and has a standard deviation of 1.0**. 
+
+
+--
+### How?
+Grand-mean center, then divide each observation by its standard deviation.
+
+---
+
+
+
+
+```r
+diag &lt;- diag %&gt;%
+  mutate(mweight_z = (mweight - mean(mweight)) / sd(mweight))
+
+mean(diag$mweight_z)
+```
+
+```
+## [1] -0.0000000000000002857957
+```
+
+```r
+sd(diag$mweight_z)
+```
+
+```
+## [1] 1
+```
+
+
+
+--
+### Pop Quiz
+
+What would the intercept represent in this model? What about the slope for
+weight?
+
+
+```r
+m1z_a &lt;- lm(ycweight ~ mweight_z, diag)
+```
+
+---
+
+```r
+arm::display(m1z_a)
+```
+
+```
+## lm(formula = ycweight ~ mweight_z, data = diag)
+##             coef.est coef.se
+## (Intercept) 87.21     5.98  
+## mweight_z   17.04     6.11  
+## ---
+## n = 24, k = 2
+## residual sd = 29.31, R-Squared = 0.26
+```
+
+* **Intercept**: Same as the centered version - expected weight of the youngest
+child when the birth mother has the average sample weight.
+
+* **Slope**: Expected change in youngest child weight **given a one standard
+deviation increase in birth mother weight**.
+
+
+--
+* Highly interpretable (imo), but almost never used. Why? 🤷‍♀️
+
+--
+* **NOT** standardized coefficient
+
+---
+# Standardized coefficient
+* To get a standardized coefficient we have to standardize both the x and y
+variable.
+* Easier way to standardize is to use the `scale` function
+
+
+```r
+diag &lt;- diag %&gt;%
+  mutate(mweight_z = scale(mweight),
+         ycweight_z = scale(ycweight))
+```
+
+--
+### Pop Quiz
+What would the intercept/slope represent now?
+
+
+```r
+m1z_b &lt;- lm(ycweight_z ~ mweight_z, diag)
+```
+
+---
+
+```r
+arm::display(m1z_b, detail = TRUE)
+```
+
+```
+## lm(formula = ycweight_z ~ mweight_z, data = diag)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 0.00     0.18    0.00    1.00    
+## mweight_z   0.51     0.18    2.79    0.01    
+## ---
+## n = 24, k = 2
+## residual sd = 0.88, R-Squared = 0.26
+```
+
+--
+* In simple linear regression with standardized coefficients: 
+  + The coefficient is equal to `\(r\)`
+
+--
+
+
+```r
+cor(diag$mweight, diag$ycweight)
+```
+
+```
+## [1] 0.5110174
+```
+
+--
+* For all standardized coefficients:
+  + The intercept will always be zero 
+  + Coefficients (slopes) represent the expected SD change in
+    the outcome, given a 1 SD increase in the corresponding
+    predictor, holding all other variables constant
+
+
+
+---
+# Want a simpler solution?
+
+
+```r
+# install.packages("lm.beta")
+library(lm.beta)
+lm.beta(m1) 
+```
+
+```
+## 
+## Call:
+## lm(formula = ycweight ~ mweight, data = diag)
+## 
+## Standardized Coefficients::
+## (Intercept)     mweight 
+##   0.0000000   0.5110174
+```
+
+---
+Note that this works with arbitrarily complex models
+
+
+```r
+m_complex &lt;- lm(ycweight ~ mage + mheight + mweight + 
+                           fage + fheight + fweight +
+                           ycage + ycheight, 
+                           data = diag)
+lm.beta(m_complex)
+```
+
+```
+## 
+## Call:
+## lm(formula = ycweight ~ mage + mheight + mweight + fage + fheight + 
+##     fweight + ycage + ycheight, data = diag)
+## 
+## Standardized Coefficients::
+## (Intercept)        mage     mheight     mweight        fage     fheight 
+##  0.00000000  0.26644165  0.04882760  0.30155158 -0.19229728 -0.06579576 
+##     fweight       ycage    ycheight 
+## -0.01710509 -0.05248234  0.82746776
+```
+
+---
+class: inverse center middle
+# Interactions
+
+--
+### One categorical IV, one continuous IV
+
+---
+# Moderating effects
+* Every model we've fit so far has assumed parallel slopes. That will now
+change!
+
+--
+
+
+```r
+benchmarks &lt;- import(here("data", "benchmarks.xlsx"),
+                     setclass = "tbl_df")
+
+ggplot(benchmarks, aes(rdg_fall, rdg_spr)) +
+  geom_point(color = "gray70") +
+  geom_smooth(aes(color = ell),
+              method = "lm")
+```
+
+---
+![](w7_files/figure-html/interaction-plot1-eval-1.png)&lt;!-- --&gt;
+
+---
+Prior plot shows pretty clear evidence that the slopes are not the same
+across English Language learner classifications.
+
+
+--
+To this point, we'd model this as
+
+
+```r
+benchmarks &lt;- benchmarks %&gt;%
+  mutate(ell = factor(ell),
+         ell = relevel(ell, ref = "Non-ELL"))
+
+m3a &lt;- lm(rdg_spr ~ rdg_fall + ell, benchmarks)
+arm::display(m3a, detail = TRUE)
+```
+
+```
+## lm(formula = rdg_spr ~ rdg_fall + ell, data = benchmarks)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 135.77    14.17    9.58    0.00  
+## rdg_fall      0.34     0.07    4.66    0.00  
+## ellActive    -9.88     2.70   -3.66    0.00  
+## ellMonitor   -2.10     2.39   -0.88    0.38  
+## ---
+## n = 174, k = 4
+## residual sd = 12.49, R-Squared = 0.24
+```
+
+---
+What does this model look like?
+### One look
+
+![](w7_files/figure-html/show-prallel1-1.png)&lt;!-- --&gt;
+
+---
+### Another look
+![](w7_files/figure-html/show-prallel2-1.png)&lt;!-- --&gt;
+
+---
+![](w7_files/figure-html/overlaid-1.png)&lt;!-- --&gt;
+
+The above plot shows the difference between our parallel slopes model (pink
+lines), and a model where the slope is allowed to vary by group (colored 
+lines).
+
+
+---
+## Thinking about modeling the interaction
+* Interactions imply that the impact or effect of one variable **depends upon**
+the level of another variable
+
+
+--
+* We can think about this from the perspective of separate models
+
+---
+* First, we specify our parallel slopes model
+
+$$
+Rdg\_{spr\_i} = b\_0 + b\_1(Rdg\_{fall\_i}) + b\_2(ELL\_i) + e
+$$
+
+--
+* Next, we specify that the fall slope will be modeled by---is conditional 
+upon---ELL status
+
+$$
+b\_1 = \gamma\_0 + \gamma\_1(ELL)
+$$
+
+--
+* Substitute in and we get
+
+$$
+Rdg\_{spr\_i} = b\_0 + (\gamma\_0 + \gamma\_1(ELL))(Rdg\_{fall\_i}) + b\_2(ELL\_i) + e
+$$
+
+--
+* Evaluate 
+
+$$
+Rdg\_{spr\_i} = b\_0 + \gamma\_0(Rdg\_{fall\_i}) + \gamma\_1(ELL \times Rdg\_{fall\_i}) + b\_2(ELL\_i) + e
+$$
+
+--
+* Rearrange, and swap out the gammas for b's
+
+$$
+Rdg\_{spr\_i} = b\_0 + b\_1(Rdg\_{fall\_i}) + b\_2(ELL\_i) + b\_3(ELL \times Rdg\_{fall\_i})  + e
+$$
+
+
+---
+# Take home message
+We specify interactions by multiplying the terms
+
+--
+### Why?
+
+
+--
+When you multiply the terms, you are implicitly modeling the effect of one
+variable on the other
+
+
+---
+# Fit the model
+
+* We could specify the interactions by hand by calculating new variables
+
+--
+  + Clutters up your data frame
+  + Means you have to manually calculate dummy variables
+
+--
+* The formula syntax allows for easy specification of interactions
+
+--
+* Even so, we'll do it when we look at two continuous variables
+
+---
+# Centering
+* Because the two terms are multiplied together (whether by you or the model)
+  you can introduce high collinearity with interaction models
+
+--
+* The intercept was not meaningful before anyway (it's impossible on this
+  measure to get a zero)
+
+--
+
+
+```r
+benchmarks &lt;- benchmarks %&gt;%
+  mutate(rdg_fall_c = scale(rdg_fall, scale = FALSE)) 
+```
+The above is quicker way to center, using the `scale` function, but telling it
+not to do the division by the `\(SD\)` part
+
+--
+
+```r
+m3b &lt;- lm(rdg_spr ~ rdg_fall_c + ell + rdg_fall_c:ell, benchmarks)
+```
+
+---
+
+```r
+arm::display(m3b, detail = TRUE, digits = 3)
+```
+
+```
+## lm(formula = rdg_spr ~ rdg_fall_c + ell + rdg_fall_c:ell, data = benchmarks)
+##                       coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)           200.484    1.226 163.471   0.000 
+## rdg_fall_c              0.447    0.086   5.227   0.000 
+## ellActive             -12.765    3.148  -4.055   0.000 
+## ellMonitor             -1.438    2.402  -0.599   0.550 
+*## rdg_fall_c:ellActive   -0.408    0.203  -2.005   0.047 
+*## rdg_fall_c:ellMonitor  -0.345    0.235  -1.467   0.144 
+## ---
+## n = 174, k = 6
+## residual sd = 12.365, R-Squared = 0.27
+```
+
+--
+### How do we get the expected slope for Active ELLs? 
+
+--
+`\(0.447 + -0.408 = 0.039\)`
+
+
+--
+Note we also now (basically) have three intercepts. Centering effects them all!
+
+---
+
+![](w7_files/figure-html/m3b-visualized-1.png)&lt;!-- --&gt;
+
+---
+# Thinking more about centering
+What if we fit the model with the raw data?
+
+--
+
+
+```r
+m3b_raw &lt;- lm(rdg_spr ~ rdg_fall + ell + rdg_fall:ell, benchmarks)
+arm::display(m3b_raw, detail = TRUE, digits = 3)
+```
+
+```
+## lm(formula = rdg_spr ~ rdg_fall + ell + rdg_fall:ell, data = benchmarks)
+##                     coef.est coef.se t value Pr(&gt;|t|)
+*## (Intercept)         116.175   16.391   7.088   0.000 
+## rdg_fall              0.447    0.086   5.227   0.000 
+*## ellActive            64.121   36.804   1.742   0.083 
+*## ellMonitor           63.648   44.854   1.419   0.158 
+## rdg_fall:ellActive   -0.408    0.203  -2.005   0.047 
+## rdg_fall:ellMonitor  -0.345    0.235  -1.467   0.144 
+## ---
+## n = 174, k = 6
+## residual sd = 12.365, R-Squared = 0.27
+```
+
+--
+# 🤨
+
+
+---
+
+![](w7_files/figure-html/m3b_raw-visualized1-1.png)&lt;!-- --&gt;
+
+
+---
+
+![](w7_files/figure-html/m3b_raw-visualized2-1.png)&lt;!-- --&gt;
+
+---
+# Semipartial correlations
+
+
+```r
+library(lmSupport)
+modelEffectSizes(m3b)
+```
+
+```
+## lm(formula = rdg_spr ~ rdg_fall_c + ell + rdg_fall_c:ell, data = benchmarks)
+## 
+## Coefficients
+##                         SSR df pEta-sqr dR-sqr
+## (Intercept)    4085937.6342  1   0.9938     NA
+## rdg_fall_c        4178.2563  1   0.1399 0.1195
+## ell               2521.3180  2   0.0894 0.0721
+## rdg_fall_c:ell     825.6226  2   0.0311 0.0236
+## 
+## Sum of squared errors (SSE): 25687.4
+## Sum of squared total  (SST): 34957.4
+```
+
+---
+# Justified?
+
+* Next week, we'll talk more about comparing models, and whether or not it's
+"worth it" to model the interaction here.
+
+--
+* Just because the plot looks like the interaction is justified, doesn't mean 
+it is.
+
+--
+* Driven partially by sample size. Does the evidence indicate it's warranted?
+Not much evidence if sample size is small.
+
+---
+class: inverse center middle
+# Interactions
+
+
+### Two categorical IVs
+
+
+---
+# Move to HSB dataset
+
+
+```r
+hsb &lt;- import(here("data", "hsb2.sav"),
+                  setclass = "tbl_df") %&gt;%
+  characterize() %&gt;%
+  mutate(ses = factor(ses),
+         ses = relevel(ses, ref = "middle"),
+         schtyp = factor(schtyp),
+         schtyp = relevel(schtyp, ref = "public"))
+head(hsb)
+```
+
+```
+## # A tibble: 6 x 11
+##      id race  ses    schtyp prog     read write  math science socst Gender
+##   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+## 1    70 white low    public general    57    52    41      47    57 Male  
+## 2   121 white middle public vocati…    68    59    53      63    61 Female
+## 3    86 white high   public general    44    33    54      58    31 Male  
+## 4   141 white high   public vocati…    63    44    47      53    56 Male  
+## 5   172 white middle public academ…    47    52    57      53    61 Male  
+## 6   113 white middle public academ…    44    52    51      63    61 Male
+```
+
+---
+# Relation
+* Let's explore the relation between school type (public/private) and SES 
+category (low, middle, high) as predictors of math scores.
+
+--
+* First - plot!
+
+
+```r
+ggplot(hsb, aes(schtyp, math, color = ses)) +
+  ggbeeswarm::geom_quasirandom(dodge.width = .5) +
+  geom_smooth(data = mutate(hsb, schtyp = as.numeric(schtyp)),
+              method = "lm",
+              aes(color = ses)) +
+  theme(legend.position = "bottom")
+```
+
+---
+![](w7_files/figure-html/categorical-plot-eval-1.png)&lt;!-- --&gt;
+
+
+---
+# Fit the model
+
+
+```r
+m4 &lt;- lm(math ~ schtyp + ses + schtyp:ses, hsb)
+arm::display(m4, detail = TRUE, digits = 3)
+```
+
+```
+## lm(formula = math ~ schtyp + ses + schtyp:ses, data = hsb)
+##                       coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)           51.355    1.036  49.550   0.000  
+## schtypprivate          4.276    2.318   1.845   0.067  
+## seshigh                5.219    1.677   3.113   0.002  
+## seslow                -2.133    1.700  -1.255   0.211  
+## schtypprivate:seshigh -6.396    3.812  -1.678   0.095  
+## schtypprivate:seslow  -5.499    6.929  -0.794   0.428  
+## ---
+## n = 200, k = 6
+## residual sd = 9.035, R-Squared = 0.09
+```
+
+--
+### Let's interpret!
+
+---
+# Plot results
+
+
+```r
+hsb &lt;- hsb %&gt;%
+  mutate(fitted_m4 = fitted(m4)) 
+
+ggplot(hsb, aes(as.numeric(schtyp) - 1, fitted_m4, color = ses)) +
+  geom_line()
+```
+
+![](w7_files/figure-html/m4_plot-1.png)&lt;!-- --&gt;
+
+---
+class: inverse center middle
+# Interactions
+
+
+### Two continuous IVs
+
+---
+# The glo dataset
+
+```r
+glo &lt;- import(here("data", "glo_sim.sav"),
+            setclass = "tbl_df") %&gt;%
+      characterize()
+head(glo)
+```
+
+```
+## # A tibble: 6 x 14
+##   condition         age  aces   sex_risk internalizing externalizing
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Control      15.85763     3 -0.6215645            16            12
+## 2 Intervention 15.48255     0  0.4536259             9            13
+## 3 Control      13.49213     0 -0.6434958             3             0
+## 4 Intervention 14.21766     1 -0.6514939            11            16
+## 5 Intervention 17.29500     4  1.151312              9             1
+## 6 Intervention 14.80630     3 -0.6855188             9             5
+## # ... with 8 more variables: parent_education &lt;chr&gt;, parent_income &lt;chr&gt;,
+## #   parent &lt;chr&gt;, teen_eth &lt;chr&gt;, teen_race &lt;chr&gt;, parent_eth &lt;chr&gt;,
+## #   parent_race &lt;chr&gt;, id &lt;chr&gt;
+```
+
+---
+### Hypothesis
+&gt; The effect of adverse childhood experiences on girls sexual risk behavior is
+  moderated by (i.e., depends upon) girls internalizing and externalizing
+  behaviors
+
+
+--
+Take a minute - sketch out what this model might look like.
+
+--
+$$
+risk_i = b_0 + b_1(internalizing) + b_2(externalizing) + b_3(aces) + \\\
+         b_4(internalizing \times aces) + b_5(externalizing \times aces) + \\\
+         e
+$$
+
+---
+# Look at some plots first
+
+* How can we visualize a continuous interaction with ggplot?
+
+--
+* We need to `cut` the continuous variable into meaningful bins
+
+--
+
+```r
+glo &lt;- glo %&gt;%
+  mutate(intern_cut = cut(internalizing, 3),
+         extern_cut = cut(externalizing, 3))
+glo %&gt;%
+  select(internalizing, intern_cut, externalizing, extern_cut)
+```
+
+```
+## # A tibble: 119 x 4
+##    internalizing intern_cut externalizing extern_cut 
+##            &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt; &lt;fct&gt;      
+##  1            16 (14,27]               12 (-0.054,18]
+##  2             9 (0.961,14]            13 (-0.054,18]
+##  3             3 (0.961,14]             0 (-0.054,18]
+##  4            11 (0.961,14]            16 (-0.054,18]
+##  5             9 (0.961,14]             1 (-0.054,18]
+##  6             9 (0.961,14]             5 (-0.054,18]
+##  7             9 (0.961,14]             6 (-0.054,18]
+##  8             6 (0.961,14]             7 (-0.054,18]
+##  9            19 (14,27]               18 (-0.054,18]
+## 10            19 (14,27]               19 (18,36]    
+## # ... with 109 more rows
+```
+
+---
+
+```r
+ggplot(glo, aes(aces, sex_risk, color = intern_cut)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme(legend.position = "top")
+```
+
+![](w7_files/figure-html/internalizing_int_plot-1.png)&lt;!-- --&gt;
+
+---
+
+```r
+ggplot(glo, aes(aces, sex_risk, color = extern_cut)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme(legend.position = "top")
+```
+
+![](w7_files/figure-html/externalizing_int_plot-1.png)&lt;!-- --&gt;
+
+---
+# Fit the model
+
+$$
+risk_i = b_0 + b_1(internalizing) + b_2(externalizing) + b_3(aces) + \\\
+         b_4(internalizing \times aces) + b_5(externalizing \times aces) + \\\
+         e
+$$
+
+--
+
+
+```r
+m5 &lt;- lm(sex_risk ~ internalizing + externalizing + aces + 
+                    aces:externalizing + aces:internalizing, 
+                    data = glo)
+```
+
+---
+
+
+```r
+arm::display(m5, detail = TRUE, digits = 3)
+```
+
+```
+## lm(formula = sex_risk ~ internalizing + externalizing + aces + 
+##     aces:externalizing + aces:internalizing, data = glo)
+##                    coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)        -0.352    0.132  -2.670   0.009  
+## internalizing      -0.071    0.020  -3.501   0.001  
+## externalizing       0.079    0.014   5.522   0.000  
+## aces                0.045    0.047   0.963   0.337  
+## externalizing:aces -0.016    0.004  -4.034   0.000  
+## internalizing:aces  0.020    0.006   3.486   0.001  
+## ---
+## n = 119, k = 6
+## residual sd = 0.583, R-Squared = 0.35
+```
+
+### Let's interpret!
+(this gets a little trickier)
+
+---
+# APA writeup example
+
+The model was specified with two-way interactions between each of
+internalizing/externalizing behaviors and adverse childhood experiences. Both
+interactions were significant, as displayed in Table 1. Overall, the effect of
+adverse childhood experiences on sexual risk behavior increased as 
+internalizing behaviors increased, but decreased as externalizing behaviors
+increased. Specifically, a one unit increase in internalizing behaviors
+corresponded to, on average, a 0.02 unit increase (95% CI: 0.01, 0.03) in the
+effect of adverse childhood experiences on sexual risk scores. This interaction
+uniquely accounted for 9.7% of the total variability in sexual risk scores. By
+contrast, a one unit increase in externalizing behaviors corresponded to, on
+average, a 0.02 unit drop in the effect of adverse childhood experiences on
+sexual risk scores (95% CI: -0.02, -0.01), uniquely accounting for 7.0% of the
+total variability in sexual risk scores. Figures 1 and 2 display these
+interactions visually.
+
+
+---
+# Confidence intervals
+
+
+```r
+confint(m5)
+```
+
+```
+##                           2.5 %       97.5 %
+## (Intercept)        -0.613645684 -0.090849830
+## internalizing      -0.110731509 -0.030698808
+## externalizing       0.050792281  0.107629844
+## aces               -0.047424228  0.137185513
+## externalizing:aces -0.024012466 -0.008193758
+## internalizing:aces  0.008762388  0.031831898
+```
+
+---
+# Squared semipartials
+
+
+```r
+modelEffectSizes(m5)
+```
+
+```
+## lm(formula = sex_risk ~ internalizing + externalizing + aces + 
+##     aces:externalizing + aces:internalizing, data = glo)
+## 
+## Coefficients
+##                        SSR df pEta-sqr dR-sqr
+## (Intercept)         2.4228  1   0.0593     NA
+## internalizing       4.1665  1   0.0979 0.0707
+## externalizing      10.3652  1   0.2125 0.1759
+## aces                0.3154  1   0.0081 0.0054
+## externalizing:aces  5.5304  1   0.1259 0.0939
+## internalizing:aces  4.1311  1   0.0971 0.0701
+## 
+## Sum of squared errors (SSE): 38.4
+## Sum of squared total  (SST): 58.9
+```
+
+---
+# Figure 1
+(one of many methods)
+
+
+```r
+library(visreg)
+visreg(m5, xvar = "aces", by = "externalizing", overlay = TRUE)
+```
+
+![](w7_files/figure-html/fig1-1.png)&lt;!-- --&gt;
+
+
+---
+# Figure 2
+
+```r
+visreg(m5, xvar = "aces", by = "internalizing", overlay = TRUE)
+```
+
+![](w7_files/figure-html/fig2-1.png)&lt;!-- --&gt;
+
+---
+# Take home message
+* Interactions are **super** powerful, and can often lead to much deeper
+  understandings of the underlying phenomena. 
+
+--
+# .center[BUT]
+
+--
+* Need to be careful - easy to overfit
+
+--
+* ALWAYS visualize your data first - use SEs in the visualization
+
+--
+* Rely heavily on theory - generally it's unwise to **test** interactions that
+  don't have strong a priori support
+  + Okay for exploratory work, such as visualizations, but testing is a bit of 
+    a different ball game
+--
+* I understand today was fast - it was meant to be an intro. 
+* We'll keep working with interactions all next week
+
+---
+class: inverse center middle
+# Lab
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
