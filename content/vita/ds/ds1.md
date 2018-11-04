@@ -19,5 +19,7 @@ comments: false
 | 5  | 2      | [Advanced R Markdown](../ds1-slides/w5p2/)
 | 6  | 1      | [Guest Lecture: Alison Hill](https://alison.netlify.com/uo-tidy-bakeoff/slides.html)
 | 6  | 2      | [Introduction to tidy data](../ds1-slides/w6p2)
+| 7  | 1      | [Continuing with tidy data](../ds1-slides/w7p1)
+| 7  | 2      | [Finishing up with tidy data](../ds1-slides/w7p2)
 
 The table above will be updated as the class goes along

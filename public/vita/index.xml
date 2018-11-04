@@ -123,6 +123,24 @@
     
     <item>
       <title></title>
+      <link>/vita/ds/ds1-slides/w7p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w7p1/</guid>
+      <description>Continuing our introduction to tidy data   class: center, middle, inverse, title-slide # Continuing our introduction to tidy data ### Daniel Anderson ### Week 7, Class 1 --- # Agenda * Review tidy data * Cover a few more examples together * Lab + Work through Alison tidy data lab (based on Jenny Bryan&#39;s LOTR tidy data example) -- ### Learning objectives for today * Get more comfortable with tidy data * Get more fluent with `gather` --- class: inverse middle center background-image:url(.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/vita/ds/ds1-slides/w7p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w7p2/</guid>
+      <description>Finishing up with tidy data   class: center, middle, inverse, title-slide # Finishing up with tidy data ### Daniel Anderson ### Week 7, Class 2 --- # Agenda * Discuss `gather` and `spread` more -- ### Learning objectives for today * Get more comfortable with moving from wide to long * Understand when you may need to &#34;overgather&#34;, an how to best approach this --- class: inverse middle center background-image:url(.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/vita/educ611/slides/class1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -294,7 +312,7 @@ Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/ds/ds1/</guid>
-      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz 1   2 2 Intro to data viz 2   3 1 Intro to data wrangling 1   3 2 Data Import &amp;amp; data wrangling 2   4 1 Dynamic Documents 1: Intro to R Markdown   4 2 Intro to git and GitHub   5 1 More git &amp;amp; intro to dynamic APA manuscripts   5 2 Advanced R Markdown   6 1 Guest Lecture: Alison Hill   6 2 Introduction to tidy data    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz 1   2 2 Intro to data viz 2   3 1 Intro to data wrangling 1   3 2 Data Import &amp;amp; data wrangling 2   4 1 Dynamic Documents 1: Intro to R Markdown   4 2 Intro to git and GitHub   5 1 More git &amp;amp; intro to dynamic APA manuscripts   5 2 Advanced R Markdown   6 1 Guest Lecture: Alison Hill   6 2 Introduction to tidy data   7 1 Continuing with tidy data   7 2 Finishing up with tidy data    The table above will be updated as the class goes along</description>
     </item>
     
     <item>

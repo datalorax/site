@@ -183,6 +183,18 @@
   </url>
   
   <url>
+    <loc>/vita/ds/ds1-slides/w7p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/vita/ds/ds1-slides/w7p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/vita/educ611/slides/class1/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
