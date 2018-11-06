@@ -286,7 +286,7 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/ds/ds1-slides/w7p2/</guid>
-      <description>Finishing up with tidy data   class: center, middle, inverse, title-slide # Finishing up with tidy data ### Daniel Anderson ### Week 7, Class 2 --- # Agenda * Discuss `gather` and `spread` more -- ### Learning objectives for today * Get more comfortable with moving from wide to long * Understand when you may need to &#34;overgather&#34;, an how to best approach this --- class: inverse middle center background-image:url(.</description>
+      <description>Finishing up with tidy data   class: center, middle, inverse, title-slide # Finishing up with tidy data ### Daniel Anderson ### Week 7, Class 2 --- # Agenda * Discuss `gather` and `spread` more -- ### Learning objectives for today * Get more comfortable with moving from wide to long * Understand when you may need to &#34;overgather&#34;, an how to best approach this --- # Reasons to prefer tidy data * More efficient storage and retrieval * More scalable * The *tidyverse* of tools will work much more efficiently --- # Read in the hiv data Note, you&#39;ll need to add `header = TRUE` to `import` to get it to treat the first row as column names instead of data.</description>
     </item>
     
     <item>

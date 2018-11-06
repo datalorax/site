@@ -34,27 +34,6 @@ class: center, middle, inverse, title-slide
 
 
 ---
-class: inverse middle center
-background-image:url(../img/chalkboard.jpg)
-background-size:cover
-
-# What questions do you have?
-
-
----
-# Revisiting *git*
-Talk with neighbor. What do these terms mean?
-
-* clone
-* pull
-* stage
-* commit
-* push
-* repo
-* remote
-
-
----
 # Reasons to prefer tidy data
 * More efficient storage and retrieval 
 * More scalable 
@@ -286,7 +265,6 @@ hiv %&gt;%
     gather(year, percentage, -country)
 ```
 
-
 ---
 # A few more examples (follow along)
 * Load the *votes_repub.csv* dataset.
@@ -324,6 +302,7 @@ head(votes)
 # Step 1: Name state
 
 * dplyr syntax
+
 
 ```r
 votes &lt;- votes %&gt;% 
@@ -405,209 +384,6 @@ ggplot(pd, aes(year, approval_rating, color = state)) +
 ```
 
 ![](w7p2_files/figure-html/plot1-1.png)&lt;!-- --&gt;
-
----
-# More complex
-* Load the affairs data
-* Discuss with a partner/your table
-    + What are the variables?
-    + What needs to happen to make it tidy?
-
-
-```r
-affairs &lt;- import(here("data", "affairs.csv"), 
-                  setclass = "tbl_df")
-head(affairs, n = 3)
-```
-
-```
-## # A tibble: 3 x 19
-##      V1 naffairs  kids vryunhap unhap avgmarr hapavg vryhap antirel notrel
-##   &lt;int&gt;    &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;int&gt;   &lt;int&gt;  &lt;int&gt;  &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
-## 1     1        0     0        0     0       0      1      0       0      0
-## 2     2        0     0        0     0       0      1      0       0      0
-## 3     3        3     0        0     0       0      1      0       0      0
-## # ... with 9 more variables: slghtrel &lt;int&gt;, smerel &lt;int&gt;, vryrel &lt;int&gt;,
-## #   yrsmarr1 &lt;int&gt;, yrsmarr2 &lt;int&gt;, yrsmarr3 &lt;int&gt;, yrsmarr4 &lt;int&gt;,
-## #   yrsmarr5 &lt;int&gt;, yrsmarr6 &lt;int&gt;
-```
-
----
-# Variables
-* Number of affairs: *naffairs*
-* Have kids or not: *kids*
-* Marriage happiness: *vryunhap*:*vryhap*
-* Religous: *antirel*:*vryrel*
-* Years married: *yrsmarr1*:*yrsmarr6*
-
----
-# Lots of ways to do this
-* One way: `rename`, `gather`, `separate`, `filter`, `spread`
-For renaming I'm using the base function and you can probably see  why I  
-prefer it in this case.
-
-
-```r
-names(affairs)[1] &lt;- "id"
-names(affairs)[4:8] &lt;- paste0("marhap_", names(affairs)[4:8])
-names(affairs)[9:13] &lt;- paste0("rel_", names(affairs)[9:13])
-names(affairs)[14:19] &lt;- paste0("yrs_", names(affairs)[14:19])
-head(affairs, n = 3)
-```
-
-```
-## # A tibble: 3 x 19
-##      id naffairs  kids marhap_vryunhap marhap_unhap marhap_avgmarr
-##   &lt;int&gt;    &lt;int&gt; &lt;int&gt;           &lt;int&gt;        &lt;int&gt;          &lt;int&gt;
-## 1     1        0     0               0            0              0
-## 2     2        0     0               0            0              0
-## 3     3        3     0               0            0              0
-## # ... with 13 more variables: marhap_hapavg &lt;int&gt;, marhap_vryhap &lt;int&gt;,
-## #   rel_antirel &lt;int&gt;, rel_notrel &lt;int&gt;, rel_slghtrel &lt;int&gt;,
-## #   rel_smerel &lt;int&gt;, rel_vryrel &lt;int&gt;, yrs_yrsmarr1 &lt;int&gt;,
-## #   yrs_yrsmarr2 &lt;int&gt;, yrs_yrsmarr3 &lt;int&gt;, yrs_yrsmarr4 &lt;int&gt;,
-## #   yrs_yrsmarr5 &lt;int&gt;, yrs_yrsmarr6 &lt;int&gt;
-```
-
----
-# `gather`
-
-
-```r
-affairs %&gt;% 
-  gather(var, val, -id, -naffairs, -kids)
-```
-
-```
-## # A tibble: 9,616 x 5
-##       id naffairs  kids var               val
-##    &lt;int&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt;
-##  1     1        0     0 marhap_vryunhap     0
-##  2     2        0     0 marhap_vryunhap     0
-##  3     3        3     0 marhap_vryunhap     0
-##  4     4        0     1 marhap_vryunhap     0
-##  5     5        3     1 marhap_vryunhap     0
-##  6     6        0     1 marhap_vryunhap     0
-##  7     7        0     0 marhap_vryunhap     0
-##  8     8        0     0 marhap_vryunhap     0
-##  9     9        7     1 marhap_vryunhap     0
-## 10    10        0     0 marhap_vryunhap     0
-## # ... with 9,606 more rows
-```
-
----
-# `separate`
-
-
-```r
-affairs %&gt;% 
-  gather(var, val, -id, -naffairs, -kids) %&gt;% 
-  separate(var, c("var", "char_val"))
-```
-
-```
-## # A tibble: 9,616 x 6
-##       id naffairs  kids var    char_val   val
-##    &lt;int&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
-##  1     1        0     0 marhap vryunhap     0
-##  2     2        0     0 marhap vryunhap     0
-##  3     3        3     0 marhap vryunhap     0
-##  4     4        0     1 marhap vryunhap     0
-##  5     5        3     1 marhap vryunhap     0
-##  6     6        0     1 marhap vryunhap     0
-##  7     7        0     0 marhap vryunhap     0
-##  8     8        0     0 marhap vryunhap     0
-##  9     9        7     1 marhap vryunhap     0
-## 10    10        0     0 marhap vryunhap     0
-## # ... with 9,606 more rows
-```
-
----
-# Filter
-
-
-```r
-affairs %&gt;% 
-  gather(var, val, -id, -naffairs, -kids) %&gt;% 
-  separate(var, c("var", "char_val")) %&gt;%
-  filter(val == 1)
-```
-
-```
-## # A tibble: 1,803 x 6
-##       id naffairs  kids var    char_val   val
-##    &lt;int&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
-##  1    49       12     1 marhap vryunhap     1
-##  2    64        0     1 marhap vryunhap     1
-##  3    82        0     1 marhap vryunhap     1
-##  4   138        0     1 marhap vryunhap     1
-##  5   150       12     1 marhap vryunhap     1
-##  6   206        7     1 marhap vryunhap     1
-##  7   215        0     1 marhap vryunhap     1
-##  8   275        3     1 marhap vryunhap     1
-##  9   358        0     1 marhap vryunhap     1
-## 10   371        0     1 marhap vryunhap     1
-## # ... with 1,793 more rows
-```
-
----
-# Drop val, `spread`
-
-
-```r
-affairs %&gt;% 
-  gather(var, val, -id, -naffairs, -kids) %&gt;% 
-  separate(var, c("var", "char_val")) %&gt;%
-  filter(val == 1) %&gt;%  
-  select(-val) %&gt;% 
-  spread(var, char_val) %&gt;% 
-  head()
-```
-
-```
-## # A tibble: 6 x 6
-##      id naffairs  kids marhap rel      yrs     
-##   &lt;int&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   
-## 1     1        0     0 hapavg slghtrel yrsmarr5
-## 2     2        0     0 hapavg smerel   yrsmarr3
-## 3     3        3     0 hapavg slghtrel yrsmarr2
-## 4     4        0     1 hapavg antirel  yrsmarr6
-## 5     5        3     1 vryhap slghtrel yrsmarr3
-## 6     6        0     1 vryhap vryrel   yrsmarr6
-```
-
----
-# Cleanup
-
-
-```r
-affairs_tidy &lt;- affairs %&gt;% 
-  gather(var, val, -id, -naffairs, -kids) %&gt;% 
-  separate(var, c("var", "char_val")) %&gt;%
-  filter(val == 1) %&gt;%  
-  select(-val) %&gt;% 
-  spread(var, char_val) %&gt;% 
-  mutate(yrs = parse_number(yrs))
-
-head(affairs_tidy)
-```
-
-```
-## # A tibble: 6 x 6
-##      id naffairs  kids marhap rel        yrs
-##   &lt;int&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-## 1     1        0     0 hapavg slghtrel     5
-## 2     2        0     0 hapavg smerel       3
-## 3     3        3     0 hapavg slghtrel     2
-## 4     4        0     1 hapavg antirel      6
-## 5     5        3     1 vryhap slghtrel     3
-## 6     6        0     1 vryhap vryrel       6
-```
-
----
-# Notice what we've done?
-* Essentially, in this case, we've removed the dummy-coding
-    + One of the most common ways data are not tidy
 
 ---
 class: inverse middle center
