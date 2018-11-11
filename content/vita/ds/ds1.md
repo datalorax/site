@@ -21,5 +21,7 @@ comments: false
 | 6  | 2      | [Introduction to tidy data](../ds1-slides/w6p2)
 | 7  | 1      | [Continuing with tidy data](../ds1-slides/w7p1)
 | 7  | 2      | [Finishing up with tidy data](../ds1-slides/w7p2)
+| 8  | 1      | [Some data taming (focusing on factors)](../ds1-slides/w8p1)
+| 8  | 2      | Work Day
 
 The table above will be updated as the class goes along
