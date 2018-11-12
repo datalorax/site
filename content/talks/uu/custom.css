@@ -1,0 +1,30 @@
+.major-emph-red {
+  display: block;
+  text-align: center;
+  font-family: 'Philosopher', sans-serif;
+  width: 110%;
+  background-color: rgba(204, 0, 0, 1);
+  color: #eee;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+  padding: 10px 50px;
+  margin: 0px -100px 0px;
+  font-weight: bolder;
+  font-size: 175%;
+}
+
+
+.major-emph-gray-trans {
+  display: block;
+  text-align: center;
+  font-family: 'Philosopher', sans-serif;
+  width: 110%;
+  background-color: rgba(128, 128, 128, 0.7);
+  color: #fff;
+  padding: 20px 50px;
+  margin: 0px -100px 0px;
+  font-weight: bolder;
+  font-size: 175%;
+}
+
+.red { color: #CC0000; }

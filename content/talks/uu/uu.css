@@ -1,0 +1,136 @@
+.remark-slide-content {
+  border-top: 5px solid #CC0000;
+  border-bottom: 5px solid #CC0000;
+  font-size: 1.2em;
+  padding: 20px 60px;
+}
+
+.remark-slide-content > h1 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.remark-slide-content > h2 {
+  font-size: 1.2em;
+  padding-left: 10px;
+}
+
+.inverse {
+  background-color: #CC0000;
+  border:none;
+  font-color: #fff;
+  text-shadow: none;
+}
+
+.inverse, .inverse h1, .inverse h2, .inverse a {
+  color: #fff;
+}
+
+.inverse h3 {
+  color: #000;
+}
+
+.inverse code {
+  color: #E1E000;
+}
+
+.footnote {
+  border-top: 1px solid #CC0000;
+  font-size: 0.6em;
+}
+
+.inverse .footnote {
+  border-top: 1px solid #000;
+  padding-top: 5px;
+  color: #000;
+  font-size: 0.6em;
+}
+
+.remark-code-line-highlighted { background-color: rgba(225, 224, 0, 0.6); }
+
+h1 {
+  color: #CC0000;
+}
+
+h2 {
+  font-size: 5px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  padding: 0px;
+  color: #000;
+}
+
+h3 {
+  color: #808080;
+  margin-bottom: -20px;
+  margin-top: 20px;
+  padding: 0px;
+}
+
+code {
+  color: #007935;
+}
+
+a {
+  color: #3F97B5;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+}
+
+a:hover {
+    font-size: 1.2em;
+    color: #EC008C;
+}
+
+.inverse a {
+  color: #808080;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+}
+
+.inverse a:hover {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.remark-slide-number {
+  font-size: 0.6em;
+}
+
+.title-slide {
+  border: 10px solid #CC0000;
+  background-color: #000;
+}
+
+.title-slide h1 {
+  padding-top: 200px;
+  font-size: 45px;
+  text-align: left;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+}
+
+.title-slide h2 {
+  font-size: 20px;
+  color: #808080;
+  text-align: left;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.title-slide h3 {
+  font-size: 30px;
+  color: #808080;
+  text-align: left;
+  text-shadow: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 1;
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+.mjx-chtml{ font-size: 100% !important; }

@@ -8,6 +8,10 @@ comments: false
       Talks
 </p>
 
+## Fall 2018
+* [Measurement, Individual Differences, and the Promise of Computational
+Methods](../uu)
+
 ## Summer 2018
 * [My Research and the COE](../datasci-09-11-18)
 	+ Talk for the University of Oregon's Data Science Initiative in a joint

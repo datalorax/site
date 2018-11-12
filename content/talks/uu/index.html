@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Measurement, individual differences, and the promise of computational methods</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="date" content="2018-11-15" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="uu.css" type="text/css" />
+    <link rel="stylesheet" href="uu-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Measurement, individual differences, and the promise of computational methods
+## Job talk for the University of Utah
+### Daniel Anderson
+### November 15, 2018
+
+---
+
+
+
+
+# My background
+### Behavioral Research and Teaching
+* Research Assistant to Research Associate to Research Assistant Professor
+* Grant funded research shop at UO that mostly focuses on measurement
+  + Curriculum Based Measurement (e.g., [easyCBM](https://easycbm.com))
+    - Project Manager, 4-year IES award on the development of a middle
+    school math CBM
+  + Statewide Alternate Assessment
+    - Lead psychometrician since 2011
+    - Lead development of a new vertical scale in 2015
+
+---
+# My background
+### Project NCAASE
+National Center on Assessment and Accountability in Special Education
+* Large inter-state collaborative focused on the measurement of schools
+* Lead numerous studies on between-school differences in achievement (and the
+  implications for accountability models)
+* First foray into very large scale data
+
+---
+# The focus of my talk today
+## Three stories of scholarship
+
+--
+### Study 1: Measurement
+* Controlling for rater effects (harshness/severity) in online designs using
+  item-response theory methods.
+
+
+--
+### Study 2: Individual differences
+* Exploring why students differ in their academic growth
+  + Teachers, Schools
+  + Variance in summer lags (out-of-school opportunities)
+
+
+--
+### In-Progress Research: Computational methods
+* Linking large-scale data sources
+  + Machine learning approaches 
+* Open data, open science, and reproducible research
+
+
+---
+class: inverse middle
+# Study 1: Measurement
+### Gauging Item Alignment Through Online Systems While Controlling for Rater Effects
+
+.footnote[Anderson, D., Irvin, P. S., Alonzo, J., &amp; Tindal, G. A. (2015). Gauging item alignment through online systems while controlling for rater effects. *Educational Measurement: Issues and Practice*, *34*, 22-33. doi: [10.1111/emip.12038](https://onlinelibrary.wiley.com/doi/pdf/10.1111/emip.12038)]
+
+---
+# Item-Standard Alignment
+* Critical to standards-based assessment and accountability
+* Provides a source of content-related validity evidence
+
+
+--
+### General Approach
+* Panel or independent reviews
+* Collapse ratings using simple averages or consensus-based methods
+
+
+--
+### Study purpose
+* Apply latent trait methods to optimally combine scores &amp; statistically document &amp; control for rater effects
+
+---
+background-image: url(img/item-sampling1.png)
+background-size: contain
+
+# Item-Sampling Plan
+
+
+---
+background-image: url(img/item-sampling2.png)
+background-size: contain
+
+# Item-Sampling Plan
+
+---
+background-image: url(img/item-sampling3.png)
+background-size: contain
+
+# Item-Sampling Plan
+
+---
+background-image: url(img/item-sampling4.png)
+background-size: contain
+
+# Item-Sampling Plan
+
+
+---
+# Scaling model
+Adapted from the Many Facets Rasch Model, defined as 
+
+.Large[
+$$
+ln\Biggl(\frac{P\_{nijk}}{P\_{ni(k-1)j}}\Biggr) = B\_n - D\_i - F\_k - C\_j
+$$
+
+]
+
+--
+
+Where
+* `\(P_{nijk}\)` is the probability that person `\(n\)` is rated into category `\(k\)` on
+  item `\(i\)` by rater `\(j\)`
+* `\(B_n\)` is the estimated location on the latent trait for person `\(n\)`
+* `\(D_i\)` is the difficulty of item `\(i\)`
+* `\(F_k\)` is the threshold for the `\(k-1\)` category
+* `\(C_j\)` is the severity/harshness of of rater `\(j\)`
+
+---
+# Scaling model
+* Prior equation (general MFRM model) estimates latent variables for persons,
+  items, item thresholds, and raters
+
+
+--
+* Our case includes item, rater, and rater threshold parameters
+
+* Redefining the subscripts so that the `\(n\)` and `\(i\)`  index items and raters
+  respectively 
+
+--
+
+.Large[
+$$
+ln\Biggl(\frac{P\_{nik}}{P\_{ni(k-1)}}\Biggr) = B\_n - D\_i - F\_k
+$$
+]
+
+* `\(B_n\)` is the latent alignment rating for item `\(n\)`
+* `\(D_i\)` is the severity/harshness of of rater `\(i\)`
+* `\(F_k\)` is the category-specific severity/harshness estimate
+
+---
+class: inverse bottom
+background-image: url(img/dir.png)
+background-size: contain
+
+
+.major-emph-gray-trans[The online rating system]
+
+---
+background-image: url(img/items-ref.png)
+background-size: contain
+
+# Results
+
+
+
+---
+background-image: url(img/raters.png)
+background-size: contain
+
+# Results
+
+---
+# Discussion
+* Online designs (in many study contexts) are an efficient means of data
+  collection, .red[**BUT**]
+
+
+--
+* When data need to be pooled/collapsed across respondents/raters, latent
+  trait/item response theory methods can help
+
+--
+* Generally, thinking about data collection through the lens of scaling and
+  equating can help make results more interpretable (common metric) and
+  potentially increase statistical power.
+
+
+--
+* More sophisticated analyses can provide additional information, which can
+  help aid interpretation and decisions
+
+
+--
+* Specific application here had some limitations (e.g., small number of raters,
+  leading to larger standard errors), but the methodology should generalize.
+
+---
+class: inverse middle
+# Study 2: Individual Differences
+### Exploring Teacher and School Variance in Students’ Within-Year Reading and Mathematics Growth.
+
+.footnote[Anderson, D. (revise and resubmit). Exploring Teacher and School
+Variance in Students’ Within-Year Reading and Mathematics Growth. *School
+Effectiveness and School Improvement*]
+
+---
+# The fundamental question
+* We know there is considerable heterogeneity in the rate at which students 
+  learn.
+
+
+--
+.major-emph-red[Why?]
+
+
+--
+* Lots of evidence that teachers contribute to learning
+
+
+--
+* Lots of evidence that schools contribute to learning
+
+
+--
+**How much does student learning depend on the set of teachers they are
+"assigned" to, versus schools?**
+
+--
+### Secondary questions
+* Is evidence of teacher "sorting" between schools present?
+* How variable is the "summer slide"?
+
+---
+# Data 
+
+* 3 Cohorts of students in one school district in the Southwestern United 
+  States, progressing from Grades 3-5
+
+  + 2007-08 to 2009-10, 2008-09 to 2010-11, or 2009-10 to 2011-12
+
+
+--
+* Three time points within each year (collected fall, winter, spring)
+
+
+--
+* Variance components estimated for teachers in each grade, necessitating the
+  removal of any student with incomplete teacher records.
+
+  + 2,909 students out 5,311 had complete teacher records
+
+
+--
+* Between 106-119 teachers, depending on the grade, nested in 18 schools
+
+
+--
+* Approximately 54% of students were coded as Hispanic, 24% White, and 74% were
+  eligible for free or reduced price lunch
+
+---
+# Measures
+* Measures of Academic Progress, developed by the Northwest Evaluation
+  Association (NWEA)
+
+* Computer adaptive 
+
+  + High conditional reliability across a broad ability range
+
+* Vertical scale
+
+  + Growth within and between grades directly comparable
+
+---
+# Piecewise growth model
+
+### Slopes
+$$
+g3\_{slp} = {0, 1, 2 | 2, 2, 2 | 2, 2, 2} \\\
+g4\_{slp} = {0, 0, 0 | 0, 1, 2 | 2, 2, 2} \\\
+g5\_{slp} = {0, 0, 0 | 0, 0, 0 | 0, 1, 2}
+$$
+
+--
+
+### Grade 4 &amp; 5 Intercepts
+$$
+g4 = {0, 0, 0 | 1, 1, 1 | 1, 1, 1} \\\
+g5 = {0, 0, 0 | 0, 0, 0 | 1, 1, 1}
+$$
+
+--
+### Fixed effects
+
+$$
+y\_{tijk} = \beta\_0 + \beta\_1(g3\_{slp}) + \beta\_2(g4) + \beta\_3(g4\_{slp}) + \beta\_4(g5) + \beta\_5(g5\_{slp}) 
+$$
+
+
+---
+# Random effects
+
+### Student level (nested)
+
+$$ 
+`\begin{pmatrix}
+  r_{0_{ijk}} + r_{1_{ijk}}(g3_{slp}) + \\\  
+  r_{2_{ijk}}(g4) + r_{3_{ijk}}(g4_{slp}) + \\\
+  r_{4_{ijk}}(g5) + r_{5_{ijk}}(g5_{slp})
+\end{pmatrix}`
+$$
+
+### Teacher level (crossed)
+
+$$ 
+`\begin{pmatrix}
+  u_{0_{j(3)k}}^3 + u_{1_{j(3)k}}^3(g3_{slp}) 
+\end{pmatrix}`
+$$
+
+$$
+`\begin{pmatrix}
+  u_{2_{j(4)k}}^4 + u_{3_{j(4)k}}^4(g4_{slp}) 
+\end{pmatrix}`
+$$
+
+$$
+`\begin{pmatrix}
+  u_{4_{j(5)k}}^4 + u_{5_{j(5)k}}^4(g5_{slp}) 
+\end{pmatrix}`
+$$
+
+---
+# Random effects
+
+### School level (nested)
+
+$$ 
+`\begin{pmatrix}
+  v_{0_{k}} + v_{1_{k}}(g3_{slp}) + \\\  
+  v_{2_{k}}(g4) + v_{3_{k}}(g4_{slp}) + \\\
+  v_{4_{k}}(g5) + v_{5_{k}}(g5_{slp})
+\end{pmatrix}`
+$$
+
+--
+
+### Residual error
+
+$$
+e
+$$
+
+--
+&lt;br/&gt;
+
+All random effects were assumed to follow a multivariate normal distribution 
+and were estimated with an unstructured variance-covariance matrix
+
+.footnote[For reading, the variance-covariance matrix at the school level was
+moderately simplified to help the model converge. Specifically, the 
+school-level intercept and all slope terms were allowed to correlate, but the
+correlation between these terms and the summer drops were fixed at zero.]
+
+---
+class: bottom
+background-image: url(img/growth.png)
+background-size: contain
+
+# Results
+
+---
+class: inverse
+background-image: url(img/rdg-params.png)
+background-size: contain
+
+---
+class: inverse
+background-image: url(img/tch-by-schl.png)
+background-size: contain
+
+---
+class: inverse
+background-image: url(img/tch-by-schl-dist.png)
+background-size: contain
+
+---
+# Conclusions
+* Considerable variability in students' growth was between **both** teachers
+  and schools
+
+
+--
+* Teacher/School effects may compound, or compensate
+
+
+--
+* Considerable variability in "high growth" teachers in all schools
+
+
+--
+* Several limitations should be kept in mind
+  + small number of schools for the complexity of the model
+  + Students had to have at least one data point within each school year to be
+    included (mobility is linked with achievement and SES)
+
+
+---
+class: inverse middle
+# Quickly:
+### In-Progress Research: Computational methods
+* Linking large-scale data sources
+  + Machine learning approaches 
+* Open data, open science, and reproducible research
+
+---
+# Open Science
+* Much recent focus on open data in research generally
+* Open data tend to be rare in educational research
+  + Privacy concerns
+
+--
+.Large[.bolder[.center[NCLB Required Publicly Available Data]]]
+
+--
+* School-level data 
+* Percent proficent in each of at least four proficiency categories
+* Disaggregated by student subgroups
+
+
+
+---
+# Reardon &amp; Ho Method
+* Calculate the empirical CDF of each distribution
+* Pair the ECDFs
+* Calculate the area under the paired curve
+* Transform it to an effect-size measure (standard deviation units)
+
+
+--
+
+.pull-left[
+![](uu-job-talk_files/figure-html/sim_ecdf-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+![](uu-job-talk_files/figure-html/sim_pp-1.png)&lt;!-- --&gt;
+]
+
+---
+# Transformation to effect size
+
+.Large[
+$$
+V = \sqrt{2}\Phi^{-1}(AUC)
+$$
+]
+
+
+### Why does this all matter?
+
+&lt;img src="uu-job-talk_files/figure-html/props-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Achievement Gap Distributions
+
+.grey[Reminder: School-level Distributions]
+
+&lt;center&gt;&lt;img src = "img/school_achievement_gaps.png" height = 460/&gt;&lt;/center&gt;
+
+---
+# Alameda County
+## `\(n\)` Income/Poverty Ratio &gt; 2.0
+
+&lt;iframe seamless src="alameda_poverty.html" width="100%" height="475"&gt;&lt;/iframe&gt;
+
+---
+# "Epidemiological" work
+* Large-scale data sources incorporated with educational outcomes
+
+* Predict "disease" (e.g., achievement gaps)
+
+* Include different modeling strategies (e.g., machine learning)
+
+* Ideally, data are publicly available/shareable
+
+  + Increase transparency/reproducibility
+
+---
+class: inverse center middle
+# Wrapping up
+
+---
+# Future Work
+* The work presented here was mostly exploratory/visual - can we actually model
+  the data with machine learning methods?
+
+
+--
+* Given recent gains in computational methods, can we expand what "counts" as
+  data? (e.g., images)
+
+---
+# Conference proposal
+
+* Train a text-based machine learning algorithm on a set of content standards.
+
+* Extract any textual features from the item and allow the model to classify
+  the item (new/additional source of content-related validity evidence)
+
+&lt;center&gt;&lt;img src = "img/text-processing1.png" height = 250/&gt;&lt;/center&gt;
+
+
+
+---
+background-image: url(img/text-processing2.png)
+background-size: contain
+
+
+---
+# Reproducibility &amp; Transparency
+
+* I'm leading a training on reproducible research at AERA this year
+
+* Embedded within all my teaching
+
+* Recently applied for small grant to help navigate between R Markdown and
+  Microsoft Word
+
+* Deeply committed to open and transparent research
+
+---
+class: inverse middle center
+# Thanks!
+### Questions?
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
