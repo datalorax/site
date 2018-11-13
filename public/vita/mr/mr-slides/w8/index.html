@@ -1021,6 +1021,20 @@ benchmarks &lt;- benchmarks %&gt;%
   mutate(rdg_fall_c = rdg_fall - mean(rdg_fall))
 ```
 
+
+---
+# Let's look back at the plot for this model
+
+
+```r
+ggplot(benchmarks, aes(rdg_fall, rdg_spr)) +
+  geom_point(color = "gray70") +
+  geom_smooth(aes(color = ell),
+              method = "lm")
+```
+
+![](w8_files/figure-html/ell-plot-1.png)&lt;!-- --&gt;
+
 ---
 # Fit the model
 
@@ -1046,19 +1060,6 @@ arm::display(ell_int, detail = TRUE, digits = 3)
 
 --
 ### How would you evaluate if the interaction was "worth it"?
-
----
-# Let's look back at the plot for this model
-
-
-```r
-ggplot(benchmarks, aes(rdg_fall, rdg_spr)) +
-  geom_point(color = "gray70") +
-  geom_smooth(aes(color = ell),
-              method = "lm")
-```
-
-![](w8_files/figure-html/ell-plot-1.png)&lt;!-- --&gt;
 
 ---
 # Compare to a parallel slopes models
@@ -1225,25 +1226,6 @@ sundry::aic_weights(glo_m1, glo_m2)
 ## 2  0.00000      1
 ## 1 30.14969      0
 ```
-
----
-
-.code-bg-red[
-
-```r
-as.data.frame(summary(glo_m2)$coefficients) %&gt;%
-  head(n = 4)
-```
-
-```
-##                   Estimate  Std. Error   t value     Pr(&gt;|t|)
-## (Intercept)   -3.373527233 0.938970630 -3.592793 0.0005821343
-*## internalizing -0.002299817 0.010606983 -0.216821 0.8289365449
-*## externalizing  0.030670806 0.007799962  3.932174 0.0001861287
-*## aces           0.035991144 0.033224785  1.083262 0.2821625062
-```
-]
-
 
 ---
 # Compare to interaction model
