@@ -309,6 +309,15 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     
     <item>
       <title></title>
+      <link>/vita/ds/ds1-slides/w9p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/vita/ds/ds1-slides/w9p1/</guid>
+      <description>Review   class: center, middle, inverse, title-slide # Review ### Daniel Anderson ### Week 9, Class 1 --- # Agenda * Publishing slides with GitHub * Review where we&#39;ve been * Lab --- class: inverse center middle # Publishing slides w/GitHUb ### Demo (RMarkdown Slides and a quick note on {xaringan}) --- ## Tidyverse: Providing a grammar for... * Graphics (ggplot) * Data manipulations (dplyr) * Tidying data (tidyr) --- class: inverse center middle # dplyr --- ## dplyr: A grammar for data wrangling * `select()`: A subset of columns * `filter()`: A subset of rows * `mutate()`: Add or modify existing columns * `arrange()`: Rows in a ascending or descending order * `summarize()`: A variable according to other functions (e.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/vita/educ611/slides/class1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -498,7 +507,7 @@ Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/ds/ds1/</guid>
-      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz 1   2 2 Intro to data viz 2   3 1 Intro to data wrangling 1   3 2 Data Import &amp;amp; data wrangling 2   4 1 Dynamic Documents 1: Intro to R Markdown   4 2 Intro to git and GitHub   5 1 More git &amp;amp; intro to dynamic APA manuscripts   5 2 Advanced R Markdown   6 1 Guest Lecture: Alison Hill   6 2 Introduction to tidy data   7 1 Continuing with tidy data   7 2 Finishing up with tidy data   8 1 Some data taming (focusing on factors)   8 2 Work Day    The table above will be updated as the class goes along</description>
+      <description>EDUC 610: Introduction to Data Science with R    Week Lecture Slides     1 1 Oh the places you&amp;rsquo;ll go! An intro to R   1 2 Seeing the big picture   2 1 Intro to data viz 1   2 2 Intro to data viz 2   3 1 Intro to data wrangling 1   3 2 Data Import &amp;amp; data wrangling 2   4 1 Dynamic Documents 1: Intro to R Markdown   4 2 Intro to git and GitHub   5 1 More git &amp;amp; intro to dynamic APA manuscripts   5 2 Advanced R Markdown   6 1 Guest Lecture: Alison Hill   6 2 Introduction to tidy data   7 1 Continuing with tidy data   7 2 Finishing up with tidy data   8 1 Some data taming (focusing on factors)   8 2 Work Day   9 1 Review   9 2 Work Day    The table above will be updated as the class goes along</description>
     </item>
     
     <item>

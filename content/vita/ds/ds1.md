@@ -23,5 +23,7 @@ comments: false
 | 7  | 2      | [Finishing up with tidy data](../ds1-slides/w7p2)
 | 8  | 1      | [Some data taming (focusing on factors)](../ds1-slides/w8p1)
 | 8  | 2      | Work Day
+| 9  | 1      | [Review](../ds1-slides/w9p1)
+| 9  | 2      | Work Day
 
 The table above will be updated as the class goes along
