@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dealing with collinearity and non-linearity</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Dealing with collinearity and non-linearity
+### Daniel Anderson
+### Week 9
+
+---
+
+
+
+
+# Agenda 
+* Review interactions exercise
+* Review the concept of (multi)collinearity
+* Introduce collinearity diagnostic tools
+  + Tolerance
+  + Variance Inflation Factor
+* Discuss nonlinearity
+  + Polynomial approaches
+  + Transformations (e.g., log)
+
+---
+class: inverse middle center
+background-image:url(../img/chalkboard.jpg)
+background-size:cover
+
+# What questions do you have?
+
+
+---
+class: inverse middle
+background-image:url(../img/wood.jpg)
+background-size:cover
+
+# Let's get setup
+
+### Tonight, we'll work with multiple data sources
+* elemapi.sav (re-download if you already have it)
+* mtcars (but it's part of base R so don't worry)
+* simdata
+
+
+---
+# elemapi
+
+
+```r
+elemapi &lt;- import(here("data", "elemapi.sav"),
+                  setclass = "tbl_df") %&gt;%
+  characterize()
+
+head(elemapi)
+```
+
+```
+## # A tibble: 6 x 21
+##    snum  dnum api00 api99 growth meals   ell yr_rnd mobility acs_k3 acs_46
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1   906    41   693   600     93    67     9 No           11     16     22
+## 2   889    41   570   501     69    92    21 No           33     15     32
+## 3   887    41   546   472     74    97    29 No           36     17     25
+## 4   876    41   571   487     84    90    27 No           27     20     30
+## 5   888    41   478   425     53    89    30 No           44     18     31
+## 6  4284    98   858   844     14    NA     3 No           10     20     33
+## # ... with 10 more variables: not_hsg &lt;dbl&gt;, hsg &lt;dbl&gt;, some_col &lt;dbl&gt;,
+## #   col_grad &lt;dbl&gt;, grad_sch &lt;dbl&gt;, avg_ed &lt;dbl&gt;, full &lt;dbl&gt;, emer &lt;dbl&gt;,
+## #   enroll &lt;dbl&gt;, mealcat &lt;chr&gt;
+```
+
+---
+# Multicollinearity
+Are two (or more) variables proxies for the same thing?
+
+--
+
+```r
+elemapi %&gt;%
+  select(api00, meals, ell, mobility, acs_k3, acs_46, emer, enroll) %&gt;%
+  cor(use = "complete.obs") %&gt;%
+  round(2)
+```
+
+```
+##          api00 meals   ell mobility acs_k3 acs_46  emer enroll
+## api00     1.00 -0.82 -0.69    -0.15  -0.06   0.15 -0.50  -0.44
+## meals    -0.82  1.00  0.70     0.16   0.01  -0.13  0.44   0.35
+## ell      -0.69  0.70  1.00    -0.13   0.05  -0.08  0.38   0.50
+## mobility -0.15  0.16 -0.13     1.00   0.07   0.17  0.00   0.01
+## acs_k3   -0.06  0.01  0.05     0.07   1.00   0.09  0.01   0.05
+## acs_46    0.15 -0.13 -0.08     0.17   0.09   1.00 -0.07   0.05
+## emer     -0.50  0.44  0.38     0.00   0.01  -0.07  1.00   0.38
+## enroll   -0.44  0.35  0.50     0.01   0.05   0.05  0.38   1.00
+```
+
+---
+# Cutoffs
+* If we get above .7, we're probably getting pretty concerned. 
+
+* Above .9, really concerned
+
+
+--
+* Why can't we just include them anyway?
+
+---
+class: inverse bottom middle
+background-image:url(../img/high-collinearity.png)
+background-size:contain
+
+# Recall from Week 4
+
+
+---
+# An analogy
+### A model with low collinearity 
+ &lt;img src="https://images-na.ssl-images-amazon.com/images/I/71A9Od4XGUL._SY550_.jpg" height="400px"/&gt;
+
+---
+### A model with high collinearity
+![](https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQawZYbvNjnJTTpanejBbxTa9mPlBKvwXvA-uccC7nA6MFSSXv2AuQcYLiCI1Gt5Ho62Bro3Q&amp;usqp=CAY)
+
+---
+# An example
+
+
+```r
+mtcars %&gt;%
+  cor() %&gt;%
+  round(2)
+```
+
+```
+##        mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+## mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
+## cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53
+## disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39
+## hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75
+## drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09
+## wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43
+## qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66
+## vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57
+## am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06
+## gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
+## carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00
+```
+
+---
+# Why we have to be careful
+
+
+```r
+m &lt;- lm(mpg ~ hp + cyl + disp, mtcars)
+arm::display(m, detail = TRUE)
+```
+
+```
+## lm(formula = mpg ~ hp + cyl + disp, data = mtcars)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 34.18     2.59   13.19    0.00   
+## hp          -0.01     0.01   -1.00    0.32   
+## cyl         -1.23     0.80   -1.54    0.13   
+## disp        -0.02     0.01   -1.81    0.08   
+## ---
+## n = 32, k = 4
+## residual sd = 3.06, R-Squared = 0.77
+```
+
+--
+Wait... none of these things significantly relate to miles per gallon?
+
+---
+# Single models
+
+
+```r
+hp_mod &lt;- lm(mpg ~ hp, mtcars)
+summary(hp_mod)$r.squared
+```
+
+```
+## [1] 0.6024373
+```
+
+```r
+cyl_mod &lt;- lm(mpg ~ cyl, mtcars)
+summary(cyl_mod)$r.squared
+```
+
+```
+## [1] 0.72618
+```
+
+```r
+disp_mod &lt;- lm(mpg ~ disp, mtcars)
+summary(disp_mod)$r.squared
+```
+
+```
+## [1] 0.7183433
+```
+
+--
+# 🤨
+
+---
+class: inverse bottom middle
+background-image:url(../img/high-collinearity.png)
+background-size:contain
+
+---
+# Variance inflation
+* Notice what (multi)collinearity does to the standard errors
+
+
+
+```r
+arm::display(m, digits = 4)
+```
+
+```
+## lm(formula = mpg ~ hp + cyl + disp, data = mtcars)
+##             coef.est coef.se
+## (Intercept) 34.1849   2.5908
+## hp          -0.0147   0.0147
+## cyl         -1.2274   0.7973
+## disp        -0.0188   0.0104
+## ---
+## n = 32, k = 4
+## residual sd = 3.0553, R-Squared = 0.77
+```
+
+---
+
+
+```r
+arm::display(hp_mod, digits = 4)
+```
+
+```
+## lm(formula = mpg ~ hp, data = mtcars)
+##             coef.est coef.se
+## (Intercept) 30.0989   1.6339
+## hp          -0.0682   0.0101
+## ---
+## n = 32, k = 2
+## residual sd = 3.8630, R-Squared = 0.60
+```
+
+```r
+arm::display(cyl_mod, digits = 4)
+```
+
+```
+## lm(formula = mpg ~ cyl, data = mtcars)
+##             coef.est coef.se
+## (Intercept) 37.8846   2.0738
+## cyl         -2.8758   0.3224
+## ---
+## n = 32, k = 2
+## residual sd = 3.2059, R-Squared = 0.73
+```
+
+---
+
+```r
+arm::display(disp_mod, digits = 4)
+```
+
+```
+## lm(formula = mpg ~ disp, data = mtcars)
+##             coef.est coef.se
+## (Intercept) 29.5999   1.2297
+## disp        -0.0412   0.0047
+## ---
+## n = 32, k = 2
+## residual sd = 3.2515, R-Squared = 0.72
+```
+
+---
+# High collinearity...
+
+--
+* Leads to larger standard errors
+
+
+--
+* Larger confidence intervals
+
+
+--
+* smaller `\(t\)` values
+
+
+--
+### Overall this leads to
+
+--
+* More uncertainty of the estimated effects (why? We're not as sure what's
+  contributing to the observed score)
+
+
+--
+* Less likelihood of detecting significant effects
+
+---
+# Why is this happening?
+
+### Recall the standard error of the estimate
+This is for the two predictor variable case
+.Large[
+$$
+s\_{b\_{y1.2}} = \frac{s\_{y.x}}{\sqrt{\sum x\_1^2(1-r\_{x\_1x\_2}^2)}}
+$$
+]
+
+
+* Look at the denominator here...
+
+
+--
+* You're multiplying the variance in `\(x_1\)` by `\(1 -\)` the correlation between the
+  variables
+
+
+---
+# Collinearity
+* If there is no correlation, the variance is unaltered, which means...
+
+
+--
+* The denominator ends up being larger, which means...
+
+
+--
+* The overall value will be smaller
+
+
+--
+* In other words, the standard error is smallest when the correlation with the
+  other variables in the model is zero
+
+---
+# Let's confirm this
+* Is this just a statistical nicety? 
+* What if we  use the bootstrap method. Do we see the same thing?
+
+---
+
+.code-bg-red[
+
+
+```r
+set.seed(8675309)
+samples &lt;- replicate(2500, 
+                     mtcars[sample(1:nrow(mtcars),
+                              size = nrow(mtcars),
+                              replace = TRUE), ],
+                     simplify = FALSE)
+```
+]
+
+
+--
+
+.code-bg-red[
+
+```r
+models &lt;- map(samples, ~lm(mpg ~ hp + cyl + disp, .))
+```
+]
+
+
+--
+.code-bg-red[
+
+
+```r
+boot_se &lt;- map_df(models, 
+                    ~data.frame(coef = coef(.),
+                                param = c("intercept",
+                                          "b1_hp",
+                                          "b2_cyl",
+                                          "b3_disp")), 
+                    .id = "iteration") %&gt;% 
+  tbl_df() %&gt;%
+  group_by(param) %&gt;%
+  summarize(se   = sd(coef)) %&gt;%
+  spread(param, se)
+```
+]
+
+---
+# Compare estimates
+
+
+```r
+boot_se
+```
+
+```
+## # A tibble: 1 x 4
+##        b1_hp    b2_cyl     b3_disp intercept
+##        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+## 1 0.01382884 0.6548481 0.009042414  2.518504
+```
+
+```r
+arm::display(m, digits = 4)
+```
+
+```
+## lm(formula = mpg ~ hp + cyl + disp, data = mtcars)
+##             coef.est coef.se
+## (Intercept) 34.1849   2.5908
+## hp          -0.0147   0.0147
+## cyl         -1.2274   0.7973
+## disp        -0.0188   0.0104
+## ---
+## n = 32, k = 4
+## residual sd = 3.0553, R-Squared = 0.77
+```
+
+--
+Our model is unstable because the predictors are highly collinear
+
+---
+# Diagnosing collinearity
+* Looking zero-order correlations can help... .bolder[but it's not enough!]
+
+
+--
+* Two well-respected diagnostic tools
+  + Tolerance
+  + Variance inflation factor
+
+---
+# Tolerance
+* Tolerance = Variance in a predictor variable `\(i\)` **not** accounted for by the
+  other variables
+
+--
+
+From our example, let's calculate the tolerance of `\(hp\)`
+--
+
+
+```r
+hp_tol_mod &lt;- lm(hp ~ cyl + disp, mtcars)
+1 - summary(hp_tol_mod)$r.squared
+```
+
+```
+## [1] 0.2984216
+```
+
+---
+# Variance Inflation Factor
+
+Even better (from my view)
+* Essentially, how much has the variance of the estimate (the standard
+  error) increased because of the collinearity?
+
+--
+* Ranges from `\(1 \dots \infty\)`
+
+--
+* Interpreted as the factor by which the variance is increased (e.g., a value
+  of 5 means the variance is 5 times larger)
+
+---
+# VIF
+
+.Large[
+$$
+VIF = \frac{1}{tol}
+$$
+]
+
+--
+VIF for hp
+
+
+```r
+1 / (1 - summary(hp_tol_mod)$r.squared)
+```
+
+```
+## [1] 3.350964
+```
+
+---
+# Calculating VIF 
+
+* You could fit all of the different models, but that's a lot of work. Instead,
+we can use the `vif` function from the `car` package.
+
+
+```r
+car::vif(m)
+```
+
+```
+##       hp      cyl     disp 
+## 3.350964 6.732984 5.521460
+```
+
+--
+### Want tolerance?
+
+
+```r
+ 1 / car::vif(m)
+```
+
+```
+##        hp       cyl      disp 
+## 0.2984216 0.1485226 0.1811115
+```
+
+---
+# Decision rules of 👍
+
+### Tolerance
+* Ranges from 0-1
+* Lower values = more concern/higher collinearity
+* (generally less used; Pedhazur says they were first used because they were
+	easier to compute)
+
+--
+
+### VIF
+* Lower values are better (minimum of 1.0)
+* Some use values of 3-5 as concerning, others 10
+* Values of 10 or more are **definitely** concerning
+
+
+---
+# What to do?
+
+* First, evaluate the impact of collinearity
+
+	+ substantively changing results?
+
+
+--
+* Next, consider removing a predictor variable
+	+ If they're mostly measuring the same thing, why bother with both?
+
+
+--
+* If removing is unsatisfactory, consider creating a composite variable
+	+ mean
+	+ PCA/EFA
+
+---
+class: inverse center middle
+# Modeling non-linearity
+
+---
+# Thinking about functional form
+* What does "functional form" mean?
+
+
+--
+* Theoretically there exists some underlying, "true", population-level function
+	relating a variable/set of variables to an outcome.
+
+
+--
+* The functional form = the form (shape) of this theoretical function
+
+
+--
+* Functional forms can be linear... or not. We need to evaluate and account for
+	functional form appropriately.
+
+---
+# A bivariate example
+
+### Linear?
+
+
+```r
+d &lt;- import(here("data", "simdata.csv"),
+            setclass = "tbl_df")
+ggplot(d, aes(x, y)) +
+	geom_point() +
+	geom_smooth()
+```
+
+![](w9_files/figure-html/quad-1.png)&lt;!-- --&gt;
+
+---
+# How do we model this?
+
+To model it linearly, we fit the model
+
+.Large[
+$$
+y\_i = b\_0 + b\_1(x\_i) + e
+$$
+]
+
+### In code
+
+
+
+```r
+linear &lt;- lm(y ~ 1 + x, data = d)
+```
+
+--
+
+To model it with a curve, with one bend
+
+
+.Large[
+$$
+y\_i = b\_0 + b\_1(x\_i) + b\_2(x\_i^2) + e
+$$
+]
+
+---
+# Two ways to model a quadratic
+
+* First, create a variable that is the squared version of the variable
+
+
+```r
+d &lt;- d %&gt;%
+	mutate(x2 = x^2)
+d
+```
+
+```
+## # A tibble: 505 x 3
+##        x         y    x2
+##    &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1     0  0            0
+##  2     0  0            0
+##  3     0  0            0
+##  4     0  1.766497     0
+##  5     0  0            0
+##  6     1 29.36648      1
+##  7     1 21.75338      1
+##  8     1 46.27026      1
+##  9     1 23.82996      1
+## 10     1 44.41550      1
+## # ... with 495 more rows
+```
+
+---
+# Include term in model
+
+
+```r
+q1 &lt;- lm(y ~ x + x2, d)
+arm::display(q1, detail = TRUE)
+```
+
+```
+## lm(formula = y ~ x + x2, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  16.93     2.70    6.27    0.00  
+## x             9.42     0.12   75.42    0.00  
+## x2           -0.06     0.00  -53.45    0.00  
+## ---
+## n = 505, k = 3
+## residual sd = 20.64, R-Squared = 0.96
+```
+
+---
+# Visualize it
+
+
+```r
+d &lt;- d %&gt;%
+	mutate(fitted_q1 = fitted(q1)) 
+
+ggplot(d, aes(x, y)) +
+	geom_point() +
+	geom_line(aes(y = fitted_q1),
+	          color = "magenta", 
+	          size = 2)
+```
+
+![](w9_files/figure-html/q1-fitted-plot-1.png)&lt;!-- --&gt;
+
+---
+# Why is this working?
+
+
+```r
+data_frame(x = 0:10,
+           x2 = x^2,
+           b1 = coef(q1)[2],
+           b2 = coef(q1)[3])
+```
+
+```
+## # A tibble: 11 x 4
+##        x    x2       b1          b2
+##    &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1     0     0 9.418913 -0.06458491
+##  2     1     1 9.418913 -0.06458491
+##  3     2     4 9.418913 -0.06458491
+##  4     3     9 9.418913 -0.06458491
+##  5     4    16 9.418913 -0.06458491
+##  6     5    25 9.418913 -0.06458491
+##  7     6    36 9.418913 -0.06458491
+##  8     7    49 9.418913 -0.06458491
+##  9     8    64 9.418913 -0.06458491
+## 10     9    81 9.418913 -0.06458491
+## 11    10   100 9.418913 -0.06458491
+```
+
+---
+
+```r
+data_frame(x = 0:10,
+           x2 = x^2,
+           b1 = coef(q1)[2],
+           b2 = coef(q1)[3],
+           y_hat = x*b1 + x2*b2)
+```
+
+```
+## # A tibble: 11 x 5
+##        x    x2       b1          b2     y_hat
+##    &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+##  1     0     0 9.418913 -0.06458491  0       
+##  2     1     1 9.418913 -0.06458491  9.354328
+##  3     2     4 9.418913 -0.06458491 18.57949 
+##  4     3     9 9.418913 -0.06458491 27.67548 
+##  5     4    16 9.418913 -0.06458491 36.64229 
+##  6     5    25 9.418913 -0.06458491 45.47994 
+##  7     6    36 9.418913 -0.06458491 54.18842 
+##  8     7    49 9.418913 -0.06458491 62.76773 
+##  9     8    64 9.418913 -0.06458491 71.21787 
+## 10     9    81 9.418913 -0.06458491 79.53884 
+## 11    10   100 9.418913 -0.06458491 87.73064
+```
+
+---
+# Method 2
+
+
+```r
+q2 &lt;- lm(y ~ poly(x, 2, raw = TRUE), d)
+arm::display(q2, detail = TRUE)
+```
+
+```
+## lm(formula = y ~ poly(x, 2, raw = TRUE), data = d)
+##                         coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)              16.93     2.70    6.27    0.00  
+## poly(x, 2, raw = TRUE)1   9.42     0.12   75.42    0.00  
+## poly(x, 2, raw = TRUE)2  -0.06     0.00  -53.45    0.00  
+## ---
+## n = 505, k = 3
+## residual sd = 20.64, R-Squared = 0.96
+```
+
+--
+
+```r
+arm::display(q1, detail = TRUE)
+```
+
+```
+## lm(formula = y ~ x + x2, data = d)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  16.93     2.70    6.27    0.00  
+## x             9.42     0.12   75.42    0.00  
+## x2           -0.06     0.00  -53.45    0.00  
+## ---
+## n = 505, k = 3
+## residual sd = 20.64, R-Squared = 0.96
+```
+
+---
+* What's this `raw = TRUE` about? let's try without
+
+--
+
+
+```r
+q2o &lt;- lm(y ~ poly(x, 2), d)
+arm::display(q2o)
+```
+
+```
+## lm(formula = y ~ poly(x, 2), data = d)
+##             coef.est coef.se 
+## (Intercept)   271.51     0.92
+## poly(x, 2)1  1939.59    20.64
+## poly(x, 2)2 -1103.26    20.64
+## ---
+## n = 505, k = 3
+## residual sd = 20.64, R-Squared = 0.96
+```
+# 😳
+
+--
+* Without `raw = TRUE`, it will fit with orthogonal polynomials.
+* This is actually probably a good thing, but I tend to not use it.
+
+---
+# Wait... what about collinearity
+
+--
+
+
+```r
+car::vif(q1)
+```
+
+```
+##        x       x2 
+## 15.71021 15.71021
+```
+# 😳
+
+--
+
+```r
+cor(d$x, d$x2)
+```
+
+```
+## [1] 0.9676503
+```
+
+# 😬
+
+---
+# Look back at estimates
+
+
+```r
+arm::display(q1, digits = 4)
+```
+
+```
+## lm(formula = y ~ x + x2, data = d)
+##             coef.est coef.se
+## (Intercept) 16.9285   2.7020
+## x            9.4189   0.1249
+## x2          -0.0646   0.0012
+## ---
+## n = 505, k = 3
+## residual sd = 20.6420, R-Squared = 0.96
+```
+
+# 🤔
+
+---
+# How much do we care?
+
+--
+* In this case, probably not at all
+
+
+--
+* We will **never** interpret one variable in isolation (many people will try,
+	don't fall into this trap)
+
+* This is also partly why orthogonal polynomials may be preferable
+
+---
+# Want to fix it anyway?
+### Center
+
+
+```r
+d &lt;- d %&gt;%
+	mutate(xc = x - mean(x),
+	       x2c = xc^2)
+cor(d$xc, d$x2c)
+```
+
+```
+## [1] 0
+```
+(usually not quite that dramatic)
+
+
+---
+# Refit
+
+
+```r
+q1c &lt;- lm(y ~ xc + x2c, d)
+arm::display(q1c, detail = TRUE, digits = 4)
+```
+
+```
+## lm(formula = y ~ xc + x2c, data = d)
+##             coef.est coef.se  t value  Pr(&gt;|t|)
+## (Intercept) 326.4119   1.3779 236.8828   0.0000
+## xc            2.9604   0.0315  93.9631   0.0000
+## x2c          -0.0646   0.0012 -53.4473   0.0000
+## ---
+## n = 505, k = 3
+## residual sd = 20.6420, R-Squared = 0.96
+```
+
+--
+* So we've reduced the standard error, BUT... remember, we interpret these as a
+	set of variables
+
+
+--
+* In more advanced models, centering helps stabilize the model overall
+
+---
+# Revisiting VIF
+
+
+```r
+vcov(q1)
+```
+
+```
+##              (Intercept)             x            x2
+## (Intercept)  7.300731983 -0.2905644106  2.409323e-03
+## x           -0.290564411  0.0155946017 -1.460196e-04
+## x2           0.002409323 -0.0001460196  1.460196e-06
+```
+
+```r
+vcov(q1c)
+```
+
+```
+##               (Intercept)            xc           x2c
+## (Intercept)  1.898737e+00 -1.030098e-17 -1.241167e-03
+## xc          -1.030098e-17  9.926413e-04  1.064181e-20
+## x2c         -1.241167e-03  1.064181e-20  1.460196e-06
+```
+
+---
+
+```r
+vcov(q1)[2, 2] /
+vcov(q1c)[2, 2]
+```
+
+```
+## [1] 15.71021
+```
+
+```r
+car::vif(q1)
+```
+
+```
+##        x       x2 
+## 15.71021 15.71021
+```
+
+---
+# One more quick note
+
+
+```r
+summary(q1)$coefficients[, "Std. Error"]["x"] 
+```
+
+```
+##         x 
+## 0.1248783
+```
+
+```r
+summary(q1c)$coefficients[, "Std. Error"]["xc"]
+```
+
+```
+##         xc 
+## 0.03150621
+```
+
+--
+
+
+```r
+summary(q1)$coefficients[, "Std. Error"]["x"] /
+summary(q1c)$coefficients[, "Std. Error"]["xc"]
+```
+
+```
+##        x 
+## 3.963611
+```
+
+---
+# SE increase
+Rather than thinking about the variance increase, we can consider the SE
+increase
+
+.Large[
+`\(\sqrt{VIF} =\)` amount SE is increased
+]
+
+--
+
+
+```r
+sqrt(car::vif(q1))
+```
+
+```
+##        x       x2 
+## 3.963611 3.963611
+```
+
+---
+# Less clear in practice
+
+
+```r
+ggplot(elemapi, aes(mobility, api00)) +
+	geom_point() +
+	geom_smooth() 
+```
+
+![](w9_files/figure-html/depression-1.png)&lt;!-- --&gt;
+
+---
+# Fit quadratic
+
+
+```r
+q3 &lt;- lm(api00 ~ poly(mobility, 2, raw = TRUE), elemapi)
+arm::display(q3, detail = TRUE)
+```
+
+```
+## lm(formula = api00 ~ poly(mobility, 2, raw = TRUE), data = elemapi)
+##                                coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)                    789.73    35.91   21.99    0.00  
+## poly(mobility, 2, raw = TRUE)1 -11.58     3.50   -3.31    0.00  
+## poly(mobility, 2, raw = TRUE)2   0.18     0.08    2.27    0.02  
+## ---
+## n = 399, k = 3
+## residual sd = 138.46, R-Squared = 0.05
+```
+
+---
+# Visualize it
+
+
+```r
+elemapi &lt;- elemapi %&gt;%
+	mutate(fitted_q3 = fitted(q3))
+
+ggplot(elemapi, aes(mobility, api00)) +
+	geom_point() +
+	geom_line(aes(y = fitted_q3),
+	          color = "magenta",
+	          size = 2)
+```
+
+---
+class: middle
+
+![](w9_files/figure-html/q3-visualize-eval-1.png)&lt;!-- --&gt;
+
+---
+# Is it worth it?
+### Compare models
+
+
+```r
+linear_api &lt;- lm(api00 ~ mobility, elemapi)
+anova(linear_api, q3)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Model 1: api00 ~ mobility
+## Model 2: api00 ~ poly(mobility, 2, raw = TRUE)
+##   Res.Df     RSS Df Sum of Sq      F Pr(&gt;F)  
+## 1    397 7690288                             
+## 2    396 7591719  1     98569 5.1416 0.0239 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+sundry::aic_weights(linear_api, q3)
+```
+
+```
+##                      predictors   delta weight
+## 2 poly(mobility, 2, raw = TRUE) 0.00000   0.83
+## 1                      mobility 3.14717   0.17
+```
+
+
+---
+# Higher-level polynomials
+* Model more than one curve
+
+
+```r
+cubic1 &lt;- lm(api00 ~ poly(mobility, 3, raw = TRUE), elemapi)
+arm::display(cubic1, detail = TRUE)
+```
+
+```
+## lm(formula = api00 ~ poly(mobility, 3, raw = TRUE), data = elemapi)
+##                                coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)                    721.09    61.66   11.69    0.00  
+## poly(mobility, 3, raw = TRUE)1   0.84     9.72    0.09    0.93  
+## poly(mobility, 3, raw = TRUE)2  -0.45     0.47   -0.97    0.33  
+## poly(mobility, 3, raw = TRUE)3   0.01     0.01    1.37    0.17  
+## ---
+## n = 399, k = 4
+## residual sd = 138.31, R-Squared = 0.06
+```
+
+---
+# Visualize it
+
+
+```r
+elemapi &lt;- elemapi %&gt;%
+	mutate(fitted_cubic1 = fitted(cubic1))
+
+ggplot(elemapi, aes(mobility, api00)) +
+	geom_point() +
+	geom_line(aes(y = fitted_cubic1),
+	          color = "magenta",
+	          size = 2)
+```
+
+---
+class: middle
+
+![](w9_files/figure-html/visualize-cubic-eval-1.png)&lt;!-- --&gt;
+
+### We're overfit
+
+
+---
+# Quickly
+### Transformations
+
+
+```r
+ggplot(elemapi, aes(mobility)) +
+	geom_histogram()
+```
+
+![](w9_files/figure-html/hist-raw-1.png)&lt;!-- --&gt;
+
+---
+
+```r
+ggplot(elemapi, aes(log(mobility))) +
+	geom_histogram()
+```
+
+![](w9_files/figure-html/hist-log-1.png)&lt;!-- --&gt;
+
+---
+# Log
+
+
+```r
+elemapi &lt;- elemapi %&gt;%
+	mutate(log_mobility = log(mobility)) 
+
+elemapi %&gt;%
+	select(mobility, log_mobility)
+```
+
+```
+## # A tibble: 399 x 2
+##    mobility log_mobility
+##       &lt;dbl&gt;        &lt;dbl&gt;
+##  1       11     2.397895
+##  2       33     3.496508
+##  3       36     3.583519
+##  4       27     3.295837
+##  5       44     3.784190
+##  6       10     2.302585
+##  7       16     2.772589
+##  8       44     3.784190
+##  9       10     2.302585
+## 10       17     2.833213
+## # ... with 389 more rows
+```
+
+---
+# Visualizing the transformation
+
+
+```r
+ggplot(elemapi, aes(mobility, log_mobility)) +
+	geom_point()
+```
+
+![](w9_files/figure-html/linear-transform-1.png)&lt;!-- --&gt;
+
+---
+# Fit model
+
+
+```r
+l1 &lt;- lm(api00 ~ log_mobility, elemapi)
+arm::display(l1, detail = TRUE)
+```
+
+```
+## lm(formula = api00 ~ log_mobility, data = elemapi)
+##              coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  847.67    44.24   19.16    0.00  
+## log_mobility -70.90    15.52   -4.57    0.00  
+## ---
+## n = 399, k = 2
+## residual sd = 138.65, R-Squared = 0.05
+```
+
+---
+# Visualize it
+
+
+```r
+elemapi &lt;- elemapi %&gt;%
+	mutate(fitted_l1 = fitted(l1))
+
+ggplot(elemapi, aes(mobility, api00)) +
+	geom_point() +
+	geom_line(aes(y = fitted_l1),
+	          color = "magenta",
+	          size = 2)
+```
+
+---
+class: middle
+
+![](w9_files/figure-html/visualize-log-eval-1.png)&lt;!-- --&gt;
+
+---
+# Compare models
+
+
+```r
+sundry::aic_weights(q3, cubic1, l1)
+```
+
+```
+##                      predictors      delta weight
+## 1 poly(mobility, 2, raw = TRUE) 0.00000000   0.34
+## 2 poly(mobility, 3, raw = TRUE) 0.11270548   0.33
+## 3                  log_mobility 0.08650927   0.33
+```
+
+# 🤷‍♂️
+
+--
+
+Preference parsimony
+
+---
+# Conclusions
+
+* (multi-)collinearity can inflate standard errors and result in unstable 
+	models
+
+
+--
+* Centering can help (often a lot)
+
+
+--
+* Functional form is important to investigate
+	+ Aside from meeting model assumptions, can often lead to new/different
+		substantive conclusions.
+
+
+--
+* Many different approaches to modeling functional form 
+	+ Polynomials common, can be extreme in their predictions in the tails
+	+ Transformation (log, log10, exponentiation, etc.) perhaps less common, but
+		very useful
+
+---
+class: inverse center middle
+# Lab
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

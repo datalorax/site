@@ -15,5 +15,6 @@ comments: false
 | 6  |[Partial and semipartial correlations](../mr-slides/w6/) |
 | 7  |[Interactions](../mr-slides/w7/) |
 | 8  |[Multi-model Inference](../mr-slides/w8/) |
+| 9  |[Dealing with collinearity and non-linearity](../mr-slides/w9/) |
 
 The table above will be updated as the class goes along
