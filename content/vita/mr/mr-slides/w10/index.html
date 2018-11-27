@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Regression for Prediction</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Regression for Prediction
+### Daniel Anderson
+### Week 10
+
+---
+
+
+
+
+# Agenda 
+* Review lab from last class
+* Introduce regression modeling for prediction (rather than explanation)
+* Old-school methods
+* Criteria for assessing model accuracy
+* Bias-variance tradeoff &amp; overfitting
+  + `\(k\)`-fold cross-validation (quickly)
+  
+---
+class: inverse middle center
+background-image:url(../img/chalkboard.jpg)
+background-size:cover
+
+# What questions do you have?
+
+
+---
+class: inverse center middle
+# Inference vs prediction
+
+---
+# What's the difference?
+Focus in this class has been on inference
+
+--
+### Example RQ's
+* What is the relation between the proportion of students eligible for 
+  free/reduced price lunch and the school API rating?
+
+
+--
+* What is the effect of treatment, after controlling for participant
+  demographics?
+
+
+--
+* To what extent does the effect of internalizing/externalizing behavior on
+  sexual risk depend upon their adverse childhood experiences?
+
+---
+# Standard errors
+* One of the defining features of predictive modeling is the estimation of a
+  standard error for a given estimate
+
+
+--
+* How certain are we of the population-level estimate?
+
+
+---
+# Prediction
+* Rather than  inferring population-level values, the focus shifts to 
+  building a "machine" that produces predictions for us on new (unseen) data
+
+
+--
+* Less focus on population-level values, or even model interpretability.
+
+
+--
+* Primary focus - how well does our model perform?
+
+
+---
+# Why might we want to do this?
+* Forecasting is useful, particularly for making individual-level decisions
+
+
+--
+* What is the likelihood that a kindergarten student will be reading on
+  "grade-level" by third grade?
+
+
+--
+* What is the likelihood that a given student has a disability?
+
+
+--
+* What is the likelihood that a given student will drop out of high-school?
+
+
+--
+### In each case:
+* Build a predictive model
+* Use the model to forecast/predict 
+* Update the forecast/prediction as more data are collected
+
+
+---
+# Example forecast plot
+(with a more complicated model - not linear regression)
+
+![](w10_files/figure-html/forecast-1.png)&lt;!-- --&gt;
+
+
+---
+# A warning
+
+![](https://media.giphy.com/media/A6H1A9rhetsXK/giphy.gif)
+
+---
+* Lots of misunderstanding out there about what predictive modeling is, and 
+  many people will disparage it
+
+
+--
+* .bolder[My view:] 
+  + these people generally have an incomplete (at best) understanding of
+    predictive modeling
+  + Often have antiquated views of the techniques used in predictive 
+    modeling (i.e., not about maxing out `\(R^2\)`)
+
+--
+### Bottom line
+Predictive modeling has been used with enormous success, and effects all of our
+lives on a daily basis.
+
+---
+class: inverse center middle
+
+# The antiquated method
+
+---
+# Stepwise regression
+* Often when people bad-talk predictive modeling, it's because their thinking 
+  of stepwise regression
+
+
+--
+### Basic approach
+* Throw a bunch of variables at a problem, only keep those that are significant
+
+
+---
+# Approaches
+* **Forward selection:** Start with no variables, add one at a time, but only
+  keep if significant
+
+
+--
+* **Backward selection:** Start with all variables, remove one at a time based
+  on the variable that is "least significant"
+
+
+--
+* **Stepwise selection:** Sequentially add predictor variables based on "most
+  significant". After each addition, cycle through and remove an 
+  non-significant variables
+
+
+--
+### Goal
+* Find the optimal subset of variables that could be used to predict the 
+  outcome
+
+---
+# Reasons for critique
+* `\(p\)` values were not designed for variable selection decisions! 
+
+* Even if wanted to use them, why stick with 0.05, rather than what works best
+for the given problem?
+
+
+--
+### More importantly
+* People use this model **for inference** which is straight-up bonkers
+
+
+--
+* Tenuous even for purely exploratory purposes
+
+
+--
+### Why are we talking about this?
+* The only reason I mention any of this is to make you aware that others may do
+it, and to caution you (in the strongest way possible) not to do this.
+
+---
+# A bit of a caveat
+* If used properly, it can be useful for **predictive modeling** purposes
+
+* R will actually not even allow you (to my knowledge) to conduct stepwise
+  selection using `\(p\)` values. 
+
+* AIC values work better, and is what R will use (information criteria )
+
+
+---
+# Quick illustration
+### Do it with me!
+(demo outside slides)
+
+
+```r
+simple &lt;- lm(mpg ~ 1, data = mtcars)
+full &lt;- formula(lm(mpg ~ ., mtcars)) # note call wrapped in `formula`
+fwd_mod &lt;- step(simple, 
+                scope = full,
+                direction = "forward")
+```
+
+```
+## Start:  AIC=115.94
+## mpg ~ 1
+## 
+##        Df Sum of Sq     RSS     AIC
+## + wt    1    847.73  278.32  73.217
+## + cyl   1    817.71  308.33  76.494
+## + disp  1    808.89  317.16  77.397
+## + hp    1    678.37  447.67  88.427
+## + drat  1    522.48  603.57  97.988
+## + vs    1    496.53  629.52  99.335
+## + am    1    405.15  720.90 103.672
+## + carb  1    341.78  784.27 106.369
+## + gear  1    259.75  866.30 109.552
+## + qsec  1    197.39  928.66 111.776
+## &lt;none&gt;              1126.05 115.943
+## 
+## Step:  AIC=73.22
+## mpg ~ wt
+## 
+##        Df Sum of Sq    RSS    AIC
+## + cyl   1    87.150 191.17 63.198
+## + hp    1    83.274 195.05 63.840
+## + qsec  1    82.858 195.46 63.908
+## + vs    1    54.228 224.09 68.283
+## + carb  1    44.602 233.72 69.628
+## + disp  1    31.639 246.68 71.356
+## &lt;none&gt;              278.32 73.217
+## + drat  1     9.081 269.24 74.156
+## + gear  1     1.137 277.19 75.086
+## + am    1     0.002 278.32 75.217
+## 
+## Step:  AIC=63.2
+## mpg ~ wt + cyl
+## 
+##        Df Sum of Sq    RSS    AIC
+## + hp    1   14.5514 176.62 62.665
+## + carb  1   13.7724 177.40 62.805
+## &lt;none&gt;              191.17 63.198
+## + qsec  1   10.5674 180.60 63.378
+## + gear  1    3.0281 188.14 64.687
+## + disp  1    2.6796 188.49 64.746
+## + vs    1    0.7059 190.47 65.080
+## + am    1    0.1249 191.05 65.177
+## + drat  1    0.0010 191.17 65.198
+## 
+## Step:  AIC=62.66
+## mpg ~ wt + cyl + hp
+## 
+##        Df Sum of Sq    RSS    AIC
+## &lt;none&gt;              176.62 62.665
+## + am    1    6.6228 170.00 63.442
+## + disp  1    6.1762 170.44 63.526
+## + carb  1    2.5187 174.10 64.205
+## + drat  1    2.2453 174.38 64.255
+## + qsec  1    1.4010 175.22 64.410
+## + gear  1    0.8558 175.76 64.509
+## + vs    1    0.0599 176.56 64.654
+```
+
+---
+
+```r
+arm::display(fwd_mod, detail = TRUE)
+```
+
+```
+## lm(formula = mpg ~ wt + cyl + hp, data = mtcars)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 38.75     1.79   21.69    0.00   
+## wt          -3.17     0.74   -4.28    0.00   
+## cyl         -0.94     0.55   -1.71    0.10   
+## hp          -0.02     0.01   -1.52    0.14   
+## ---
+## n = 32, k = 4
+## residual sd = 2.51, R-Squared = 0.84
+```
+
+```r
+fwd_mod$anova
+```
+
+```
+##    Step Df  Deviance Resid. Df Resid. Dev       AIC
+## 1       NA        NA        31  1126.0472 115.94345
+## 2  + wt -1 847.72525        30   278.3219  73.21736
+## 3 + cyl -1  87.14997        29   191.1720  63.19800
+## 4  + hp -1  14.55145        28   176.6205  62.66456
+```
+
+
+---
+# Shall we change the criteria?
+
+
+```r
+full &lt;- lm(mpg ~ ., data = mtcars)
+simple &lt;- formula(lm(mpg ~ 1, mtcars)) # note call wrapped in `formula`
+back_mod &lt;- step(full, 
+                scope = simple,
+                direction = "backward")
+```
+
+```
+## Start:  AIC=70.9
+## mpg ~ cyl + disp + hp + drat + wt + qsec + vs + am + gear + carb
+## 
+##        Df Sum of Sq    RSS    AIC
+## - cyl   1    0.0799 147.57 68.915
+## - vs    1    0.1601 147.66 68.932
+## - carb  1    0.4067 147.90 68.986
+## - gear  1    1.3531 148.85 69.190
+## - drat  1    1.6270 149.12 69.249
+## - disp  1    3.9167 151.41 69.736
+## - hp    1    6.8399 154.33 70.348
+## - qsec  1    8.8641 156.36 70.765
+## &lt;none&gt;              147.49 70.898
+## - am    1   10.5467 158.04 71.108
+## - wt    1   27.0144 174.51 74.280
+## 
+## Step:  AIC=68.92
+## mpg ~ disp + hp + drat + wt + qsec + vs + am + gear + carb
+## 
+##        Df Sum of Sq    RSS    AIC
+## - vs    1    0.2685 147.84 66.973
+## - carb  1    0.5201 148.09 67.028
+## - gear  1    1.8211 149.40 67.308
+## - drat  1    1.9826 149.56 67.342
+## - disp  1    3.9009 151.47 67.750
+## - hp    1    7.3632 154.94 68.473
+## &lt;none&gt;              147.57 68.915
+## - qsec  1   10.0933 157.67 69.032
+## - am    1   11.8359 159.41 69.384
+## - wt    1   27.0280 174.60 72.297
+## 
+## Step:  AIC=66.97
+## mpg ~ disp + hp + drat + wt + qsec + am + gear + carb
+## 
+##        Df Sum of Sq    RSS    AIC
+## - carb  1    0.6855 148.53 65.121
+## - gear  1    2.1437 149.99 65.434
+## - drat  1    2.2139 150.06 65.449
+## - disp  1    3.6467 151.49 65.753
+## - hp    1    7.1060 154.95 66.475
+## &lt;none&gt;              147.84 66.973
+## - am    1   11.5694 159.41 67.384
+## - qsec  1   15.6830 163.53 68.200
+## - wt    1   27.3799 175.22 70.410
+## 
+## Step:  AIC=65.12
+## mpg ~ disp + hp + drat + wt + qsec + am + gear
+## 
+##        Df Sum of Sq    RSS    AIC
+## - gear  1     1.565 150.09 63.457
+## - drat  1     1.932 150.46 63.535
+## &lt;none&gt;              148.53 65.121
+## - disp  1    10.110 158.64 65.229
+## - am    1    12.323 160.85 65.672
+## - hp    1    14.826 163.35 66.166
+## - qsec  1    26.408 174.94 68.358
+## - wt    1    69.127 217.66 75.350
+## 
+## Step:  AIC=63.46
+## mpg ~ disp + hp + drat + wt + qsec + am
+## 
+##        Df Sum of Sq    RSS    AIC
+## - drat  1     3.345 153.44 62.162
+## - disp  1     8.545 158.64 63.229
+## &lt;none&gt;              150.09 63.457
+## - hp    1    13.285 163.38 64.171
+## - am    1    20.036 170.13 65.466
+## - qsec  1    25.574 175.67 66.491
+## - wt    1    67.572 217.66 73.351
+## 
+## Step:  AIC=62.16
+## mpg ~ disp + hp + wt + qsec + am
+## 
+##        Df Sum of Sq    RSS    AIC
+## - disp  1     6.629 160.07 61.515
+## &lt;none&gt;              153.44 62.162
+## - hp    1    12.572 166.01 62.682
+## - qsec  1    26.470 179.91 65.255
+## - am    1    32.198 185.63 66.258
+## - wt    1    69.043 222.48 72.051
+## 
+## Step:  AIC=61.52
+## mpg ~ hp + wt + qsec + am
+## 
+##        Df Sum of Sq    RSS    AIC
+## - hp    1     9.219 169.29 61.307
+## &lt;none&gt;              160.07 61.515
+## - qsec  1    20.225 180.29 63.323
+## - am    1    25.993 186.06 64.331
+## - wt    1    78.494 238.56 72.284
+## 
+## Step:  AIC=61.31
+## mpg ~ wt + qsec + am
+## 
+##        Df Sum of Sq    RSS    AIC
+## &lt;none&gt;              169.29 61.307
+## - am    1    26.178 195.46 63.908
+## - qsec  1   109.034 278.32 75.217
+## - wt    1   183.347 352.63 82.790
+```
+
+---
+
+```r
+arm::display(back_mod, detail = TRUE)
+```
+
+```
+## lm(formula = mpg ~ wt + qsec + am, data = mtcars)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept)  9.62     6.96    1.38    0.18   
+## wt          -3.92     0.71   -5.51    0.00   
+## qsec         1.23     0.29    4.25    0.00   
+## am           2.94     1.41    2.08    0.05   
+## ---
+## n = 32, k = 4
+## residual sd = 2.46, R-Squared = 0.85
+```
+
+```r
+back_mod$anova
+```
+
+```
+##     Step Df   Deviance Resid. Df Resid. Dev      AIC
+## 1        NA         NA        21   147.4944 70.89774
+## 2  - cyl  1 0.07987121        22   147.5743 68.91507
+## 3   - vs  1 0.26852280        23   147.8428 66.97324
+## 4 - carb  1 0.68546077        24   148.5283 65.12126
+## 5 - gear  1 1.56497053        25   150.0933 63.45667
+## 6 - drat  1 3.34455117        26   153.4378 62.16190
+## 7 - disp  1 6.62865369        27   160.0665 61.51530
+## 8   - hp  1 9.21946935        28   169.2859 61.30730
+```
+
+---
+# Change the criteria again?
+
+
+```r
+simple &lt;- lm(mpg ~ 1, data = mtcars)
+full &lt;- formula(lm(mpg ~ ., mtcars))  # note call wrapped in `formula`
+step_mod &lt;- step(simple, 
+                scope = full,
+                direction = "both")
+```
+
+```
+## Start:  AIC=115.94
+## mpg ~ 1
+## 
+##        Df Sum of Sq     RSS     AIC
+## + wt    1    847.73  278.32  73.217
+## + cyl   1    817.71  308.33  76.494
+## + disp  1    808.89  317.16  77.397
+## + hp    1    678.37  447.67  88.427
+## + drat  1    522.48  603.57  97.988
+## + vs    1    496.53  629.52  99.335
+## + am    1    405.15  720.90 103.672
+## + carb  1    341.78  784.27 106.369
+## + gear  1    259.75  866.30 109.552
+## + qsec  1    197.39  928.66 111.776
+## &lt;none&gt;              1126.05 115.943
+## 
+## Step:  AIC=73.22
+## mpg ~ wt
+## 
+##        Df Sum of Sq     RSS     AIC
+## + cyl   1     87.15  191.17  63.198
+## + hp    1     83.27  195.05  63.840
+## + qsec  1     82.86  195.46  63.908
+## + vs    1     54.23  224.09  68.283
+## + carb  1     44.60  233.72  69.628
+## + disp  1     31.64  246.68  71.356
+## &lt;none&gt;               278.32  73.217
+## + drat  1      9.08  269.24  74.156
+## + gear  1      1.14  277.19  75.086
+## + am    1      0.00  278.32  75.217
+## - wt    1    847.73 1126.05 115.943
+## 
+## Step:  AIC=63.2
+## mpg ~ wt + cyl
+## 
+##        Df Sum of Sq    RSS    AIC
+## + hp    1    14.551 176.62 62.665
+## + carb  1    13.772 177.40 62.805
+## &lt;none&gt;              191.17 63.198
+## + qsec  1    10.567 180.60 63.378
+## + gear  1     3.028 188.14 64.687
+## + disp  1     2.680 188.49 64.746
+## + vs    1     0.706 190.47 65.080
+## + am    1     0.125 191.05 65.177
+## + drat  1     0.001 191.17 65.198
+## - cyl   1    87.150 278.32 73.217
+## - wt    1   117.162 308.33 76.494
+## 
+## Step:  AIC=62.66
+## mpg ~ wt + cyl + hp
+## 
+##        Df Sum of Sq    RSS    AIC
+## &lt;none&gt;              176.62 62.665
+## - hp    1    14.551 191.17 63.198
+## + am    1     6.623 170.00 63.442
+## + disp  1     6.176 170.44 63.526
+## - cyl   1    18.427 195.05 63.840
+## + carb  1     2.519 174.10 64.205
+## + drat  1     2.245 174.38 64.255
+## + qsec  1     1.401 175.22 64.410
+## + gear  1     0.856 175.76 64.509
+## + vs    1     0.060 176.56 64.654
+## - wt    1   115.354 291.98 76.750
+```
+
+---
+
+```r
+arm::display(step_mod, detail = TRUE)
+```
+
+```
+## lm(formula = mpg ~ wt + cyl + hp, data = mtcars)
+##             coef.est coef.se t value Pr(&gt;|t|)
+## (Intercept) 38.75     1.79   21.69    0.00   
+## wt          -3.17     0.74   -4.28    0.00   
+## cyl         -0.94     0.55   -1.71    0.10   
+## hp          -0.02     0.01   -1.52    0.14   
+## ---
+## n = 32, k = 4
+## residual sd = 2.51, R-Squared = 0.84
+```
+
+```r
+step_mod$anova
+```
+
+```
+##    Step Df  Deviance Resid. Df Resid. Dev       AIC
+## 1       NA        NA        31  1126.0472 115.94345
+## 2  + wt -1 847.72525        30   278.3219  73.21736
+## 3 + cyl -1  87.14997        29   191.1720  63.19800
+## 4  + hp -1  14.55145        28   176.6205  62.66456
+```
+
+---
+# Wrapping up this section
+* Applying different criteria gave us different variables
+
+
+--
+* From a predictive modeling framework, this isn't really a big deal - we only
+care about which model performs best.
+
+
+--
+* From an inference perspective, it's a REALLY big deal - that's why we don't
+use these models for inference 
+  + Little to no theory guiding decisions, except which variables will be
+    included in the automatic procedure (which is often all available variables)
+
+---
+class: inverse center middle
+# How do we determine "performance"
+
+---
+class: inverse
+background-image:url(../img/islr.png)
+background-size:contain
+
+# Quick plug
+
+---
+# Model performance criteria
+* If the primary concern is prediction, what do we care about the most?
+
+--
+
+.center[### How close our predictions are, on average?]
+
+
+--
+.Large[🤨]
+
+* Wait, isn't that basically the same thing as residual variance?
+
+
+--
+### No! 
+* Why? We want to know how far off our model is, on average, for .bolder[cases
+  outside our sample!]
+
+---
+# Test/Train datasets
+
+* Our goal is to maximize .bolder[out-of-sample] predictive accuracy. How can 
+  we get an estimate of that? Leave out part of the sample.
+
+--
+
+1. Split the raw data into "training" and "test" datasets
+
+
+--
+2. Build a model on the training dataset
+
+
+--
+3. Do everything you can to make the model the "best" you can
+
+
+--
+4. When you've settled on a .bolder[final] model, use the parameter estimates
+  to predict the outcome on the test data
+
+---
+# Quick example
+
+
+```r
+library(tidyverse)
+set.seed(8675309)
+train &lt;- mtcars %&gt;%
+  sample_frac(.8)
+
+test &lt;- anti_join(mtcars, train)
+nrow(train)
+```
+
+```
+## [1] 26
+```
+
+```r
+nrow(test)
+```
+
+```
+## [1] 6
+```
+
+---
+# Fit model(s)
+* Only use the training data
+
+
+```r
+m1 &lt;- lm(mpg ~ hp, train)
+m2 &lt;- lm(mpg ~ hp + disp, train)
+m3 &lt;- lm(mpg ~ hp + disp + cyl, train)
+sundry::aic_weights(m1, m2, m3)
+```
+
+```
+##        predictors    delta weight
+## 3 hp + disp + cyl 0.000000   0.66
+## 2       hp + disp 1.399100   0.33
+## 1              hp 8.280349   0.01
+```
+
+--
+### Settle on a model then...
+
+---
+# Predict new cases
+
+
+```r
+test &lt;- test %&gt;%
+  mutate(pred_mpg = predict(m2, newdata = test))
+
+test
+```
+
+```
+##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb pred_mpg
+## 1 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4 22.48265
+## 2 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4 13.53374
+## 3 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1 25.80064
+## 4 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1 26.01929
+## 5 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8 12.35749
+## 6 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2 23.48326
+```
+
+---
+# Calculate differences
+
+
+```r
+test %&gt;%
+  mutate(diff = pred_mpg - mpg)
+```
+
+```
+##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb pred_mpg       diff
+## 1 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4 22.48265  1.4826458
+## 2 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4 13.53374 -0.7662631
+## 3 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1 25.80064 -6.5993644
+## 4 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1 26.01929 -7.8807063
+## 5 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8 12.35749 -2.6425118
+## 6 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2 23.48326  2.0832604
+```
+
+--
+What's the average difference? 
+
+
+--
+&lt;img src="https://datainsure.com/wp-content/uploads/2018/04/ZERO-01.png"
+height="175px" /&gt;
+
+---
+# What do we do?
+
+--
+* Square them
+
+
+--
+* Average the squared values
+
+
+--
+### Mean square error
+
+.Large[
+$$
+MSE = \frac{1}{n}\sum(y\_i - \hat{y\_i})^2
+$$
+]
+
+
+--
+### Root mean square error
+
+.Large[
+$$
+RMSE = \sqrt{\frac{1}{n}\sum(y\_i - \hat{y\_i})^2}
+$$
+]
+
+
+---
+# Evaluate 
+
+
+```r
+test %&gt;%
+  summarize(mse = mean((pred_mpg - mpg)^2))
+```
+
+```
+##       mse
+## 1 19.9609
+```
+
+
+```r
+test %&gt;%
+  summarize(rmse = sqrt(mean((pred_mpg - mpg)^2)))
+```
+
+```
+##       rmse
+## 1 4.467762
+```
+
+--
+* Note, you can only really do this once! Otherwise, your test dataset, in a
+sense, becomes part of your training dataset.
+
+---
+## How do we develop effective models?
+One approach:
+
+--
+* Split the data into multiple little samples
+
+  
+--
+* Leave out one piece, try different models on the other pieces, predict on left out piece
+
+
+--
+* Evaluate with MSE or RMSE (or similar)
+  
+
+
+--
+### We'll cover this more in a bit (sort of)
+
+---
+class: inverse center middle
+# Overfitting
+### And thinking more about functional form
+
+.Large[
+$$
+\hat{Y} = f(\mathbf{X})
+$$
+]
+
+
+---
+# Predicting income
+* Imagine we are trying to predict respondents' income. 
+* In this case, the data have been simulated, so .bolder[we know] the 
+  functional form
+
+
+--
+
+.center[
+
+&lt;img src="../img/true-functional-form.png" height="350px" /&gt;
+
+]
+
+---
+# We could fit a linear relation
+
+.center[
+
+&lt;img src="../img/linear-relation.png" height="450px" /&gt;
+
+]
+
+---
+# Or a more complex model
+
+.center[
+
+&lt;img src="../img/spline-good.png" height="450px" /&gt;
+
+]
+
+---
+# Or a really complicated model
+
+.center[
+
+&lt;img src="../img/spline-bad.png" height="450px" /&gt;
+
+]
+
+---
+* The linear model doesn't fit the observed data as well .gray[(it is
+  slightly underfit)]
+
+* The really complex model model fits the observed data nearly perfectly 
+  .gray[(it is overfit)]
+
+
+--
+* The middle model fits the observed data well, and matches the underlying
+  function well. 
+
+--
+* We know this because we know the underlying function - usually we do not.
+
+---
+# Overfitting in action
+
+.center[
+
+![](../img/mcelreath-fig-6.3.gif)
+
+]
+
+
+---
+class: inverse center middle
+# Bias-Variance Trade-off
+
+---
+# Definitions
+* Bias: How well does the model represent the observed data?
+
+
+--
+* Variance: How much does the model change from sample to sample?
+
+
+--
+### Linear models...
+Tend to have low variance
+
+--
+### But also...
+Can have high bias, if the underlying functional form is not *truly* linear
+
+
+
+---
+# Highly flexible models
+* Tend to have low bias (representing the observed data well), but can
+  easily overfit, leading to high variance
+
+
+--
+### The goal
+* Balance the bias-variance trade-off
+
+--
+* Note, this is an incredibly useful perspective **even if your goal is
+  to model for inference.**
+
+
+---
+# More gifs!
+Why the linear model has low variance
+
+![](../img/linear.gif)
+
+---
+# A crazy polynomial model
+Why more complicated models have higher variance
+![](../img/cray-poly.gif)
+
+
+---
+# k-fold cross-validation 
+### Quickly 
+
+![](../img/k-fold-cv.png)
+
+
+---
+
+```r
+library(modelr)
+iris %&gt;%
+  crossv_kfold(10) %&gt;%
+  mutate(model = map(train, ~lm(Sepal.Length ~ Petal.Length, data=.)))
+```
+
+```
+## # A tibble: 10 x 4
+##    train          test           .id   model   
+##    &lt;list&gt;         &lt;list&gt;         &lt;chr&gt; &lt;list&gt;  
+##  1 &lt;S3: resample&gt; &lt;S3: resample&gt; 01    &lt;S3: lm&gt;
+##  2 &lt;S3: resample&gt; &lt;S3: resample&gt; 02    &lt;S3: lm&gt;
+##  3 &lt;S3: resample&gt; &lt;S3: resample&gt; 03    &lt;S3: lm&gt;
+##  4 &lt;S3: resample&gt; &lt;S3: resample&gt; 04    &lt;S3: lm&gt;
+##  5 &lt;S3: resample&gt; &lt;S3: resample&gt; 05    &lt;S3: lm&gt;
+##  6 &lt;S3: resample&gt; &lt;S3: resample&gt; 06    &lt;S3: lm&gt;
+##  7 &lt;S3: resample&gt; &lt;S3: resample&gt; 07    &lt;S3: lm&gt;
+##  8 &lt;S3: resample&gt; &lt;S3: resample&gt; 08    &lt;S3: lm&gt;
+##  9 &lt;S3: resample&gt; &lt;S3: resample&gt; 09    &lt;S3: lm&gt;
+## 10 &lt;S3: resample&gt; &lt;S3: resample&gt; 10    &lt;S3: lm&gt;
+```
+
+---
+
+```r
+iris %&gt;%
+  crossv_kfold(10) %&gt;%
+  mutate(model = map(train, ~lm(Sepal.Length ~ Petal.Length, data=.)),
+*        rmse = map2_dbl(model, test, rmse))
+```
+
+```
+## # A tibble: 10 x 5
+##    train          test           .id   model         rmse
+##    &lt;list&gt;         &lt;list&gt;         &lt;chr&gt; &lt;list&gt;       &lt;dbl&gt;
+##  1 &lt;S3: resample&gt; &lt;S3: resample&gt; 01    &lt;S3: lm&gt; 0.5285575
+##  2 &lt;S3: resample&gt; &lt;S3: resample&gt; 02    &lt;S3: lm&gt; 0.4091673
+##  3 &lt;S3: resample&gt; &lt;S3: resample&gt; 03    &lt;S3: lm&gt; 0.4461581
+##  4 &lt;S3: resample&gt; &lt;S3: resample&gt; 04    &lt;S3: lm&gt; 0.3957181
+##  5 &lt;S3: resample&gt; &lt;S3: resample&gt; 05    &lt;S3: lm&gt; 0.2968595
+##  6 &lt;S3: resample&gt; &lt;S3: resample&gt; 06    &lt;S3: lm&gt; 0.4021314
+##  7 &lt;S3: resample&gt; &lt;S3: resample&gt; 07    &lt;S3: lm&gt; 0.2893860
+##  8 &lt;S3: resample&gt; &lt;S3: resample&gt; 08    &lt;S3: lm&gt; 0.5304752
+##  9 &lt;S3: resample&gt; &lt;S3: resample&gt; 09    &lt;S3: lm&gt; 0.4278984
+## 10 &lt;S3: resample&gt; &lt;S3: resample&gt; 10    &lt;S3: lm&gt; 0.3290200
+```
+
+---
+
+```r
+iris %&gt;%
+  crossv_kfold(10) %&gt;%
+  mutate(model = map(train, 
+                     ~lm(Sepal.Length ~ Petal.Length, 
+                         data=.)),
+         rmse = map2_dbl(model, test, rmse)) %&gt;%
+* summarize(mean_rmse = mean(rmse))
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_rmse
+##       &lt;dbl&gt;
+## 1 0.4097537
+```
+
+---
+# What if we model it cubicly 🤷
+
+
+```r
+iris %&gt;%
+  crossv_kfold(10) %&gt;%
+  mutate(model = map(train, 
+                     ~lm(Sepal.Length ~ poly(Petal.Length, 3), 
+                         data=.)),
+         rmse = map2_dbl(model, test, rmse)) %&gt;%
+* summarize(mean_rmse = mean(rmse))
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_rmse
+##       &lt;dbl&gt;
+## 1 0.3635301
+```
+
+---
+class: inverse middle center
+background-image:url(../img/kaggle.png)
+background-size:contain
+
+
+---
+# Want some practice?
+[kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+* Competitive data science platform  
+
+
+--
+* Ways for companies to crowdsource problems
+
+
+--
+* Can compete individually or in teams
+
+
+--
+* Great way to learn!
+
+---
+class: inverse center middle
+# Demo
+Let's try a model together!
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
