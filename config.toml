@@ -78,7 +78,7 @@ copyright = "Daniel Anderson"            # default: author.name ↓
   [params.social]                                         # 社交链接
     a-email = "mailto:daniela@uoregon.edu"
     b-stack-overflow = "https://stackoverflow.com/users/4959854/daniel-anderson"
-    c-twitter = "https://twitter.com/DJAnderson_07"
-    g-github = "https://github.com/DJAnderson07"
+    c-twitter = "https://twitter.com/datalorax_"
+    g-github = "https://github.com/datalorax"
 
 
