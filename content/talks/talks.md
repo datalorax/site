@@ -8,6 +8,9 @@ comments: false
       Talks
 </p>
 
+## Spring 2019
+* [Variance in Student Growth, Intervention Effects, and Achievement Gaps](../vatech)
+
 ## Fall 2018
 * [Measurement, Individual Differences, and the Promise of Computational
 Methods](../uu)

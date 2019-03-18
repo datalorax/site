@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Variance in Student Growth, Intervention Effects, and Achievement Gaps</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="date" content="2019-03-25" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="vatech.css" type="text/css" />
+    <link rel="stylesheet" href="vatech-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Variance in Student Growth, Intervention Effects, and Achievement Gaps
+## Job talk for Virginia Tech
+### Daniel Anderson
+### March 25, 2019
+
+---
+
+
+
+
+# My background
+### Behavioral Research and Teaching
+* Research Assistant to Research Associate to Research Assistant Professor
+* Grant funded research shop at UO that mostly focuses on measurement
+  + Curriculum Based Measurement (e.g., [easyCBM](https://easycbm.com))
+      - Project Manager, 4-year IES award on the development of a middle
+    school math CBM
+  + Statewide Alternate Assessment
+      - Lead psychometrician since 2011
+      - Lead development of a new vertical scale in 2015
+
+---
+# My background
+### Project NCAASE
+National Center on Assessment and Accountability in Special Education
+* Large inter-state collaborative focused on the measurement of schools
+* Lead numerous studies on between-school differences in achievement (and the
+  implications for accountability models)
+* First foray into very large scale data
+
+---
+# The focus of my talk today
+## Three stories of scholarship
+
+--
+### Study 1: Variance in students' within-year growth
+* Average differences between .bolder[teachers] and .bolder[schools]
+* Variance in summer lags (out-of-school opportunities)
+
+
+--
+### Study 2: Variance in intervention effects
+* Regression Discontinuity Design
+* Cluster-level design; treatment delivered at the school level
+* Evaluations of functional form are critical
+
+
+--
+### In-Progress Research: Computational methods
+* Variance in achievement gaps
+* Open data, open science, and reproducible research
+
+---
+class: inverse middle
+# Study 1: Variance in students' within-year growth
+### Exploring Teacher and School Variance in Students’ Within-Year Reading and Mathematics Growth.
+
+.footnote[Anderson, D. (conditional acceptance). Exploring Teacher and School
+Variance in Students’ Within-Year Reading and Mathematics Growth. *School
+Effectiveness and School Improvement*]
+
+---
+# The fundamental question
+* We know there is considerable heterogeneity in the rate at which students 
+  learn.
+
+
+--
+.major-emph-orange[Why?]
+
+
+--
+* Lots of evidence that teachers contribute to learning
+
+
+--
+* Lots of evidence that schools contribute to learning
+
+
+--
+**How much does student learning depend on the set of teachers they are
+"assigned" to, versus schools?**
+
+--
+### Secondary questions
+* Is evidence of teacher "sorting" between schools present?
+* How variable is the "summer slide"?
+
+---
+# Data 
+
+* 3 Cohorts of students in one school district in the Southwestern United 
+  States, progressing from Grades 3-5
+
+  + 2007-08 to 2009-10, 2008-09 to 2010-11, or 2009-10 to 2011-12
+
+
+--
+* Three time points within each year (collected fall, winter, spring)
+
+
+--
+* Variance components estimated for teachers in each grade, necessitating the
+  removal of any student with incomplete teacher records.
+
+  + 2,909 students out 5,311 had complete teacher records
+
+
+--
+* Between 106-119 teachers, depending on the grade, nested in 18 schools
+
+
+--
+* Approximately 54% of students were coded as Hispanic, 24% White, and 74% were
+  eligible for free or reduced price lunch
+
+---
+# Measures
+* Measures of Academic Progress, developed by the Northwest Evaluation
+  Association (NWEA)
+
+* Computer adaptive 
+
+  + High conditional reliability across a broad ability range
+
+* Vertical scale
+
+  + Growth within and between grades directly comparable
+
+---
+# Piecewise growth model
+
+### Slopes
+$$
+g3\_{slp} = {0, 1, 2 | 2, 2, 2 | 2, 2, 2} \\\
+g4\_{slp} = {0, 0, 0 | 0, 1, 2 | 2, 2, 2} \\\
+g5\_{slp} = {0, 0, 0 | 0, 0, 0 | 0, 1, 2}
+$$
+
+--
+
+### Grade 4 &amp; 5 Intercepts
+$$
+g4 = {0, 0, 0 | 1, 1, 1 | 1, 1, 1} \\\
+g5 = {0, 0, 0 | 0, 0, 0 | 1, 1, 1}
+$$
+
+--
+### Fixed effects
+
+$$
+y\_{tijk} = \beta\_0 + \beta\_1(g3\_{slp}) + \beta\_2(g4) + \beta\_3(g4\_{slp}) + \beta\_4(g5) + \beta\_5(g5\_{slp}) 
+$$
+
+
+---
+# Random effects
+
+### Student level (nested)
+
+$$ 
+`\begin{pmatrix}
+  r_{0_{ijk}} + r_{1_{ijk}}(g3_{slp}) + \\\  
+  r_{2_{ijk}}(g4) + r_{3_{ijk}}(g4_{slp}) + \\\
+  r_{4_{ijk}}(g5) + r_{5_{ijk}}(g5_{slp})
+\end{pmatrix}`
+$$
+
+### Teacher level (crossed)
+
+$$ 
+`\begin{pmatrix}
+  u_{0_{j(3)k}}^3 + u_{1_{j(3)k}}^3(g3_{slp}) 
+\end{pmatrix}`
+$$
+
+$$
+`\begin{pmatrix}
+  u_{2_{j(4)k}}^4 + u_{3_{j(4)k}}^4(g4_{slp}) 
+\end{pmatrix}`
+$$
+
+$$
+`\begin{pmatrix}
+  u_{4_{j(5)k}}^4 + u_{5_{j(5)k}}^4(g5_{slp}) 
+\end{pmatrix}`
+$$
+
+---
+# Random effects
+
+### School level (nested)
+
+$$ 
+`\begin{pmatrix}
+  v_{0_{k}} + v_{1_{k}}(g3_{slp}) + \\\  
+  v_{2_{k}}(g4) + v_{3_{k}}(g4_{slp}) + \\\
+  v_{4_{k}}(g5) + v_{5_{k}}(g5_{slp})
+\end{pmatrix}`
+$$
+
+--
+
+### Residual error
+
+$$
+e
+$$
+
+--
+&lt;br/&gt;
+
+All random effects were assumed to follow a multivariate normal distribution 
+and were estimated with an unstructured variance-covariance matrix
+
+.footnote[For reading, the variance-covariance matrix at the school level was
+moderately simplified to help the model converge. Specifically, the 
+school-level intercept and all slope terms were allowed to correlate, but the
+correlation between these terms and the summer drops were fixed at zero.]
+
+---
+class: bottom inverse2
+background-image: url(img/growth.png)
+background-size: contain
+
+# Results
+
+---
+class: inverse
+background-image: url(img/rdg-params.png)
+background-size: contain
+
+---
+class: inverse
+background-image: url(img/tch-by-schl.png)
+background-size: contain
+
+---
+class: inverse
+background-image: url(img/tch-by-schl-dist.png)
+background-size: contain
+
+---
+# Conclusions
+* Considerable variability in students' growth was between **both** teachers
+  and schools
+
+
+--
+* Teacher/School effects may compound, or compensate
+
+
+--
+* Generally a mix of high/low growth teachers within each school
+
+
+--
+* Several limitations should be kept in mind
+  + Small number of schools for the complexity of the model
+  + Students had to have at least one data point within each school year to be
+    included (mobility is linked with achievement and SES)
+
+---
+class: inverse middle
+# Study 2: Evaluating School-Provided Interventions
+
+
+.maroon[.large[.fancy-font[
+Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement
+    ]
+  ]
+]
+
+
+.footnote[Fien, H., Anderson, D., Nelson, N. J., Baker, S. K., &amp; Kennedy, P. (2018). Examining the Impact and School-Level Predictors of Impact Variability of an 8th Grade Reading Intervention on At-Risk Students’ Reading Achievement. *Learning Disabilities Research &amp; Practice*, *33*, 37-50. doi: [10.1111​/ldrp.12161](https://onlinelibrary.wiley.com/doi/full/10.1111/ldrp.12161)]
+
+---
+# Background
+### Middle School Intervention Project
+* Oregon Department of Education launched *Effective Behavioral and Instructional Support System* initiative 
+
+  + MSIP aimed at evaluating its effect
+
+* Multi-tiered systems of support
+
+--
+.major-emph-orange[
+Do district-adopted and -implemented interventions have their desired effect on student reading outcomes?
+]
+
+
+---
+# Design
+
+.Large[Regression discontinuity (RD)]
+
+* Students scoring below a .bold[school-defined] threshold on a reading composite measure were targeted for intervention
+
+* Fuzzy design by design
+  
+  + Up to 5% of students could be exempted on either side of the cut
+
+--
+*Note: The paper had some planned follow-up post-hoc analyses of between school variability, which I will not discuss in depth here*
+
+
+---
+# Impact Model
+
+.Large[Generalized Additive Mixed Model]
+
+### Level 1
+
+$$
+y\_{ij} = \beta\_{0j} + \beta\_{1j}(LEC\_{ij}) + s\_1(LEC \times pre\_{ij}) + s\_2(AC \times pre\_{ij}) + e\_{ij}
+$$
+
+--
+
+### Level 2
+
+$$
+\beta\_{0j} = \gamma\_{00} + \gamma\_{10}(cut\_j) + u\_{0j}\\\
+\beta\_{1j} = \gamma\_{10} + u\_{1j}
+$$
+
+
+--
+* `\(s_p =\)` thin-plate spline smooths
+
+  + Degree of smoothing determined via generalized cross-validation
+
+
+--
+* `\(\gamma_{10} =\)` average treatment effect (assuming a sharp design)
+
+
+--
+* `\(u_{1j} =\)` between school variation in the average treatment effect 
+
+
+
+---
+# Accounting for fuzziness
+9% crossovers, 18% no-shows
+
+Two step process to estimate the fuzzy RD gap
+
+
+--
+1. Model probability gap (of treatment receipt)
+
+  + Models equivalent to previous slide, but using multilevel logistic regression
+
+
+--
+1. Divide sharp RD impact estimate, `\(\gamma_{10}\)`, by estimated probability gap
+
+
+.gray[(standard errors can be similarly transformed)]
+
+
+
+---
+# RD on State Test
+
+`\(\gamma_{10} = -0.06\)`; `\(\gamma_{10_f} = -0.12, SE_f = 0.72, z_f = -0.16, p_f = 0.87\)`   
+
+![](rd-state-test.png)
+
+---
+# By school
+
+![](rd-state-test-faceted.png)
+
+---
+# Variability
+
+![](rd-variability.png)
+
+---
+# Conclusions
+
+* No significant effect of intervention found
+
+* Small variability in the null effect between schools
+
+--
+
+* Three possible sources of null effect (Seftor, 2017)
+  
+  + Methodological failure
+
+  + **Implementation failure**
+
+  + *Theory failure*
+
+
+---
+class: inverse middle
+# Quickly:
+### In-Progress Research: Computational methods
+* Linking large-scale data sources
+  + Machine learning approaches 
+* Open data, open science, and reproducible research
+
+---
+# Open science
+* Much recent focus on open data in research generally
+
+* Open data tend to be rare in educational research
+
+  + Privacy concerns
+
+
+--
+.major-emph-orange[NCLB Required Publicly Available Data]
+
+
+--
+* School-level data 
+
+* Percent proficient in each of at least four proficiency categories
+
+* Disaggregated by student subgroups
+
+
+
+---
+# Reardon &amp; Ho method
+* Calculate the empirical CDF of each distribution
+* Pair the ECDFs
+* Calculate the area under the paired curve
+* Transform it to an effect-size measure (standard deviation units)
+
+
+--
+
+.pull-left[
+![](vatech-job-talk_files/figure-html/sim_ecdf-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+![](vatech-job-talk_files/figure-html/sim_pp-1.png)&lt;!-- --&gt;
+]
+
+---
+# Transformation to effect size
+
+.Large[
+$$
+V = \sqrt{2}\Phi^{-1}(AUC)
+$$
+]
+
+
+### Why does this all matter?
+
+&lt;img src="vatech-job-talk_files/figure-html/props-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse2
+# Achievement gap distributions
+
+.grey[Reminder: School-level Distributions]
+
+&lt;center&gt;&lt;img src = "img/school_achievement_gaps.png" height = 460/&gt;&lt;/center&gt;
+
+---
+# Alameda county
+## `\(n\)` Income/Poverty Ratio &gt; 2.0
+
+&lt;iframe seamless src="alameda_poverty.html" width="100%" height="475"&gt;&lt;/iframe&gt;
+
+---
+# "Epidemiological" work
+
+* Large-scale data sources incorporated with educational outcomes
+
+
+--
+* Predict "disease" (e.g., achievement gaps)
+
+
+--
+* The work presented here was mostly exploratory/visual - can we actually model
+  the data with machine learning methods?
+
+
+--
+* Given recent gains in computational methods, can we expand what "counts" as
+  data? (e.g., images)
+
+  + IES grant application currently (still) under review under the *Statistical and Research Methodology Early Career* RFA
+
+---
+class: inverse center middle
+# Wrapping up
+
+
+---
+# Reproducibility &amp; transparency
+
+* I'm leading a training on reproducible research at AERA this year
+
+* Embedded within all my teaching
+
+* Deeply committed to open and transparent research
+
+---
+class: inverse middle center
+# Thanks!
+### Questions?
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
