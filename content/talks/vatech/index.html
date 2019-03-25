@@ -316,6 +316,7 @@ Do district-adopted and -implemented interventions have their desired effect on 
   
   + Up to 5% of students could be exempted on either side of the cut
 
+
 --
 *Note: The paper had some planned follow-up post-hoc analyses of between school variability, which I will not discuss in depth here*
 
@@ -323,12 +324,12 @@ Do district-adopted and -implemented interventions have their desired effect on 
 ---
 # Impact Model
 
-.Large[Generalized Additive Mixed Model]
+.Large[Multilevel Generalized Additive Model]
 
 ### Level 1
 
 $$
-y\_{ij} = \beta\_{0j} + \beta\_{1j}(LEC\_{ij}) + s\_1(LEC \times pre\_{ij}) + s\_2(AC \times pre\_{ij}) + e\_{ij}
+y\_{ij} = \beta\_{0j} + \beta\_{1j}(LEC\_{ij}) + s\_1(LEC \times assignVar\_{ij}) + s\_2(AC \times assignVar\_{ij}) + e\_{ij}
 $$
 
 --
@@ -336,7 +337,7 @@ $$
 ### Level 2
 
 $$
-\beta\_{0j} = \gamma\_{00} + \gamma\_{10}(cut\_j) + u\_{0j}\\\
+\beta\_{0j} = \gamma\_{00} + \gamma\_{01}(cut\_j) + u\_{0j}\\\
 \beta\_{1j} = \gamma\_{10} + u\_{1j}
 $$
 
@@ -349,7 +350,6 @@ $$
 
 --
 * `\(\gamma_{10} =\)` average treatment effect (assuming a sharp design)
-
 
 --
 * `\(u_{1j} =\)` between school variation in the average treatment effect 
@@ -490,33 +490,18 @@ class: inverse2
 &lt;iframe seamless src="alameda_poverty.html" width="100%" height="475"&gt;&lt;/iframe&gt;
 
 ---
-# "Epidemiological" work
-
-* Large-scale data sources incorporated with educational outcomes
-
-
---
-* Predict "disease" (e.g., achievement gaps)
-
-
---
-* The work presented here was mostly exploratory/visual - can we actually model
-  the data with machine learning methods?
-
-
---
-* Given recent gains in computational methods, can we expand what "counts" as
-  data? (e.g., images)
-
-  + IES grant application currently (still) under review under the *Statistical and Research Methodology Early Career* RFA
-
----
-class: inverse center middle
 # Wrapping up
 
+* Geographic achievement gap variance work presented here was mostly
+exploratory/visual
+  + Can we actually model the data with machine learning methods?
 
----
-# Reproducibility &amp; transparency
+* IES grant application currently (still) under review under the *Statistical
+and Research Methodology Early Career* RFA
+
+--
+
+### Reproducibility &amp; transparency
 
 * I'm leading a training on reproducible research at AERA this year
 
@@ -528,6 +513,11 @@ class: inverse center middle
 class: inverse middle center
 # Thanks!
 ### Questions?
+
+&lt;br&gt;
+&lt;br&gt;
+
+Slides available at &lt;br&gt; http://www.datalorax.com/talks/vatech/
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>

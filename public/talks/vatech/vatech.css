@@ -35,7 +35,7 @@
   color: #e87722;
 }
 
-.inverse, .inverse h1, .inverse h2, .inverse a {
+.inverse, .inverse h1, .inverse h2{
   color: #fff;
 }
 
@@ -74,7 +74,7 @@ h2 {
   margin-bottom: 20px;
   margin-top: 0px;
   padding: 0px;
-  color: #fff;
+  color: #e87722;
 }
 
 h3 {
@@ -95,18 +95,18 @@ a {
 }
 
 a:hover {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
     color: #EC008C;
 }
 
 .inverse a {
-  color: #808080;
+  color: #2cd5c4;
   text-decoration: none;
-  transition: all .2s ease-in-out;
+  /*transition: all .2s ease-in-out;*/
 }
 
 .inverse a:hover {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
     color: #fff;
 }
 
