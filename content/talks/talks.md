@@ -9,6 +9,8 @@ comments: false
 </p>
 
 ## Spring 2019
+* [Evaluating Content-Related Validity Evidence Using Text Modeling](../ncme19)
+	+ Talk for the annual conference of the National Council on Measurement in Education. April 5, 2019, Toronto, Ontario.
 * [Variance in Student Growth, Intervention Effects, and Achievement Gaps](../vatech)
 
 ## Fall 2018

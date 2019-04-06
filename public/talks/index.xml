@@ -49,6 +49,15 @@
     
     <item>
       <title></title>
+      <link>/talks/ncme19/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/ncme19/</guid>
+      <description>Evaluating Content-Related Validity Evidence Using Text Modeling   class: center, middle, inverse, title-slide # Evaluating Content-Related Validity Evidence Using Text Modeling ### Daniel Anderson ### Brock Rowley ### Sondra Stegenga ### P. Shawn Irvin ### Joshua M. Rosenberg --- # Background ### Content-related validity evidence -- * One five major sources of validity evidence (as outlined by the [*Standards*](https://www.apa.org/science/programs/testing/standards)) -- * Does the content represented in the test represent the targeted content?</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/talks/sicss-seattle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -90,7 +99,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/talks/</guid>
-      <description>Talks Spring 2019  Variance in Student Growth, Intervention Effects, and Achievement Gaps  Fall 2018  Measurement, Individual Differences, and the Promise of Computational Methods  Summer 2018  My Research and the COE  Talk for the University of Oregon&amp;rsquo;s Data Science Initiative in a joint meeting with Oregon Health and Science University.   Spring 2018  Community Features and School Achievement Gaps  Talk for the Summer Institute on Computational Social Science - Seattle, June 22, 2018 .</description>
+      <description>Talks Spring 2019  Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education. April 5, 2019, Toronto, Ontario.  Variance in Student Growth, Intervention Effects, and Achievement Gaps  Fall 2018  Measurement, Individual Differences, and the Promise of Computational Methods  Summer 2018  My Research and the COE  Talk for the University of Oregon&amp;rsquo;s Data Science Initiative in a joint meeting with Oregon Health and Science University.</description>
     </item>
     
   </channel>

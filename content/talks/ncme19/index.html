@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Evaluating Content-Related Validity Evidence Using Text Modeling</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="author" content="Brock Rowley" />
+    <meta name="author" content="Sondra Stegenga" />
+    <meta name="author" content="P. Shawn Irvin" />
+    <meta name="author" content="Joshua M. Rosenberg" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Evaluating Content-Related Validity Evidence Using Text Modeling
+### Daniel Anderson
+### Brock Rowley
+### Sondra Stegenga
+### P. Shawn Irvin
+### Joshua M. Rosenberg
+
+---
+
+
+
+
+# Background
+### Content-related validity evidence
+
+--
+
+* One five major sources of validity evidence (as outlined by the [*Standards*](https://www.apa.org/science/programs/testing/standards))
+
+
+--
+* Does the content represented in the test represent the targeted content?
+ 
+  + Are specific areas missing?
+
+  + Are specific areas over-represented?
+
+
+--
+* Operationally, evidence is often gathered through *alignment studies*.
+
+  + Judgments made by panels of experts (educators).
+
+  + Does the test items align with the content standards?
+
+
+---
+# Study purpose
+Extend content-related validity evidence through the use of text mining
+
+
+--
+* What thematic topics are represented in the content standards?
+
+
+--
+* How do individual items map on to these topics (if at all)?
+
+
+--
+* What is the overall coverage of the topics across test items?
+
+
+---
+# Topic modeling
+* Corpus of words split into *documents*
+
+
+--
+  + We treat each content standard as a document
+
+
+--
+* Latent variables (topics) estimated from word co-occurrence
+
+
+--
+  + Number of topics estimated is determined by the researcher (similar to exploratory factor analysis)
+
+
+--
+* Each document is a mixture of topics
+  + `\(\gamma\)` estimates provide probability a given topic is represented within a document
+
+* Each topic is a mixture of words
+  + `\(\beta\)` estimates provide probability a given word is represented within a topic
+
+---
+class: middle
+.major-emph-green[The fundamental idea]
+
+--
+1. Train a model on the content standards to estimate the latent topics represented therein. 
+
+
+--
+2. Apply the model to the test items to estimate which topics the items represent (based on the text within the item).
+
+---
+# Our application
+* Science NGSS Performance Expectations
+
+* Grade 8 statewide Alternate Assessment based on Alternate Achievement Standards (AA-AAS)
+
+  + Designed for students with the .bolder[most] significant cognitive disabilities.
+
+  + 1% reporting cap
+
+  + Reduced in depth, breadth, and complexity 
+
+---
+# Analyses
+
+* Topics estimated using Latent Dirichlet Allocation
+  + Common stop words removed ("and", "of", "the", etc.)
+  + Webb's DOK verbs removed ("choose", "describe", "find")
+
+
+--
+* Four methods evaluated to determine optimal number of topics (2-25 evaluated)
+  + Arun et al. (2010): KL-Divergence
+  + Cao et al. (2009): Cosine similarity
+  + Deveaud et al. (2014): Jensen Shannon distance
+  + Griffiths &amp; Sayers (2004): harmonic mean of posterior log-likelihoods
+
+
+--
+* Smaller range of topics evaluated by two science content experts for substantive meaning 
+
+
+---
+background-image:url(ncme19_files/figure-latex/n-topics-1.png)
+background-size: contain
+background-position: 90% 50%
+class: middle
+
+# Results: `\(n\)` topics
+
+* 3-6 topics evaluated for substantive meaning
+
+* 5-topic solution independently arrived upon
+
+  + Distinct topics, little redundancy
+
+
+---
+# Topics
+
+&lt;br/&gt;
+
+
+| Topic |Substantive Label                                                     |
+|:-----:|:---------------------------------------------------------------------|
+|   1   |Analyzing data and using evidence to understand organisms and systems |
+|   2   |Using scientific evidence to understand Earth systems                 |
+|   3   |Energy                                                                |
+|   4   |Genetic information                                                   |
+|   5   |Scientific solutions                                                  |
+
+
+---
+background-image:url(ncme19_files/figure-latex/heatmap-1.png)
+background-size: contain
+background-position: 90% 50%
+class: middle
+
+# Mapping topics 
+# to standards
+* Most standards represented by a single topic
+
+
+---
+background-image:url(ncme19_files/figure-latex/word-freq-1.png)
+background-size: contain
+background-position: 90% 50%
+class: middle
+
+# Mapping words 
+# to topics
+* Top 15 words displayed
+
+
+---
+background-image:url(ncme19_files/figure-latex/unnamed-chunk-2-1.png)
+background-size: contain
+background-position: 90% 50%
+class: middle
+
+# Predicting 
+# items
+# to topics
+* Nine random items displayed
+
+
+---
+background-image:url(ncme19_files/figure-latex/unnamed-chunk-3-1.png)
+background-size: contain
+background-position: 90% 50%
+class: middle
+
+# Topic coverage
+
+---
+# Discussion
+* Content validity is a critical component of "overall evaluative judgment" (Messick, 1995) of the validity of test-based inferences
+
+
+--
+* Particularly important within standards-based educational systems
+
+
+--
+* Text-modeling may serve as additional source of evidence (triangulation)
+
+
+--
+* May be useful as a diagnostic tool
+
+
+---
+# Limitations &amp; Future Directions
+
+* Results depend upon chosen topic model - different models may lead to different inferences
+
+
+--
+* Our model is preliminary, but publicly available. Consensus from field could help inform models that are useful and provide better validity evidence.
+
+
+--
+* Our application was in Science with an AA-AAS
+
+  + Generalizability to other content areas/tests is not known
+
+
+--
+* What if an item has no text?
+  
+  + Text-modeling could perhaps be used to help "flag" items for further investigation
+
+  + Alternative ML procedures (e.g., image recognition) may help
+
+
+---
+# Conclusions
+
+* Text mining procedures may provide additional source of evidence
+
+  + Perhaps supplementing formal alignment studies
+
+* Evidence could be used diagnostically
+
+* Topic modeling itself may be useful in understanding the topics represented in either the standards or a given test, indpendent of the linkage between the two.
+
+---
+class: inverse center middle
+
+# Thanks
+
+
+[<i class="fab  fa-github fa-2x "></i> repo](https://github.com/datalorax/text-analysis-content-validity)
+[<i class="fas  fa-envelope fa-2x "></i>](mailto:daniela@uoregon.edu)
+[<i class="fab  fa-twitter fa-2x "></i> @datalorax](https://twitter.com/datalorax_)
+
+&lt;br/&gt;
+
+Slides available at:
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

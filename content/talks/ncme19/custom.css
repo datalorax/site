@@ -1,0 +1,28 @@
+.title-slide h1 {
+  padding-top: 180px;
+  font-size: 60px;
+  text-align: left;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+}
+
+.major-emph-green {
+  display: block;
+  text-align: center;
+  font-family: 'Philosopher', sans-serif;
+  width: 110%;
+  background-color: #007935;
+  color: #eee;
+  border-top: 3px solid #FEE11A;
+  border-bottom: 3px solid #FEE11A;
+  padding: 10px 50px;
+  margin: 0px -100px 0px;
+  font-weight: bolder;
+  font-size: 175%;
+}
+
+.bolder { font-weight: 900; }
+
+.remark-slide table {
+  font-size: 1.2em;
+}
