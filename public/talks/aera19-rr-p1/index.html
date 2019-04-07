@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transparent and Reproducible Research with R (Part 1)</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <meta name="author" content="Joshua M Rosenberg" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Transparent and Reproducible Research with R (Part 1)
+## And a bit of git/GitHub
+### Daniel Anderson
+### Joshua M Rosenberg
+### April 7, 2019
+
+---
+
+class: inverse
+background-image:url(https://media.giphy.com/media/yoJC2A59OCZHs1LXvW/giphy.gif)
+background-size:contain
+
+
+
+---
+# Agenda 
+
+### First two hours
+- Introduction (8:00 - 8:45)
+  - Who we are, who participants are and why they're here (15 min.) 
+  - Reproducible research and literate programming (20 min.) &lt;!-- DA --&gt;
+  - Conducting science in the public and in an open way &amp; OSF (10 min.) &lt;!-- JMR --&gt;
+
+--
+- R Markdown (8:45 - 10:00)
+  - Delineating code chunks from plain text (15 min.) &lt;!-- JMR --&gt;
+  - Creating headers (5 min.) &lt;!-- JMR --&gt;
+  - Creating lists and using other features of markdown (10 min.) &lt;!-- DA --&gt;
+  - Whole-document and code chunk-specific options (15 min.) &lt;!-- DA --&gt;
+  - Rendering and sharing documents in different formats (15 min.) &lt;!-- JMR --&gt;
+  - Lab (practice) (15 min.)
+
+---
+class:inverse right
+background-image:url(img/break.jpg)
+background-size:cover
+
+# Break (10:00 - 10:15)
+
+
+---
+# Last two hours
+- Advanced R Markdown functionality (10:15 - 11:00 minutes)
+  - Formatting tables (20 min.) &lt;!-- DA --&gt;
+  - Creating manuscripts to submit for publication (via {papaja}; 25 min.)
+
+- Use of git/GitHub for version control and collaboration (11:00 - 11:45)
+  - Introduction to GitHub, RStudio interface, and GitKraken GUI (20
+  min.) &lt;!-- DA --&gt;
+  - Making changes, committing them, and pushing them to the repository (15 min.) &lt;!-- DA --&gt;
+  - Use of GitHub (and ignoring specific files via `.gitignore`; 10 min.) &lt;!-- JMR --&gt;
+
+- Wrap-up/ideas for next steps/staying in touch (11:45 - 12:00)
+
+---
+# #whoami
+
+.pull-left[
+* Research Assistant Professor: Behavioral Research and Teaching, University of
+Oregon ([#goducks](https://twitter.com/search?q=%23goducks&amp;src=typd))
+* Dad (two daughters: 6 (almost 7) and 4)
+* Primary areas of interest
+  + 💗💗R💗💗 and computational research 
+  + Open data, open science, and reproducible workflows
+  + Growth modeling, achievement gaps, and variance
+    between educational institutions (particularly spatially)
+]
+
+&lt;img src="img/thefam.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+
+
+---
+# #whoami 2
+
+.pull-left[
+* Assistant Professor: STEM Education, University of Tennessee, Knoxville
+* Also a Dad (one-year-old toddler!)
+* Primary areas of interest
+  + Data science in education (network analytic methods, experience sampling method, computational grounded theory)
+  + Data science education (integrating data science and science education)
+]
+
+&lt;img src="img/kr-joro.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse bottom right
+background-image: url(https://images.pexels.com/photos/1385627/pexels-photo-1385627.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260)
+background-size: cover
+
+# #whoyouis
+
+Introduce yourself
+What's your prior experience with R/R Markdown and git/GitHub?
+Why are you here?
+
+---
+class: da center middle
+# This slide means we're 
+# transitioning to Daniel
+
+---
+class: jmr center middle
+# This slide means we're 
+## transitioning to Josh
+
+
+---
+# Before we really get started
+* Realize this is all going to be an intro
+  
+  + Covering a lot of content - that's purposeful
+  
+  + Idea is to give you exposure and some basic familiarity
+
+--
+* Resources to learn more
+  
+  + Daniel's class(es)
+    + [Intro course](http://www.datalorax.com/vita/ds/ds1/)
+    + [Data viz course](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/)
+    + [Functional programming](https://uo-datasci-specialization.github.io/c3-fun_program_r/)
+
+  + [r4ds](https://r4ds.had.co.nz)
+
+  + [R Markdown book](https://bookdown.org/yihui/rmarkdown/)
+
+  + [(Developing) data science in education book](https://github.com/data-edu/data-science-in-education)
+  
+  + .gray[(plenty of others out there too)]
+
+
+---
+class: da center middle
+# Reproducible Research and
+# Literate Programming
+
+&lt;br&gt;
+
+### 8:15 - 8:30am
+
+
+---
+# A couple caveats 
+* Much of what we're going to be discussing represents an ideal that we have only recently begun working towards.
+
+--
+
+* None of what we will talk about should be taken as a referendum on you or
+  your current practices. However, we hope to help to convince you that you should be working toward the reproducible research ideal, and that, as a field, we should be moving toward reproducible research being the *minimal standard*.
+
+
+--
+* We will be focusing on reproducible research with R (obviously). Other
+  options are available but, in our view, none are as clear, comprehensive, and easy to implement as the tools at your disposal through R.
+
+---
+# What is reproducible research?
+* .bolder[Replicability] is the gold standard for research. Ideally, most
+research would be verified through replication. 
+
+
+--
+* Reproducibility represents a .bolder[minimal] standard, which itself can aid replication (tremendously), by conducting and documenting the research sufficiently that .blue[an independent researcher could reproduce all the results from a study], provided the data were available
+
+
+--
+* Turns out this is a more difficult standard than we would generally like to admit.
+
+---
+# Why should we care?
+* Reproducibility as an ethical standard
+
+  + More transparency
+  + More potential for results to be verified (and errors found/corrected)
+
+
+--
+* If your work **is not** reproducible, it is often not truly replicable.
+
+
+--
+* If your work **is** reproducible, then others have a "recipe" for replication.
+
+
+---
+
+# Are journal articles research? 
+* Initially, we may think of journal articles as research, but really the
+  research is everything that went into the article, not the article itself. 
+
+
+--
+* Some (Buckheit &amp; Donoho, 2015) conceive of the article as the
+  "advertisement".
+
+--
+* If all we have is the advertisement, can we really fully understand the
+  steps and decisions made during the research?
+    + In large-scale data analysis, the answer is generally "no".  
+
+---
+# Tangential benefits
+Striving toward reproducible research will:
+* Make your own code more efficient/easily interpretable
+
+  + Can help with collaboration on a project
+
+* Reduce errors
+
+* Increase efficiency by not having to redo tables and figures with each tweak
+  to a model.
+
+---
+# What does literate programming look like?
+### What this workshop is about!
+
+--
+1. Start with a basic text document (not Word, text)
+
+
+--
+2. Use the text document to write your article
+
+
+--
+3. Embed code within the text document that corresponds to your analysis. Note this is not just copying the code in. The code should be live and what you're working with while conducting your research.
+
+
+--
+4. Render the document into a different format (pdf, html, etc.).
+  + Select which code (if any) will be displayed
+  + Build tables of results and plots to be produced
+
+
+---
+# End result
+* Readers can then read the "advertisement", but if they are interested 
+  in reproducing your results they can access the text file that contains the analysis code.
+
+* Single product that has the advertisement and the research process embedded.
+
+---
+# Other reasons dynamic documents are useful
+Outside of reproducibility, you may want to use R Markdown to:
+* Produce slides
+
+* Keep track of your analysis (notes, essentially), even if you end up using 
+  something like Word
+
+* Share code with others
+
+* Quickly share results with others
+
+* Produce professional looking data products
+
+
+---
+# Challenges
+* Word is the industry standard (frustratingly so, to us) 
+  + Word output is less than ideal
+* Can be difficult when collaborating with others
+* Some journal articles *require* papers submitted in Word
+  + Potentially get a pdf to word converter, but still less than ideal
+* Advanced features have a relatively steep learning curve
+
+---
+class: jmr center middle
+
+# Open science and R Markdown basics 
+
+### 8:35 - 8:45 am
+---
+
+# Open science and public work
+
+.pull-left[
+### Benefits
+* Working in the public has potential benefits:
+  * People know what your expertise is
+  * Potential colleagues can reach out to you for collaborations
+  * Allow others to build upon your work
+  * Build a network
+]
+
+.pull-right[
+### Dilemmas
+* Working in the public has *some* potential dilemmas/drawbacks to manage:
+  * Sometimes difficult to share pre-prints (due to copyright issues)
+  * Getting 'scooped'
+  * Often difficult to share data
+]
+---
+
+# Open Science Framework
+
+- Offers a platform in which you can store *private* data
+
+- Has an Application Programming Interface (API) to connect with R
+
+- Example: [https://osf.io/9ex7k/](https://osf.io/9ex7k/)
+
+---
+
+# R Markdown Basics
+
+## 8:45 - 9:00
+
+---
+# R Markdown
+From within your R Studio Project:
+![](img/rmd_template.png )
+
+---
+# First thing: Render!
+![](img/knit.png)
+
+---
+class: inverse center middle
+# Create new a R Markdown doc
+
+### ### Try it out!
+
+
+# YAML Front Matter
+
+```
+---
+title: Example Markdown document
+author: 
+  - Daniel Anderson
+  - : "2019-05-07"
+---
+```
+
+![](img/frontMatter.png)
+
+* Three dashes before and after the YAML fields
+* Case sensitive
+* Many other fields are possible.
+  + For example, you may want to include an `output:` argument (`pdf_document`,
+    `html_document`, `word_document`). Must be specified as it is rendered, if
+    not supplied.
+
+
+---
+# Example: Change syntax highlighting
+The YAML will control a lot of how a document looks. For example, if you wanted to render with a different syntax highlighter:
+
+.pull-left[
+### Standard Rmd
+
+```
+---
+title: "Doc Title"
+output: pdf_document
+---
+```
+]
+
+
+.pull-right[
+### kate 
+
+```
+---
+title: "Doc Title"
+output: 
+  pdf_document:
+    highlight: kate
+---
+```
+]
+
+
+---
+# Code chunks versus text
+
+![](img/code_chunks.png)
+
+---
+# Code chunks
+
+Start a code chunk with ` ```{r}`, then produce some r code, then close the
+
+  chunk with three additional back ticks ` ``` `.
+
+![](img/codeChunk1.png)
+
+--
+
+
+```r
+a &lt;- 3
+b &lt;- 5
+
+a + b * (exp(a)/b)
+```
+
+```
+## [1] 23.08554
+```
+
+---
+class: da center middle
+# R Markdown basics 
+## Headings, lists, chunk options, and inline code
+
+
+### 9:00 - 9:30am
+
+
+---
+# Headings and Lists 
+
+### Not R-lists
+
+.pull-left[
+
+```
+# Level 1
+## Level 2 
+### Level 3 (etc.)
+```
+
+&lt;br/&gt;
+
+```
+ * Unordered list
+  - inset
+    + inset more
+  - etc.
+
+1. Ordered list
+  a. blah blah
+2. More stuff
+```
+
+]
+
+.pull-right[
+
+![](img/headersLists.png)
+
+]
+
+
+---
+# echo and eval
+
+.pull-left[
+
+You can show code without evaluating it, using `eval = FALSE`. 
+
+&lt;div align = "left"&gt;
+&lt;img src = img/codeChunk2.png height = 100&gt;
+&lt;/div&gt;
+
+
+
+```r
+a + b * (exp(a)/b)
+```
+]
+
+.pull-right[
+
+Alternatively, you can evaluate the code without displaying it, using `echo = 
+  FALSE`.
+
+&lt;div align = "left"&gt;
+&lt;img src = img/codeChunk3.png height = 100&gt;
+&lt;/div&gt;
+
+![](workshop-presentation-p1_files/figure-html/plotExample-1.png)&lt;!-- --&gt;
+
+]
+
+---
+# warning
+
+
+
+### Warning = `FALSE`
+
+```r
+ggplot(msleep, aes(sleep_rem, sleep_total)) + 
+  geom_point()
+```
+
+![](workshop-presentation-p1_files/figure-html/ggplotWarning2-1.png)&lt;!-- --&gt;
+Warning is printed to the console when rendering.
+
+
+---
+
+### Warning = `TRUE`
+
+```r
+ggplot(msleep, aes(sleep_rem, sleep_total)) + 
+  geom_point()
+```
+
+```
+## Warning: Removed 22 rows containing missing values (geom_point).
+```
+
+![](workshop-presentation-p1_files/figure-html/ggplotWarning1-1.png)&lt;!-- --&gt;
+
+---
+# Show errors
+
+`error = TRUE`
+
+```r
+ggplot(msleep, aes(sleep, sleep_total)) + 
+  geom_point()
+```
+
+```
+## Error: Aesthetics must be either length 1 or the same as the data (83): x
+```
+
+--
+
+&lt;br&gt;
+
+If `error = FALSE`, the document won't render if it encounters an error.
+
+![](img/errorRendering.png)
+
+---
+# Message
+Some functions will return messages. You may want to suppress these.
+
+### message = `FALSE`
+
+```r
+ggplot(msleep, aes(sleep_total)) +
+  geom_histogram()
+```
+
+![](workshop-presentation-p1_files/figure-html/messages2-1.png)&lt;!-- --&gt;
+
+---
+# Message
+
+### message = `TRUE`
+
+```r
+ggplot(msleep, aes(sleep_total)) +
+  geom_histogram()
+```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+![](workshop-presentation-p1_files/figure-html/messages1-1.png)&lt;!-- --&gt;
+
+---
+# include
+
+![](img/includeFALSE.png)
+
+The `include` argument is used to evaluate code that is not included in the
+document at all. For example, when setting up your global options.
+
+
+---
+# Setting global options
+Change the default behavior
+
+
+```r
+opts_chunk$set(...) # insert options here
+```
+
+For example, you can set `echo = FALSE` and `fig.width = 6.5` and `fig.height = 8` with the following code.
+
+
+```r
+opts_chunk$set(echo = FALSE, fig.width = 6.5, fig.height = 8)
+```
+
+This is most useful when producing a report for somebody who doesn't use R and has no use or knowledge of the code.
+
+
+You can always override the global options within a particular chunk, e.g.
+
+` ```{r, chunkName, echo = TRUE}` 
+
+` ``` `
+
+---
+## Other things to consider setting globally:
+* `warnings = FALSE`
+* `message = FALSE`
+* `errors = TRUE`
+* `echo = FALSE`
+* Caching options (next slides)
+
+
+---
+# More complete chunk options
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Options &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Arguments &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Default &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Result &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; eval &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Evaluate the code? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; echo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Show the code? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; results &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; markup, asis, hold, hide &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; markup &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Render the results &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; warning &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Print warnings? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; error &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Preserve errors? (if FALSE, quit) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; message &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Print any messages? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; include &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Include any of the code or output or code? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; tidy &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Tidy code? (see formatR package) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# (and a few more)
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Options &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Arguments &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Default &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Result &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; cache &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical, 0:3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Cache code chunks? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; cache.comments &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NULL &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Cache invalidated by comment changes? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; dependson &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; char, num &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NULL &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Current chunk depend on prior cached chunks? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; autodep &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Depends determined automatically? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; fig.height/fig.width &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; numeric &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 7, 7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Height and width of figure &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; fig.show &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; asis, hold, animate, hide &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; asis &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; How the figure should be displayed &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; interval &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; numeric &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Animate speed &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.footnote[For complete documentation, see http://yihui.name/knitr/options/]
+
+---
+# Inline code
+
+A single back tick followed by `r` produces inline code to be evaluated.
+
+&lt;div align = "center"&gt;
+&lt;img src = img/inlineCode.png width = 1000&gt;
+&lt;/div&gt;
+&lt;br&gt;
+
+This is an example of inline code, where I want to refer to the sum of `a` and
+  `b`, which is 8.
+
+This is *extremely* useful in writing reports. Never have to update any numbers in text, regardless of changes to your models or data (if you are careful about it).
+
+---
+# Real example
+
+![](img/ell_means.png)
+
+---
+class: jmr center middle
+
+# Rendering and documents
+
+## 9:30 - 10:00am-
+# Rendering R Markdown documents
+
+## Modify the YAML
+Get the same document to render to different formats by modifying the YAML to output HTML, PDF, and .docx
+
+.pull-left[
+### From
+
+```
+---
+title: "My Document"
+author: "Stephanie Lawson"
+output: html_document
+---
+```
+]
+
+
+.pull-right[
+### To
+
+```
+---
+title: "My Document"
+author: "Stephanie Lawson"
+output: pdf_document
+---
+```
+]
+
+---
+
+# Rendering to HTML
+
+```
+---
+title: "My Document"
+author: "Stephanie Lawson"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    higlight: kate
+---
+```
+
+---
+
+# Re# Rendering to a PDF
+* Need a tex (pronounced tek) distribution
+  + Our recommendation for this workshop with probably everything you'll ever need: 
+    {tinytex}
+    
+--
+
+```r
+install.packages("tinytex")
+tinytex::install_tinytex()
+```
+
+This is another amazing package by Yihui Xie. See more about it
+[here](https://yihui.name/tinytex/)
+
+---
+
+ndering to PDF
+
+```
+---
+title: "My Document"
+author: "Stephanie Lawson"
+output: 
+  pdf_document:
+    toc: true
+    number_sections: true
+    higlight: kate
+---
+```
+
+---
+
+# Rendering to .docx
+
+A key feature is the ability to use a reference document; see [here](https://bookdown.org/yihui/rmarkdown/word-document.html)
+
+```
+---
+title: "My Document"
+author: "Stephanie Lawson"
+output: word_document
+---
+```
+
+
+
+
+
+---
+s: da crse center middle
+# Break
+
+### 10:00 - 10:15
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"chakra": "libs/remark.min.js",
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

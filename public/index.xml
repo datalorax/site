@@ -129,6 +129,24 @@ install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the so
     
     <item>
       <title></title>
+      <link>/talks/aera19-rr-p1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/aera19-rr-p1/</guid>
+      <description>Transparent and Reproducible Research with R (Part 1)    class: center, middle, inverse, title-slide # Transparent and Reproducible Research with R (Part 1) ## And a bit of git/GitHub ### Daniel Anderson ### Joshua M Rosenberg ### April 7, 2019 --- class: inverse background-image:url(https://media.giphy.com/media/yoJC2A59OCZHs1LXvW/giphy.gif) background-size:contain --- # Agenda ### First two hours - Introduction (8:00 - 8:45) - Who we are, who participants are and why they&#39;re here (15 min.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/talks/aera19-rr-p2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/aera19-rr-p2/</guid>
+      <description>Transparent and Reproducible Research with R (Part 2)   class: center, middle, inverse, title-slide # Transparent and Reproducible Research with R (Part 2) ## And a bit of git/GitHub ### Daniel Anderson ### Joshua M Rosenberg ### April 7, 2019 --- # Agenda # Last two hours - Advanced R Markdown functionality (10:15 - 11:00 minutes) - Formatting tables (20 min.) &amp;lt;!-- DA --&amp;gt; - Creating manuscripts to submit for publication (via {papaja}; 25 min.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/talks/cascadia18/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -678,7 +696,7 @@ The purpose of esvis is primarily to visualize differences in two or more distri
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/talks/</guid>
-      <description>Talks Spring 2019  Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education. April 5, 2019, Toronto, Ontario.  Variance in Student Growth, Intervention Effects, and Achievement Gaps  Fall 2018  Measurement, Individual Differences, and the Promise of Computational Methods  Summer 2018  My Research and the COE  Talk for the University of Oregon&amp;rsquo;s Data Science Initiative in a joint meeting with Oregon Health and Science University.</description>
+      <description>Talks Spring 2019  AERA Reproducible Research Training: (part 1) AERA Reproducible Research Training: (part 2)  Training on open and transparent research with R and git/GitHub. April 7, 2019, Toronto, Ontario.  Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education. April 6, 2019, Toronto, Ontario.  Variance in Student Growth, Intervention Effects, and Achievement Gaps  Fall 2018  Measurement, Individual Differences, and the Promise of Computational Methods  Summer 2018  My Research and the COE  Talk for the University of Oregon&amp;rsquo;s Data Science Initiative in a joint meeting with Oregon Health and Science University.</description>
     </item>
     
     <item>

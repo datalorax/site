@@ -9,8 +9,13 @@ comments: false
 </p>
 
 ## Spring 2019
+* [AERA Reproducible Research Training: (part 1)](../aera19-rr-p1)
+* [AERA Reproducible Research Training: (part 2)](../aera19-rr-p2)
+	+ Training on open and transparent research with R and git/GitHub. April 7,
+	2019, Toronto, Ontario.
 * [Evaluating Content-Related Validity Evidence Using Text Modeling](../ncme19)
-	+ Talk for the annual conference of the National Council on Measurement in Education. April 5, 2019, Toronto, Ontario.
+	+ Talk for the annual conference of the National Council on Measurement in
+	Education. April 6, 2019, Toronto, Ontario.
 * [Variance in Student Growth, Intervention Effects, and Achievement Gaps](../vatech)
 
 ## Fall 2018

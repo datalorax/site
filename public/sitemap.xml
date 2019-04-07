@@ -87,6 +87,18 @@
   </url>
   
   <url>
+    <loc>/talks/aera19-rr-p1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/talks/aera19-rr-p2/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/talks/cascadia18/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
