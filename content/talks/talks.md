@@ -9,6 +9,9 @@ comments: false
 </p>
 
 ## Spring 2019
+* [Some Advice on Data Viz](../psych-seminar19)
+	+ Talk for first year graduate students in a Psychology seminar on producing
+	better data visualizations
 * [AERA Reproducible Research Training: (part 1)](../aera19-rr-p1)
 * [AERA Reproducible Research Training: (part 2)](../aera19-rr-p2)
 	+ Training on open and transparent research with R and git/GitHub. April 7,

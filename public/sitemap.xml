@@ -129,6 +129,12 @@
   </url>
   
   <url>
+    <loc>/talks/psych-seminar19/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/talks/sicss-seattle/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

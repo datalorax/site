@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Some data viz advice</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Daniel Anderson" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/uo-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Some data viz advice
+### Daniel Anderson
+### Wednesday, April 24
+
+---
+
+
+
+
+# #whoami
+
+.pull-left[
+* Research Assistant Professor: Behavioral Research and Teaching, University
+* Dad (two daughters: 7 and 4 (almost 5))
+* Primary areas of interest
+  + 💗💗R💗💗 and computational research 
+  + Open data, open science, and reproducible workflows
+  + Growth modeling, achievement gaps, and variance
+    between educational institutions (particularly spatially)
+]
+
+&lt;img src="img/thefam.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+
+---
+# Resources (free)
+
+.pull-left[
+Healy (http://socviz.co)
+
+&lt;div&gt;
+&lt;img src = http://socviz.co/assets/dv-cover-pupress.jpg height = 400&gt;
+&lt;/div&gt;
+
+]
+
+.pull-right[
+Wilke (https://serialmentor.com/dataviz/)
+
+&lt;div&gt;
+&lt;img src =
+http://t1.gstatic.com/images?q=tbn:ANd9GcSKmL1jCuh8rAxHEvGdd80_6GENytaUjiP7YEWGsiRFF_yta-18 height = 400&gt; &lt;/div&gt;
+
+
+]
+
+
+---
+# Other Resources
+* My classes! 
+* Sequence
+  + [Intro to R and reproducible/transparent research](https://github.com/uo-datasci-specialization/c1-intro_data_sci)
+  + [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/)
+  + [Functional Programming in R](https://uo-datasci-specialization.github.io/c3-fun_program_r/)
+  + Applied Predictive Modeling
+  + Capstone
+
+---
+# Where to start?
+* I *really* recommend moving to R as quickly as possible
+
+--
+
+.pull-left[
+
+http://r4ds.had.co.nz
+
+&lt;div&gt;
+&lt;img src = img/r4ds.png height = 350&gt;
+&lt;/div&gt;
+
+]
+
+.pull-right[
+http://www.moderndive.com
+![](img/moderndive.png)
+]
+
+---
+# ggplot2!
+
+.pull-left[
+https://r-graphics.org
+![](https://r-graphics.org/cover.jpg)
+]
+
+.pull-right[
+available through [amazon](https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/ref=dp_ob_title_bk)
+![](https://images-na.ssl-images-amazon.com/images/I/31uoy-qmhEL._SX331_BO1,204,203,200_.jpg)
+]
+
+---
+# Last note before we really start
+* These slides were produced with R
+
+* See the source code [here](https://github.com/datalorax/psych-seminar19)
+
+* The focus of this particular talk is not on the code itself
+
+---
+class: middle center
+# Different ways of encoding data
+
+![](talk_files/figure-html/data-encoding-1.png)&lt;!-- --&gt;
+
+---
+# Other elements to consider
+* Text
+  
+  + How is the text displayed (e.g., font, face, location)? 
+  
+  + What is the purpose of the text?
+
+--
+
+* Transparency
+  
+  + Are there overlapping pieces? 
+  
+  + Can transparency help?
+
+--
+* Type of data
+  + Continuous/categorical
+  + Which can be mapped to each aesthetic?
+    - e.g., shape and line type can only be mapped to categorical data, whereas
+    color and size can be mapped to either.
+
+
+---
+class: middle center
+# Basic Scales
+
+![](talk_files/figure-html/scales-wilke-1.png)&lt;!-- --&gt;
+
+---
+# Talk with a neighbor
+How would you encode these data into a display?
+
+| Month | Day | Location     | Temperature |
+|:-----:|:---:|:-------------| ------------|
+|  Jan  |  1  | Chicago      | 25.6        |
+|  Jan  |  1  | San Diego    | 55.2        |
+|  Jan  |  1  | Houston      | 53.9        |
+|  Jan  |  1  | Death Valley | 51.0        |
+|  Jan  |  2  | Chicago      | 25.5        |
+|  Jan  |  2  | San Diego    | 55.3        |
+|  Jan  |  2  | Houston      | 53.8        |
+|  Jan  |  2  | Death Valley | 51.2        |
+|  Jan  |  3  | Chicago      | 25.3        |
+
+
+---
+class: middle center
+# Putting it to practice
+
+![](talk_files/figure-html/temp-change-1.png)&lt;!-- --&gt;
+
+---
+class: middle center
+# Alternative representation
+
+![](talk_files/figure-html/temp-change2-1.png)&lt;!-- --&gt;
+
+---
+# Comparison
+
+* Both represent three scales
+
+  + Two position scales (x/y axis)
+  + One color scale (categorical for the first, continuous for the second)
+
+--
+
+* More scales are possible
+
+![](talk_files/figure-html/five-scales-1.png)&lt;!-- --&gt;
+
+---
+background-image:url(http://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-multichannel-1.png)
+background-size:contain
+
+Additional scales can become lost without high structure in the data
+
+---
+# Thinking more about color
+### Three fundamental uses 
+
+--
+1. Distinguish groups from each other
+
+
+--
+1. Represent data values
+
+
+--
+1. Highlight
+
+
+---
+# Discrete items
+* Often no intrinsic order
+
+
+--
+### Qualitative color scale
+* Finite number of colors
+  + Chosen to maximize distinctness, while also be equivalent
+  + Equivalent
+    - No  color should stand out
+    - No impression of order
+
+---
+background-image:url(https://serialmentor.com/dataviz/color_basics_files/figure-html/qualitative-scales-1.png)
+background-size:contain
+
+# Some examples
+
+.footnote[See more about the Okabe Ito palette origins here: http://jfly.iam.u-tokyo.ac.jp/color/]
+
+
+---
+background-image:url(https://serialmentor.com/dataviz/color_basics_files/figure-html/sequential-scales-1.png)
+background-size:contain
+
+# Sequential scale examples
+### Colors to represent continuous values
+
+
+
+---
+background-image:url(https://serialmentor.com/dataviz/color_basics_files/figure-html/diverging-scales-1.png)
+background-size:contain
+
+# Diverging palettes
+
+---
+# Earth palette
+
+![](talk_files/figure-html/or1-1.png)&lt;!-- --&gt;
+
+---
+![](talk_files/figure-html/ca1-1.png)&lt;!-- --&gt;
+
+---
+# Common problems with color
+### Too many
+
+More than 5-ish categories generally becomes too difficult to track
+
+![](talk_files/figure-html/too-many-colors-1.png)&lt;!-- --&gt;
+
+---
+# Use labels
+
+More than 5-ish categories generally becomes too difficult to track
+
+![](talk_files/figure-html/states-labeled-1.png)&lt;!-- --&gt;
+
+---
+# Better
+
+Get a subset
+
+![](talk_files/figure-html/subset-states-1.png)&lt;!-- --&gt;
+
+---
+# Best
+
+![](talk_files/figure-html/best-label-1.png)&lt;!-- --&gt;
+
+---
+## Problem with default ggplot2 palette 
+
+![](talk_files/figure-html/colorblind1-1.png)&lt;!-- --&gt;
+
+---
+# Alternative: viridis
+
+![](talk_files/figure-html/viridis1-1.png)&lt;!-- --&gt;
+
+---
+# Revised version
+
+![](talk_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+---
+# Last few note on palettes
+* Do some research, find what you like .bold[and] what tends to work well
+
+* Check for colorblindness
+
+* Look into http://colorbrewer2.org/ 
+
+---
+class: inverse center middle
+# Data ink ratio
+
+---
+# What is it?
+
+--
+&gt; ### Above all else,  show the data
+
+&lt;br&gt;
+\-Edward Tufte
+
+
+--
+* Data-Ink Ratio = Ink devoted to the data / total ink used to produce the
+figure
+
+
+--
+* Common goal: Maximize the data-ink ratio
+
+---
+# Example
+
+![](img/six-boxplots.png)
+
+--
+
+* First thought might be... Cool!
+
+---
+background-image:url(https://theamericanreligion.files.wordpress.com/2012/10/lee-corso-sucks.jpeg?w=660)
+background-size:cover
+
+---
+# Minimize cognitive load
+* Empirically, Tufte's plot was .bolder[the most difficult] for viewers to
+interpret.
+
+
+--
+* Visual cues (labels, gridlines) reduce the data-ink ratio, but can also 
+reduce cognitive load.
+
+---
+# An example
+### Which do you prefer?
+
+.pull-left[
+![](talk_files/figure-html/h3_bad-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](talk_files/figure-html/h3_good-1.png)&lt;!-- --&gt;
+]
+
+
+---
+# Advice from Wilke
+
+&gt; Whenever possible, .bolder[visualize your data with solid, colored shapes] rather than with lines that outline those shapes. Solid shapes are more easily perceived, are less likely to create visual artifacts or optical illusions, and do more immediately convey amounts than do outlines.
+
+.gray[emphasis added]
+
+---
+# Another example
+
+.pull-left[
+![](talk_files/figure-html/iris_lines-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](talk_files/figure-html/iris_colored_lines-1.png)&lt;!-- --&gt;
+]
+
+---
+class: center middle
+
+![](talk_files/figure-html/iris_filled-1.png)&lt;!-- --&gt;
+
+---
+# Labels in place of legends
+
+Prior slide is a great example of when annotations can be used in place of a legend to 
+* reduce cognitive load
+* increase clarity
+* increase beauty
+* maximize the figure size
+
+---
+class: inverse center middle
+# Practical advice so far
+
+--
+### Avoid line drawings
+
+--
+### Maximize the data-ink ratio within reason (but preference reduction of cognitive load)
+
+--
+### Use color to your advantage (and think critically about the palettes you choose)
+
+--
+### Consider plot annotations over legends
+
+---
+# Grouped data
+### Distributions
+
+How do we display more than one distribution at a time?
+
+
+
+
+---
+# Boxplots
+
+![](talk_files/figure-html/boxplots-1.png)&lt;!-- --&gt;
+
+---
+# Violin plots
+
+![](talk_files/figure-html/violin-1.png)&lt;!-- --&gt;
+
+---
+# Jittered points
+
+![](talk_files/figure-html/jittered-1.png)&lt;!-- --&gt;
+
+---
+# Sina plots
+
+![](talk_files/figure-html/sina-1.png)&lt;!-- --&gt;
+
+---
+# Stacked histograms
+
+![](talk_files/figure-html/stacked-histo-1.png)&lt;!-- --&gt;
+
+---
+# Overlapping densities
+
+![](talk_files/figure-html/overlap-dens-1.png)&lt;!-- --&gt;
+
+---
+# Ridgeline densities
+
+![](talk_files/figure-html/ridgeline-1.png)&lt;!-- --&gt;
+
+
+
+---
+class: inverse center middle
+# Quick empirical examples
+
+
+---
+# Titanic data
+
+
+```
+## # A tibble: 1,313 x 5
+##   name                                          class   age sex    survived
+##   &lt;chr&gt;                                         &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;int&gt;
+## 1 Allen, Miss Elisabeth Walton                  1st   29    female        1
+## 2 Allison, Miss Helen Loraine                   1st    2    female        0
+## 3 Allison, Mr Hudson Joshua Creighton           1st   30    male          0
+## 4 Allison, Mrs Hudson JC (Bessie Waldo Daniels) 1st   25    female        0
+## 5 Allison, Master Hudson Trevor                 1st    0.92 male          1
+## 6 Anderson, Mr Harry                            1st   47    male          1
+## # … with 1,307 more rows
+```
+
+
+---
+# Boxplots
+
+![](talk_files/figure-html/boxplots-empirical-1.png)&lt;!-- --&gt;
+
+---
+# Violin plots
+
+![](talk_files/figure-html/violin-empirical-1.png)&lt;!-- --&gt;
+
+---
+# Jittered point plots
+
+![](talk_files/figure-html/jittered-empirical-1.png)&lt;!-- --&gt;
+
+---
+# Sina plot
+
+![](talk_files/figure-html/sina-empirical-1.png)&lt;!-- --&gt;
+
+---
+# Stacked histogram
+
+![](talk_files/figure-html/stacked-histo-empirical-1.png)&lt;!-- --&gt;
+
+--
+
+# 🤨
+
+---
+# Dodged
+![](talk_files/figure-html/dodged-histo-empirical-1.png)&lt;!-- --&gt;
+
+---
+# Better
+
+![](talk_files/figure-html/wrapped-histo-empirical-1.png)&lt;!-- --&gt;
+
+---
+# Overlapping densities
+
+![](talk_files/figure-html/overlap-dens-empirical-1.png)&lt;!-- --&gt;
+
+--
+Note the default colors really don't work well in most of these
+
+---
+
+![](talk_files/figure-html/overlap-dens-empirical2-1.png)&lt;!-- --&gt;
+
+---
+# Ridgeline densities
+
+![](talk_files/figure-html/ridgeline-dens-empirical-1.png)&lt;!-- --&gt;
+
+---
+class: inverse center middle
+# Visualizing amounts
+
+---
+# Bar plots
+
+
+
+![](talk_files/figure-html/bars-1.png)&lt;!-- --&gt;
+
+---
+# Flipped bars
+
+![](talk_files/figure-html/flipped_bars-1.png)&lt;!-- --&gt;
+
+---
+# Dotplot
+
+![](talk_files/figure-html/dots-1.png)&lt;!-- --&gt;
+
+---
+# Heatmap
+
+![](talk_files/figure-html/heatmap-1.png)&lt;!-- --&gt;
+
+---
+class: inverse center middle
+# A short journey
+### How much does college cost?
+
+
+---
+# Tuition data
+
+
+```
+## # A tibble: 6 x 13
+##   State `2004-05` `2005-06` `2006-07` `2007-08` `2008-09` `2009-10`
+##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Alab…  5682.838  5840.550  5753.496  6008.169  6475.092  7188.954
+## 2 Alas…  4328.281  4632.623  4918.501  5069.822  5075.482  5454.607
+## 3 Ariz…  5138.495  5415.516  5481.419  5681.638  6058.464  7263.204
+## 4 Arka…  5772.302  6082.379  6231.977  6414.900  6416.503  6627.092
+## 5 Cali…  5285.921  5527.881  5334.826  5672.472  5897.888  7258.771
+## 6 Colo…  4703.777  5406.967  5596.348  6227.002  6284.137  6948.473
+## # … with 6 more variables: `2010-11` &lt;dbl&gt;, `2011-12` &lt;dbl&gt;,
+## #   `2012-13` &lt;dbl&gt;, `2013-14` &lt;dbl&gt;, `2014-15` &lt;dbl&gt;, `2015-16` &lt;dbl&gt;
+```
+
+---
+# By state: 2015-16
+![](talk_files/figure-html/state-tuition1-1.png)&lt;!-- --&gt;
+
+--
+
+# 🤮🤮🤮
+
+---
+# Two puke emoji version
+# 🤮🤮
+
+![](talk_files/figure-html/state-tuition2-1.png)&lt;!-- --&gt;
+
+---
+# One puke emoji version
+# 🤮
+
+![](talk_files/figure-html/state-tuition3-eval-1.png)&lt;!-- --&gt;
+
+---
+# Kinda smiley version
+# 😏
+
+![](talk_files/figure-html/state-tuition4-eval-1.png)&lt;!-- --&gt;
+
+---
+# Highlight Oregon
+# 🙂
+
+![](talk_files/figure-html/oregon-highlight-eval-1.png)&lt;!-- --&gt;
+
+---
+# Not always good to sort
+
+![](talk_files/figure-html/income_df-sorted-1.png)&lt;!-- --&gt;
+
+---
+# Much better
+
+![](talk_files/figure-html/income_df-1.png)&lt;!-- --&gt;
+
+---
+# Heatmap
+
+
+
+![](talk_files/figure-html/heatmap2-eval-1.png)&lt;!-- --&gt;
+
+---
+# Better heatmap
+
+
+
+![](talk_files/figure-html/heatmap3-eval-1.png)&lt;!-- --&gt;
+
+---
+# Even better heatmap
+
+
+
+![](talk_files/figure-html/heatmap4-eval-1.png)&lt;!-- --&gt;
+
+---
+background-image: url("img/heatmap.png")
+class: inverse bottom
+background-size:contain
+
+
+---
+# Quick aside
+* Think about the data you have
+* Given that these are state-level data, they have a geographic component
+
+---
+background-image: url("img/states-heatmap.png")
+class: inverse bottom
+background-size:contain
+
+
+
+---
+class: inverse center middle
+# Some things to avoid
+
+---
+# Line drawings
+### As discussed earlier
+
+.pull-left[
+###  😫
+![](talk_files/figure-html/dens-titanic-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+### Change the fill
+![](talk_files/figure-html/dens-titanic-blue-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+.pull-left[
+![](talk_files/figure-html/iris_lines2-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](talk_files/figure-html/iris_filled2-1.png)&lt;!-- --&gt;
+]
+
+
+
+---
+# Much worse
+### Unnecessary 3D
+
+.pull-left[
+![](img/3d-pie-10-v2.png)
+]
+
+.pull-right[
+![](img/3d-pie-20-v2.png)
+]
+
+---
+# Much worse
+### Unnecessary 3D
+
+.pull-left[
+![](img/3d-pie-40-v2.png)
+]
+
+.pull-right[
+![](img/3d-pie-80-v2.png)
+]
+
+
+---
+# Horrid example
+### Used relatively regularly
+![](img/3d_bar.png)
+
+
+---
+# Pie charts
+### Especially w/lots of categories
+
+![](https://serialmentor.com/dataviz/visualizing_proportions_files/figure-html/marketshare-pies-1.png)
+
+---
+# Alternative representation
+
+![](https://serialmentor.com/dataviz/visualizing_proportions_files/figure-html/marketshare-side-by-side-1.png)
+
+
+---
+# A case for pie charts
+* `\(n\)` categories low,
+* differences are relatively large
+* familiar for some audiences 
+
+![](talk_files/figure-html/pie-1.png)&lt;!-- --&gt;
+
+---
+# The anatomy of a pie chart
+Pie charts are just stacked bar charts with a radial coordinate system
+
+![](talk_files/figure-html/stacked_bars_nopie-1.png)&lt;!-- --&gt;
+
+---
+# Horizontal
+
+![](talk_files/figure-html/horiz_stacked-1.png)&lt;!-- --&gt;
+
+---
+# My preference
+
+![](talk_files/figure-html/dodged_bars-1.png)&lt;!-- --&gt;![](talk_files/figure-html/dodged_bars-2.png)&lt;!-- --&gt;
+
+---
+# Dual axes
+* One exception - if second axis is a direct transformation of the first
+  + e.g., Miles/Kilometers, Fahrenheit/Celsius 
+
+.footnote[See many examples here: http://www.tylervigen.com/spurious-correlations]
+
+
+---
+# Truncated axes
+![](img/truncated_axes.png)
+
+---
+class: middle
+![](img/truncated_axes2.png)
+
+
+---
+# Not always a bad thing
+&gt; It is tempting to lay down inflexible rules about what to do in terms of producing your graphs, and to dismiss people who don’t follow them as producing junk charts or lying with statistics. But being honest with your data is a bigger problem than can be solved by rules of thumb about making graphs. In this case there is a moderate level of agreement that bar charts should generally include a zero baseline (or equivalent) given that bars encode their variables as lengths. But it would be a mistake to think that a dot plot was by the same token deliberately misleading, just because it kept itself to the range of the data instead.
+
+---
+class: middle
+.pull-left[
+![](http://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-bar-simple-1.png)
+]
+
+.pull-right[
+![](http://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-bar-simple-2.png)
+]
+
+---
+class: middle
+.pull-left[
+![](http://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-law-enrollments-1.png)
+]
+
+.pull-right[
+![](http://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-law-enrollments-2.png)
+]
+
+---
+# Scaling issues
+![](img/area_size.png)
+
+---
+class: middle center
+# Poor binning choices
+![](img/poor_binning.png)
+
+---
+# Conclusions 
+
+### Practical takeaways to make better visualizations
+
+1. Avoid line drawings
+
+2. Sort bar charts in ascending/descending order as long as the other axis does not have implicit meaning
+
+3. Consider dropping legends and using annotations, when possible
+
+4. Use color to your advantage, but be sensitive to color-blindness, and use the right kind of palette
+
+5. Consider double-encoding data (shapes and color)
+
+6. Make your labels bigger! .gray[Didn't talk about this one much but it's super common and really important]
+
+
+
+---
+# Some things to avoid
+
+* Essentially never
+
+  + Use dual axes (produce separate plots instead)
+
+  + Use 3D unnecessarily
+
+* Be wary of
+
+  + Truncated axes
+
+  + Pie charts (usually (always?) use bars instead)
+
+
+
+---
+class: inverse center middle
+# Thanks!
+### Questions
+&lt;i class="fab  fa-twitter ">&lt;/i> [@datalorax_](https://twitter.com/datalorax_)
+&lt;i class="fab  fa-github ">&lt;/i> [@datalorax](https://github.com/datalorax)
+&lt;i class="fas  fa-envelope ">&lt;/i> [daniela@uoregon.edu](mailto:daniela@uoregon.edu)
+ 
+Slides available at
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-dune-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

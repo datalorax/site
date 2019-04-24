@@ -76,6 +76,15 @@
     
     <item>
       <title></title>
+      <link>/talks/psych-seminar19/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/psych-seminar19/</guid>
+      <description>Some data viz advice   class: center, middle, inverse, title-slide # Some data viz advice ### Daniel Anderson ### Wednesday, April 24 --- # #whoami .pull-left[ * Research Assistant Professor: Behavioral Research and Teaching, University * Dad (two daughters: 7 and 4 (almost 5)) * Primary areas of interest + 💗💗R💗💗 and computational research + Open data, open science, and reproducible workflows + Growth modeling, achievement gaps, and variance between educational institutions (particularly spatially) ] &amp;lt;img src=&#34;</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/talks/sicss-seattle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -117,7 +126,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/talks/</guid>
-      <description>Talks Spring 2019  AERA Reproducible Research Training: (part 1) AERA Reproducible Research Training: (part 2)  Training on open and transparent research with R and git/GitHub. April 7, 2019, Toronto, Ontario.  Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education. April 6, 2019, Toronto, Ontario.  Variance in Student Growth, Intervention Effects, and Achievement Gaps  Fall 2018  Measurement, Individual Differences, and the Promise of Computational Methods  Summer 2018  My Research and the COE  Talk for the University of Oregon&amp;rsquo;s Data Science Initiative in a joint meeting with Oregon Health and Science University.</description>
+      <description>Talks Spring 2019  Some Advice on Data Viz  Talk for first year graduate students in a Psychology seminar on producing better data visualizations  AERA Reproducible Research Training: (part 1) AERA Reproducible Research Training: (part 2)  Training on open and transparent research with R and git/GitHub. April 7, 2019, Toronto, Ontario.  Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education.</description>
     </item>
     
   </channel>
