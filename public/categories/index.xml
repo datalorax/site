@@ -7,16 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>R Code</title>
-      <link>/categories/r-code/</link>
-      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
+      <title>Achievement Gap</title>
+      <link>/categories/achievement-gap/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/r-code/</guid>
+      <guid>/categories/achievement-gap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Effect Size</title>
+      <link>/categories/effect-size/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/effect-size/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistics</title>
+      <link>/categories/statistics/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/statistics/</guid>
       <description></description>
     </item>
     
@@ -30,11 +49,20 @@
     </item>
     
     <item>
-      <title>Website</title>
+      <title>website</title>
       <link>/categories/website/</link>
       <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/website/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R Code</title>
+      <link>/categories/r-code/</link>
+      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/r-code/</guid>
       <description></description>
     </item>
     

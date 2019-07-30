@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w5p1/w5p1/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Reviewing what we know Talk with your neighbor: How would you do each of the following using dplyr?  Extract only the first and third through ninth columns Extract the third column and any column that ends with &ldquo;response&rdquo; Reorder columns Extract only cases from students classified as English Language Learners (ELL) Create a new variable that represents the proportion of ELL students by grade Order the data in ascending or descending order Center a variable (i." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w5p1/w5p1/" />
+
 <meta itemprop="name" content="Advanced dplyr and More on RMarkdown">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Reviewing what we know Talk with your neighbor: How would you do each of the following using dplyr?  Extract only the first and third through ninth columns Extract the third column and any column that ends with &ldquo;response&rdquo; Reorder columns Extract only cases from students classified as English Language Learners (ELL) Create a new variable that represents the proportion of ELL students by grade Order the data in ascending or descending order Center a variable (i.">
 
@@ -208,12 +209,11 @@ mcrc
 <hr />
 
 <ul>
-<li>Extract only the first and third through ninth columns</li>
-</ul>
+<li><p>Extract only the first and third through ninth columns</p>
 
 <pre><code class="language-r">library(dplyr)
 mcrc %&gt;% 
-  select(1, 3:9)
+select(1, 3:9)
 </code></pre>
 
 <pre><code>## # A tibble: 72,948 x 8
@@ -231,16 +231,16 @@ mcrc %&gt;%
 ## 10  8316                   Unknown             Unknown                 
 ## # ... with 72,938 more rows, and 3 more variables: score &lt;int&gt;,
 ## #   item_1_response &lt;int&gt;, item_1_correct &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Extract the third column and any column that ends with &ldquo;response&rdquo;</li>
-</ul>
+<li><p>Extract the third column and any column that ends with &ldquo;response&rdquo;</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  select(3, ends_with(&quot;response&quot;))
+select(3, ends_with(&quot;response&quot;))
 </code></pre>
 
 <pre><code>## # A tibble: 72,948 x 21
@@ -264,16 +264,16 @@ mcrc %&gt;%
 ## #   item_14_response &lt;int&gt;, item_15_response &lt;int&gt;,
 ## #   item_16_response &lt;int&gt;, item_17_response &lt;int&gt;,
 ## #   item_18_response &lt;int&gt;, item_19_response &lt;int&gt;, item_20_response &lt;int&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Reorder columns</li>
-</ul>
+<li><p>Reorder columns</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  select(1:6, ends_with(&quot;correct&quot;), ends_with(&quot;response&quot;))
+select(1:6, ends_with(&quot;correct&quot;), ends_with(&quot;response&quot;))
 </code></pre>
 
 <pre><code>## # A tibble: 72,948 x 46
@@ -305,16 +305,16 @@ mcrc %&gt;%
 ## #   item_15_response &lt;int&gt;, item_16_response &lt;int&gt;,
 ## #   item_17_response &lt;int&gt;, item_18_response &lt;int&gt;,
 ## #   item_19_response &lt;int&gt;, item_20_response &lt;int&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Extract only cases from students classified as English Language Learners</li>
-</ul>
+<li><p>Extract only cases from students classified as English Language Learners</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  filter(ell == &quot;Y&quot;)
+filter(ell == &quot;Y&quot;)
 </code></pre>
 
 <pre><code>## # A tibble: 5,687 x 47
@@ -345,18 +345,18 @@ mcrc %&gt;%
 ## #   item_17_response &lt;int&gt;, item_17_correct &lt;chr&gt;, item_18_response &lt;int&gt;,
 ## #   item_18_correct &lt;chr&gt;, item_19_response &lt;int&gt;, item_19_correct &lt;chr&gt;,
 ## #   item_20_response &lt;int&gt;, item_20_correct &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Create a new variable that represents the proportion of ELL students by grade</li>
-</ul>
+<li><p>Create a new variable that represents the proportion of ELL students by grade</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  group_by(schid) %&gt;% 
-  mutate(prop_ell = mean(ell == &quot;Y&quot;, na.rm = TRUE)) %&gt;% 
-  select(1:2, prop_ell) 
+group_by(schid) %&gt;% 
+mutate(prop_ell = mean(ell == &quot;Y&quot;, na.rm = TRUE)) %&gt;% 
+select(1:2, prop_ell) 
 </code></pre>
 
 <pre><code>## # A tibble: 72,948 x 3
@@ -374,19 +374,19 @@ mcrc %&gt;%
 ##  9  8315   589 0.07407407
 ## 10  8316   257 0.04347826
 ## # ... with 72,938 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Order the data in ascending order</li>
-</ul>
+<li><p>Order the data in ascending order</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  group_by(schid) %&gt;% 
-  mutate(prop_ell = mean(ell == &quot;Y&quot;, na.rm = TRUE)) %&gt;% 
-  select(1:2, prop_ell) %&gt;% 
-  arrange(schid)
+group_by(schid) %&gt;% 
+mutate(prop_ell = mean(ell == &quot;Y&quot;, na.rm = TRUE)) %&gt;% 
+select(1:2, prop_ell) %&gt;% 
+arrange(schid)
 </code></pre>
 
 <pre><code>## # A tibble: 72,948 x 3
@@ -404,19 +404,19 @@ mcrc %&gt;%
 ##  9 26493     1 0.01408451
 ## 10 25447     1 0.01408451
 ## # ... with 72,938 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Order the data in descending order</li>
-</ul>
+<li><p>Order the data in descending order</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  group_by(schid) %&gt;% 
-  mutate(prop_ell = mean(ell == &quot;Y&quot;, na.rm = TRUE)) %&gt;% 
-  select(1:2, prop_ell) %&gt;% 
-  arrange(desc(prop_ell))
+group_by(schid) %&gt;% 
+mutate(prop_ell = mean(ell == &quot;Y&quot;, na.rm = TRUE)) %&gt;% 
+select(1:2, prop_ell) %&gt;% 
+arrange(desc(prop_ell))
 </code></pre>
 
 <pre><code>## # A tibble: 72,948 x 3
@@ -434,7 +434,8 @@ mcrc %&gt;%
 ##  9 22285   369 0.2083333
 ## 10 11200   369 0.2083333
 ## # ... with 72,938 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -560,11 +561,10 @@ mcrc %&gt;%
 <ul>
 <li><p>Remove the first five rows</p></li>
 
-<li><p>Extract the first five rows</p></li>
-</ul>
+<li><p>Extract the first five rows</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  slice(-1:-5)
+slice(-1:-5)
 </code></pre>
 
 <pre><code>## # A tibble: 72,943 x 47
@@ -595,7 +595,8 @@ mcrc %&gt;%
 ## #   item_17_response &lt;int&gt;, item_17_correct &lt;chr&gt;, item_18_response &lt;int&gt;,
 ## #   item_18_correct &lt;chr&gt;, item_19_response &lt;int&gt;, item_19_correct &lt;chr&gt;,
 ## #   item_20_response &lt;int&gt;, item_20_correct &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -635,11 +636,11 @@ mcrc %&gt;%
 <li>Number of rows from you output will be the number of distinct values (e.g., number of schools)</li>
 <li>Can use distinct on multiple variable</li>
 </ul></li>
-<li>How many unique race/ethnicity combinations are there?</li>
-</ul>
+
+<li><p>How many unique race/ethnicity combinations are there?</p>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  distinct(race, ethnicity)
+distinct(race, ethnicity)
 </code></pre>
 
 <pre><code>## # A tibble: 32 x 2
@@ -656,20 +657,18 @@ mcrc %&gt;%
 ##  9 American Indian or Alaskan Native Not Hispanic/Latino
 ## 10                             Asian Not Hispanic/Latino
 ## # ... with 22 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="why-is-this-helpful-1">Why is this helpful</h2>
 
 <ul>
-<li>Remove duplicate records (primary reason I find it helpful)
+<li><p>Remove duplicate records (primary reason I find it helpful)</p>
 
 <ul>
-<li>optional <code>.keep_all</code> argument
-<br /></li>
-</ul></li>
-</ul>
+<li><p>optional <code>.keep_all</code> argument</p>
 
 <pre><code class="language-r">nrow(mcrc)
 </code></pre>
@@ -678,7 +677,7 @@ mcrc %&gt;%
 </code></pre>
 
 <pre><code class="language-r">mcrc %&gt;% 
-  distinct(id, .keep_all = TRUE)
+distinct(id, .keep_all = TRUE)
 </code></pre>
 
 <pre><code>## # A tibble: 36,474 x 47
@@ -709,7 +708,9 @@ mcrc %&gt;%
 ## #   item_17_response &lt;int&gt;, item_17_correct &lt;chr&gt;, item_18_response &lt;int&gt;,
 ## #   item_18_correct &lt;chr&gt;, item_19_response &lt;int&gt;, item_19_correct &lt;chr&gt;,
 ## #   item_20_response &lt;int&gt;, item_20_correct &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 
@@ -972,12 +973,11 @@ mcrc %&gt;%
 <p>How do we randomly select schools? (and keep all the data from each school)</p>
 
 <ul>
-<li>One method</li>
-</ul>
+<li><p>One method</p>
 
 <pre><code class="language-r">schools &lt;- mcrc %&gt;% 
-  distinct(schid) %&gt;% 
-  sample_n(10)
+distinct(schid) %&gt;% 
+sample_n(10)
 schools
 </code></pre>
 
@@ -994,7 +994,8 @@ schools
 ##  8   782
 ##  9   433
 ## 10   232
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -2316,14 +2317,14 @@ output:
 <ul>
 <li><p>You can use plotly along with ggplot to create interactive graphics (see <a href="https://plot.ly/ggplot2/">https://plot.ly/ggplot2/</a>)</p></li>
 
-<li><p>Easiest example: Use the <code>ggplotly</code> function</p></li>
-</ul>
+<li><p>Easiest example: Use the <code>ggplotly</code> function</p>
 
 <pre><code class="language-r">p &lt;- ggplot(mpg, aes(manufacturer, hwy, fill = class)) + geom_bar(stat = &quot;identity&quot;)
 
 library(plotly)
 ggplotly(p)
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

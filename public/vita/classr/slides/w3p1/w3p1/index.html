@@ -28,7 +28,7 @@ Part of the many reasons Hadley is a cool guy  (It&amp;rsquo;s no longer there, 
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w3p1/w3p1/" />
@@ -57,6 +57,7 @@ The ggplot2 package Today, we&rsquo;ll primarily be covering the basics of the g
 Part of the many reasons Hadley is a cool guy  (It&rsquo;s no longer there, but if you want access to it let me know)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w3p1/w3p1/" />
+
 <meta itemprop="name" content="Intro to ggplot2">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the ggplot2 package  Note: There is a lot that we won&rsquo;t cover today (it&rsquo;s just an intro).
 The ggplot2 package Today, we&rsquo;ll primarily be covering the basics of the ggplot2 package. Much of this presentation is based on examples from the new ggplot2 book.
@@ -482,24 +483,22 @@ head(mpg)
 <ul>
 <li>Load the <em>ggplot2</em> package.</li>
 <li>Load the diamonds dataset with <code>data(diamonds)</code></li>
-<li>Set and store the data and aesthetics, in an object <code>p</code>, using the following code</li>
-</ul>
+
+<li><p>Set and store the data and aesthetics, in an object <code>p</code>, using the following code</p>
 
 <pre><code class="language-r">library(ggplot2)
 data(diamonds)
 p &lt;- ggplot(diamonds, aes(carat, price))
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Print <code>p</code>. What do you see?</li>
-<li>Explore different geoms, with <code>p + geom_XXX()</code>(some geoms, such as <code>geom_hex()</code> require additional package(s)). For example, a basic scatterplot could be produced with</li>
-</ul>
+<li><p>Print <code>p</code>. What do you see?</p></li>
+
+<li><p>Explore different geoms, with <code>p + geom_XXX()</code>(some geoms, such as <code>geom_hex()</code> require additional package(s)). For example, a basic scatterplot could be produced with</p>
 
 <pre><code class="language-r">p + geom_point()
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Add at least one additional layer (i.e., produce a plot with at least two layers)</li>
+<li><p>Add at least one additional layer (i.e., produce a plot with at least two layers)</p></li>
 </ul>
 
 <hr />
@@ -1004,8 +1003,8 @@ head(samp1)
 
 <ul>
 <li>Equivalent plots could be produced at other levels (in this case, the classroom or school levels)</li>
-<li>The previous plots did produce some warnings (only 3 points with the LOESS)</li>
-</ul>
+
+<li><p>The previous plots did produce some warnings (only 3 points with the LOESS)</p>
 
 <pre><code class="language-r">lfit &lt;- loess(RIT ~ Months, data = samp1, subset = SID == 503177, span = 2)
 </code></pre>
@@ -1022,7 +1021,8 @@ head(samp1)
 </code></pre>
 
 <pre><code>## Warning in sqrt(sum.squares/one.delta): NaNs produced
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

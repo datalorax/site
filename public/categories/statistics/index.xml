@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics on Data Science in Education</title>
+    <link>/categories/statistics/</link>
+    <description>Recent content in Statistics on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Estimating important things with public data</title>
+      <link>/post/estimating-important-things-with-public-data/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/estimating-important-things-with-public-data/</guid>
+      <description>Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.</description>
+    </item>
+    
+  </channel>
+</rss>

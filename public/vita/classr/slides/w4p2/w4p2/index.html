@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w4p2/w4p2/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review and discuss tidy data in more depth Practice tidying data  Reasons to prefer tidy data  More efficient storage and retrieval More scalable The tidyverse of tools will work much more efficiently  Read in the hiv data  Make some manipulations (just dplyr variety) to make the data look like the below." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w4p2/w4p2/" />
+
 <meta itemprop="name" content="More on tidy data">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review and discuss tidy data in more depth Practice tidying data  Reasons to prefer tidy data  More efficient storage and retrieval More scalable The tidyverse of tools will work much more efficiently  Read in the hiv data  Make some manipulations (just dplyr variety) to make the data look like the below.">
 
@@ -175,8 +176,8 @@ strong {
 <li>Make some manipulations (just dplyr variety) to make the data look like the below.</li>
 <li>Are these data tidy?</li>
 <li>How would you add a new variable - say, percent aids?</li>
-<li>Discuss how you would transform these data, if at all.</li>
-</ul>
+
+<li><p>Discuss how you would transform these data, if at all.</p>
 
 <pre><code>## # A tibble: 3 x 5
 ##         country      x1979 x1989 x1999 x2009
@@ -184,18 +185,18 @@ strong {
 ## 1        France         NA  &lt;NA&gt;   0.3   0.4
 ## 2  South Africa         NA  &lt;NA&gt;  14.8  17.2
 ## 3 United States 0.03176408  &lt;NA&gt;   0.5   0.6
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="how-do-we-tidy-these-data">How do we tidy these data?</h2>
 
 <ul>
-<li>Use the <code>gather()</code> function from <em>tidyr</em></li>
-</ul>
+<li><p>Use the <code>gather()</code> function from <em>tidyr</em></p>
 
 <pre><code class="language-r">hiv_tidy &lt;- hiv %&gt;% 
-    gather(year, percentage, -1)
+gather(year, percentage, -1)
 hiv_tidy
 </code></pre>
 
@@ -214,7 +215,8 @@ hiv_tidy
 ## 10        France x2009         0.4
 ## 11  South Africa x2009        17.2
 ## 12 United States x2009         0.6
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -265,24 +267,24 @@ hiv_tidy
 <h2 id="declaring-columns-to-gather">Declaring columns to gather</h2>
 
 <ul>
-<li>I could have declared the columns to gather other ways. The important part is just being clear which columns should be part of the gather. All of the below are equivalent</li>
+<li><p>I could have declared the columns to gather other ways. The important part is just being clear which columns should be part of the gather. All of the below are equivalent</p>
+
+<pre><code class="language-r">hiv %&gt;% 
+gather(year, percentage, -1)
+</code></pre>
+
+<pre><code class="language-r">hiv %&gt;% 
+gather(year, percentage, x1979, x1989, x1999, x2009)
+</code></pre>
+
+<pre><code class="language-r">hiv %&gt;% 
+gather(year, percentage, x1979:x2009)
+</code></pre>
+
+<pre><code class="language-r">hiv %&gt;% 
+gather(year, percentage, -country)
+</code></pre></li>
 </ul>
-
-<pre><code class="language-r">hiv %&gt;% 
-    gather(year, percentage, -1)
-</code></pre>
-
-<pre><code class="language-r">hiv %&gt;% 
-    gather(year, percentage, x1979, x1989, x1999, x2009)
-</code></pre>
-
-<pre><code class="language-r">hiv %&gt;% 
-    gather(year, percentage, x1979:x2009)
-</code></pre>
-
-<pre><code class="language-r">hiv %&gt;% 
-    gather(year, percentage, -country)
-</code></pre>
 
 <hr />
 
@@ -617,8 +619,7 @@ lotr
 <h2 id="alternative-method">Alternative method</h2>
 
 <ul>
-<li>The <code>bind_rows</code> function includes an optional <code>.id</code> argument. Try it!</li>
-</ul>
+<li><p>The <code>bind_rows</code> function includes an optional <code>.id</code> argument. Try it!</p>
 
 <pre><code class="language-r">fellowship &lt;- import(&quot;../../data/fellowship.csv&quot;, setclass = &quot;tbl_df&quot;)
 ttowers &lt;- import(&quot;../../data/two_towers.csv&quot;, setclass = &quot;tbl_df&quot;)
@@ -640,7 +641,8 @@ lotr2
 ## 7       3    Elf    183   510
 ## 8       3 Hobbit      2  2673
 ## 9       3  Human    268  2459
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -671,14 +673,13 @@ lotr2
 <h2 id="dplyr-version">dplyr version</h2>
 
 <ul>
-<li>I personally prefer <code>base::ifelse</code> to <code>dplyr::recode</code>, but I&rsquo;d be remiss if I didn&rsquo;t at least mention it</li>
-</ul>
+<li><p>I personally prefer <code>base::ifelse</code> to <code>dplyr::recode</code>, but I&rsquo;d be remiss if I didn&rsquo;t at least mention it</p>
 
 <pre><code class="language-r">lotr2 %&gt;% 
-  mutate(dataset = recode(dataset, 
-                            &quot;1&quot; = &quot;fellowship&quot;, 
-                            &quot;2&quot; = &quot;two towers&quot;,
-                            &quot;3&quot; = &quot;return of the king&quot;))
+mutate(dataset = recode(dataset, 
+                        &quot;1&quot; = &quot;fellowship&quot;, 
+                        &quot;2&quot; = &quot;two towers&quot;,
+                        &quot;3&quot; = &quot;return of the king&quot;))
 </code></pre>
 
 <pre><code>## # A tibble: 9 x 4
@@ -693,7 +694,8 @@ lotr2
 ## 7 return of the king    Elf    183   510
 ## 8 return of the king Hobbit      2  2673
 ## 9 return of the king  Human    268  2459
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -720,8 +722,7 @@ lotr2
 <h2 id="a-few-more-examples-follow-along">A few more examples (follow along)</h2>
 
 <ul>
-<li>Load the <em>votes.repub.csv</em> dataset.</li>
-</ul>
+<li><p>Load the <em>votes.repub.csv</em> dataset.</p>
 
 <pre><code class="language-r">votes &lt;- import(&quot;../../data/votes.repub.csv&quot;, setclass = &quot;tbl_df&quot;)
 votes
@@ -745,7 +746,8 @@ votes
 ## #   X1924 &lt;dbl&gt;, X1928 &lt;dbl&gt;, X1932 &lt;dbl&gt;, X1936 &lt;dbl&gt;, X1940 &lt;dbl&gt;,
 ## #   X1944 &lt;dbl&gt;, X1948 &lt;dbl&gt;, X1952 &lt;dbl&gt;, X1956 &lt;dbl&gt;, X1960 &lt;dbl&gt;,
 ## #   X1964 &lt;dbl&gt;, X1968 &lt;dbl&gt;, X1972 &lt;dbl&gt;, X1976 &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -761,19 +763,17 @@ votes
 <h2 id="step-1-name-state">Step 1: Name state</h2>
 
 <ul>
-<li>dplyr syntax</li>
-</ul>
+<li><p>dplyr syntax</p>
 
 <pre><code class="language-r">votes &lt;- votes %&gt;% 
-  rename(state = V1)
-</code></pre>
+rename(state = V1)
+</code></pre></li>
 
-<ul>
-<li>I actually prefer base syntax for renaming, but it may be slightly less clear</li>
-</ul>
+<li><p>I actually prefer base syntax for renaming, but it may be slightly less clear</p>
 
 <pre><code class="language-r">names(votes)[1] &lt;- &quot;state&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -856,13 +856,13 @@ ggplot(pd, aes(year, approval_rating, color = state)) +
 
 <ul>
 <li>Load the affairs data</li>
-<li>Discuss with a partner/your table
+
+<li><p>Discuss with a partner/your table</p>
 
 <ul>
 <li>What are the variables?</li>
-<li>What needs to happen to make it tidy?</li>
-</ul></li>
-</ul>
+
+<li><p>What needs to happen to make it tidy?</p>
 
 <pre><code class="language-r">affairs &lt;- import(&quot;../../data/affairs.csv&quot;, setclass = &quot;tbl_df&quot;)
 affairs
@@ -885,7 +885,9 @@ affairs
 ## #   slghtrel &lt;int&gt;, smerel &lt;int&gt;, vryrel &lt;int&gt;, yrsmarr1 &lt;int&gt;,
 ## #   yrsmarr2 &lt;int&gt;, yrsmarr3 &lt;int&gt;, yrsmarr4 &lt;int&gt;, yrsmarr5 &lt;int&gt;,
 ## #   yrsmarr6 &lt;int&gt;
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 
@@ -904,9 +906,8 @@ affairs
 <h2 id="lots-of-ways-to-do-this">Lots of ways to do this</h2>
 
 <ul>
-<li>One way: <code>rename</code>, <code>gather</code>, <code>separate</code>, <code>filter</code>, <code>spread</code>
-For renaming I&rsquo;m using base again and you can probably see more clearly why I  prefer it</li>
-</ul>
+<li><p>One way: <code>rename</code>, <code>gather</code>, <code>separate</code>, <code>filter</code>, <code>spread</code>
+For renaming I&rsquo;m using base again and you can probably see more clearly why I  prefer it</p>
 
 <pre><code class="language-r">names(affairs)[1] &lt;- &quot;id&quot;
 names(affairs)[4:8] &lt;- paste0(&quot;marhap_&quot;, names(affairs)[4:8])
@@ -933,7 +934,8 @@ affairs
 ## #   rel_slghtrel &lt;int&gt;, rel_smerel &lt;int&gt;, rel_vryrel &lt;int&gt;,
 ## #   yrs_yrsmarr1 &lt;int&gt;, yrs_yrsmarr2 &lt;int&gt;, yrs_yrsmarr3 &lt;int&gt;,
 ## #   yrs_yrsmarr4 &lt;int&gt;, yrs_yrsmarr5 &lt;int&gt;, yrs_yrsmarr6 &lt;int&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1094,13 +1096,13 @@ affairs_tidy
 <h2 id="plot-1">plot</h2>
 
 <ul>
-<li>Lots of different ways to do this, of course.</li>
-</ul>
+<li><p>Lots of different ways to do this, of course.</p>
 
 <pre><code class="language-r">ggplot(affairs_tidy, aes(yrs, naffairs, color = marhap)) + 
-    geom_jitter(width = 0.2, height = 0) +
-    geom_smooth(method = &quot;lm&quot;, se = FALSE) 
-</code></pre>
+geom_jitter(width = 0.2, height = 0) +
+geom_smooth(method = &quot;lm&quot;, se = FALSE) 
+</code></pre></li>
+</ul>
 
 <p><img src="../assets/fig/affairs_plot1-1.png" alt="plot of chunk affairs_plot1" /></p>
 
@@ -1137,8 +1139,8 @@ affairs_tidy
 
 <ul>
 <li>Hint 1: You&rsquo;ll have to create a new variable.</li>
-<li>Hint 2: Think about additional arguments you could pass to the functions you&rsquo;re using. Look at the documentation.</li>
-</ul>
+
+<li><p>Hint 2: Think about additional arguments you could pass to the functions you&rsquo;re using. Look at the documentation.</p>
 
 <pre><code>## # A tibble: 601 x 10
 ##       id naffairs  kids  marhap   yrs antirel notrel slghtrel smerel
@@ -1154,7 +1156,8 @@ affairs_tidy
 ##  9   106        0     0  vryhap     3       0      0        1      0
 ## 10   107        0     1  vryhap     5       0      0        0      0
 ## # ... with 591 more rows, and 1 more variables: vryrel &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

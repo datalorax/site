@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w8p1/w8p1/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of string data String operators  Cover both stringr and base functions  Special characters Pattern matching  Before we get started  In many cases, I&rsquo;ve opted to show both base and stringr functions stringr is part of the tidyverse, and has some nice functionality, but many of the base functions are so common I think I&rsquo;d be doing you a disservice if I didn&rsquo;t also introduce them." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w8p1/w8p1/" />
+
 <meta itemprop="name" content="Introduction to Strings">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of string data String operators  Cover both stringr and base functions  Special characters Pattern matching  Before we get started  In many cases, I&rsquo;ve opted to show both base and stringr functions stringr is part of the tidyverse, and has some nice functionality, but many of the base functions are so common I think I&rsquo;d be doing you a disservice if I didn&rsquo;t also introduce them.">
 
@@ -181,22 +182,22 @@ strong {
 
 <ul>
 <li>Strings can be anything wrapped in quotes</li>
-<li>All of the below are strings</li>
-</ul>
+
+<li><p>All of the below are strings</p>
 
 <pre><code class="language-r">&quot;TRUE&quot;
 &quot;1&quot;
 &quot;a&quot;
 &quot;4.78&quot;
 &quot;purple&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Strings are the most flexible data type. Can be coerced to other types if it makes sense
-(the below spits out warnings)</li>
-</ul>
+<li><p>Strings are the most flexible data type. Can be coerced to other types if it makes sense
+(the below spits out warnings)</p>
 
 <pre><code class="language-r">as.double(c(&quot;TRUE&quot;, &quot;1&quot;, &quot;a&quot;, &quot;4.78&quot;, &quot;purple&quot;))
 </code></pre>
@@ -208,39 +209,39 @@ strong {
 </code></pre>
 
 <pre><code>## [1] TRUE   NA   NA   NA   NA
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="vectors-must-be-of-the-same-type">Vectors must be of the same type</h2>
 
 <ul>
-<li>This implies that if you have a character element in an atomic vector, all will be coerced to character (because it&rsquo;s the most flexible)</li>
-</ul>
+<li><p>This implies that if you have a character element in an atomic vector, all will be coerced to character (because it&rsquo;s the most flexible)</p>
 
 <pre><code class="language-r">c(&quot;string&quot;, 1.45, TRUE, 5L)
 </code></pre>
 
 <pre><code>## [1] &quot;string&quot; &quot;1.45&quot;   &quot;TRUE&quot;   &quot;5&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="factors">Factors</h2>
 
 <ul>
-<li>Factors may not behave as you&rsquo;d expect</li>
-</ul>
+<li><p>Factors may not behave as you&rsquo;d expect</p>
 
 <pre><code class="language-r">c(factor(&quot;a&quot;), &quot;b&quot;, 1, 4.59)
 </code></pre>
 
 <pre><code>## [1] &quot;1&quot;    &quot;b&quot;    &quot;1&quot;    &quot;4.59&quot;
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Why do you think this is happening?</li>
-<li>How could we get this to do what we intend? (i.e., return &ldquo;a&rdquo;)</li>
+<li><p>Why do you think this is happening?</p></li>
+
+<li><p>How could we get this to do what we intend? (i.e., return &ldquo;a&rdquo;)</p></li>
 </ul>
 
 <hr />
@@ -763,8 +764,8 @@ symbols
 
 <ul>
 <li>Better ways to do that</li>
-<li>Let&rsquo;s create some normal distributions and annotate the plot</li>
-</ul>
+
+<li><p>Let&rsquo;s create some normal distributions and annotate the plot</p>
 
 <pre><code class="language-r">x &lt;- seq(-5, 5, .1)
 l1 &lt;- dnorm(x, 0, 1)
@@ -774,7 +775,8 @@ l3 &lt;- dnorm(x, 0, 3)
 d &lt;- data.frame(x = x, 
 				likelihood = c(l1, l2, l3), 
 				sd = rep(1:3, each = length(x)))
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -806,8 +808,7 @@ ggplot(d, aes(x, likelihood, color = factor(sd))) + geom_line()
 <h2 id="base-plot-annotations">Base plot annotations</h2>
 
 <ul>
-<li>Use <code>expression</code> with no quotes</li>
-</ul>
+<li><p>Use <code>expression</code> with no quotes</p>
 
 <pre><code class="language-r">splt &lt;- split(d, d$sd)
 
@@ -824,7 +825,8 @@ lines(splt[[3]]$x, splt[[3]]$likelihood, col = &quot;#619CFF&quot;, lwd = 2)
 text(0, 0.41, expression(sigma == 1), col = &quot;#F8766D&quot;)
 text(0, 0.21, expression(sigma == 2), col = &quot;#00BA38&quot;)
 text(0, 0.14, expression(sigma == 3), col = &quot;#619CFF&quot;)
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -836,18 +838,17 @@ text(0, 0.14, expression(sigma == 3), col = &quot;#619CFF&quot;)
 
 <ul>
 <li>If you want the literal text to show up, instead of the symbol, you have to escape it it <code>\</code>.</li>
-<li>Because <code>\</code> itself is a special character, that means you need two: <code>\\</code>.</li>
-</ul>
+
+<li><p>Because <code>\</code> itself is a special character, that means you need two: <code>\\</code>.</p>
 
 <pre><code class="language-r">show_symbols &lt;- c(&quot;\\u03B1&quot;, &quot;\\u03B2&quot;, &quot;\\u03B3&quot;, &quot;\\u03B4&quot;, &quot;\\u03B5&quot;, &quot;\\u03B6&quot;)
 show_symbols
 </code></pre>
 
 <pre><code>## [1] &quot;\\u03B1&quot; &quot;\\u03B2&quot; &quot;\\u03B3&quot; &quot;\\u03B4&quot; &quot;\\u03B5&quot; &quot;\\u03B6&quot;
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>There are also a host of regular expressions that have special characters that you&rsquo;ll need to escape if you want them to print too. We&rsquo;ll talk more about these later.</li>
+<li><p>There are also a host of regular expressions that have special characters that you&rsquo;ll need to escape if you want them to print too. We&rsquo;ll talk more about these later.</p></li>
 </ul>
 
   </div>

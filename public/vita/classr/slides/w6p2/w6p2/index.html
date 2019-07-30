@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w6p2/w6p2/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review where we&rsquo;ve been  reading in data dplyr tidyr  Where to next? (briefly) Lab  Work on your final project   Tidyverse: Providing a grammar for&hellip;  Graphics (ggplot) Data manipulations (dplyr) Tidying data (tidyr) Ever expanding specialized topics (not quite modeling yet, although there is some)  Reading in data rio makes it easy  Remember there are a bunch of different options you can specify" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w6p2/w6p2/" />
+
 <meta itemprop="name" content="Review">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Review where we&rsquo;ve been  reading in data dplyr tidyr  Where to next? (briefly) Lab  Work on your final project   Tidyverse: Providing a grammar for&hellip;  Graphics (ggplot) Data manipulations (dplyr) Tidying data (tidyr) Ever expanding specialized topics (not quite modeling yet, although there is some)  Reading in data rio makes it easy  Remember there are a bunch of different options you can specify">
 
@@ -425,13 +426,12 @@ reads %&gt;%
 <h2 id="overwrite-a-variable">Overwrite a variable</h2>
 
 <ul>
-<li>Standardize</li>
-</ul>
+<li><p>Standardize</p>
 
 <pre><code class="language-r">reads %&gt;% 
-  mutate(pre_test_score = scale(pre_test_score),
-         post_test_score = scale(post_test_score)) %&gt;% 
-  select(student_id, 5, 7)
+mutate(pre_test_score = scale(pre_test_score),
+     post_test_score = scale(post_test_score)) %&gt;% 
+select(student_id, 5, 7)
 </code></pre>
 
 <pre><code>## # A tibble: 48 x 3
@@ -448,44 +448,44 @@ reads %&gt;%
 ##  9   Virden 9     -0.1897008      -0.5851578
 ## 10  Virden 10      0.5001202      -0.8888073
 ## # ... with 38 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="summarize-a-column-or-columns"><code>summarize</code> a column (or columns)</h2>
 
 <ul>
-<li>Average pre/post and gain</li>
-</ul>
+<li><p>Average pre/post and gain</p>
 
 <pre><code class="language-r">reads %&gt;% 
-  mutate(gain = post_test_score - pre_test_score) %&gt;% 
-  summarize(av_pre = mean(pre_test_score, na.rm = TRUE),
-            av_post = mean(post_test_score, na.rm = TRUE),
-            av_gain = mean(gain, na.rm = TRUE))
+mutate(gain = post_test_score - pre_test_score) %&gt;% 
+summarize(av_pre = mean(pre_test_score, na.rm = TRUE),
+        av_post = mean(post_test_score, na.rm = TRUE),
+        av_gain = mean(gain, na.rm = TRUE))
 </code></pre>
 
 <pre><code>## # A tibble: 1 x 3
 ##   av_pre  av_post  av_gain
 ##    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 41.375 97.70833 56.33333
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="summaries-by-group">Summaries by group</h2>
 
 <ul>
-<li>Use <code>group_by</code> to get the same summaries by a grouping factor.
-Mean pre/post and gain by test site</li>
-</ul>
+<li><p>Use <code>group_by</code> to get the same summaries by a grouping factor.
+Mean pre/post and gain by test site</p>
 
 <pre><code class="language-r">reads %&gt;% 
-  mutate(gain = post_test_score - pre_test_score) %&gt;% 
-  group_by(test_site) %&gt;% 
-  summarize(av_pre = mean(pre_test_score, na.rm = TRUE),
-            av_post = mean(post_test_score, na.rm = TRUE),
-            av_gain = mean(gain, na.rm = TRUE))
+mutate(gain = post_test_score - pre_test_score) %&gt;% 
+group_by(test_site) %&gt;% 
+summarize(av_pre = mean(pre_test_score, na.rm = TRUE),
+        av_post = mean(post_test_score, na.rm = TRUE),
+        av_gain = mean(gain, na.rm = TRUE))
 </code></pre>
 
 <pre><code>## # A tibble: 6 x 4
@@ -497,19 +497,19 @@ Mean pre/post and gain by test site</li>
 ## 4   VIRDEN ALL 39.00000  92.00000 53.00000
 ## 5     WESTSIDE 46.60000 102.86667 56.26667
 ## 6 WESTSIDE ALL 47.00000 103.00000 56.00000
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="conditional-verbs">Conditional verbs</h2>
 
 <ul>
-<li><code>*_if</code>, <code>*_all</code> functions can help with efficiency</li>
-</ul>
+<li><p><code>*_if</code>, <code>*_all</code> functions can help with efficiency</p>
 
 <pre><code class="language-r">reads %&gt;% 
-  select_if(is.numeric) %&gt;% 
-  summarize_all(mean, na.rm = TRUE)
+select_if(is.numeric) %&gt;% 
+summarize_all(mean, na.rm = TRUE)
 </code></pre>
 
 <pre><code>## # A tibble: 1 x 10
@@ -518,16 +518,16 @@ Mean pre/post and gain by test site</li>
 ## 1         41.375        97.70833     3.270833     4.270833     5.395833
 ## # ... with 5 more variables: unit_4_score &lt;dbl&gt;, unit_5_6_score &lt;dbl&gt;,
 ## #   unit_7_score &lt;dbl&gt;, unit_8_score &lt;dbl&gt;, total_score &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li><code>*_at</code></li>
-</ul>
+<li><p><code>*_at</code></p>
 
 <pre><code class="language-r">reads %&gt;%
-  summarize_at(vars(unit_1_score, unit_3_score, unit_7_score), funs(mean, sd))
+summarize_at(vars(unit_1_score, unit_3_score, unit_7_score), funs(mean, sd))
 </code></pre>
 
 <pre><code>## # A tibble: 1 x 6
@@ -535,7 +535,8 @@ Mean pre/post and gain by test site</li>
 ##               &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;
 ## 1          3.270833          5.395833            16.375        1.267257
 ## # ... with 2 more variables: unit_3_score_sd &lt;dbl&gt;, unit_7_score_sd &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -619,11 +620,10 @@ Mean pre/post and gain by test site</li>
 <h2 id="review-homework-4">Review Homework 4</h2>
 
 <ul>
-<li>Tidy the reads dataset, minus columns 5-9</li>
-</ul>
+<li><p>Tidy the reads dataset, minus columns 5-9</p>
 
 <pre><code class="language-r">reads %&gt;% 
-  select(-5:-9)
+select(-5:-9)
 </code></pre>
 
 <pre><code>## # A tibble: 48 x 20
@@ -645,7 +645,8 @@ Mean pre/post and gain by test site</li>
 ## #   unit_5_6_score &lt;int&gt;, unit_5_6_percent &lt;chr&gt;, unit_7_score &lt;int&gt;,
 ## #   unit_7_percent &lt;chr&gt;, unit_8_score &lt;int&gt;, unit_8_percent &lt;chr&gt;,
 ## #   total_score &lt;int&gt;, total_percent_correct &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -662,18 +663,19 @@ Mean pre/post and gain by test site</li>
 
 <ul>
 <li><code>gather</code> once for raw scores, and a second time for percentages.</li>
-<li>Anything wrong with this?</li>
-</ul>
+
+<li><p>Anything wrong with this?</p>
 
 <pre><code class="language-r">library(tidyr)
 double_gather &lt;- reads %&gt;% 
-  select(4, 1:3, 10:23) %&gt;% 
-  filter(student_id != &quot;All Students (Average)&quot;) %&gt;% 
-  gather(unit, score, contains(&quot;score&quot;)) %&gt;% 
-  gather(unit2, percent, contains(&quot;percent&quot;)) %&gt;% 
-  mutate(unit = readr::parse_number(unit)) %&gt;% 
-  select(-unit2)
-</code></pre>
+select(4, 1:3, 10:23) %&gt;% 
+filter(student_id != &quot;All Students (Average)&quot;) %&gt;% 
+gather(unit, score, contains(&quot;score&quot;)) %&gt;% 
+gather(unit2, percent, contains(&quot;percent&quot;)) %&gt;% 
+mutate(unit = readr::parse_number(unit)) %&gt;% 
+select(-unit2)
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -725,12 +727,12 @@ double_gather &lt;- reads %&gt;%
 <h2 id="n-rows-by-n-gathers">n rows by n gathers</h2>
 
 <ul>
-<li>Assuming 7 columns are gathered each time:</li>
-</ul>
+<li><p>Assuming 7 columns are gathered each time:</p>
 
 <pre><code class="language-r">expo &lt;- tibble(gathers = 1:5, nrows = 7^(1:5))
 ggplot(expo, aes(gathers, nrows)) + geom_line()
-</code></pre>
+</code></pre></li>
+</ul>
 
 <p><img src="../assets/fig/gather_exponential-1.png" alt="plot of chunk gather_exponential" /></p>
 
@@ -739,19 +741,18 @@ ggplot(expo, aes(gathers, nrows)) + geom_line()
 <h2 id="alternative">Alternative</h2>
 
 <ul>
-<li>Gather all, then spread. <strong>BUT</strong>, requires common names to parse out the variables that are currently stored in the column names.</li>
-</ul>
+<li><p>Gather all, then spread. <strong>BUT</strong>, requires common names to parse out the variables that are currently stored in the column names.</p>
 
 <pre><code class="language-r">names(reads)[grep(&quot;\\d_\\d&quot;, names(reads))] &lt;- c(&quot;unit_5-6_score&quot;, &quot;unit_5-6_percent&quot;)
 </code></pre>
 
 <pre><code class="language-r">reads_tidy &lt;- reads %&gt;% 
-  select(4, 1:3, 10:23) %&gt;% 
-  filter(student_id != &quot;All Students (Average)&quot;) %&gt;% 
-  gather(var, val, -1:-4) %&gt;% 
-  separate(var, c(&quot;dis&quot;, &quot;unit&quot;, &quot;type&quot;), sep = &quot;_&quot;) %&gt;% 
-  select(-dis) %&gt;% 
-  spread(type, val)
+select(4, 1:3, 10:23) %&gt;% 
+filter(student_id != &quot;All Students (Average)&quot;) %&gt;% 
+gather(var, val, -1:-4) %&gt;% 
+separate(var, c(&quot;dis&quot;, &quot;unit&quot;, &quot;type&quot;), sep = &quot;_&quot;) %&gt;% 
+select(-dis) %&gt;% 
+spread(type, val)
 reads_tidy
 </code></pre>
 
@@ -769,7 +770,8 @@ reads_tidy
 ##  9   Jones 10 06/01/2016 12:00:00 AM  YEAR END     JONES     2     12%
 ## 10   Jones 10 06/01/2016 12:00:00 AM  YEAR END     JONES     3     20%
 ## # ... with 305 more rows, and 1 more variables: score &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -813,11 +815,10 @@ reads_tidy
 <h2 id="my-method">My method</h2>
 
 <ul>
-<li>Load the data</li>
-</ul>
+<li><p>Load the data</p>
 
 <pre><code class="language-r">insurance &lt;- import(&quot;../../data/insurance_coverage.csv&quot;, skip =  3, setclass = &quot;tbl_df&quot;) %&gt;% 
-  janitor::clean_names()
+janitor::clean_names()
 </code></pre>
 
 <pre><code>## Warning in fread(skip = 3, input = structure(&quot;../../data/
@@ -844,7 +845,8 @@ reads_tidy
 ## # ... with 26 more rows, and 7 more variables: geo_name &lt;chr&gt;, geo &lt;chr&gt;,
 ## #   sex_name &lt;chr&gt;, sex &lt;chr&gt;, hc_pop &lt;int&gt;, hc_pop_moe &lt;dbl&gt;,
 ## #   hc_pop_rca &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -887,18 +889,18 @@ smry
 <h2 id="reorder-and-relevel-age-ranges">Reorder and relevel age ranges</h2>
 
 <ul>
-<li>This was really tricky - we haven&rsquo;t really talked about this yet</li>
-</ul>
+<li><p>This was really tricky - we haven&rsquo;t really talked about this yet</p>
 
 <pre><code class="language-r">smry$in_oregon_csvage_bucket &lt;- gsub(&quot;insurance_&quot;, &quot;&quot;, smry$in_oregon_csvage_bucket)
 smry &lt;- smry %&gt;% 
-  mutate(age_range = factor(in_oregon_csvage_bucket,
-                            levels = c(&quot;under_6&quot;, &quot;6to17&quot;, &quot;18to24&quot;, &quot;25to34&quot;, 
-                                       &quot;35to44&quot;, &quot;45to54&quot;, &quot;55to64&quot;, &quot;65to74&quot;,
-                                       &quot;75plus&quot;),
-                            labels = c(&quot;&lt; 6&quot;, &quot;6-17&quot;, &quot;18-24&quot;, &quot;25-34&quot;, &quot;35-44&quot;,
-                                       &quot;45-54&quot;, &quot;55-64&quot;, &quot;65-74&quot;, &quot;75 +&quot;)))
-</code></pre>
+mutate(age_range = factor(in_oregon_csvage_bucket,
+                        levels = c(&quot;under_6&quot;, &quot;6to17&quot;, &quot;18to24&quot;, &quot;25to34&quot;, 
+                                   &quot;35to44&quot;, &quot;45to54&quot;, &quot;55to64&quot;, &quot;65to74&quot;,
+                                   &quot;75plus&quot;),
+                        labels = c(&quot;&lt; 6&quot;, &quot;6-17&quot;, &quot;18-24&quot;, &quot;25-34&quot;, &quot;35-44&quot;,
+                                   &quot;45-54&quot;, &quot;55-64&quot;, &quot;65-74&quot;, &quot;75 +&quot;)))
+</code></pre></li>
+</ul>
 
 <hr />
 

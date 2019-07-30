@@ -7,13 +7,49 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Sat, 14 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Blogdown</title>
+      <title>Data Visualization</title>
+      <link>/tags/data-visualization/</link>
+      <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keepfamiliestogether</title>
+      <link>/tags/keepfamiliestogether/</link>
+      <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/keepfamiliestogether/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rtweet</title>
+      <link>/tags/rtweet/</link>
+      <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rtweet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>slidex</title>
+      <link>/tags/slidex/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/slidex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blogdown</title>
       <link>/tags/blogdown/</link>
       <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
       
@@ -22,29 +58,11 @@
     </item>
     
     <item>
-      <title>Census Data</title>
-      <link>/tags/census-data/</link>
-      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/census-data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Css</title>
+      <title>css</title>
       <link>/tags/css/</link>
       <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/css/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Custom Functions</title>
-      <link>/tags/custom-functions/</link>
-      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/custom-functions/</guid>
       <description></description>
     </item>
     
@@ -58,16 +76,43 @@
     </item>
     
     <item>
-      <title>Data Visualization</title>
-      <link>/tags/data-visualization/</link>
-      <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
+      <title>sundry</title>
+      <link>/tags/sundry/</link>
+      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/data-visualization/</guid>
+      <guid>/tags/sundry/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Esvis</title>
+      <title>Custom Functions</title>
+      <link>/tags/custom-functions/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/custom-functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyeval</title>
+      <link>/tags/tidyeval/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tidyeval/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Package Development</title>
+      <link>/tags/package-development/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/package-development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>esvis</title>
       <link>/tags/esvis/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
       
@@ -85,11 +130,11 @@
     </item>
     
     <item>
-      <title>Keepfamiliestogether</title>
-      <link>/tags/keepfamiliestogether/</link>
-      <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
+      <title>Census Data</title>
+      <link>/tags/census-data/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/keepfamiliestogether/</guid>
+      <guid>/tags/census-data/</guid>
       <description></description>
     </item>
     
@@ -99,51 +144,6 @@
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/mapping/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Package Development</title>
-      <link>/tags/package-development/</link>
-      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/package-development/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rtweet</title>
-      <link>/tags/rtweet/</link>
-      <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rtweet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Slidex</title>
-      <link>/tags/slidex/</link>
-      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/slidex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sundry</title>
-      <link>/tags/sundry/</link>
-      <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/sundry/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tidyeval</title>
-      <link>/tags/tidyeval/</link>
-      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/tidyeval/</guid>
       <description></description>
     </item>
     

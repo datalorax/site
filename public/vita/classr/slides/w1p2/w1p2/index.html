@@ -27,7 +27,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w1p2/w1p2/" />
@@ -55,6 +55,7 @@
  Customizing the look/feel  Theme Syntax highlighting Panes  Keyboard shortcuts Snippets (briefly)  (consider the daily download version: https://www." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w1p2/w1p2/" />
+
 <meta itemprop="name" content="Lab 1">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Things to cover today  R Studio R Studio Projects Installing packages (specifically tidyverse) Reading in data (very briefly) The $ operator Super basics of manipulating data with dplyr R Markdown basics  R Studio [demo]
  Customizing the look/feel  Theme Syntax highlighting Panes  Keyboard shortcuts Snippets (briefly)  (consider the daily download version: https://www.">
@@ -249,15 +250,16 @@ Try running <code>list.files(&quot;./data/&quot;)</code>. What do you see? (noti
 
 <ul>
 <li>Install once with <code>install.packages()</code></li>
-<li>Load each time with <code>library()</code></li>
-</ul>
+
+<li><p>Load each time with <code>library()</code></p>
 
 <pre><code class="language-r"># Install once
 install.packages(&quot;tidyverse&quot;)
 
 # Load each time
 library(tidyverse)
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -275,16 +277,14 @@ library(tidyverse)
 <h2 id="load-the-data">Load the data</h2>
 
 <ul>
-<li>We&rsquo;re going to use the <em>rio</em> package to load the data. Store it in an object called <code>d</code> with the following lines of code (note the relative path).</li>
-</ul>
+<li><p>We&rsquo;re going to use the <em>rio</em> package to load the data. Store it in an object called <code>d</code> with the following lines of code (note the relative path).</p>
 
 <pre><code class="language-r">install.packages(&quot;rio&quot;)
 library(rio)
 d &lt;- import(&quot;./data/seda.csv&quot;)
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>It may seem like nothing happens. Try running <code>d</code>. This will print whatever is stored in the object to the console (not technically, but close enough).</li>
+<li><p>It may seem like nothing happens. Try running <code>d</code>. This will print whatever is stored in the object to the console (not technically, but close enough).</p></li>
 </ul>
 
 <hr />
@@ -292,12 +292,12 @@ d &lt;- import(&quot;./data/seda.csv&quot;)
 <h2 id="let-s-try-it-out">Let&rsquo;s try it out!</h2>
 
 <ul>
-<li>Load the <em>tidyverse</em> package and try to run the following code. What do you see? What do you make of it? (we&rsquo;ll talk about the mechanics behind this a lot more later)</li>
-</ul>
+<li><p>Load the <em>tidyverse</em> package and try to run the following code. What do you see? What do you make of it? (we&rsquo;ll talk about the mechanics behind this a lot more later)</p>
 
 <pre><code class="language-r">ggplot(data = d, aes(x = factor(grade), y = mean_link_ela)) +
-  geom_violin()
-</code></pre>
+geom_violin()
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -327,8 +327,8 @@ all you need. But for much applied work it&rsquo;s easiest to just load them all
 
 <ul>
 <li>Generally, in this course, <em>tidyverse</em> tools</li>
-<li>Sometimes <code>$</code></li>
-</ul>
+
+<li><p>Sometimes <code>$</code></p>
 
 <pre><code class="language-r">d$leaname
 </code></pre>
@@ -341,7 +341,8 @@ all you need. But for much applied work it&rsquo;s easiest to just load them all
 ## [11] &quot;ALBERTVILLE CITY&quot;       &quot;ALBERTVILLE CITY&quot;      
 ## [13] &quot;ALBERTVILLE CITY&quot;       &quot;ALBERTVILLE CITY&quot;      
 ## [15] &quot;ALBERTVILLE CITY&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -400,10 +401,9 @@ all you need. But for much applied work it&rsquo;s easiest to just load them all
 <h2 id="some-dplyr">Some <em>dplyr</em></h2>
 
 <ul>
-<li>Subset rows with <code>filter</code>
+<li><p>Subset rows with <code>filter</code>
 <br>
-Subset the data for Oregon districts only</li>
-</ul>
+Subset the data for Oregon districts only</p>
 
 <pre><code class="language-r">oregon &lt;- filter(d, stateabb == &quot;OR&quot;)
 head(oregon)
@@ -416,7 +416,8 @@ head(oregon)
 ## 4    4100014                       VALE SD 84   41       OR 2009     6
 ## 5    4100014                       VALE SD 84   41       OR 2009     7
 ## 6    4100014                       VALE SD 84   41       OR 2009     8
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -517,8 +518,8 @@ head(math)
 
 <ul>
 <li>In base R, you generally subset with <code>[]</code>.</li>
-<li>The one place I will often use this in this class is with renaming variables</li>
-</ul>
+
+<li><p>The one place I will often use this in this class is with renaming variables</p>
 
 <pre><code class="language-r">names(d)[1]
 </code></pre>
@@ -532,7 +533,8 @@ head(math)
 <pre><code>##  [1] &quot;leaid&quot;          &quot;leaname&quot;        &quot;fips&quot;           &quot;stateabb&quot;      
 ##  [5] &quot;year&quot;           &quot;grade&quot;          &quot;mean_link_ela&quot;  &quot;se_link_ela&quot;   
 ##  [9] &quot;mean_link_math&quot; &quot;se_link_math&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -690,14 +692,15 @@ This is an example of inline code, where I want to refer to the sum of `a` and
 
 <ul>
 <li>Joy plots, or ridgline density plots</li>
-<li>Requires a <em>ggplot2</em> extenstion called <em>ggridges</em></li>
-</ul>
+
+<li><p>Requires a <em>ggplot2</em> extenstion called <em>ggridges</em></p>
 
 <pre><code class="language-r">install.packages(&quot;ggridges&quot;)
 library(ggridges)
 ggplot(d, aes(x = mean_link_ela, y = factor(grade))) +
-  geom_density_ridges()
-</code></pre>
+geom_density_ridges()
+</code></pre></li>
+</ul>
 
 <p><img src="../assets/fig/joyplots_eval-1.png" alt="plot of chunk joyplots_eval" /></p>
 

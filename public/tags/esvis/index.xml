@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Esvis on Data Science in Education</title>
+    <title>esvis on Data Science in Education</title>
     <link>/tags/esvis/</link>
-    <description>Recent content in Esvis on Data Science in Education</description>
+    <description>Recent content in esvis on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>

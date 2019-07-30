@@ -27,7 +27,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w5p2/w5p2/" />
@@ -55,6 +55,7 @@
  Wickham, ggplot2 book, Chapter 9  Aesthetics  Aesthetics map a variable to a visual clue called a glyph When mapping a variable to a glyph, use aes()." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w5p2/w5p2/" />
+
 <meta itemprop="name" content="Tidy data, data viz, and summaries">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }   Tidy data is particularly important for ggplot2 because the job of ggplot2 is to map variables to visual properties: if your data isn’t tidy, you’ll have a hard time visualising it.
  Wickham, ggplot2 book, Chapter 9  Aesthetics  Aesthetics map a variable to a visual clue called a glyph When mapping a variable to a glyph, use aes().">
@@ -175,8 +176,7 @@ strong {
 <h2 id="example">Example</h2>
 
 <ul>
-<li>Using the data below, how could you show the relation between math scores and classroom size?</li>
-</ul>
+<li><p>Using the data below, how could you show the relation between math scores and classroom size?</p>
 
 <pre><code class="language-r">library(tidyverse)
 star &lt;- read_csv(&quot;./data/star.csv&quot;)
@@ -193,7 +193,8 @@ head(star)
 ## 5      79   boy   yes        0            0          1     1     0     0
 ## 6       5   boy   yes        1            0          0     1     0     0
 ## # ... with 3 more variables: totexp &lt;int&gt;, tmathss &lt;int&gt;, treadss &lt;int&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -205,12 +206,10 @@ head(star)
 Let&rsquo;s tidy!</p>
 
 <ul>
-<li>In this case, I think it&rsquo;s easiest to again add a prefix to each variable prior to the gather, then separate and spread on that prefix.
+<li><p>In this case, I think it&rsquo;s easiest to again add a prefix to each variable prior to the gather, then separate and spread on that prefix.</p>
 
 <ul>
-<li>Notice I&rsquo;m using a space as a delimiter given that some already have underscores.</li>
-</ul></li>
-</ul>
+<li><p>Notice I&rsquo;m using a space as a delimiter given that some already have underscores.</p>
 
 <pre><code class="language-r">names(star)[4:6] &lt;- paste(&quot;size&quot;, names(star)[4:6]) 
 names(star)[7:9] &lt;- paste(&quot;eth&quot;, names(star)[7:9]) 
@@ -229,7 +228,9 @@ head(star)
 ## # ... with 7 more variables: `size small_size` &lt;int&gt;, `eth white` &lt;int&gt;,
 ## #   `eth black` &lt;int&gt;, `eth other` &lt;int&gt;, totexp &lt;int&gt;, tmathss &lt;int&gt;,
 ## #   treadss &lt;int&gt;
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 
@@ -260,18 +261,17 @@ head(star)
 <h2 id="let-s-go-through-this-step-by-step">Let&rsquo;s go through this step by step</h2>
 
 <ul>
-<li>Note - we&rsquo;re essentially un-dummy-coding these variables</li>
-</ul>
+<li><p>Note - we&rsquo;re essentially un-dummy-coding these variables</p>
 
 <pre><code class="language-r">library(tidyverse)
 star_tidy &lt;- star %&gt;% 
-  mutate(sid = row_number()) %&gt;% 
-  gather(var, val, c(4:9)) %&gt;% 
-  separate(var, c(&quot;var&quot;, &quot;val2&quot;), sep = &quot; &quot;) %&gt;% 
-  filter(val == 1) %&gt;% 
-  select(-val) %&gt;% 
-  spread(var, val2)  %&gt;% 
-  arrange(sid) 
+mutate(sid = row_number()) %&gt;% 
+gather(var, val, c(4:9)) %&gt;% 
+separate(var, c(&quot;var&quot;, &quot;val2&quot;), sep = &quot; &quot;) %&gt;% 
+filter(val == 1) %&gt;% 
+select(-val) %&gt;% 
+spread(var, val2)  %&gt;% 
+arrange(sid) 
 star_tidy
 </code></pre>
 
@@ -289,18 +289,18 @@ star_tidy
 ## 9       11  girl    no     11     439     478     9 black   small_size
 ## 10      66  girl    no     10     528     455    10 white   small_size
 ## # ... with 5,738 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="quick-housekeeping">Quick housekeeping</h2>
 
 <ul>
-<li>Let&rsquo;s reorder the variables to make it a little tidy-er</li>
-</ul>
+<li><p>Let&rsquo;s reorder the variables to make it a little tidy-er</p>
 
 <pre><code class="language-r">star_tidy &lt;- star_tidy %&gt;% 
-    select(sid, schidkn, sex, frl, eth, totexp, size, 5:6)
+select(sid, schidkn, sex, frl, eth, totexp, size, 5:6)
 star_tidy
 </code></pre>
 
@@ -318,7 +318,8 @@ star_tidy
 ## 9      9      11  girl    no black     11   small_size     439     478
 ## 10    10      66  girl    no white     10   small_size     528     455
 ## # ... with 5,738 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -347,11 +348,10 @@ ggplot(star_tidy, aes(totexp, tmathss, color = size)) +
 <h2 id="gather-once-more"><code>gather</code> once more</h2>
 
 <ul>
-<li>Note, this is still tidy, but the level of analysis has changed. In other words, before, each case (row) represented a student. Now, each case represents a student within a content area.</li>
-</ul>
+<li><p>Note, this is still tidy, but the level of analysis has changed. In other words, before, each case (row) represented a student. Now, each case represents a student within a content area.</p>
 
 <pre><code class="language-r">gathered_star_tidy &lt;- star_tidy %&gt;% 
-    gather(subject, score, tmathss:treadss) 
+gather(subject, score, tmathss:treadss) 
 gathered_star_tidy
 </code></pre>
 
@@ -369,7 +369,8 @@ gathered_star_tidy
 ## 9      9      11  girl    no black     11   small_size tmathss   439
 ## 10    10      66  girl    no white     10   small_size tmathss   528
 ## # ... with 11,486 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -393,13 +394,13 @@ gathered_star_tidy
 
 <ul>
 <li>Produce a summary dataset</li>
-<li>Plot results</li>
-</ul>
+
+<li><p>Plot results</p>
 
 <pre><code class="language-r">by_exp &lt;- star_tidy %&gt;% 
-    group_by(totexp) %&gt;% 
-    summarize(n = n(),
-              tmathss = mean(tmathss))
+group_by(totexp) %&gt;% 
+summarize(n = n(),
+          tmathss = mean(tmathss))
 by_exp
 </code></pre>
 
@@ -417,7 +418,8 @@ by_exp
 ## 9       8   488 479.7582
 ## 10      9   215 488.3256
 ## # ... with 15 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

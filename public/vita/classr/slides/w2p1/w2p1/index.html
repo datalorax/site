@@ -28,7 +28,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w2p1/w2p1/" />
@@ -57,6 +57,7 @@
  Others? Tidyverse: Providing a grammar for&hellip;  Graphics (ggplot) Data manipulations (dplyr, tidyr) Ever expanding specialized topics (not quite modeling yet, although there is some)  dplyr: A grammar for data wrangling Take a guess - what do you think the following do?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w2p1/w2p1/" />
+
 <meta itemprop="name" content="dplyr (and a bit of checking in)">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  First things first: Cool stuff share! A bit of background on my pick  Equations within RMD look beautiful, but can be a pain  Must use \LaTeX (see examples here: http://www.statpower.net/Content/310/R%20Stuff/SampleMarkdown.html)    
  My pick: mathpix  See https://github.com/jonocarroll/mathpix   Generally works well regardless of surface (demo following)
@@ -292,9 +293,8 @@ strong {
 <p>Import the data (first start a new project, and put the data in a data folder, then..)</p>
 
 <ul>
-<li>Note the optional <code>setclass</code> argument here to set everything to a tibble,
-rather than a standard data frame, which has much nicer printing methods.</li>
-</ul>
+<li><p>Note the optional <code>setclass</code> argument here to set everything to a tibble,
+rather than a standard data frame, which has much nicer printing methods.</p>
 
 <pre><code class="language-r">library(rio)
 dirty &lt;- import(&quot;./data/dirty_data.xlsx&quot;, setclass = &quot;tbl_df&quot;)
@@ -320,15 +320,15 @@ dirty
 ## # ... with 6 more variables: `% Allocated` &lt;dbl&gt;, `Full time?` &lt;chr&gt;, `do
 ## #   not edit! ---&gt;` &lt;lgl&gt;, Certification &lt;chr&gt;, Certification__1 &lt;chr&gt;,
 ## #   Certification__2 &lt;lgl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="clean-names"><code>clean_names()</code></h2>
 
 <ul>
-<li>Function I use the most. I <em>really</em> recommend getting in the habit of sticking with a consistent style, and if that style is snake_case, then this is a great helper function.</li>
-</ul>
+<li><p>Function I use the most. I <em>really</em> recommend getting in the habit of sticking with a consistent style, and if that style is snake_case, then this is a great helper function.</p>
 
 <pre><code class="language-r">library(janitor)
 clean_names(dirty)
@@ -353,7 +353,8 @@ clean_names(dirty)
 ## # ... with 6 more variables: percent_allocated &lt;dbl&gt;, full_time &lt;chr&gt;,
 ## #   do_not_edit &lt;lgl&gt;, certification &lt;chr&gt;, certification_1 &lt;chr&gt;,
 ## #   certification_2 &lt;lgl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -791,12 +792,12 @@ select(reads, num_range(&quot;unit_&quot;, c(2:4, 7)))
 
 <ul>
 <li>You can supply multiple arguments to filter and they will be stapled together with <code>&amp;</code>.</li>
-<li>The below is equivalent to the code on the previous slide</li>
-</ul>
+
+<li><p>The below is equivalent to the code on the previous slide</p>
 
 <pre><code class="language-r">filter(presidential, party == &quot;Democratic&quot;,
-                     start &gt; as.Date(&quot;1970-01-01&quot;),
-                     start &lt; as.Date(&quot;2000-01-01&quot;))
+                 start &gt; as.Date(&quot;1970-01-01&quot;),
+                 start &lt; as.Date(&quot;2000-01-01&quot;))
 </code></pre>
 
 <pre><code>## # A tibble: 2 x 4
@@ -804,7 +805,8 @@ select(reads, num_range(&quot;unit_&quot;, c(2:4, 7)))
 ##     &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;      &lt;chr&gt;
 ## 1  Carter 1977-01-20 1981-01-20 Democratic
 ## 2 Clinton 1993-01-20 2001-01-20 Democratic
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -833,8 +835,7 @@ select(after_2000, name, party)
 <h2 id="chaining-arguments-1">Chaining arguments</h2>
 
 <ul>
-<li>Alternatively, we could wrap <code>select</code> around <code>filter</code></li>
-</ul>
+<li><p>Alternatively, we could wrap <code>select</code> around <code>filter</code></p>
 
 <pre><code class="language-r">select(filter(presidential, start &gt; as.Date(&quot;2000-01-01&quot;)), name, party)
 </code></pre>
@@ -844,7 +845,8 @@ select(after_2000, name, party)
 ##   &lt;chr&gt;      &lt;chr&gt;
 ## 1  Bush Republican
 ## 2 Obama Democratic
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -852,11 +854,11 @@ select(after_2000, name, party)
 
 <ul>
 <li>Or, we could use another function to help increase the readability of our code: <code>%&gt;%</code></li>
-<li>Called the &ldquo;pipe&rdquo; operator and &ldquo;piping functions&rdquo;</li>
-</ul>
+
+<li><p>Called the &ldquo;pipe&rdquo; operator and &ldquo;piping functions&rdquo;</p>
 
 <pre><code class="language-r">filter(presidential, start &gt; as.Date(&quot;2000-01-01&quot;)) %&gt;% 
-  select(name, party)
+select(name, party)
 </code></pre>
 
 <pre><code>## # A tibble: 2 x 2
@@ -864,7 +866,8 @@ select(after_2000, name, party)
 ##   &lt;chr&gt;      &lt;chr&gt;
 ## 1  Bush Republican
 ## 2 Obama Democratic
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -891,16 +894,14 @@ select(after_2000, name, party)
 <h2 id="your-turn">Your turn</h2>
 
 <ul>
-<li>Install and load the package <em>Lahman</em>, which will give you access to the dataset <em>Teams</em></li>
-</ul>
+<li><p>Install and load the package <em>Lahman</em>, which will give you access to the dataset <em>Teams</em></p>
 
 <pre><code class="language-r">install.packages(&quot;Lahman&quot;)
 library(Lahman)
 head(Teams)
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Using piping, produce a subset of the data that has the following characteristics:
+<li><p>Using piping, produce a subset of the data that has the following characteristics:</p>
 
 <ul>
 <li>Only one team (your choice)</li>
@@ -1138,17 +1139,17 @@ cubs
 <h2 id="summarize"><code>summarize</code></h2>
 
 <ul>
-<li>Compute the mean and standard deviation of winning percentage</li>
-</ul>
+<li><p>Compute the mean and standard deviation of winning percentage</p>
 
 <pre><code class="language-r">cubs %&gt;% 
-    summarize(mean_winning_pct = mean(w_pct),
-              sd_winning_pct = sd(w_pct))
+summarize(mean_winning_pct = mean(w_pct),
+          sd_winning_pct = sd(w_pct))
 </code></pre>
 
 <pre><code>##   mean_winning_pct sd_winning_pct
 ## 1        0.4811027     0.06864337
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

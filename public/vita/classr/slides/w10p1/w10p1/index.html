@@ -27,7 +27,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w10p1/w10p1/" />
@@ -55,6 +55,7 @@
  Haven&rsquo;t even discussed modeling! Version control (git/github) Functional programming (get a bit today) Object oriented programming  We also briefly discussed a few important topics" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w10p1/w10p1/" />
+
 <meta itemprop="name" content="Beyond the course">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  A reminder: The R learning curve Agenda  Introduction to functions Introduction to Lists Introduction to the purrr package for working with lists Artificial example Walk through a real script (at least some of it)  Before we get started&hellip;  There&rsquo;s SO MUCH we still haven&rsquo;t talked about
  Haven&rsquo;t even discussed modeling! Version control (git/github) Functional programming (get a bit today) Object oriented programming  We also briefly discussed a few important topics">
@@ -277,13 +278,13 @@ $$</p>
 <hr />
 
 <ul>
-<li>For simplicity, let&rsquo;s assume separate columns for the focal and reference group</li>
-</ul>
+<li><p>For simplicity, let&rsquo;s assume separate columns for the focal and reference group</p>
 
 <pre><code class="language-r">mean_diff &lt;- function(foc, ref) {
 	mean(foc, na.rm = TRUE) - mean(ref, na.rm = TRUE)
 }
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -650,18 +651,15 @@ grouped_means(cyl)
 <hr />
 
 <ul>
-<li>Write the function</li>
-</ul>
+<li><p>Write the function</p>
 
 <pre><code class="language-r">xbar &lt;- function(x) {
 	x &lt;- na.omit(x)
 	sum(x) / length(x)
 }
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Test it out: No missing data</li>
-</ul>
+<li><p>Test it out: No missing data</p>
 
 <pre><code class="language-r">xbar(mtcars$mpg); mean(mtcars$mpg)
 </code></pre>
@@ -679,13 +677,13 @@ grouped_means(cyl)
 </code></pre>
 
 <pre><code>## [1] 3.596563
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Test it out: missing data</li>
-</ul>
+<li><p>Test it out: missing data</p>
 
 <pre><code class="language-r">v1 &lt;- c(1:5, NA, NA, 7:10)
 v2 &lt;- c(NA, seq(32:80), NA, 12)
@@ -707,7 +705,8 @@ v2 &lt;- c(NA, seq(32:80), NA, 12)
 </code></pre>
 
 <pre><code>## [1] 24.74
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -835,8 +834,7 @@ v2 &lt;- c(NA, seq(32:80), NA, 12)
 <h2 id="lists-returned-by-functions">Lists returned by functions</h2>
 
 <ul>
-<li>Many functions return a list of objects. This is because lists are a great way to store a lot of varied information. For example: <code>lm</code>.</li>
-</ul>
+<li><p>Many functions return a list of objects. This is because lists are a great way to store a lot of varied information. For example: <code>lm</code>.</p>
 
 <pre><code class="language-r">mod &lt;- lm(hp ~ mpg, data = mtcars)
 str(mod)
@@ -899,7 +897,8 @@ str(mod)
 ##   .. .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
 ##   .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;hp&quot; &quot;mpg&quot;
 ##  - attr(*, &quot;class&quot;)= chr &quot;lm&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1269,8 +1268,7 @@ map(lst, mean)
 <h2 id="remember-a-data-frame-is-a-list">Remember, a data frame is a list</h2>
 
 <ul>
-<li>Loop through all the columns and apply a specific function</li>
-</ul>
+<li><p>Loop through all the columns and apply a specific function</p>
 
 <pre><code class="language-r">map_dbl(mtcars, mean)
 </code></pre>
@@ -1279,7 +1277,8 @@ map(lst, mean)
 ##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250 
 ##       qsec         vs         am       gear       carb 
 ##  17.848750   0.437500   0.406250   3.687500   2.812500
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1406,8 +1405,8 @@ str(sim_data)
 
 <ul>
 <li><em>sim_data</em> is a list, so we can loop through it</li>
-<li>We saw on the previous slide that the sample sizes were correct. What about the means and standard deviations?</li>
-</ul>
+
+<li><p>We saw on the previous slide that the sample sizes were correct. What about the means and standard deviations?</p>
 
 <pre><code class="language-r">map_dbl(sim_data, mean)
 </code></pre>
@@ -1419,7 +1418,8 @@ str(sim_data)
 </code></pre>
 
 <pre><code>## [1] 0.7623378 0.9640901 2.0434633 2.0012167
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

@@ -2,6 +2,7 @@ library(fs)
 library(glue)
 library(purrr)
 
+# system('brew install ren')
 system('cd render && ren "*.md" "#1.txt"')
 
 txt_files <- dir_ls("render", glob = "*.txt")

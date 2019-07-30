@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Tue, 19 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Estimating important things with public data</title>
+      <link>/post/estimating-important-things-with-public-data/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/estimating-important-things-with-public-data/</guid>
+      <description>Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.</description>
+    </item>
     
     <item>
       <title>Looking into #KeepFamiliesTogether</title>
@@ -714,7 +723,7 @@ The purpose of esvis is primarily to visualize differences in two or more distri
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/vita/teaching/</guid>
-      <description>COE Data Science Specialization  I am currently in the process of leading the development of a five-course data science specialization in R for students in the College of Education at the University of Oregon, in collaboration with Drs. Alison Hill, Chester Ismay and Andrew Bray. Although the courses will be offered through the COE, it is anticipated that students from numerous social science departments will have an interest, given past enrollment in the R courses listed below.</description>
+      <description># COE Data Science Specialization  I am currently in the process of leading the development of a five-course data science specialization in R for students in the College of Education at the University of Oregon, in collaboration with Drs. Alison Hill, Chester Ismay and Andrew Bray. Although the courses will be offered through the COE, it is anticipated that students from numerous social science departments will have an interest, given past enrollment in the R courses listed below.</description>
     </item>
     
     <item>

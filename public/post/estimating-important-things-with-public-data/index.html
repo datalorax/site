@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Estimating important things with public data - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins." />
+
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.0" />
+
+
+<link rel="canonical" href="/post/estimating-important-things-with-public-data/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Estimating important things with public data" />
+<meta property="og:description" content="Intro One of the neatest things I&rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&rsquo;s the approach I&rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/estimating-important-things-with-public-data/" />
+<meta property="article:published_time" content="2019-07-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-07-29T19:57:09-07:00" />
+<meta itemprop="name" content="Estimating important things with public data">
+<meta itemprop="description" content="Intro One of the neatest things I&rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&rsquo;s the approach I&rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.">
+
+
+<meta itemprop="datePublished" content="2019-07-29T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-07-29T19:57:09-07:00" />
+<meta itemprop="wordCount" content="2314">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Estimating important things with public data"/>
+<meta name="twitter:description" content="Intro One of the neatest things I&rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&rsquo;s the approach I&rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">datalorax</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">datalorax</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Estimating important things with public data</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-07-29 </span>
+        <div class="post-category">
+            
+              <a href="/categories/effect-size/"> Effect Size </a>
+            
+              <a href="/categories/achievement-gap/"> Achievement Gap </a>
+            
+              <a href="/categories/statistics/"> Statistics </a>
+            
+          </div>
+        <span class="more-meta"> 2314 words </span>
+        <span class="more-meta"> 11 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#intro">Intro</a>
+<ul>
+<li><a href="#background">Background</a></li>
+</ul></li>
+<li><a href="#effect-sizes-from-ordinal-data">Effect sizes from ordinal data</a>
+<ul>
+<li><a href="#a-made-up-example">A made up example</a></li>
+<li><a href="#ordinal-data">Ordinal data</a>
+<ul>
+<li><a href="#coarsening-the-data">Coarsening the data</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<h1 id="intro">Intro</h1>
+
+<p>One of the neatest things I&rsquo;ve learned about in the last few years is how to <a href="https://journals.sagepub.com/doi/abs/10.3102/1076998611411918">estimate effect sizes from coarsened data</a>. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&rsquo;s the approach I&rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.</p>
+
+<h2 id="background">Background</h2>
+
+<p>In case you&rsquo;re unfamiliar, states adminster tests to students at the end of the year in each of Grades 3-8, and once in high school, for all students in their state in English/Language Arts and Mathematics. Science assessments are also administered, but not across all grades. States report, for every school in their state, the percentage of students scoring in each of (usually) for proficiency categories. Sometimes these are given labels, like &ldquo;Below Expectations&rdquo;, &ldquo;Nearly Proficient&rdquo;, &ldquo;Proficient&rdquo;, and &ldquo;Exceeds&rdquo;, and other times they just have a numerical label from 1-4. These data are reported for every school in the state, and disagregatted by student demographics such as race/ethnicity, special education status, etc., provided there is a sufficient amount of data to ensure individual students cannot be identified (and this lower threshold varies by state).</p>
+
+<p>While these data are somewhat helpful on their own, their actually not as helpful as one might think. The primary problem is that the percentage of students in each of these categories depends <em>a lot</em> on the placement of the cut scores delineating the different categories, and those cut scores vary not only by state, but by grade-level. Any direct comparisons that are not in the same grade, during the same academic year (because the cut scores can change from year to year), and in the same content area are therfore tenuous (see <a href="https://www-leland.stanford.edu/~hakuta/Courses/Ed205X%20Website/Resources/Ho%20The%20Problem%20with%20Proficiency%20ER%20v37%20n6.pdf">Ho, 2008</a> for a discussion of just how tenuous comparisons can be). But, it&rsquo;s an awful lot of data that we don&rsquo;t want to just throw out. The fact that it&rsquo;s reported by demographic groups is particularly intriguing, given the long-standing racial achievement disparities have been found, dating back to the Coleman report. Evaluating achievement disparities at this scale could lead to new insights (and indeed, this has been done; for example, see recent work by <a href="https://cepa.stanford.edu/sites/default/files/wp16-10-v201712.pdf">Reardon, Kalograides, and Shores</a>). But how do we make sense of the data, after I&rsquo;ve just discussed the problems with direct comparisons in terms of percent proficient? Enter $V$, an effect size like metric estimated from ordinal data.</p>
+
+<h1 id="effect-sizes-from-ordinal-data">Effect sizes from ordinal data</h1>
+
+<p>First, what&rsquo;s an effect size? There are many different types of effect sizes, but the most common is Cohen&rsquo;s $D$, which is just the difference between the means of two respective distributions, divided by their pooled standard deviation (see <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full">Lakens, 2013</a> for a nice review of effect sizes). This implies we have a standardized mean difference measure. So, a value of 0.5 would imply that the focal distribution is, on average, half a standard deviation higher than the reference distribution. Effect sizes are useful for lots of different reasons, but primarily among them is that they are comparable across studies and different scales (under certain assumptions, and occassionally it won&rsquo;t work well, but generally it works well enough). If we could report our ordinal percent proficient data in terms of an effect size, then all of the sudden would could make comparisons between student groups across grades and even across states, even if they don&rsquo;t use the same test.</p>
+
+<h2 id="a-made-up-example">A made up example</h2>
+
+<p>We&rsquo;re going to start with a made-up example. To make this most clear, I think it&rsquo;s actually helpful to start out with continuous data and then bin it manually. I&rsquo;ll use the tidyverse throughout, so I&rsquo;ll first load that. I&rsquo;ll also set my ggplot theme to minimal, which is my favorite when I&rsquo;m exploring and not trying to make things uber beautiful.</p>
+
+<pre><code class="language-r">library(tidyverse)
+theme_set(theme_minimal())
+</code></pre>
+
+<p>Now, we just need to simulate some data. I&rsquo;ll simulate data for two groups, assuming both are distributed normally, with the first having a mean of 100 and standard deviation of 10. The second will have scores, on average, half a standard deviation less than the first (so 5 points). To keep things simple, I&rsquo;ll make the standard deviation the same (although in principle they can be different). We&rsquo;ll simulate 500 studenst in the first group and 200 in the second, then put it together in a data frame. I&rsquo;ll also set a seed so the results are reproducible.</p>
+
+<pre><code class="language-r">set.seed(8675309)
+g1 &lt;- rnorm(500, 100, 10)
+g2 &lt;- rnorm(200, 95, 10)
+
+d &lt;- tibble(id = 1:700,
+            group = c(rep(&quot;g1&quot;, 500), rep(&quot;g2&quot;, 200)),
+            score = c(g1, g2))
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 700 x 3
+##       id group score
+##    &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;
+##  1     1 g1     90.0
+##  2     2 g1    107. 
+##  3     3 g1     93.8
+##  4     4 g1    120. 
+##  5     5 g1    111. 
+##  6     6 g1    110. 
+##  7     7 g1    100. 
+##  8     8 g1    107. 
+##  9     9 g1    106. 
+## 10    10 g1    109. 
+## # … with 690 more rows
+</code></pre>
+
+<p>To confirm our simulation has worked, let&rsquo;s first just look at the density of the two distributions</p>
+
+<pre><code class="language-r">ggplot(d, aes(score)) +
+  geom_density(aes(fill = group), alpha = 0.6, color = &quot;white&quot;) +
+  scale_fill_brewer(palette = &quot;Pastel1&quot;)
+</code></pre>
+
+<p><img src="../2019-07-29-estimating-important-things-with-public-data_files/figure-html/densities-1.png" alt="" /><!-- --></p>
+
+<p>And sure enough, <code>g2</code> distribution peaks just about 5 points below the <code>g1</code> distribution.</p>
+
+<p>We can also look at these by their empirical cummulative distribution functions with very little changes to the plotting code.</p>
+
+<pre><code class="language-r">ggplot(d, aes(score)) +
+  stat_ecdf(aes(color = group), size = 1.3) +
+  scale_color_brewer(palette = &quot;Pastel1&quot;)
+</code></pre>
+
+<p><img src="../2019-07-29-estimating-important-things-with-public-data_files/figure-html/ecdfs-1.png" alt="" /><!-- --></p>
+
+<p>And again you can see a relatively constant differnce between the to distrutions, with approximately a 5 point horizontal difference at most points in the scale.</p>
+
+<p>What&rsquo;s interesting, however, is that if we extract the y-values for each curve, and match them based on their x-values, we&rsquo;ll end up with what looks an awful lot like a ROC curve. The mechanics here are a bit complicated, but essentially we just have to compute the ECDF for each, then match them.</p>
+
+<pre><code class="language-r">g1_ecdf &lt;- d %&gt;% 
+  filter(group == &quot;g1&quot;) %&gt;% 
+  pull(score) %&gt;% 
+  ecdf()
+
+g2_ecdf &lt;- d %&gt;% 
+  filter(group == &quot;g2&quot;) %&gt;% 
+  pull(score) %&gt;% 
+  ecdf()
+
+matched_d &lt;- tibble(range = 60:140,
+                    g1_cdf = g1_ecdf(range),
+                    g2_cdf = g2_ecdf(range))
+matched_d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 81 x 3
+##    range g1_cdf g2_cdf
+##    &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1    60  0       0   
+##  2    61  0       0   
+##  3    62  0       0   
+##  4    63  0       0   
+##  5    64  0       0   
+##  6    65  0       0   
+##  7    66  0       0   
+##  8    67  0       0   
+##  9    68  0.002   0.01
+## 10    69  0.002   0.01
+## # … with 71 more rows
+</code></pre>
+
+<p>The first two blocks of code above create functions that return the y-value for the correpsonding group. The <code>matched_d</code> part reports the cummulative density for each group across the score range 6 to 140. Now, we can plot the curves against each other.</p>
+
+<pre><code class="language-r">ggplot(matched_d, aes(g1_cdf, g2_cdf)) +
+  geom_line(color = &quot;cornflowerblue&quot;, size = 1.4) +
+  geom_abline(linetype = &quot;dashed&quot;, color = &quot;gray30&quot;)
+</code></pre>
+
+<p><img src="../2019-07-29-estimating-important-things-with-public-data_files/figure-html/roc-1-1.png" alt="" /><!-- --></p>
+
+<p>In the above, if there was no difference between these two groups, the line would follow the dashed line perfectly. To the extent that the matched CDFs diverge from the reference line, there is a difference in the distributions. We can even calculate the area under this curve, which is itself and effect size like metric. I like to use the <code>pracma</code> R package to do this, with the <code>trapz</code> function for trapezoidal integration, which seems to work better overall (in my experience), than other integration techniques.</p>
+
+<pre><code class="language-r">library(pracma)
+auc &lt;- trapz(matched_d$g1_cdf, matched_d$g2_cdf)
+auc
+</code></pre>
+
+<pre><code class="language-r">## [1] 0.63065
+</code></pre>
+
+<p>In this case, the area under the curve is directly interpretable as the probability that a randomly selected observation from the x-axis (group 1) would have a higher value than a randomly selected observation from the y-axis (group 2). But it&rsquo;s more than just that. In the Ho and Reardon paper referenced in the first sentence of this post, they outline the following formula</p>
+
+<p>$$
+V = \sqrt(2)\Phi^{-1}(P_{a&gt;b})
+$$</p>
+
+<p>which looks fairly complicated, but really isn&rsquo;t that bad. The $P_{a&gt;b}$ is just the area under the curve we calculated above and $\Phi^{-1}$ is the equivalent of R&rsquo;s <code>qnorm</code> function, which walks a probability value back to a quantile score (e.g., <code>qnorm(0.975) = 1.959964</code>). So really, we just use the <code>qnorm</code> function on our AUC value multiply the result by the square root of 2. Why would we do this? Because it puts the AUC value on a standard deviation scale and, under the condition of respective normality, is actually equivalent to Cohen&rsquo;s $D$. In R code, and assuming we have created an object called <code>auc</code>, as above, the formula for $V$ looks like <code>sqrt(2)*qnorm(auc)</code>, which gives us a value of 0.4717468. Using the esvis package, we can compare this to Cohen&rsquo;s $D$</p>
+
+<pre><code class="language-r">library(esvis)
+coh_d(d, score ~ group, ref_group = &quot;g2&quot;)
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 1 x 4
+##   group_ref group_foc coh_d coh_se
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+## 1 g2        g1        0.460 0.0846
+</code></pre>
+
+<p>And as you can see, they are very close.</p>
+
+<h2 id="ordinal-data">Ordinal data</h2>
+
+<p>Why do we do all the gymnastics above if we can use Cohen&rsquo;s $D$ to get, essentially, the same answer? In some ways, $V$ is preferable to Cohen&rsquo;s $D$, because it rests on fewer assumptions. But more importantly, we can use the method even when all we have access to is ordinal data reported as the percentage of people in each of $n$ categories, as is required by statewide testing agencies, but also common in other areas (e.g., underweight, normal, overweight, or obese for various body-mass index (BMI) ranges). We can do this because we can use the percentage of respondents in each category to approximate the empirical cummulative distribution function for each group, match these curves, calculate the area under the curve, and then transform it to an effect size. This all makes intuitive sense, but let&rsquo;s prove this to ourselves.</p>
+
+<h3 id="coarsening-the-data">Coarsening the data</h3>
+
+<p>I&rsquo;ll make up three cut scores to define four performance categories: 92, 97, and 107. Note that these are purposefully not evenly spaced, as is common in statewide testing, but some basic simulations I&rsquo;ve conducted in the past suggest that the better the spacing, the better the ECDF approximation will be (which again, makes intuitive sense).</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;% 
+  mutate(category = case_when(score &lt; 92 ~ 1,
+                              score &gt;= 92 &amp; score &lt; 97 ~ 2,
+                              score &gt;= 97 &amp; score &lt; 107 ~ 3,
+                              score &gt;= 107 ~ 4))
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 700 x 4
+##       id group score category
+##    &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;
+##  1     1 g1     90.0        1
+##  2     2 g1    107.         4
+##  3     3 g1     93.8        2
+##  4     4 g1    120.         4
+##  5     5 g1    111.         4
+##  6     6 g1    110.         4
+##  7     7 g1    100.         3
+##  8     8 g1    107.         3
+##  9     9 g1    106.         3
+## 10    10 g1    109.         4
+## # … with 690 more rows
+</code></pre>
+
+<p>Now let&rsquo;s quickly look at the proportion in each category by group</p>
+
+<pre><code class="language-r">props &lt;- d %&gt;% 
+  group_by(group) %&gt;% 
+  count(category) %&gt;% 
+  mutate(prop = n/sum(n)) %&gt;% 
+  select(-n) %&gt;% 
+  spread(group, prop)
+
+props
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 4 x 3
+##   category    g1    g2
+##      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1        1 0.222 0.41 
+## 2        2 0.166 0.175
+## 3        3 0.386 0.290
+## 4        4 0.226 0.125
+</code></pre>
+
+<p>Ho and Reardon outline a number of different ways to approximate the ECDF, but we&rsquo;ll stick with the simplest &ldquo;connect the dots&rdquo; method. Let&rsquo;s look at how the ECDF for the full data compares to our approximation using just the data shown above.</p>
+
+<pre><code class="language-r">props_plot_d &lt;- props %&gt;% 
+  mutate(score = c(92, 97, 107, 125))
+
+bottom &lt;- tibble(category = 0, g1 = 0, g2 = 0, score = 75)
+
+props_plot_d &lt;- bind_rows(bottom, props_plot_d) %&gt;% 
+  mutate(g1 = cumsum(g1),
+         g2 = cumsum(g2)) %&gt;% 
+  select(score, g1, g2) %&gt;% 
+  gather(group, prop, -score)
+
+ggplot(d, aes(score)) +
+  stat_ecdf(aes(color = group)) +
+  geom_point(aes(y = prop, color = group), data = props_plot_d,
+             size = 3) +
+  geom_line(aes(y = prop, color = group), data = props_plot_d,
+             linetype = &quot;dashed&quot;,
+             size = 1.4) 
+</code></pre>
+
+<p><img src="../2019-07-29-estimating-important-things-with-public-data_files/figure-html/ecdf-compare-1.png" alt="" /><!-- --></p>
+
+<p>As you can see from the above, it&rsquo;s not perfect, but it&rsquo;s pretty close!</p>
+
+<p>To estimate $V$ from teh coarsened data, then, all we need to do is transform the proportions into cummulative proportions, and compute the integral.</p>
+
+<pre><code class="language-r">props %&gt;% 
+  mutate(cdf_g1 = cumsum(g1),
+         cdf_g2 = cumsum(g2))
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 4 x 5
+##   category    g1    g2 cdf_g1 cdf_g2
+##      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1        1 0.222 0.41   0.222  0.41 
+## 2        2 0.166 0.175  0.388  0.585
+## 3        3 0.386 0.290  0.774  0.875
+## 4        4 0.226 0.125  1      1
+</code></pre>
+
+<p>But the above has a small problem. If we compute the integral here we&rsquo;ll miss out on a fair bit of the curve because we have not included zero. There&rsquo;s a few ways to do this and I&rsquo;m taking a not very general but easy way here.</p>
+
+<pre><code class="language-r">zero &lt;- tibble(category = 0, g1 = 0, g2 = 0)
+props &lt;- props %&gt;% 
+  bind_rows(zero) %&gt;% 
+  arrange(category) %&gt;% 
+  mutate(cdf_g1 = cumsum(g1),
+         cdf_g2 = cumsum(g2))
+props
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 5 x 5
+##   category    g1    g2 cdf_g1 cdf_g2
+##      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1        0 0     0      0      0    
+## 2        1 0.222 0.41   0.222  0.41 
+## 3        2 0.166 0.175  0.388  0.585
+## 4        3 0.386 0.290  0.774  0.875
+## 5        4 0.226 0.125  1      1
+</code></pre>
+
+<p>Now let&rsquo;s compute the AUC.</p>
+
+<pre><code class="language-r">trapz(props$cdf_g1, props$cdf_g2)
+</code></pre>
+
+<pre><code class="language-r">## [1] 0.62175
+</code></pre>
+
+<p>and transform it to $V$</p>
+
+<pre><code class="language-r">sqrt(2)*qnorm(trapz(props$cdf_g1, props$cdf_g2))
+</code></pre>
+
+<pre><code class="language-r">## [1] 0.4385196
+</code></pre>
+
+<p>And there we are. Again. Not perfect, but pretty darn close! We could, of course, go on to do some simulations, in which case we would find that the difference between $V$ and $D$ averages zero. I&rsquo;ve done these sorts of comparisons with empirical data as well (see <a href="http://www.datalorax.com/talks/ncme18/">here</a> for example). But this is probably long enough as is.</p>
+
+<p>Thanks for reading!</p>
+
+    </div>
+
+    
+    
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/looking-into-keepfamiliestogether/">
+            <span class="next-text nav-default">Looking into #KeepFamiliesTogether</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/datalorax_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/datalorax" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme based on 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2019
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

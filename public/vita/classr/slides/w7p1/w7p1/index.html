@@ -27,7 +27,7 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w7p1/w7p1/" />
@@ -55,6 +55,7 @@ library(tidyverse) install.packages(&amp;quot;nycflights13&amp;quot;) library(ny
 library(tidyverse) install.packages(&quot;nycflights13&quot;) library(nycflights13)  keys  Uniquely identify rows in a dataset. Variable(s) in common between two datasets to be joined. Primary keys: Uniquely identify observations in their dataset Foreign keys: Uniquely identify observations in other datasets." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w7p1/w7p1/" />
+
 <meta itemprop="name" content="Joins">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  To get started today, run the following code. We won&rsquo;t use it a lot, but we will use it some.
 library(tidyverse) install.packages(&quot;nycflights13&quot;) library(nycflights13)  keys  Uniquely identify rows in a dataset. Variable(s) in common between two datasets to be joined. Primary keys: Uniquely identify observations in their dataset Foreign keys: Uniquely identify observations in other datasets.">
@@ -263,8 +264,7 @@ income_ineq
 <h2 id="sometimes-there-is-no-key">Sometimes there is no key</h2>
 
 <ul>
-<li>These tables have an <em>implicit</em> id - the row numbers. For example:</li>
-</ul>
+<li><p>These tables have an <em>implicit</em> id - the row numbers. For example:</p>
 
 <pre><code class="language-r">flights
 </code></pre>
@@ -286,7 +286,8 @@ income_ineq
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -316,11 +317,10 @@ income_ineq
 <h2 id="create-a-key">Create a key</h2>
 
 <ul>
-<li>If there is no key, it&rsquo;s often helpful to add one. These are called <em>surrogate</em> keys.</li>
-</ul>
+<li><p>If there is no key, it&rsquo;s often helpful to add one. These are called <em>surrogate</em> keys.</p>
 
 <pre><code class="language-r">flights &lt;- flights %&gt;% 
-    mutate(new_id = row_number())
+mutate(new_id = row_number())
 flights[ ,c(1:3, ncol(flights))]
 </code></pre>
 
@@ -338,7 +338,8 @@ flights[ ,c(1:3, ncol(flights))]
 ##  9  2013     1     1      9
 ## 10  2013     1     1     10
 ## # ... with 336,766 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -370,8 +371,7 @@ flights[ ,c(1:3, ncol(flights))]
 <h2 id="illustrating-the-joins">Illustrating the joins</h2>
 
 <ul>
-<li>Consider the following hypothetical datasets to be merged</li>
-</ul>
+<li><p>Consider the following hypothetical datasets to be merged</p>
 
 <pre><code class="language-r">set.seed(100)
 gender &lt;- tibble(key = 1:3, male = rbinom(3, 1, .5))
@@ -398,7 +398,8 @@ sped &lt;- tibble(key = c(1, 2, 4), sped = rbinom(3, 1, .5))
 ## 1     1     0
 ## 2     2     0
 ## 3     4     0
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -668,17 +669,18 @@ dems
 
 <ul>
 <li>Often you want to add summary info to your dataset.</li>
-<li>You can do this easily with by piping arguments</li>
-</ul>
+
+<li><p>You can do this easily with by piping arguments</p>
 
 <pre><code class="language-r">ecls &lt;- ecls %&gt;% 
-    group_by(school_id) %&gt;% 
-    summarize(sch_pre_math = mean(T1MSCALE)) %&gt;% 
-    left_join(ecls)
+group_by(school_id) %&gt;% 
+summarize(sch_pre_math = mean(T1MSCALE)) %&gt;% 
+left_join(ecls)
 </code></pre>
 
 <pre><code>## Joining, by = &quot;school_id&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -713,11 +715,10 @@ dems
 <h2 id="default-behavior-changing-it">Default behavior &amp; changing it</h2>
 
 <ul>
-<li>By default, the <code>*_join</code> functions will use all columns with common names as keys.</li>
-</ul>
+<li><p>By default, the <code>*_join</code> functions will use all columns with common names as keys.</p>
 
 <pre><code class="language-r">flights2 &lt;- flights %&gt;% 
-  select(year:day, hour, origin, dest, tailnum, carrier)
+select(year:day, hour, origin, dest, tailnum, carrier)
 flights2[1:2, ]
 </code></pre>
 
@@ -738,7 +739,8 @@ flights2[1:2, ]
 ## 2    EWR  2013     1     1     1 37.04 21.92 53.97      230   13.80936
 ## # ... with 5 more variables: wind_gust &lt;dbl&gt;, precip &lt;dbl&gt;,
 ## #   pressure &lt;dbl&gt;, visib &lt;dbl&gt;, time_hour &lt;dttm&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -771,8 +773,7 @@ flights2[1:2, ]
 <h2 id="use-only-some-vars">Use only some vars?</h2>
 
 <ul>
-<li>If we were joining <em>flights2</em> and <em>planes</em>, we would not want to use the year variable in the join, because it means different things in each dataset.</li>
-</ul>
+<li><p>If we were joining <em>flights2</em> and <em>planes</em>, we would not want to use the year variable in the join, because it means different things in each dataset.</p>
 
 <pre><code class="language-r">planes
 </code></pre>
@@ -792,13 +793,13 @@ flights2[1:2, ]
 ## 10  N110UW  1999 Fixed wing multi engine AIRBUS INDUSTRIE  A320-214
 ## # ... with 3,312 more rows, and 4 more variables: engines &lt;int&gt;,
 ## #   seats &lt;int&gt;, speed &lt;int&gt;, engine &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>How? Specify the variables with <code>by</code></li>
-</ul>
+<li><p>How? Specify the variables with <code>by</code></p>
 
 <pre><code class="language-r">left_join(flights2, planes, by = &quot;tailnum&quot;)
 </code></pre>
@@ -819,15 +820,15 @@ flights2[1:2, ]
 ## # ... with 336,766 more rows, and 7 more variables: type &lt;chr&gt;,
 ## #   manufacturer &lt;chr&gt;, model &lt;chr&gt;, engines &lt;int&gt;, seats &lt;int&gt;,
 ## #   speed &lt;int&gt;, engine &lt;chr&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="mismatched-names">Mismatched names?</h2>
 
 <ul>
-<li>What if you had data to merge like this?</li>
-</ul>
+<li><p>What if you had data to merge like this?</p>
 
 <pre><code class="language-r">stu
 </code></pre>
@@ -856,7 +857,8 @@ dems
 ## 1      1    no
 ## 2      2    no
 ## 3      3   yes
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -909,13 +911,11 @@ dems
 <li><p>Let&rsquo;s filter classrooms with extremely high math pretest average scores.</p>
 
 <ul>
-<li>First, calculate averages</li>
-</ul></li>
-</ul>
+<li><p>First, calculate averages</p>
 
 <pre><code class="language-r">av_pre_mth &lt;- ecls %&gt;% 
-    group_by(teacher_id, k_type) %&gt;% 
-    summarize(av_pre_mth = mean(T1MSCALE)) 
+group_by(teacher_id, k_type) %&gt;% 
+summarize(av_pre_mth = mean(T1MSCALE)) 
 av_pre_mth
 </code></pre>
 
@@ -934,17 +934,18 @@ av_pre_mth
 ##  9    0023T01 half-day    10.9880
 ## 10    0023T04 half-day    20.0220
 ## # ... with 697 more rows
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Next, filter for means 3 standard deviations above the mean.</li>
-</ul>
+<li><p>Next, filter for means 3 standard deviations above the mean.</p>
 
 <pre><code class="language-r">extr_high &lt;- av_pre_mth %&gt;% 
-    ungroup() %&gt;% 
-    filter(av_pre_mth &gt; (mean(av_pre_mth) + 3*sd(av_pre_mth)))
+ungroup() %&gt;% 
+filter(av_pre_mth &gt; (mean(av_pre_mth) + 3*sd(av_pre_mth)))
 extr_high
 </code></pre>
 
@@ -959,13 +960,13 @@ extr_high
 ## 6    0663T01 full-day    42.8455
 ## 7    0944T03 half-day    45.3710
 ## 8    1045T02 full-day    40.7340
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Finally, use <code>semi_join</code> to filter.</li>
-</ul>
+<li><p>Finally, use <code>semi_join</code> to filter.</p>
 
 <pre><code class="language-r">extr_high_ecls &lt;- semi_join(ecls, extr_high)
 </code></pre>
@@ -996,15 +997,15 @@ extr_high
 ## #   T1ARSLIT &lt;dbl&gt;, T1ARSMAT &lt;dbl&gt;, T1ARSGEN &lt;dbl&gt;, T2ARSLIT &lt;dbl&gt;,
 ## #   T2ARSMAT &lt;dbl&gt;, T2ARSGEN &lt;dbl&gt;, ARSlitgain &lt;dbl&gt;, ARSmathgain &lt;dbl&gt;,
 ## #   ARSgkgain &lt;dbl&gt;, testdate1 &lt;date&gt;, testdate2 &lt;date&gt;, elapse &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="filtering-joins-2">Filtering joins</h2>
 
 <ul>
-<li><code>anti_join()</code> does the opposite, keeping any rows that do <strong>not</strong> match.</li>
-</ul>
+<li><p><code>anti_join()</code> does the opposite, keeping any rows that do <strong>not</strong> match.</p>
 
 <pre><code class="language-r">extr_low_ecls &lt;- anti_join(ecls, extr_high)
 </code></pre>
@@ -1036,15 +1037,15 @@ extr_high
 ## #   T1ARSGEN &lt;dbl&gt;, T2ARSLIT &lt;dbl&gt;, T2ARSMAT &lt;dbl&gt;, T2ARSGEN &lt;dbl&gt;,
 ## #   ARSlitgain &lt;dbl&gt;, ARSmathgain &lt;dbl&gt;, ARSgkgain &lt;dbl&gt;,
 ## #   testdate1 &lt;date&gt;, testdate2 &lt;date&gt;, elapse &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="check-expected">Check: Expected?</h2>
 
 <ul>
-<li>Always a good idea to make sure the number of rows you end up with is what you expected.</li>
-</ul>
+<li><p>Always a good idea to make sure the number of rows you end up with is what you expected.</p>
 
 <pre><code class="language-r">nrow(ecls)
 </code></pre>
@@ -1062,10 +1063,9 @@ extr_high
 </code></pre>
 
 <pre><code>## [1] FALSE
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Why is the above false? Let&rsquo;s investigate</li>
+<li><p>Why is the above false? Let&rsquo;s investigate</p></li>
 </ul>
 
 <hr />
@@ -1104,17 +1104,15 @@ extr_high
 <hr />
 
 <ul>
-<li>Did these teachers really only teach one students?
+<li><p>Did these teachers really only teach one students?</p>
 
 <ul>
-<li>Check first teacher</li>
-</ul></li>
-</ul>
+<li><p>Check first teacher</p>
 
 <pre><code class="language-r">ecls %&gt;% 
-  group_by(teacher_id) %&gt;% 
-  count() %&gt;% 
-  filter(teacher_id == &quot;0013T01&quot;)
+group_by(teacher_id) %&gt;% 
+count() %&gt;% 
+filter(teacher_id == &quot;0013T01&quot;)
 </code></pre>
 
 <pre><code>## # A tibble: 1 x 2
@@ -1122,7 +1120,9 @@ extr_high
 ##   teacher_id     n
 ##        &lt;chr&gt; &lt;int&gt;
 ## 1    0013T01     1
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <p><strong>Answer:</strong> YES!</p>
 
@@ -1192,8 +1192,8 @@ extr_high
 
 <ul>
 <li>This is an example I came up with before knowing that <code>semi_join()</code> or <code>anti_join()</code> existed.</li>
-<li>Trying to select one cohort of students from the seda data</li>
-</ul>
+
+<li><p>Trying to select one cohort of students from the seda data</p>
 
 <pre><code class="language-r">seda &lt;- import(&quot;../../data/seda.csv&quot;, setclass = &quot;tbl_df&quot;)
 seda
@@ -1214,13 +1214,13 @@ seda
 ## 10 100005       ALBERTVILLE CITY     1       AL  2010     3      205.7993
 ## # ... with 326,236 more rows, and 3 more variables: se_link_ela &lt;dbl&gt;,
 ## #   mean_link_math &lt;dbl&gt;, se_link_math &lt;dbl&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>First, create a data frame with the criteria for the filter</li>
-</ul>
+<li><p>First, create a data frame with the criteria for the filter</p>
 
 <pre><code class="language-r">criteria &lt;- tibble(year = 2009:2013, grade = 3:7)
 criteria
@@ -1234,10 +1234,9 @@ criteria
 ## 3  2011     5
 ## 4  2012     6
 ## 5  2013     7
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Then use a <code>right_join</code> with <em>seda</em> and <em>criteria</em></li>
+<li><p>Then use a <code>right_join</code> with <em>seda</em> and <em>criteria</em></p></li>
 </ul>
 
 <hr />
@@ -1310,8 +1309,7 @@ publishers &lt;- read_csv(publishers, skip = 1)
 <h2 id="the-superhero-data">The <em>superhero</em> data</h2>
 
 <ul>
-<li>What&rsquo;s the key here?</li>
-</ul>
+<li><p>What&rsquo;s the key here?</p>
 
 <pre><code class="language-r">superheroes
 </code></pre>
@@ -1326,15 +1324,15 @@ publishers &lt;- read_csv(publishers, skip = 1)
 ## 5    Joker       bad   male                DC
 ## 6 Catwoman       bad female                DC
 ## 7  Hellboy      good   male Dark Horse Comics
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="the-publishers-data">The <em>publishers</em> data</h2>
 
 <ul>
-<li>What&rsquo;s the key here?</li>
-</ul>
+<li><p>What&rsquo;s the key here?</p>
 
 <pre><code class="language-r">publishers
 </code></pre>
@@ -1345,7 +1343,8 @@ publishers &lt;- read_csv(publishers, skip = 1)
 ## 1        DC       1934
 ## 2    Marvel       1939
 ## 3     Image       1992
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

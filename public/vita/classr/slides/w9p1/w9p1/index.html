@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w9p1/w9p1/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of factors  creating/modifying when you do/do not want factors  Basics of Dates  Specifically, we&rsquo;ll focus date calculations   Disclaimer  We&rsquo;re obviously not going to cover all there is to know about factors and dates in one smashed-together two-hour lecture. If we had more time, we&rsquo;d spend a week on each." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w9p1/w9p1/" />
+
 <meta itemprop="name" content="Factors and Dates">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of factors  creating/modifying when you do/do not want factors  Basics of Dates  Specifically, we&rsquo;ll focus date calculations   Disclaimer  We&rsquo;re obviously not going to cover all there is to know about factors and dates in one smashed-together two-hour lecture. If we had more time, we&rsquo;d spend a week on each.">
 
@@ -244,26 +245,22 @@ tibble(lets = letters[1:3])
 <h2 id="what-to-do">What to do?</h2>
 
 <ul>
-<li>Turn it off globally, but that&rsquo;s dangerous</li>
-</ul>
+<li><p>Turn it off globally, but that&rsquo;s dangerous</p>
 
 <pre><code class="language-r">options(default.stringsAsFactors = FALSE)
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Turn it off in only the functions it affects, but you might forget</li>
-</ul>
+<li><p>Turn it off in only the functions it affects, but you might forget</p>
 
 <pre><code class="language-r">str(data.frame(lets = letters[1:3], stringsAsFactors = FALSE))
 </code></pre>
 
 <pre><code>## 'data.frame':	3 obs. of  1 variable:
 ##  $ lets: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot;
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Use <code>rio::import</code> or <em>readr</em> (e.g., <code>readr::read_csv</code>), which will default
-to reading strings in as strings</li>
+<li><p>Use <code>rio::import</code> or <em>readr</em> (e.g., <code>readr::read_csv</code>), which will default
+to reading strings in as strings</p></li>
 </ul>
 
 <hr />
@@ -271,14 +268,12 @@ to reading strings in as strings</li>
 <h2 id="creating-factors">Creating factors</h2>
 
 <ul>
-<li>Imagine you have a vector of months</li>
-</ul>
+<li><p>Imagine you have a vector of months</p>
 
 <pre><code class="language-r">months &lt;- c(&quot;Dec&quot;, &quot;Apr&quot;, &quot;Jan&quot;, &quot;Mar&quot;)
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>We could store this as a string, but there are issues with this.
+<li><p>We could store this as a string, but there are issues with this.</p>
 
 <ul>
 <li>There are only 12 possible months
@@ -286,15 +281,16 @@ to reading strings in as strings</li>
 <ul>
 <li>factors will help us weed out values that don&rsquo;t conform to our predefined <em>levels</em>, which helps safeguard against typos, etc.</li>
 </ul></li>
-<li>You can&rsquo;t sort this vector in a meaningful way (it defaults to alphabetic)</li>
-</ul></li>
-</ul>
+
+<li><p>You can&rsquo;t sort this vector in a meaningful way (it defaults to alphabetic)</p>
 
 <pre><code class="language-r">sort(months)
 </code></pre>
 
 <pre><code>## [1] &quot;Apr&quot; &quot;Dec&quot; &quot;Jan&quot; &quot;Mar&quot;
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 
@@ -312,15 +308,15 @@ months
 </code></pre>
 
 <ul>
-<li>Now, we can sort<br /></li>
-</ul>
+<li><p>Now, we can sort</p>
 
 <pre><code class="language-r">sort(months)
 </code></pre>
 
 <pre><code>## [1] Jan Mar Apr Dec
 ## Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -345,8 +341,7 @@ months
 <h2 id="what-if-we-don-t-specify-the-levels">What if we don&rsquo;t specify the levels?</h2>
 
 <ul>
-<li>If you define a factor without specifying the levels, it will assign them alphabetically</li>
-</ul>
+<li><p>If you define a factor without specifying the levels, it will assign them alphabetically</p>
 
 <pre><code class="language-r">mnths &lt;- c(&quot;Dec&quot;, &quot;Apr&quot;, &quot;Jan&quot;, &quot;Mar&quot;)
 factor(mnths)
@@ -354,18 +349,17 @@ factor(mnths)
 
 <pre><code>## [1] Dec Apr Jan Mar
 ## Levels: Apr Dec Jan Mar
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>If you instead want them in the order they appeared in the data, use <code>unique</code> when specifying the levels (Why is <code>unique()</code> necessary? What&rsquo;s it doing?)</li>
-</ul>
+<li><p>If you instead want them in the order they appeared in the data, use <code>unique</code> when specifying the levels (Why is <code>unique()</code> necessary? What&rsquo;s it doing?)</p>
 
 <pre><code class="language-r">factor(mnths, levels = unique(mnths))
 </code></pre>
 
 <pre><code>## [1] Dec Apr Jan Mar
 ## Levels: Dec Apr Jan Mar
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -374,19 +368,16 @@ factor(mnths)
 <h1 id="use-the-levels-function">Use the <code>levels</code> function</h1>
 
 <ul>
-<li>To view the levels</li>
-</ul>
+<li><p>To view the levels</p>
 
 <pre><code class="language-r">levels(months)
 </code></pre>
 
 <pre><code>##  [1] &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot; &quot;Apr&quot; &quot;May&quot; &quot;Jun&quot; &quot;Jul&quot; &quot;Aug&quot; &quot;Sep&quot; &quot;Oct&quot; &quot;Nov&quot;
 ## [12] &quot;Dec&quot;
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>To modify the levels</li>
-</ul>
+<li><p>To modify the levels</p>
 
 <pre><code class="language-r">levels(months) &lt;- 1:12
 months
@@ -394,7 +385,8 @@ months
 
 <pre><code>## [1] 12   4    1    3    &lt;NA&gt;
 ## Levels: 1 2 3 4 5 6 7 8 9 10 11 12
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1183,12 +1175,12 @@ ggplot(relig_summary, aes(tvhours, relig)) + geom_point()
 <h2 id="revisiting-our-word-frequency-example">Revisiting our word frequency example</h2>
 
 <ul>
-<li>An easier way to do what we did before, would be to just include the reorder call right within the call to ggplot</li>
-</ul>
+<li><p>An easier way to do what we did before, would be to just include the reorder call right within the call to ggplot</p>
 
 <pre><code class="language-r">ggplot(words_freq, aes(fct_reorder(word, n), n)) + 
 	geom_col()
-</code></pre>
+</code></pre></li>
+</ul>
 
 <p><img src="assets/fig/fct_reorder_words-1.png" alt="plot of chunk fct_reorder_words" /></p>
 
@@ -1197,18 +1189,17 @@ ggplot(relig_summary, aes(tvhours, relig)) + geom_point()
 <h2 id="more-on-modifying-factor-levels">More on modifying factor levels</h2>
 
 <ul>
-<li>The <code>forcats::fct_recode</code> function can make modifying factors more explicit</li>
-</ul>
+<li><p>The <code>forcats::fct_recode</code> function can make modifying factors more explicit</p>
 
 <pre><code class="language-r">gss_cat %&gt;%
-  mutate(partyid = fct_recode(partyid,
-    &quot;Republican, strong&quot; 	= &quot;Strong republican&quot;,
-    &quot;Republican, weak&quot; 		= &quot;Not str republican&quot;,
-    &quot;Independent, near rep&quot; = &quot;Ind,near rep&quot;,
-    &quot;Independent, near dem&quot; = &quot;Ind,near dem&quot;,
-    &quot;Democrat, weak&quot; 		= &quot;Not str democrat&quot;,
-    &quot;Democrat, strong&quot;		= &quot;Strong democrat&quot;)) %&gt;%
-  count(partyid)
+mutate(partyid = fct_recode(partyid,
+&quot;Republican, strong&quot; 	= &quot;Strong republican&quot;,
+&quot;Republican, weak&quot; 		= &quot;Not str republican&quot;,
+&quot;Independent, near rep&quot; = &quot;Ind,near rep&quot;,
+&quot;Independent, near dem&quot; = &quot;Ind,near dem&quot;,
+&quot;Democrat, weak&quot; 		= &quot;Not str democrat&quot;,
+&quot;Democrat, strong&quot;		= &quot;Strong democrat&quot;)) %&gt;%
+count(partyid)
 </code></pre>
 
 <pre><code>## # A tibble: 10 x 2
@@ -1224,7 +1215,8 @@ ggplot(relig_summary, aes(tvhours, relig)) + geom_point()
 ##  8 Independent, near dem  2499
 ##  9        Democrat, weak  3690
 ## 10      Democrat, strong  3490
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1257,22 +1249,22 @@ levels(gss_cat$partyid)
 <h2 id="collapsing-levels">Collapsing levels</h2>
 
 <ul>
-<li><code>fct_recode</code> can also be used to collapse levels easily</li>
-</ul>
+<li><p><code>fct_recode</code> can also be used to collapse levels easily</p>
 
 <pre><code class="language-r">gss_cat %&gt;%
-  mutate(partyid = fct_recode(partyid,
-    &quot;Republican, strong&quot;    = &quot;Strong republican&quot;,
-    &quot;Republican, weak&quot;      = &quot;Not str republican&quot;,
-    &quot;Independent, near rep&quot; = &quot;Ind,near rep&quot;,
-    &quot;Independent, near dem&quot; = &quot;Ind,near dem&quot;,
-    &quot;Democrat, weak&quot;        = &quot;Not str democrat&quot;,
-    &quot;Democrat, strong&quot;      = &quot;Strong democrat&quot;,
-    &quot;Other&quot;                 = &quot;No answer&quot;,
-    &quot;Other&quot;                 = &quot;Don't know&quot;,
-    &quot;Other&quot;                 = &quot;Other party&quot;)) %&gt;%
-  count(partyid)
-</code></pre>
+mutate(partyid = fct_recode(partyid,
+&quot;Republican, strong&quot;    = &quot;Strong republican&quot;,
+&quot;Republican, weak&quot;      = &quot;Not str republican&quot;,
+&quot;Independent, near rep&quot; = &quot;Ind,near rep&quot;,
+&quot;Independent, near dem&quot; = &quot;Ind,near dem&quot;,
+&quot;Democrat, weak&quot;        = &quot;Not str democrat&quot;,
+&quot;Democrat, strong&quot;      = &quot;Strong democrat&quot;,
+&quot;Other&quot;                 = &quot;No answer&quot;,
+&quot;Other&quot;                 = &quot;Don't know&quot;,
+&quot;Other&quot;                 = &quot;Other party&quot;)) %&gt;%
+count(partyid)
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1316,17 +1308,16 @@ levels(gss_cat$partyid)
 <ul>
 <li><p>In my mind, the most useful functions in <em>forcats</em> are for collapsing a lot of categories.</p></li>
 
-<li><p>For example, collapse all categories into <em>republican</em>, <em>democrat</em>, <em>independent</em>, or <em>other</em>.</p></li>
-</ul>
+<li><p>For example, collapse all categories into <em>republican</em>, <em>democrat</em>, <em>independent</em>, or <em>other</em>.</p>
 
 <pre><code class="language-r">gss_cat %&gt;%
-  mutate(partyid = fct_collapse(partyid,
-    other = c(&quot;No answer&quot;, &quot;Don't know&quot;, &quot;Other party&quot;),
-    rep = c(&quot;Strong republican&quot;, &quot;Not str republican&quot;),
-    ind = c(&quot;Ind,near rep&quot;, &quot;Independent&quot;, &quot;Ind,near dem&quot;),
-    dem = c(&quot;Not str democrat&quot;, &quot;Strong democrat&quot;)
-  )) %&gt;%
-  count(partyid)
+mutate(partyid = fct_collapse(partyid,
+other = c(&quot;No answer&quot;, &quot;Don't know&quot;, &quot;Other party&quot;),
+rep = c(&quot;Strong republican&quot;, &quot;Not str republican&quot;),
+ind = c(&quot;Ind,near rep&quot;, &quot;Independent&quot;, &quot;Ind,near dem&quot;),
+dem = c(&quot;Not str democrat&quot;, &quot;Strong democrat&quot;)
+)) %&gt;%
+count(partyid)
 </code></pre>
 
 <pre><code>## # A tibble: 4 x 2
@@ -1336,7 +1327,8 @@ levels(gss_cat$partyid)
 ## 2     rep  5346
 ## 3     ind  8409
 ## 4     dem  7180
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1345,8 +1337,8 @@ levels(gss_cat$partyid)
 <ul>
 <li>We can &ldquo;lump&rdquo; a bunch of categories together using <code>fct_lump</code>.</li>
 <li>Default behavior of <code>fct_lump</code> is to create an &ldquo;other&rdquo; group that includes all the smallest groups while maintaining &ldquo;other&rdquo; as the smallest group represented.</li>
-<li>Can also take optional <em>n</em> argument, where <em>n</em> represents the number of groups to collapse to</li>
-</ul>
+
+<li><p>Can also take optional <em>n</em> argument, where <em>n</em> represents the number of groups to collapse to</p>
 
 <pre><code class="language-r">gss_cat %&gt;% 
 	mutate(rel = fct_lump(relig)) %&gt;% 
@@ -1358,7 +1350,8 @@ levels(gss_cat$partyid)
 ##       &lt;fctr&gt; &lt;int&gt;
 ## 1 Protestant 10846
 ## 2      Other 10637
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1394,9 +1387,8 @@ levels(gss_cat$partyid)
 </code></pre>
 
 <ul>
-<li>No need for multiple variables to define a categorical variable: internal
-dummy-coding</li>
-</ul>
+<li><p>No need for multiple variables to define a categorical variable: internal
+dummy-coding</p>
 
 <pre><code class="language-r">contrasts(colors)
 </code></pre>
@@ -1405,18 +1397,17 @@ dummy-coding</li>
 ## black    0     0
 ## blue     1     0
 ## green    0     1
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Change the reference group by defining a new contrast matrix. For example, we can set green to the reference group with the following code.</li>
-</ul>
+<li><p>Change the reference group by defining a new contrast matrix. For example, we can set green to the reference group with the following code.</p>
 
 <pre><code class="language-r">contrasts(colors) &lt;- matrix(c(1, 0,
 	  						  0, 1,
 	  						  0, 0),
 						byrow = TRUE, 
 						ncol = 2)
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1538,8 +1529,8 @@ today()
 <ul>
 <li>When you read in data, the dates are likely to be in all sorts of different formats.</li>
 <li>Hopefully, they&rsquo;re at least consistent within a column</li>
-<li><em>lubridate</em> makes individual conversions relatively easy.</li>
-</ul>
+
+<li><p><em>lubridate</em> makes individual conversions relatively easy.</p>
 
 <pre><code class="language-r">ymd(&quot;2012/02/14&quot;)
 </code></pre>
@@ -1557,7 +1548,8 @@ today()
 </code></pre>
 
 <pre><code>## [1] &quot;2015-03-10&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1618,8 +1610,8 @@ yq()
 
 <ul>
 <li>Sometimes you&rsquo;ll run up against dates like <code>16750</code> or <code>-1250</code></li>
-<li>These are number deviating from the &ldquo;Unix Epoch&rdquo;, which is 1970-01-01</li>
-</ul>
+
+<li><p>These are number deviating from the &ldquo;Unix Epoch&rdquo;, which is 1970-01-01</p>
 
 <pre><code class="language-r">as_date(4380) # interpreted as days
 </code></pre>
@@ -1631,15 +1623,15 @@ yq()
 </code></pre>
 
 <pre><code>## [1] &quot;1970-01-01 01:13:00 UTC&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="parsing-other-formats">Parsing other formats</h2>
 
 <ul>
-<li>What format is <em>dep_time</em> in?</li>
-</ul>
+<li><p>What format is <em>dep_time</em> in?</p>
 
 <pre><code class="language-r">library(nycflights13)
 flights
@@ -1662,7 +1654,8 @@ flights
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1852,8 +1845,7 @@ flights
 <h2 id="creating-dates-from-multiple-variables">Creating dates from multiple variables</h2>
 
 <ul>
-<li>Take a minute&hellip; How might you think we could create a single date variable?</li>
-</ul>
+<li><p>Take a minute&hellip; How might you think we could create a single date variable?</p>
 
 <pre><code class="language-r">flights %&gt;% 
 	select(year, month, day, hour, minute)
@@ -1873,7 +1865,8 @@ flights
 ##  9  2013     1     1     6      0
 ## 10  2013     1     1     6      0
 ## # ... with 336,766 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1882,8 +1875,8 @@ flights
 <ul>
 <li><code>make_date()</code> and <code>make_datetime()</code> functions that can save us a boatload of time.</li>
 <li>Arguments are: year, month, day, hour, min, sec, and tz.</li>
-<li>All arguments have defaults, which are: <code>1970L</code>, <code>1L</code>, <code>0L</code>, <code>0L</code>, <code>0</code>, and <code>&quot;UTC&quot;</code></li>
-</ul>
+
+<li><p>All arguments have defaults, which are: <code>1970L</code>, <code>1L</code>, <code>0L</code>, <code>0L</code>, <code>0</code>, and <code>&quot;UTC&quot;</code></p>
 
 <pre><code class="language-r">flights %&gt;% 
 	select(year, month, day, hour, minute) %&gt;% 
@@ -1904,7 +1897,8 @@ flights
 ##  9  2013     1     1     6      0 2013-01-01 06:00:00
 ## 10  2013     1     1     6      0 2013-01-01 06:00:00
 ## # ... with 336,766 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1935,8 +1929,7 @@ year(datetime)
 <h2 id="calculating-time-spans">Calculating Time Spans</h2>
 
 <ul>
-<li>Really common situation for me: Dataset like the below, need to calculate number of weeks/months, etc., either between dates, or from a specific date.</li>
-</ul>
+<li><p>Really common situation for me: Dataset like the below, need to calculate number of weeks/months, etc., either between dates, or from a specific date.</p>
 
 <pre><code class="language-r">sid &lt;- rep(1:4, each = 3)
 date &lt;- c(&quot;9/3/08&quot;, &quot;12/10/08&quot;, &quot;4/22/09&quot;, &quot;8/29/08&quot;, &quot;12/5/08&quot;, &quot;4/17/09&quot;, &quot;8/29/08&quot;, &quot;12/4/08&quot;, &quot;4/23/09&quot;, &quot;9/3/08&quot;, &quot;12/1/08&quot;, &quot;4/20/09&quot;)
@@ -1958,7 +1951,8 @@ d
 ## 10   4   9/3/08   191
 ## 11   4  12/1/08   197
 ## 12   4  4/20/09   214
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -1990,21 +1984,21 @@ d
 
 <ul>
 <li>In my case, I often want to calculate the date from the first day of the school year.</li>
-<li>First, create a date object with that date</li>
-</ul>
+
+<li><p>First, create a date object with that date</p>
 
 <pre><code class="language-r">first_day &lt;- mdy(&quot;08/05/2008&quot;)
 first_day
 </code></pre>
 
 <pre><code>## [1] &quot;2008-08-05&quot;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <ul>
-<li>Next, compute the difference between that date and the corresponding date the test was administered.</li>
-</ul>
+<li><p>Next, compute the difference between that date and the corresponding date the test was administered.</p>
 
 <pre><code class="language-r">d %&gt;% 
 	mutate(days_elapsed = date - first_day)
@@ -2023,7 +2017,8 @@ first_day
 ## 10   4 2008-09-03   191      29 days
 ## 11   4 2008-12-01   197     118 days
 ## 12   4 2009-04-20   214     258 days
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -2066,14 +2061,13 @@ first_day
 <h2 id="what-if-i-wanted-days-between-each-assessment">What if I wanted days between each assessment?</h2>
 
 <ul>
-<li>Some knowledge of base R comes in handy here: <code>lag</code></li>
-</ul>
+<li><p>Some knowledge of base R comes in handy here: <code>lag</code></p>
 
 <pre><code class="language-r">d %&gt;% 
 	group_by(sid) %&gt;% 
-  arrange(date) %&gt;% 
+arrange(date) %&gt;% 
 	mutate(days_between = date - lag(date)) %&gt;% 
-  arrange(sid)
+arrange(sid)
 </code></pre>
 
 <pre><code>## # A tibble: 12 x 4
@@ -2092,15 +2086,15 @@ first_day
 ## 10     4 2008-09-03   191      NA days
 ## 11     4 2008-12-01   197      89 days
 ## 12     4 2009-04-20   214     140 days
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
 <h2 id="different-metric">Different metric?</h2>
 
 <ul>
-<li>Suppose I instead wanted weeks</li>
-</ul>
+<li><p>Suppose I instead wanted weeks</p>
 
 <pre><code class="language-r">first_day_weeks &lt;- week(first_day)
 first_day_weeks
@@ -2132,7 +2126,8 @@ d
 ## 10     4 2008-09-03   191        1             4
 ## 11     4 2008-12-01   197        2            16
 ## 12     4 2009-04-20   214        3           -16
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 

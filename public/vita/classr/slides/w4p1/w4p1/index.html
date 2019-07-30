@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w4p1/w4p1/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few models and look at some extensions (the broom package) Practice a bit, if time allows (it probably won&rsquo;t)  A little story first      It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w4p1/w4p1/" />
+
 <meta itemprop="name" content="Intro to tidy data">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce the concept of tidy data Tidy a simple dataset together with tidyr Summarize and transform tidy data with dplyr Fit a few models and look at some extensions (the broom package) Practice a bit, if time allows (it probably won&rsquo;t)  A little story first      It is often said that 80% of data analysis is spent on the process of cleaning and preparing the data.">
 
@@ -2013,12 +2014,12 @@ What do you get? Are these data tidy now?</p>
 
 <ul>
 <li><code>group_by</code> <em>stu_name</em> (rather than <em>item</em>)</li>
-<li><code>sum</code> score (rather than average it with <code>mean</code>)</li>
-</ul>
+
+<li><p><code>sum</code> score (rather than average it with <code>mean</code>)</p>
 
 <pre><code class="language-r">td %&gt;% 
-  group_by(stu_name) %&gt;% 
-  summarize(raw_score = sum(score))
+group_by(stu_name) %&gt;% 
+summarize(raw_score = sum(score))
 </code></pre>
 
 <pre><code>## # A tibble: 35 x 2
@@ -2035,7 +2036,8 @@ What do you get? Are these data tidy now?</p>
 ##  9  Britton         8
 ## 10    Carol         6
 ## # ... with 25 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -2103,19 +2105,18 @@ ld
 <ul>
 <li>wave</li>
 <li>subject</li>
-<li>Two steps
+
+<li><p>Two steps</p>
 
 <ul>
-<li>gather, separate</li>
-</ul></li>
-</ul>
+<li><p>gather, separate</p>
 
 <pre><code class="language-r">tidy_ld &lt;- ld %&gt;% 
-  gather(var, score, -1) %&gt;% 
-  separate(var, c(&quot;dis&quot;, &quot;wave&quot;, &quot;subject&quot;), sep = &quot;_&quot;, convert = TRUE) %&gt;% 
-  select(-dis)
+gather(var, score, -1) %&gt;% 
+separate(var, c(&quot;dis&quot;, &quot;wave&quot;, &quot;subject&quot;), sep = &quot;_&quot;, convert = TRUE) %&gt;% 
+select(-dis)
 tidy_ld %&gt;% 
-  spread(subject, score)
+spread(subject, score)
 </code></pre>
 
 <pre><code>## # A tibble: 20 x 4
@@ -2141,22 +2142,23 @@ tidy_ld %&gt;%
 ## 18     5     2   104    95
 ## 19     5     3   107    97
 ## 20     5     4   113   102
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 
 <h2 id="again-why-so-useful">Again - why so useful?</h2>
 
 <ul>
-<li>summaries by wave and subject</li>
-</ul>
+<li><p>summaries by wave and subject</p>
 
 <pre><code class="language-r">tidy_ld %&gt;% 
-  group_by(wave, subject) %&gt;% 
-  summarize(n = n(),
-            mean = mean(score), 
-            sd = sd(score)) %&gt;% 
-  arrange(subject, wave)
+group_by(wave, subject) %&gt;% 
+summarize(n = n(),
+        mean = mean(score), 
+        sd = sd(score)) %&gt;% 
+arrange(subject, wave)
 </code></pre>
 
 <pre><code>## # A tibble: 8 x 5
@@ -2171,7 +2173,8 @@ tidy_ld %&gt;%
 ## 6     2     rdg     5 103.6 6.730527
 ## 7     3     rdg     5 106.8 7.563068
 ## 8     4     rdg     5 110.2 7.362065
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -2405,11 +2408,11 @@ model &lt;- rasch(md)
 <h2 id="more-on-spreading">More on spreading</h2>
 
 <ul>
-<li>It&rsquo;s also common to have to <code>gather</code> beyond where you really need to, manipulate the variable, then spread it back out.</li>
-</ul>
+<li><p>It&rsquo;s also common to have to <code>gather</code> beyond where you really need to, manipulate the variable, then spread it back out.</p>
 
 <pre><code class="language-r">knitr::kable(d[1:3, 1:10])
-</code></pre>
+</code></pre></li>
+</ul>
 
 <table>
 <thead>

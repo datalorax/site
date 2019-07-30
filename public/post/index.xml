@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Tue, 19 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Estimating important things with public data</title>
+      <link>/post/estimating-important-things-with-public-data/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/estimating-important-things-with-public-data/</guid>
+      <description>Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.</description>
+    </item>
     
     <item>
       <title>Looking into #KeepFamiliesTogether</title>

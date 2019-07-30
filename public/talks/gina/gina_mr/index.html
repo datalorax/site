@@ -27,7 +27,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/talks/gina/gina_mr/" />
@@ -55,6 +55,7 @@
  Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/talks/gina/gina_mr/" />
+
 <meta itemprop="name" content="Multiple regression with R">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
  Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!">
@@ -666,11 +667,11 @@ pp_plot(reading ~ ell, benchmarks)
 <h2 id="want-to-follow-along">Want to follow along?</h2>
 
 <ul>
-<li>Copy and paste the following code in your R console</li>
-</ul>
+<li><p>Copy and paste the following code in your R console</p>
 
 <pre><code class="language-r">install.packages(c(&quot;tidyverse&quot;, &quot;rio&quot;, &quot;devtools&quot;, &quot;arm&quot;, &quot;lm.beta&quot;, &quot;visreg&quot;, &quot;lme4&quot;))
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -679,8 +680,8 @@ pp_plot(reading ~ ell, benchmarks)
 <ul>
 <li>Before fitting model, you&rsquo;ll generally need to import some data, let&rsquo;s do so now</li>
 <li>Make sure your data file is stored in the same place that your script is</li>
-<li>The <code>setclass</code> argument above is actually not required, but makes it a bit easier to work with.</li>
-</ul>
+
+<li><p>The <code>setclass</code> argument above is actually not required, but makes it a bit easier to work with.</p>
 
 <pre><code class="language-r">library(rio)
 d &lt;- import(&quot;synthetic_data.csv&quot;, setclass = &quot;tbl_df&quot;)
@@ -701,7 +702,8 @@ d
 ##  9  7966652     7     1      7 Never   234
 ## 10  7776640     7     1      6 Never   234
 ## # ... with 11,208 more rows
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -782,15 +784,15 @@ ggplot(d, aes(x = grade, y = SS)) +
 <h2 id="quick-aside">Quick aside</h2>
 
 <ul>
-<li><code>geom_jitter</code> might be slightly better in this case</li>
-</ul>
+<li><p><code>geom_jitter</code> might be slightly better in this case</p>
 
 <pre><code class="language-r">ggplot(d, aes(grade, SS)) +
-  geom_jitter(height = 0, width = 0.2, color = &quot;gray80&quot;, alpha = 0.6) +
-  geom_smooth(method = &quot;lm&quot;,
-              aes(color = factor(LD33))) +
-  facet_wrap(~cohort)
-</code></pre>
+geom_jitter(height = 0, width = 0.2, color = &quot;gray80&quot;, alpha = 0.6) +
+geom_smooth(method = &quot;lm&quot;,
+          aes(color = factor(LD33))) +
+facet_wrap(~cohort)
+</code></pre></li>
+</ul>
 
 <p><img src="../assets_gina_mr/fig/jittered-1.png" alt="plot of chunk jittered" /></p>
 
@@ -799,17 +801,18 @@ ggplot(d, aes(x = grade, y = SS)) +
 <h2 id="step-2-fit-the-model">Step 2: Fit the model</h2>
 
 <ul>
-<li>Use the <code>lm</code> function
+<li><p>Use the <code>lm</code> function</p>
 
 <ul>
 <li>Part of base R</li>
-<li>Takes the following general form</li>
-</ul></li>
-</ul>
+
+<li><p>Takes the following general form</p>
 
 <pre><code class="language-r">mod &lt;- lm(outcome ~ predictor1 + predictor2 + predictorN,
-          data = d)
-</code></pre>
+  data = d)
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 
@@ -1064,16 +1067,16 @@ visreg(full_mod, &quot;clock&quot;, by = &quot;LD33&quot;)
 <h2 id="last-note-fitting-the-right-model">Last note - fitting the right model!</h2>
 
 <ul>
-<li>The model we&rsquo;ve fit should be multilevel. So let&rsquo;s do it!</li>
-</ul>
+<li><p>The model we&rsquo;ve fit should be multilevel. So let&rsquo;s do it!</p>
 
 <pre><code class="language-r">#install.package(&quot;lme4&quot;)
 library(lme4)
 mlm &lt;- lmer(SS ~ clock + cohort + LD33 +
-                   clock:cohort + clock:LD33 +
-              (1 + clock|SID), 
-                 data = d)
-</code></pre>
+               clock:cohort + clock:LD33 +
+          (1 + clock|SID), 
+             data = d)
+</code></pre></li>
+</ul>
 
 <hr />
 

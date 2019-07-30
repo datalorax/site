@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w8p2/w8p2/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of regular expressions  You&rsquo;re not expected to be an expert from one brief lecture  Provide resources for learning more Purpose: Generally to make you aware of them  Disclaimer  Before we get started, I think it&rsquo;s worth mentioning this is NOT a specialty area for me. Still working hard myself to understand all of this Today is mostly about exposure and awareness  Resources (Some of which I&rsquo;ll reference and others I won&rsquo;t) * Sanchez: Handling and Processing Strings in R (available here) * Li and Bryan: Regular Expression in R (available here)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w8p2/w8p2/" />
+
 <meta itemprop="name" content="Introduction to Regular Expressions">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Basics of regular expressions  You&rsquo;re not expected to be an expert from one brief lecture  Provide resources for learning more Purpose: Generally to make you aware of them  Disclaimer  Before we get started, I think it&rsquo;s worth mentioning this is NOT a specialty area for me. Still working hard myself to understand all of this Today is mostly about exposure and awareness  Resources (Some of which I&rsquo;ll reference and others I won&rsquo;t) * Sanchez: Handling and Processing Strings in R (available here) * Li and Bryan: Regular Expression in R (available here)">
 
@@ -193,20 +194,21 @@ strong {
 
 <ul>
 <li>&ldquo;an &lsquo;instruction&rsquo; given to a function on what and how to match or replace strings&rdquo; <a href="http://biostat.mc.vanderbilt.edu/wiki/pub/Main/SvetlanaEdenRFiles/regExprTalk.pdf">(Eden, 2007)</a></li>
-<li><em>Metacharacters</em> are special characters that define specific operations
+
+<li><p><em>Metacharacters</em> are special characters that define specific operations</p>
 
 <ul>
 <li>can be interpreted as standard characters, provided the appropriate syntax is used.</li>
-<li>include the following:</li>
-</ul></li>
-</ul>
+
+<li><p>include the following:</p>
 
 <pre><code>##  [1] $  *  +  .  ?  [  ^  {  |  (  \\
-</code></pre>
+</code></pre></li>
+</ul></li>
 
-<ul>
-<li><em>Sequences</em> define sequences of characters to match</li>
-<li><em>Character classes</em> define ranges to match or not match</li>
+<li><p><em>Sequences</em> define sequences of characters to match</p></li>
+
+<li><p><em>Character classes</em> define ranges to match or not match</p></li>
 </ul>
 
 <hr />
@@ -1006,15 +1008,15 @@ text_num
 <h2 id="build-up-compound-expressions">Build up compound expressions</h2>
 
 <ul>
-<li>California license plates: Example from Espenoza
+<li><p>California license plates: Example from Espenoza</p>
 
 <ul>
-<li>start with a number, followed by three letters, followed by three numbers</li>
-</ul></li>
-</ul>
+<li><p>start with a number, followed by three letters, followed by three numbers</p>
 
 <pre><code>## [1] &quot;^[0-9][A-Z]{3}[0-9]{3}$&quot;
-</code></pre>
+</code></pre></li>
+</ul></li>
+</ul>
 
 <hr />
 

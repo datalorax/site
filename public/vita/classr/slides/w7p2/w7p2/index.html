@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w7p2/w7p2/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Load College scorecard data Load Earnings data Tidy and join Joins with data viz  semi- and anti-joins, mostly   Read in college scorecard data library(tidyverse) library(rio) library(janitor) scorecard &lt;- import(&quot;../../data/Most-Recent-Cohorts-Scorecard-Elements.csv&quot;, setclass = &quot;tbl_df&quot;, na = c(&quot;NULL&quot;, &quot;PrivacySuppressed&quot;)) %&gt;% clean_names() head(scorecard)  ## # A tibble: 6 x 122 ## unitid opeid opeid6 instnm city ## &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; ## 1 100654 100200 1002 Alabama A &amp; M University Normal ## 2 100663 105200 1052 University of Alabama at Birmingham Birmingham ## 3 100690 2503400 25034 Amridge University Montgomery ## 4 100706 105500 1055 University of Alabama in Huntsville Huntsville ## 5 100724 100500 1005 Alabama State University Montgomery ## 6 100751 105100 1051 The University of Alabama Tuscaloosa ## # ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w7p2/w7p2/" />
+
 <meta itemprop="name" content="More on Joins (lab)">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Load College scorecard data Load Earnings data Tidy and join Joins with data viz  semi- and anti-joins, mostly   Read in college scorecard data library(tidyverse) library(rio) library(janitor) scorecard &lt;- import(&quot;../../data/Most-Recent-Cohorts-Scorecard-Elements.csv&quot;, setclass = &quot;tbl_df&quot;, na = c(&quot;NULL&quot;, &quot;PrivacySuppressed&quot;)) %&gt;% clean_names() head(scorecard)  ## # A tibble: 6 x 122 ## unitid opeid opeid6 instnm city ## &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; ## 1 100654 100200 1002 Alabama A &amp; M University Normal ## 2 100663 105200 1052 University of Alabama at Birmingham Birmingham ## 3 100690 2503400 25034 Amridge University Montgomery ## 4 100706 105500 1055 University of Alabama in Huntsville Huntsville ## 5 100724 100500 1005 Alabama State University Montgomery ## 6 100751 105100 1051 The University of Alabama Tuscaloosa ## # .">
 
@@ -286,12 +287,11 @@ head(earnings)
 <h2 id="keyed-variables">Keyed variables</h2>
 
 <ul>
-<li>unitid?</li>
-</ul>
+<li><p>unitid?</p>
 
 <pre><code class="language-r">scorecard %&gt;% 
-  count(unitid) %&gt;% 
-  filter(n &gt; 1)
+count(unitid) %&gt;% 
+filter(n &gt; 1)
 </code></pre>
 
 <pre><code>## # A tibble: 0 x 2
@@ -299,13 +299,14 @@ head(earnings)
 </code></pre>
 
 <pre><code class="language-r">earnings %&gt;% 
-  count(unitid) %&gt;% 
-  filter(n &gt; 1)
+count(unitid) %&gt;% 
+filter(n &gt; 1)
 </code></pre>
 
 <pre><code>## # A tibble: 0 x 2
 ## # ... with 2 variables: unitid &lt;int&gt;, n &lt;int&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -822,16 +823,16 @@ huge
 <h2 id="flip-grouping-and-faceting">Flip grouping and faceting</h2>
 
 <ul>
-<li>Any evidence for differences by content area?</li>
-</ul>
+<li><p>Any evidence for differences by content area?</p>
 
 <pre><code class="language-r">ggplot(td, aes(sat, earnings, color = test)) +
-  geom_point(alpha = 0.2) +
-  geom_smooth() +
-  scale_color_brewer(palette = &quot;Set2&quot;) +
-  scale_y_log10(label = scales::dollar) +
-  facet_grid(~ptile)
-</code></pre>
+geom_point(alpha = 0.2) +
+geom_smooth() +
+scale_color_brewer(palette = &quot;Set2&quot;) +
+scale_y_log10(label = scales::dollar) +
+facet_grid(~ptile)
+</code></pre></li>
+</ul>
 
 <p><img src="../assets/fig/viz4-1.png" alt="plot of chunk viz4" /></p>
 

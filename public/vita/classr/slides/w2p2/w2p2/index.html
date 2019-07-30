@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.56.0" />
 
 
 <link rel="canonical" href="/vita/classr/slides/w2p2/w2p2/" />
@@ -53,6 +53,7 @@
 <meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Discuss reading in data  The rio package, and when you may want some additional flexibility Other packages for reading in data  Lab  Use R Markdown Read in data from two different sources Conduct some basic manipulations   rio  Super nice package - most of the time, it just works, regardless of the source file type." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/vita/classr/slides/w2p2/w2p2/" />
+
 <meta itemprop="name" content="Importing Data">
 <meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Discuss reading in data  The rio package, and when you may want some additional flexibility Other packages for reading in data  Lab  Use R Markdown Read in data from two different sources Conduct some basic manipulations   rio  Super nice package - most of the time, it just works, regardless of the source file type.">
 
@@ -275,11 +276,12 @@ mtcars %&gt;%
 
 <ul>
 <li>Another really useful feature is <code>convert()</code>, which just takes a file of one type and converts it to another.</li>
-<li>Say your advisor uses SPSS, but her/his colleague uses Stata. They might use some proprietary (and expensive) software like SAS/CONNECT. Instead, just run this one line of code and voila!</li>
-</ul>
+
+<li><p>Say your advisor uses SPSS, but her/his colleague uses Stata. They might use some proprietary (and expensive) software like SAS/CONNECT. Instead, just run this one line of code and voila!</p>
 
 <pre><code class="language-r">convert(&quot;./data/ecls-k_samp.sav&quot;, &quot;./data/ecls-k_samp.dta&quot;)
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
@@ -320,8 +322,8 @@ mtcars %&gt;%
 <ul>
 <li>Primary function is <code>read_csv</code></li>
 <li>Used equivalently to <code>rio::import</code>, but only works for csv files</li>
-<li>Note the messages produced, below</li>
-</ul>
+
+<li><p>Note the messages produced, below</p>
 
 <pre><code class="language-r">library(tidyverse)
 exam1 &lt;- read_csv(&quot;./data/exam1.csv&quot;)
@@ -336,7 +338,8 @@ exam1 &lt;- read_csv(&quot;./data/exam1.csv&quot;)
 </code></pre>
 
 <pre><code>## See spec(...) for full column specifications.
-</code></pre>
+</code></pre></li>
+</ul>
 
 <hr />
 
