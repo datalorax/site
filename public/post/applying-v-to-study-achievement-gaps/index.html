@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Applying V to study achievement gaps - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&amp;rsquo;ll put this method to work for the state of California. I&amp;rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade." />
+
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.0" />
+
+
+<link rel="canonical" href="/post/applying-v-to-study-achievement-gaps/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Applying V to study achievement gaps" />
+<meta property="og:description" content="In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&rsquo;ll put this method to work for the state of California. I&rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/applying-v-to-study-achievement-gaps/" />
+<meta property="article:published_time" content="2019-08-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-06T20:28:17-07:00" />
+<meta itemprop="name" content="Applying V to study achievement gaps">
+<meta itemprop="description" content="In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&rsquo;ll put this method to work for the state of California. I&rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade.">
+
+
+<meta itemprop="datePublished" content="2019-08-06T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-08-06T20:28:17-07:00" />
+<meta itemprop="wordCount" content="3850">
+
+
+
+<meta itemprop="keywords" content="V,Public Data," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Applying V to study achievement gaps"/>
+<meta name="twitter:description" content="In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&rsquo;ll put this method to work for the state of California. I&rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">datalorax</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">datalorax</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Applying V to study achievement gaps</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-06 </span>
+        <div class="post-category">
+            
+              <a href="/categories/effect-size/"> Effect Size </a>
+            
+              <a href="/categories/statistics/"> Statistics </a>
+            
+          </div>
+        <span class="more-meta"> 3850 words </span>
+        <span class="more-meta"> 19 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#the-data">The data</a>
+<ul>
+<li><a href="#loading-the-data">Loading the data</a></li>
+<li><a href="#preparing-the-data">Preparing the data</a></li>
+</ul></li>
+<li><a href="#estimated-effect-sizes">Estimated effect sizes</a>
+<ul>
+<li><a href="#data-prep">Data prep</a></li>
+<li><a href="#produce-estimates">Produce estimates</a></li>
+<li><a href="#quick-exploration">Quick exploration</a></li>
+</ul></li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>In the <a href="http://www.datalorax.com/post/estimating-important-things-with-public-data/">last post</a> I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&rsquo;ll put this method to work for the state of California. I&rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at <a href="https://www.cde.ca.gov/ta/ac/cm/">least 30 students in each group, for the corresponding grade</a>.</p>
+
+<h1 id="the-data">The data</h1>
+
+<p>The primary data we&rsquo;ll be looking at are available <a href="https://caaspp.cde.ca.gov/sb2018/ResearchFileList">here</a>. As I mentioned in the previous post, part of what I think is so cool about this method is that these data are reported across all states, so you could apply this method with any state. I chose California here because I have some experience with their specific data, I&rsquo;m a west-coaster, and California is more interesting than Oregon (where I live) because they are much more diverse and have areas of dense population.</p>
+
+<p>These data have a number of numeric codes in them that don&rsquo;t make much sense without the code book, which is available <a href="http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/subgroups.zip">here</a>.</p>
+
+<p>I&rsquo;m also always interested in geographic variance in social things, including school performance, so I also like to try to grab the longitude and latitude of the schools. That&rsquo;s available through a separate file, available <a href="https://www.cde.ca.gov/ds/si/ds/pubschls.asp">here</a>. Note that geographic information is available more generally for every public school in the country through the <em>National Center for Education Statistics</em> (NCES) <a href="https://nces.ed.gov/programs/edge/">Education Demographic and Geographic Estimates (EDGE)</a> program.</p>
+
+<h2 id="loading-the-data">Loading the data</h2>
+
+<p>We could, of course, just visit these websites and pull the data down and load it in manually, but that&rsquo;s no fun. This is R. Let&rsquo;s do it through code!</p>
+
+<p>The file we want is at <a href="http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/sb_ca2018_all_csv_v3.zip">http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/sb_ca2018_all_csv_v3.zip</a>. The tricky part is, it&rsquo;s in a zip file with one other file. One way to handle this is by creating a temporary directory, downloading the zip file there, then unzipping the file and pulling just the data we want out. In our case, the filename is the same as the zip file, but with a <code>.txt</code> extension. I&rsquo;ll be using the tidyverse later anyway so I&rsquo;ll do something like this</p>
+
+<pre><code class="language-r">library(tidyverse)
+
+# create a temporary directory
+tmp &lt;- tempdir()
+
+# download the zip file. Call it &quot;file.zip&quot;
+download.file(&quot;http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/sb_ca2018_all_csv_v3.zip&quot;, 
+              file.path(tmp, &quot;file.zip&quot;))
+
+# Pull out just the file we want
+file &lt;- unzip(file.path(tmp, &quot;file.zip&quot;), files = &quot;sb_ca2018_all_csv_v3.txt&quot;)
+
+# Read it into R
+d &lt;- read_csv(file) %&gt;%
+  janitor::clean_names()
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 3,269,730 x 32
+##    county_code district_code school_code filler test_year subgroup_id
+##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;lgl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+##  1 00          00000         0000000     NA          2018           1
+##  2 00          00000         0000000     NA          2018           1
+##  3 00          00000         0000000     NA          2018           1
+##  4 00          00000         0000000     NA          2018           1
+##  5 00          00000         0000000     NA          2018           1
+##  6 00          00000         0000000     NA          2018           1
+##  7 00          00000         0000000     NA          2018           1
+##  8 00          00000         0000000     NA          2018           1
+##  9 00          00000         0000000     NA          2018           1
+## 10 00          00000         0000000     NA          2018           1
+## # … with 3,269,720 more rows, and 26 more variables: test_type &lt;chr&gt;,
+## #   total_tested_at_entity_level &lt;dbl&gt;, total_tested_with_scores &lt;dbl&gt;,
+## #   grade &lt;dbl&gt;, test_id &lt;dbl&gt;, caaspp_reported_enrollment &lt;dbl&gt;,
+## #   students_tested &lt;dbl&gt;, mean_scale_score &lt;dbl&gt;,
+## #   percentage_standard_exceeded &lt;dbl&gt;, percentage_standard_met &lt;dbl&gt;,
+## #   percentage_standard_met_and_above &lt;dbl&gt;,
+## #   percentage_standard_nearly_met &lt;dbl&gt;,
+## #   percentage_standard_not_met &lt;dbl&gt;, students_with_scores &lt;dbl&gt;,
+## #   area_1_percentage_above_standard &lt;dbl&gt;,
+## #   area_1_percentage_near_standard &lt;dbl&gt;,
+## #   area_1_percentage_below_standard &lt;dbl&gt;,
+## #   area_2_percentage_above_standard &lt;dbl&gt;,
+## #   area_2_percentage_near_standard &lt;dbl&gt;,
+## #   area_2_percentage_below_standard &lt;dbl&gt;,
+## #   area_3_percentage_above_standard &lt;dbl&gt;,
+## #   area_3_percentage_near_standard &lt;dbl&gt;,
+## #   area_3_percentage_below_standard &lt;dbl&gt;,
+## #   area_4_percentage_above_standard &lt;dbl&gt;,
+## #   area_4_percentage_near_standard &lt;dbl&gt;,
+## #   area_4_percentage_below_standard &lt;dbl&gt;
+</code></pre>
+
+<p>That gives us the basic file we want, but we don&rsquo;t know what any of the subgroup IDs represent. To get that, we&rsquo;ll have to download another datafile. This is another zip file, but note I&rsquo;m using a slightly different approach below, which I can do because the zip file only contains a single file.</p>
+
+<pre><code class="language-r">tmp_file &lt;- tempfile()
+download.file(&quot;http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/subgroups.zip&quot;,
+              tmp_file)
+subgroups &lt;- read_csv(unz(tmp_file, &quot;Subgroups.txt&quot;), 
+                      col_names = c(&quot;char_num&quot;, &quot;subgroup_id&quot;, 
+                                    &quot;specific_group&quot;, &quot;overall_group&quot;))
+subgroups
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 47 x 4
+##    char_num subgroup_id specific_group                  overall_group      
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;                           &lt;chr&gt;              
+##  1 001                1 All Students                    All Students       
+##  2 003                3 Male                            Gender             
+##  3 004                4 Female                          Gender             
+##  4 006                6 Fluent English proficient and … English-Language F…
+##  5 007                7 Initial fluent English profici… English-Language F…
+##  6 008                8 Reclassified fluent English pr… English-Language F…
+##  7 028               28 Migrant education               Migrant            
+##  8 031               31 Economically disadvantaged      Economic Status    
+##  9 074               74 Black or African American       Ethnicity          
+## 10 075               75 American Indian or Alaska Nati… Ethnicity          
+## # … with 37 more rows
+</code></pre>
+
+<p>Now we can join these data</p>
+
+<pre><code class="language-r">d &lt;- left_join(d, subgroups)
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 3,269,730 x 35
+##    county_code district_code school_code filler test_year subgroup_id
+##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;lgl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+##  1 00          00000         0000000     NA          2018           1
+##  2 00          00000         0000000     NA          2018           1
+##  3 00          00000         0000000     NA          2018           1
+##  4 00          00000         0000000     NA          2018           1
+##  5 00          00000         0000000     NA          2018           1
+##  6 00          00000         0000000     NA          2018           1
+##  7 00          00000         0000000     NA          2018           1
+##  8 00          00000         0000000     NA          2018           1
+##  9 00          00000         0000000     NA          2018           1
+## 10 00          00000         0000000     NA          2018           1
+## # … with 3,269,720 more rows, and 29 more variables: test_type &lt;chr&gt;,
+## #   total_tested_at_entity_level &lt;dbl&gt;, total_tested_with_scores &lt;dbl&gt;,
+## #   grade &lt;dbl&gt;, test_id &lt;dbl&gt;, caaspp_reported_enrollment &lt;dbl&gt;,
+## #   students_tested &lt;dbl&gt;, mean_scale_score &lt;dbl&gt;,
+## #   percentage_standard_exceeded &lt;dbl&gt;, percentage_standard_met &lt;dbl&gt;,
+## #   percentage_standard_met_and_above &lt;dbl&gt;,
+## #   percentage_standard_nearly_met &lt;dbl&gt;,
+## #   percentage_standard_not_met &lt;dbl&gt;, students_with_scores &lt;dbl&gt;,
+## #   area_1_percentage_above_standard &lt;dbl&gt;,
+## #   area_1_percentage_near_standard &lt;dbl&gt;,
+## #   area_1_percentage_below_standard &lt;dbl&gt;,
+## #   area_2_percentage_above_standard &lt;dbl&gt;,
+## #   area_2_percentage_near_standard &lt;dbl&gt;,
+## #   area_2_percentage_below_standard &lt;dbl&gt;,
+## #   area_3_percentage_above_standard &lt;dbl&gt;,
+## #   area_3_percentage_near_standard &lt;dbl&gt;,
+## #   area_3_percentage_below_standard &lt;dbl&gt;,
+## #   area_4_percentage_above_standard &lt;dbl&gt;,
+## #   area_4_percentage_near_standard &lt;dbl&gt;,
+## #   area_4_percentage_below_standard &lt;dbl&gt;, char_num &lt;chr&gt;,
+## #   specific_group &lt;chr&gt;, overall_group &lt;chr&gt;
+</code></pre>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<p>It&rsquo;s fairly difficult to see what&rsquo;s going on here so let&rsquo;s limit our data to only the things we really care about here. We&rsquo;ll need the district and school codes, the group variables we just added in, and all the percentage in each category.</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;%
+  select(district_code, school_code, grade, overall_group, specific_group, test_id, 
+         percentage_standard_not_met, percentage_standard_nearly_met,
+         percentage_standard_met, percentage_standard_exceeded)
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 3,269,730 x 10
+##    district_code school_code grade overall_group specific_group test_id
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;
+##  1 00000         0000000         3 All Students  All Students         1
+##  2 00000         0000000         3 All Students  All Students         2
+##  3 00000         0000000         4 All Students  All Students         2
+##  4 00000         0000000         4 All Students  All Students         1
+##  5 00000         0000000         5 All Students  All Students         1
+##  6 00000         0000000         5 All Students  All Students         2
+##  7 00000         0000000         6 All Students  All Students         2
+##  8 00000         0000000         6 All Students  All Students         1
+##  9 00000         0000000         7 All Students  All Students         1
+## 10 00000         0000000         7 All Students  All Students         2
+## # … with 3,269,720 more rows, and 4 more variables:
+## #   percentage_standard_not_met &lt;dbl&gt;,
+## #   percentage_standard_nearly_met &lt;dbl&gt;, percentage_standard_met &lt;dbl&gt;,
+## #   percentage_standard_exceeded &lt;dbl&gt;
+</code></pre>
+
+<p>As you can see <a href="https://caaspp.cde.ca.gov/sb2018/research_fixfileformat18">here</a> at the bottom of the page, a test id of 1 means it was English Language Arts, while 2 means Mathematics.</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;%
+  mutate(test_id = ifelse(test_id == 1, &quot;ELA&quot;, &quot;Mathematics&quot;))
+</code></pre>
+
+<p>Now we&rsquo;ll limit the data to only Hispanic/White students, which is the achievement gap we&rsquo;ll investigate across schools. I don&rsquo;t know the specific labels, so I&rsquo;ll look at these first, then filter accordingly.</p>
+
+<pre><code class="language-r">d %&gt;%
+  filter(overall_group == &quot;Ethnicity&quot;) %&gt;%
+  count(specific_group)
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 8 x 2
+##   specific_group                          n
+##   &lt;chr&gt;                               &lt;int&gt;
+## 1 American Indian or Alaska Native    36814
+## 2 Asian                               66739
+## 3 Black or African American           69158
+## 4 Filipino                            49836
+## 5 Hispanic or Latino                  97442
+## 6 Native Hawaiian or Pacific Islander 31804
+## 7 Two or more races                   69653
+## 8 White                               91827
+</code></pre>
+
+<pre><code class="language-r">d &lt;- d %&gt;%
+  filter(overall_group == &quot;Ethnicity&quot;,
+         specific_group == &quot;White&quot; |
+           specific_group == &quot;Hispanic or Latino&quot;)
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 189,269 x 10
+##    district_code school_code grade overall_group specific_group test_id
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;  
+##  1 00000         0000000         3 Ethnicity     Hispanic or L… ELA    
+##  2 00000         0000000         3 Ethnicity     Hispanic or L… Mathem…
+##  3 00000         0000000         4 Ethnicity     Hispanic or L… Mathem…
+##  4 00000         0000000         4 Ethnicity     Hispanic or L… ELA    
+##  5 00000         0000000         5 Ethnicity     Hispanic or L… ELA    
+##  6 00000         0000000         5 Ethnicity     Hispanic or L… Mathem…
+##  7 00000         0000000         6 Ethnicity     Hispanic or L… Mathem…
+##  8 00000         0000000         6 Ethnicity     Hispanic or L… ELA    
+##  9 00000         0000000         7 Ethnicity     Hispanic or L… ELA    
+## 10 00000         0000000         7 Ethnicity     Hispanic or L… Mathem…
+## # … with 189,259 more rows, and 4 more variables:
+## #   percentage_standard_not_met &lt;dbl&gt;,
+## #   percentage_standard_nearly_met &lt;dbl&gt;, percentage_standard_met &lt;dbl&gt;,
+## #   percentage_standard_exceeded &lt;dbl&gt;
+</code></pre>
+
+<p>Notice that the <code>school_code</code> and <code>district_code</code> are both 0 here. This is the code for the overall state, which we probably want to eliminate.</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;%
+  filter(school_code != &quot;0000000&quot;)
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 160,479 x 10
+##    district_code school_code grade overall_group specific_group test_id
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;  
+##  1 10017         0112607        11 Ethnicity     Hispanic or L… Mathem…
+##  2 10017         0112607        11 Ethnicity     Hispanic or L… ELA    
+##  3 10017         0112607        13 Ethnicity     Hispanic or L… ELA    
+##  4 10017         0112607        13 Ethnicity     Hispanic or L… Mathem…
+##  5 10017         0112607        11 Ethnicity     White          Mathem…
+##  6 10017         0112607        11 Ethnicity     White          ELA    
+##  7 10017         0112607        13 Ethnicity     White          ELA    
+##  8 10017         0112607        13 Ethnicity     White          Mathem…
+##  9 10017         0123968         3 Ethnicity     Hispanic or L… Mathem…
+## 10 10017         0123968         3 Ethnicity     Hispanic or L… ELA    
+## # … with 160,469 more rows, and 4 more variables:
+## #   percentage_standard_not_met &lt;dbl&gt;,
+## #   percentage_standard_nearly_met &lt;dbl&gt;, percentage_standard_met &lt;dbl&gt;,
+## #   percentage_standard_exceeded &lt;dbl&gt;
+</code></pre>
+
+<h1 id="estimated-effect-sizes">Estimated effect sizes</h1>
+
+<p>We now have a pretty basic dataset that we&rsquo;re ready to use to estimate effect size. If you recall from the previous post, what we need is the <em>cummumulate</em> percentage of students in each category, rather than the raw percents. I&rsquo;m going to do this by first creating a lower category that has zero students in it. I&rsquo;ll then reshape the data to a long(er) format and calculate the cummulative sum.</p>
+
+<h2 id="data-prep">Data prep</h2>
+
+<p>First, create the lower category</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;%
+  mutate(percentage_standard_low = 0)
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 160,479 x 11
+##    district_code school_code grade overall_group specific_group test_id
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;  
+##  1 10017         0112607        11 Ethnicity     Hispanic or L… Mathem…
+##  2 10017         0112607        11 Ethnicity     Hispanic or L… ELA    
+##  3 10017         0112607        13 Ethnicity     Hispanic or L… ELA    
+##  4 10017         0112607        13 Ethnicity     Hispanic or L… Mathem…
+##  5 10017         0112607        11 Ethnicity     White          Mathem…
+##  6 10017         0112607        11 Ethnicity     White          ELA    
+##  7 10017         0112607        13 Ethnicity     White          ELA    
+##  8 10017         0112607        13 Ethnicity     White          Mathem…
+##  9 10017         0123968         3 Ethnicity     Hispanic or L… Mathem…
+## 10 10017         0123968         3 Ethnicity     Hispanic or L… ELA    
+## # … with 160,469 more rows, and 5 more variables:
+## #   percentage_standard_not_met &lt;dbl&gt;,
+## #   percentage_standard_nearly_met &lt;dbl&gt;, percentage_standard_met &lt;dbl&gt;,
+## #   percentage_standard_exceeded &lt;dbl&gt;, percentage_standard_low &lt;dbl&gt;
+</code></pre>
+
+<p>We need this because of the cummulative sum calculation that comes next. First though, let&rsquo;s reshape the data. After the reshape, I do a tiny bit of cleanup so the <code>category</code> variable doesn&rsquo;t repeat <code>&quot;percentage_standard_&quot;</code> over and over.</p>
+
+<pre><code class="language-r">ld &lt;- d %&gt;%
+  gather(category, percentage, starts_with(&quot;percentage&quot;)) %&gt;%
+  mutate(category = gsub(&quot;percentage_standard_&quot;, &quot;&quot;, category))
+
+ld
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 802,395 x 8
+##    district_code school_code grade overall_group specific_group test_id
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;  
+##  1 10017         0112607        11 Ethnicity     Hispanic or L… Mathem…
+##  2 10017         0112607        11 Ethnicity     Hispanic or L… ELA    
+##  3 10017         0112607        13 Ethnicity     Hispanic or L… ELA    
+##  4 10017         0112607        13 Ethnicity     Hispanic or L… Mathem…
+##  5 10017         0112607        11 Ethnicity     White          Mathem…
+##  6 10017         0112607        11 Ethnicity     White          ELA    
+##  7 10017         0112607        13 Ethnicity     White          ELA    
+##  8 10017         0112607        13 Ethnicity     White          Mathem…
+##  9 10017         0123968         3 Ethnicity     Hispanic or L… Mathem…
+## 10 10017         0123968         3 Ethnicity     Hispanic or L… ELA    
+## # … with 802,385 more rows, and 2 more variables: category &lt;chr&gt;,
+## #   percentage &lt;dbl&gt;
+</code></pre>
+
+<p>Now we need to make sure the categories are ordered in ascending order within a school. The best way to do this, from my perspective, is to transform category into a categorical variable.</p>
+
+<pre><code class="language-r">unique(ld$category)
+</code></pre>
+
+<pre><code class="language-r">## [1] &quot;not_met&quot;    &quot;nearly_met&quot; &quot;met&quot;        &quot;exceeded&quot;   &quot;low&quot;
+</code></pre>
+
+<pre><code class="language-r">ld &lt;- ld %&gt;%
+  mutate(category = factor(category, 
+                           levels = c(&quot;low&quot;, &quot;not_met&quot;, 
+                                      &quot;nearly_met&quot;, &quot;met&quot;, 
+                                      &quot;exceeded&quot;))) %&gt;%
+  arrange(school_code, grade, specific_group, test_id, category)
+
+ld
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 802,395 x 8
+##    district_code school_code grade overall_group specific_group test_id
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;  
+##  1 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  2 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  3 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  4 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  5 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  6 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+##  7 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+##  8 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+##  9 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+## 10 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+## # … with 802,385 more rows, and 2 more variables: category &lt;fct&gt;,
+## #   percentage &lt;dbl&gt;
+</code></pre>
+
+<p>And now we can calculate the cummulative percentage</p>
+
+<pre><code class="language-r">ld &lt;- ld %&gt;%
+  group_by(school_code, grade, specific_group, test_id) %&gt;%
+  mutate(cumm_perc = cumsum(percentage))
+
+ld
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 802,395 x 9
+## # Groups:   school_code, grade, specific_group, test_id [160,479]
+##    district_code school_code grade overall_group specific_group test_id
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;  
+##  1 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  2 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  3 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  4 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  5 65243         0100016         3 Ethnicity     Hispanic or L… ELA    
+##  6 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+##  7 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+##  8 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+##  9 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+## 10 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
+## # … with 802,385 more rows, and 3 more variables: category &lt;fct&gt;,
+## #   percentage &lt;dbl&gt;, cumm_perc &lt;dbl&gt;
+</code></pre>
+
+<p>And now we&rsquo;re getting close. We just need a column for each each group. We&rsquo;ll drop the raw percentage (so rows are uniquely defined) and spread the cummulative sum into to columns according to the specific group</p>
+
+<pre><code class="language-r">ld %&gt;%
+  select(-percentage) %&gt;%
+  spread(specific_group, cumm_perc)	
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 429,670 x 8
+## # Groups:   school_code, grade, test_id [85,934]
+##    district_code school_code grade overall_group test_id category
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;   &lt;fct&gt;   
+##  1 10017         0112607        11 Ethnicity     ELA     low     
+##  2 10017         0112607        11 Ethnicity     ELA     not_met 
+##  3 10017         0112607        11 Ethnicity     ELA     nearly_…
+##  4 10017         0112607        11 Ethnicity     ELA     met     
+##  5 10017         0112607        11 Ethnicity     ELA     exceeded
+##  6 10017         0112607        11 Ethnicity     Mathem… low     
+##  7 10017         0112607        11 Ethnicity     Mathem… not_met 
+##  8 10017         0112607        11 Ethnicity     Mathem… nearly_…
+##  9 10017         0112607        11 Ethnicity     Mathem… met     
+## 10 10017         0112607        11 Ethnicity     Mathem… exceeded
+## # … with 429,660 more rows, and 2 more variables: `Hispanic or
+## #   Latino` &lt;dbl&gt;, White &lt;dbl&gt;
+</code></pre>
+
+<p>This looks basically correct, but to make it a bit more clear, let&rsquo;s remove schools that did not report percentages for both groups</p>
+
+<pre><code class="language-r">ld &lt;- ld %&gt;%
+  select(-percentage) %&gt;%
+  spread(specific_group, cumm_perc)	%&gt;%
+  janitor::clean_names() %&gt;%
+  drop_na(hispanic_or_latino, white) %&gt;%
+  arrange(school_code, grade, test_id, category) 
+
+ld
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 219,925 x 8
+## # Groups:   school_code, grade, test_id [74,545]
+##    district_code school_code grade overall_group test_id category
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;   &lt;fct&gt;   
+##  1 65243         0100016         3 Ethnicity     ELA     low     
+##  2 65243         0100016         3 Ethnicity     Mathem… low     
+##  3 65243         0100016         4 Ethnicity     ELA     low     
+##  4 65243         0100016         4 Ethnicity     ELA     not_met 
+##  5 65243         0100016         4 Ethnicity     ELA     nearly_…
+##  6 65243         0100016         4 Ethnicity     ELA     met     
+##  7 65243         0100016         4 Ethnicity     ELA     exceeded
+##  8 65243         0100016         4 Ethnicity     Mathem… low     
+##  9 65243         0100016         4 Ethnicity     Mathem… not_met 
+## 10 65243         0100016         4 Ethnicity     Mathem… nearly_…
+## # … with 219,915 more rows, and 2 more variables:
+## #   hispanic_or_latino &lt;dbl&gt;, white &lt;dbl&gt;
+</code></pre>
+
+<p>And now we&rsquo;re very close, but if you look carefully you can see we have one issue remaining - every school has the low category reported for both groups. We need to remove schools that <strong>only</strong> have the low category reported (because they don&rsquo;t actually have any real data reported). There&rsquo;s lots of ways to do this, of course, but a fairly straightforward way is to count the rows within each school/grade/test combination and make sure there are five observations (four categories, plus the low category). Then we&rsquo;ll select for just those observations.</p>
+
+<pre><code class="language-r">ld &lt;- ld %&gt;%
+  group_by(school_code, grade, test_id) %&gt;%
+  mutate(n = n()) %&gt;%
+  filter(n == 5) %&gt;%
+  select(-n)
+
+ld
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 181,725 x 8
+## # Groups:   school_code, grade, test_id [36,345]
+##    district_code school_code grade overall_group test_id category
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;   &lt;fct&gt;   
+##  1 65243         0100016         4 Ethnicity     ELA     low     
+##  2 65243         0100016         4 Ethnicity     ELA     not_met 
+##  3 65243         0100016         4 Ethnicity     ELA     nearly_…
+##  4 65243         0100016         4 Ethnicity     ELA     met     
+##  5 65243         0100016         4 Ethnicity     ELA     exceeded
+##  6 65243         0100016         4 Ethnicity     Mathem… low     
+##  7 65243         0100016         4 Ethnicity     Mathem… not_met 
+##  8 65243         0100016         4 Ethnicity     Mathem… nearly_…
+##  9 65243         0100016         4 Ethnicity     Mathem… met     
+## 10 65243         0100016         4 Ethnicity     Mathem… exceeded
+## # … with 181,715 more rows, and 2 more variables:
+## #   hispanic_or_latino &lt;dbl&gt;, white &lt;dbl&gt;
+</code></pre>
+
+<p>And our data are <strong>finally</strong> finalized! 🥳</p>
+
+<h2 id="produce-estimates">Produce estimates</h2>
+
+<p>First, let&rsquo;s compute the area under the paired curves. To do this, we just use an x/y integration. This will give us one estimate for each school/test/grade combination. I&rsquo;ll use the {pracma} package again. One small caveat here&hellip; to get the correct AUC, the cummulative percentages actually need to be cummulative proportions. We could have done this transformation above in our data prep (and maybe I should have done that) but you can also do it in the integration and it doesn&rsquo;t change the results at all. We&rsquo;ll take this approach.</p>
+
+<pre><code class="language-r">aucs &lt;- ld %&gt;%
+  group_by(school_code, grade, test_id) %&gt;%
+  summarize(auc = pracma::trapz(hispanic_or_latino / 100, 
+                                white / 100)) %&gt;%
+  ungroup()
+
+aucs
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 36,345 x 4
+##    school_code grade test_id       auc
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1 0100016         4 ELA         0.342
+##  2 0100016         4 Mathematics 0.339
+##  3 0100016        13 ELA         0.389
+##  4 0100016        13 Mathematics 0.420
+##  5 0100024         3 ELA         0.429
+##  6 0100024         3 Mathematics 0.484
+##  7 0100024         4 ELA         0.534
+##  8 0100024         4 Mathematics 0.477
+##  9 0100024         5 ELA         0.478
+## 10 0100024         5 Mathematics 0.445
+## # … with 36,335 more rows
+</code></pre>
+
+<p>As a reminder, these values represent the probability that a randomly selected student from the x axis group, in this case students coded Hispanic/Latino, would score above a randomly selected student from the y axis group, in this case students coded White.</p>
+
+<p>Now, we can transform these values into effect sizes using <code>sqrt(2)*qnorm(auc)</code>, where <code>auc</code> represents the values we just calculated.</p>
+
+<pre><code class="language-r">v &lt;- aucs %&gt;%
+  mutate(v = sqrt(2)*qnorm(auc))
+
+v
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 36,345 x 5
+##    school_code grade test_id       auc       v
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+##  1 0100016         4 ELA         0.342 -0.577 
+##  2 0100016         4 Mathematics 0.339 -0.588 
+##  3 0100016        13 ELA         0.389 -0.400 
+##  4 0100016        13 Mathematics 0.420 -0.285 
+##  5 0100024         3 ELA         0.429 -0.253 
+##  6 0100024         3 Mathematics 0.484 -0.0565
+##  7 0100024         4 ELA         0.534  0.119 
+##  8 0100024         4 Mathematics 0.477 -0.0803
+##  9 0100024         5 ELA         0.478 -0.0792
+## 10 0100024         5 Mathematics 0.445 -0.195 
+## # … with 36,335 more rows
+</code></pre>
+
+<p>And voilà! We have effect size estimates for <strong>every school in California</strong> that reported data on both groups.</p>
+
+<h2 id="quick-exploration">Quick exploration</h2>
+
+<p>This is already a long post, so I&rsquo;ll keep this brief, but let&rsquo;s quickly explore the effect size estimates.</p>
+
+<p>First, let&rsquo;s just look at the distributions by content area.</p>
+
+<pre><code class="language-r">theme_set(theme_minimal(15))
+
+means &lt;- v %&gt;%
+  group_by(test_id) %&gt;%
+  summarize(av = mean(v))
+
+ggplot(v, aes(v)) +
+  annotate(&quot;rect&quot;,
+           inherit.aes = FALSE,
+           ymin = -Inf, 
+           ymax = Inf,
+           xmin = 0, 
+           xmax = Inf,
+           fill = &quot;gray40&quot;,
+           alpha = .8) +
+  geom_histogram(fill = &quot;cornflowerblue&quot;) +
+  geom_vline(aes(xintercept = av), means, size = 1.5, color = &quot;magenta&quot;) +
+  geom_vline(xintercept = 0, color = &quot;gray80&quot;) +
+  facet_wrap(~test_id, ncol = 1)
+</code></pre>
+
+<p><img src="../2019-08-06-applying-v-to-study-achievement-gaps_files/figure-html/dist-1.png" alt="" /><!-- --></p>
+
+<p>This gives us a quick understanding of the overall distribution. For the vast majority of schools, students coded Hispanic/Latino are scoring, on average, lower than students coded White. But this is not true for all schools. We can also see that these achievement disparities are, on average, slightly larger in Math than in ELA.</p>
+
+<p>Notice, however, that there is <em>considerable</em> variability between schools. What drives this variability? This is currently my primary area of interest.</p>
+
+<p>One more quick exploration, let&rsquo;s look at the distributions by grade. I&rsquo;ll use the {ggridges} package to produce distributions by grade.</p>
+
+<pre><code class="language-r">grade_means &lt;- v %&gt;%
+  group_by(grade, test_id) %&gt;%
+  summarize(mean = mean(v),
+            mean_se = sundry::se(v))
+
+ggplot(v, aes(x = v, y = factor(grade))) +
+  ggridges::geom_density_ridges(fill = &quot;cornflowerblue&quot;, 
+                                alpha = 0.4,
+                                color = &quot;white&quot;,
+                                height = 0.4,
+                                scale = 1) +
+  geom_segment(aes(x = mean, xend = mean, 
+                   y = as.numeric(factor(grade)), 
+                   yend = as.numeric(factor(grade)) + 0.7), 
+               grade_means,
+               color = &quot;gray40&quot;,
+               lty = &quot;dashed&quot;) +
+  scale_x_continuous(&quot;&quot;, limits = c(-1.75, 1)) +
+  labs(y  = &quot;Grade&quot;,
+       title = &quot;Achievement gap effect sizes by grade&quot;,
+       subtitle = &quot;Effect sizes estimated from ordinal percent proficient data&quot;,
+       caption = &quot;Data obtained from the California Department of Education website: \n https://caaspp.cde.ca.gov/sb2018/ResearchFileList&quot;) +
+  facet_wrap(~test_id) 
+</code></pre>
+
+<p><img src="../2019-08-06-applying-v-to-study-achievement-gaps_files/figure-html/grade-distributions-1.png" alt="" /><!-- --></p>
+
+<p>Is there evidence of the achievement gaps growing by grade? Maybe&hellip; let&rsquo;s take a different look.</p>
+
+<pre><code class="language-r">ggplot(grade_means, aes(grade, mean)) +
+  geom_errorbar(aes(ymax = mean + qnorm(0.975)*mean_se,
+                    ymin = mean + qnorm(0.025)*mean_se)) +
+  geom_point() +
+  geom_smooth() +
+  facet_wrap(~test_id) +
+  scale_x_continuous(breaks = c(3:8, 11, 13))
+</code></pre>
+
+<p><img src="../2019-08-06-applying-v-to-study-achievement-gaps_files/figure-html/grade-change-1.png" alt="" /><!-- --></p>
+
+<p>Maybe some, but the evidence is not overwhelmingly strong in this case</p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>This was a long post, but an important one, I think. In the next post, I&rsquo;ll talk about geographical variation in school-level achievement gaps, which will require linking the schools with data including longitude and latitude, and exploring things like census variables to explore how they may relate to the between-school variability.</p>
+
+<p>Thanks for reading! Please get in touch if you found it interesting, see areas that need correcting, or have follow-up questions.</p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2019-08-06</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/v/">V</a>
+          
+          <a href="/tags/public-data/">Public Data</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/estimating-important-things-with-public-data/">
+            <span class="next-text nav-default">Estimating important things with public data</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/datalorax_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/datalorax" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme based on 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2019
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

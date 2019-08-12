@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Applying V to study achievement gaps</title>
+      <link>/post/applying-v-to-study-achievement-gaps/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/applying-v-to-study-achievement-gaps/</guid>
+      <description>In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&amp;rsquo;ll put this method to work for the state of California. I&amp;rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade.</description>
+    </item>
     
     <item>
       <title>Estimating important things with public data</title>
@@ -134,6 +143,15 @@ Quick example The API for esvis is consistent across functions, so we use the sa
       <guid>/post/esvis-part-1/</guid>
       <description>This is the first of a series of posts to introduce my new esvis R package, why I think it&amp;rsquo;s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it&amp;rsquo;s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
 install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/post/sb_ca2018_all_csv_v3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/sb_ca2018_all_csv_v3/</guid>
+      <description>&amp;ldquo;County Code&amp;rdquo;,&amp;ldquo;District Code&amp;rdquo;,&amp;ldquo;School Code&amp;rdquo;,&amp;ldquo;Filler&amp;rdquo;,&amp;ldquo;Test Year&amp;rdquo;,&amp;ldquo;Subgroup ID&amp;rdquo;,&amp;ldquo;Test Type&amp;rdquo;,&amp;ldquo;Total Tested At Entity Level&amp;rdquo;,&amp;ldquo;Total Tested with Scores&amp;rdquo;,&amp;ldquo;Grade&amp;rdquo;,&amp;ldquo;Test Id&amp;rdquo;,&amp;ldquo;CAASPP Reported Enrollment&amp;rdquo;,&amp;ldquo;Students Tested&amp;rdquo;,&amp;ldquo;Mean Scale Score&amp;rdquo;,&amp;ldquo;Percentage Standard Exceeded&amp;rdquo;,&amp;ldquo;Percentage Standard Met&amp;rdquo;,&amp;ldquo;Percentage Standard Met and Above&amp;rdquo;,&amp;ldquo;Percentage Standard Nearly Met&amp;rdquo;,&amp;ldquo;Percentage Standard Not Met&amp;rdquo;,&amp;ldquo;Students with Scores&amp;rdquo;,&amp;ldquo;Area 1 Percentage Above Standard&amp;rdquo;,&amp;ldquo;Area 1 Percentage Near Standard&amp;rdquo;,&amp;ldquo;Area 1 Percentage Below Standard&amp;rdquo;,&amp;ldquo;Area 2 Percentage Above Standard&amp;rdquo;,&amp;ldquo;Area 2 Percentage Near Standard&amp;rdquo;,&amp;ldquo;Area 2 Percentage Below Standard&amp;rdquo;,&amp;ldquo;Area 3 Percentage Above Standard&amp;rdquo;,&amp;ldquo;Area 3 Percentage Near Standard&amp;rdquo;,&amp;ldquo;Area 3 Percentage Below Standard&amp;rdquo;,&amp;ldquo;Area 4 Percentage Above Standard&amp;rdquo;,&amp;ldquo;Area 4 Percentage Near Standard&amp;rdquo;,&amp;ldquo;Area 4 Percentage Below Standard&amp;rdquo; &amp;ldquo;00&amp;rdquo;,&amp;ldquo;00000&amp;rdquo;,&amp;ldquo;0000000&amp;rdquo;,,2018,1,&amp;ldquo;B&amp;rdquo;,&amp;ldquo;3180571&amp;rdquo;,&amp;ldquo;3177420&amp;rdquo;,3,&amp;ldquo;1&amp;rdquo;,&amp;ldquo;445017&amp;rdquo;,&amp;ldquo;434468&amp;rdquo;,&amp;ldquo;2424.</description>
     </item>
     
     <item>

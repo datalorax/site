@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Tue, 19 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Public Data</title>
+      <link>/tags/public-data/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/public-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>V</title>
+      <link>/tags/v/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/v/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Data Visualization</title>

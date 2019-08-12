@@ -61,7 +61,7 @@
 
 <meta itemprop="datePublished" content="2019-07-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-07-29T19:57:09-07:00" />
-<meta itemprop="wordCount" content="2319">
+<meta itemprop="wordCount" content="2323">
 
 
 
@@ -153,7 +153,7 @@
               <a href="/categories/statistics/"> Statistics </a>
             
           </div>
-        <span class="more-meta"> 2319 words </span>
+        <span class="more-meta"> 2323 words </span>
         <span class="more-meta"> 11 mins read </span>
         
       </div>
@@ -196,11 +196,11 @@
 
 <p>In case you&rsquo;re unfamiliar, states administer tests to students at the end of the year in each of Grades 3-8, and once in high school, for all students in their state in English/Language Arts and Mathematics. Science assessments are also administered, but not across all grades. States report, for every school in their state, the percentage of students scoring in each of (usually) four proficiency categories. Sometimes these are given labels, like &ldquo;Below Expectations&rdquo;, &ldquo;Nearly Proficient&rdquo;, &ldquo;Proficient&rdquo;, and &ldquo;Exceeds&rdquo;, and other times they just have a numerical label from 1-4. These data are reported for every school in the state, and disaggregated by student demographics such as race/ethnicity, special education status, etc., provided there is a sufficient amount of data to ensure individual students cannot be identified (and this lower threshold varies by state).</p>
 
-<p>While these data are somewhat helpful on their own, their actually not as helpful as one might think. The primary problem is that the percentage of students in each of these categories depends <em>a lot</em> on the placement of the cut scores delineating the different categories, and those cut scores vary not only by state, but by grade-level. Any direct comparisons that are not in the same grade, during the same academic year (because the cut scores can change from year to year), and in the same content area are therefore tenuous (see <a href="https://www-leland.stanford.edu/~hakuta/Courses/Ed205X%20Website/Resources/Ho%20The%20Problem%20with%20Proficiency%20ER%20v37%20n6.pdf">Ho, 2008</a> for a discussion of just how tenuous comparisons can be). But, it&rsquo;s an awful lot of data that we don&rsquo;t want to just throw out. The fact that this data reported by demographic groups is particularly intriguing, given the long-standing racial achievement disparities have been found, dating back to the Coleman report. Evaluating achievement disparities at this scale could lead to new insights (and indeed, this has been done; for example, see recent work by <a href="https://cepa.stanford.edu/sites/default/files/wp16-10-v201712.pdf">Reardon, Kalograides, and Shores</a>). But how do we make sense of the data, after I&rsquo;ve just discussed the problems with direct comparisons in terms of percent proficient? Enter $V$, an effect size like metric estimated from ordinal data.</p>
+<p>While these data are somewhat helpful on their own, they&rsquo;re actually not as helpful as one might think. The primary problem is that the percentage of students in each of these categories depends <em>a lot</em> on the placement of the cut scores delineating the different categories, and those cut scores vary not only by state, but by grade-level. Any direct comparisons that are not in the same grade, during the same academic year (because the cut scores can change from year to year), and in the same content area are therefore tenuous (see <a href="https://www-leland.stanford.edu/~hakuta/Courses/Ed205X%20Website/Resources/Ho%20The%20Problem%20with%20Proficiency%20ER%20v37%20n6.pdf">Ho, 2008</a> for a discussion of just how tenuous comparisons can be). But, it&rsquo;s an awful lot of data that we don&rsquo;t want to just throw out. The fact that this data is reported by demographic groups is particularly intriguing, given that long-standing racial achievement disparities have been found, dating back to the Coleman report. Evaluating achievement disparities at this scale could lead to new insights (and indeed, this has been done; for example, see recent work by <a href="https://cepa.stanford.edu/sites/default/files/wp16-10-v201712.pdf">Reardon, Kalograides, and Shores</a>). But how do we make sense of the data, after I&rsquo;ve just discussed the problems with direct comparisons in terms of percent proficient? Enter $V$, an effect size like metric estimated from ordinal data.</p>
 
 <h1 id="effect-sizes-from-ordinal-data">Effect sizes from ordinal data</h1>
 
-<p>First, what&rsquo;s an effect size? There are many different types of effect sizes, but the most common is Cohen&rsquo;s $D$, which is just the difference between the means of two respective distributions, divided by their pooled standard deviation (see <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full">Lakens, 2013</a> for a nice review of effect sizes). This implies we have a standardized mean difference measure. So, a value of 0.5 would imply that the focal distribution is, on average, half a standard deviation higher than the reference distribution. Effect sizes are useful for lots of different reasons, but primarily among them is that they are comparable across studies and different scales (under certain assumptions, and occasionally it won&rsquo;t work well, but generally it works well enough). If we could report our ordinal percent proficient data in terms of an effect size, then all of the sudden would could make comparisons between student groups across grades and even across states, even if they don&rsquo;t use the same test.</p>
+<p>First, what&rsquo;s an effect size? There are many different types of effect sizes, but the most common is Cohen&rsquo;s $D$, which is just the difference between the means of two respective distributions, divided by their pooled standard deviation (see <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full">Lakens, 2013</a> for a nice review of effect sizes). This implies we have a standardized mean difference measure. So, a value of 0.5 would imply that the focal distribution is, on average, half a standard deviation higher than the reference distribution. Effect sizes are useful for lots of different reasons, but primary among them is that they are comparable across studies and different scales (under certain assumptions, and occasionally it won&rsquo;t work well, but generally it works well enough). If we could report our ordinal percent proficient data in terms of an effect size, then all of the sudden we could make comparisons between student groups across grades and even across states, even if they don&rsquo;t use the same test.</p>
 
 <h2 id="a-made-up-example">A made up example</h2>
 
@@ -247,7 +247,7 @@ d
 
 <p><img src="../2019-07-29-estimating-important-things-with-public-data_files/figure-html/densities-1.png" alt="" /><!-- --></p>
 
-<p>And sure enough, <code>g2</code> distribution peaks just about 5 points below the <code>g1</code> distribution.</p>
+<p>And sure enough, the <code>g2</code> distribution peaks just about 5 points below the <code>g1</code> distribution.</p>
 
 <p>We can also look at these by their empirical cumulative distribution functions with very little changes to the plotting code.</p>
 
@@ -260,7 +260,7 @@ d
 
 <p>And again you can see a relatively constant difference between the to distributions, with approximately a 5 point horizontal difference at most points in the scale.</p>
 
-<p>What&rsquo;s interesting, however, is that if we extract the y-values for each curve, and match them based on their x-values, we&rsquo;ll end up with what looks an awful lot like a ROC curve. The mechanics here are a bit complicated, but essentially we just have to compute the Empirical Cumulative Distribution Function (ECDF) for each, then match them.</p>
+<p>What&rsquo;s interesting, however, is that if we extract the y-values for each curve, and match them based on their x-values, we&rsquo;ll end up with what looks an awful lot like a ROC curve. The mechanics here are a bit complicated, but essentially we just have to compute the empirical cumulative distribution function (ECDF) for each, then match them.</p>
 
 <pre><code class="language-r">g1_ecdf &lt;- d %&gt;% 
   filter(group == &quot;g1&quot;) %&gt;% 
@@ -294,7 +294,7 @@ matched_d
 ## # … with 71 more rows
 </code></pre>
 
-<p>The first two blocks of code above create functions that return the y-value for the corresponding group. The <code>matched_d</code> part reports the cumulative density for each group across the score range 6 to 140. Now, we can plot the curves against each other.</p>
+<p>The first two blocks of code above create functions that return the y-value for the corresponding group. The <code>matched_d</code> part reports the cumulative density for each group across the score range 60 to 140. Now, we can plot the curves against each other.</p>
 
 <pre><code class="language-r">ggplot(matched_d, aes(g1_cdf, g2_cdf)) +
   geom_line(color = &quot;cornflowerblue&quot;, size = 1.4) +
@@ -319,7 +319,7 @@ auc
 V = \sqrt(2)\Phi^{-1}(P_{a&gt;b})
 $$</p>
 
-<p>which looks fairly complicated, but really isn&rsquo;t that bad. The $P_{a&gt;b}$ is just the area under the curve we calculated above and $\Phi^{-1}$ is the equivalent of R&rsquo;s <code>qnorm</code> function, which walks a probability value back to a quantile score (e.g., <code>qnorm(0.975) = 1.959964</code>). So really, we just use the <code>qnorm</code> function on our AUC value multiply the result by the square root of 2. Why would we do this? Because it puts the AUC value on a standard deviation scale and, under the condition of respective normality, is actually equivalent to Cohen&rsquo;s $D$. In R code, and assuming we have created an object called <code>auc</code>, as above, the formula for $V$ looks like <code>sqrt(2)*qnorm(auc)</code>, which gives us a value of 0.4717468. Using the esvis package, we can compare this to Cohen&rsquo;s $D$</p>
+<p>which looks fairly complicated, but really isn&rsquo;t that bad. The $P_{a&gt;b}$ is just the area under the curve we calculated above and $\Phi^{-1}$ is the equivalent of R&rsquo;s <code>qnorm</code> function, which walks a probability value back to a quantile score (e.g., <code>qnorm(0.975) = 1.959964</code>). So really, we just call <code>qnorm</code> the AUC value we just calculated, and multiply the result by the square root of 2. Why would we do this? Because it puts the AUC value on a standard deviation scale and, under the condition of respective normality, is actually equivalent to Cohen&rsquo;s $D$. In R code, and assuming we have created an object called <code>auc</code>, as above, the formula for $V$ looks like <code>sqrt(2)*qnorm(auc)</code>, which gives us a value of 0.4717468. Using the esvis package, we can compare this to Cohen&rsquo;s $D$</p>
 
 <pre><code class="language-r">library(esvis)
 coh_d(d, score ~ group, ref_group = &quot;g2&quot;)
@@ -335,7 +335,7 @@ coh_d(d, score ~ group, ref_group = &quot;g2&quot;)
 
 <h2 id="ordinal-data">Ordinal data</h2>
 
-<p>Why do we do all the gymnastics above if we can use Cohen&rsquo;s $D$ to get, essentially, the same answer? In some ways, $V$ is preferable to Cohen&rsquo;s $D$, because it rests on fewer assumptions. But more importantly, we can use the method even when all we have access to is ordinal data reported as the percentage of people in each of $n$ categories, as is required by statewide testing agencies, but also common in other areas (e.g., underweight, normal, overweight, or obese for various body-mass index (BMI) ranges). We can do this because we can use the percentage of respondents in each category to approximate the empirical cumulative distribution function for each group, match these curves, calculate the area under the curve, and then transform it to an effect size. This all makes intuitive sense, but let&rsquo;s prove this to ourselves.</p>
+<p>Why do we do all the gymnastics above if we can use Cohen&rsquo;s $D$ to get, essentially, the same answer? In some ways, $V$ is preferable to Cohen&rsquo;s $D$, because it rests on fewer assumptions. But more importantly, we can use the method even when all we have access to is ordinal data reported as the percentage of people in each of $n$ categories, as is required by statewide testing agencies, but also common in other areas (e.g., underweight, normal, overweight, or obese for various body-mass index (BMI) ranges). We can do this because we can use the percentage of respondents in each category to approximate the ECDF for each group, match these curves, calculate the area under the curve, and then transform it to an effect size. This all makes intuitive sense, but let&rsquo;s prove this to ourselves.</p>
 
 <h3 id="coarsening-the-data">Coarsening the data</h3>
 
@@ -405,7 +405,8 @@ ggplot(d, aes(score)) +
              size = 3) +
   geom_line(aes(y = prop, color = group), data = props_plot_d,
              linetype = &quot;dashed&quot;,
-             size = 1.4) 
+             size = 1.4) +
+  scale_color_brewer(palette = &quot;Pastel1&quot;)
 </code></pre>
 
 <p><img src="../2019-07-29-estimating-important-things-with-public-data_files/figure-html/ecdf-compare-1.png" alt="" /><!-- --></p>
@@ -483,6 +484,11 @@ props
       
       <nav class="post-nav">
         
+          <a class="prev" href="/post/applying-v-to-study-achievement-gaps/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Applying V to study achievement gaps</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         
           <a class="next" href="/post/looking-into-keepfamiliestogether/">
             <span class="next-text nav-default">Looking into #KeepFamiliesTogether</span>

@@ -1,0 +1,308 @@
+---
+title: Applying V to study achievement gaps
+author: Daniel Anderson
+date: '2019-08-06'
+slug: applying-v-to-study-achievement-gaps
+categories:
+  - Effect Size
+  - Statistics
+tags:
+  - V
+  - Public Data
+lastmod: '2019-08-06T20:28:17-07:00'
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include = FALSE}
+library(knitr)
+opts_chunk$set(cache = TRUE, 
+               warning = FALSE, 
+               message = FALSE,
+               cache.lazy = FALSE)
+dep_auto()
+```
+
+In the [last post](http://www.datalorax.com/post/estimating-important-things-with-public-data/) I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we'll put this method to work for the state of California. I'll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at [least 30 students in each group, for the corresponding grade](https://www.cde.ca.gov/ta/ac/cm/).
+
+
+# The data
+
+The primary data we'll be looking at are available [here](https://caaspp.cde.ca.gov/sb2018/ResearchFileList). As I mentioned in the previous post, part of what I think is so cool about this method is that these data are reported across all states, so you could apply this method with any state. I chose California here because I have some experience with their specific data, I'm a west-coaster, and California is more interesting than Oregon (where I live) because they are much more diverse and have areas of dense population. 
+
+These data have a number of numeric codes in them that don't make much sense without the code book, which is available [here](http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/subgroups.zip).
+
+I'm also always interested in geographic variance in social things, including school performance, so I also like to try to grab the longitude and latitude of the schools. That's available through a separate file, available [here](https://www.cde.ca.gov/ds/si/ds/pubschls.asp). Note that geographic information is available more generally for every public school in the country through the *National Center for Education Statistics* (NCES) [Education Demographic and Geographic Estimates (EDGE)](https://nces.ed.gov/programs/edge/) program.
+
+## Loading the data
+We could, of course, just visit these websites and pull the data down and load it in manually, but that's no fun. This is R. Let's do it through code! 
+
+The file we want is at http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/sb_ca2018_all_csv_v3.zip. The tricky part is, it's in a zip file with one other file. One way to handle this is by creating a temporary directory, downloading the zip file there, then unzipping the file and pulling just the data we want out. In our case, the filename is the same as the zip file, but with a `.txt` extension. I'll be using the tidyverse later anyway so I'll do something like this
+
+```{r, load-data}
+library(tidyverse)
+
+# create a temporary directory
+tmp <- tempdir()
+
+# download the zip file. Call it "file.zip"
+download.file("http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/sb_ca2018_all_csv_v3.zip", 
+              file.path(tmp, "file.zip"))
+
+# Pull out just the file we want
+file <- unzip(file.path(tmp, "file.zip"), files = "sb_ca2018_all_csv_v3.txt")
+
+# Read it into R
+d <- read_csv(file) %>%
+  janitor::clean_names()
+d
+```
+
+That gives us the basic file we want, but we don't know what any of the subgroup IDs represent. To get that, we'll have to download another datafile. This is another zip file, but note I'm using a slightly different approach below, which I can do because the zip file only contains a single file.
+
+```{r subgroup-file}
+tmp_file <- tempfile()
+download.file("http://www3.cde.ca.gov/caasppresearchfiles/2018/sb/subgroups.zip",
+              tmp_file)
+subgroups <- read_csv(unz(tmp_file, "Subgroups.txt"), 
+                      col_names = c("char_num", "subgroup_id", 
+                                    "specific_group", "overall_group"))
+subgroups
+```
+
+Now we can join these data
+
+```{r join}
+d <- left_join(d, subgroups)
+d
+```
+
+
+## Preparing the data
+It's fairly difficult to see what's going on here so let's limit our data to only the things we really care about here. We'll need the district and school codes, the group variables we just added in, and all the percentage in each category.
+
+```{r cleanup}
+d <- d %>%
+  select(district_code, school_code, grade, overall_group, specific_group, test_id, 
+         percentage_standard_not_met, percentage_standard_nearly_met,
+         percentage_standard_met, percentage_standard_exceeded)
+d
+```
+
+As you can see [here](https://caaspp.cde.ca.gov/sb2018/research_fixfileformat18) at the bottom of the page, a test id of 1 means it was English Language Arts, while 2 means Mathematics.
+
+```{r subject-code}
+d <- d %>%
+  mutate(test_id = ifelse(test_id == 1, "ELA", "Mathematics"))
+```
+
+Now we'll limit the data to only Hispanic/White students, which is the achievement gap we'll investigate across schools. I don't know the specific labels, so I'll look at these first, then filter accordingly.
+
+```{r hisp-white-rows}
+d %>%
+  filter(overall_group == "Ethnicity") %>%
+  count(specific_group)
+
+d <- d %>%
+  filter(overall_group == "Ethnicity",
+         specific_group == "White" |
+           specific_group == "Hispanic or Latino")
+d
+```
+
+Notice that the `school_code` and `district_code` are both 0 here. This is the code for the overall state, which we probably want to eliminate.
+
+```{r filter-remove-statewide}
+d <- d %>%
+  filter(school_code != "0000000")
+d
+```
+
+# Estimated effect sizes
+
+We now have a pretty basic dataset that we're ready to use to estimate effect size. If you recall from the previous post, what we need is the *cummumulate* percentage of students in each category, rather than the raw percents. I'm going to do this by first creating a lower category that has zero students in it. I'll then reshape the data to a long(er) format and calculate the cummulative sum.
+
+## Data prep
+First, create the lower category
+
+```{r low-cat}
+d <- d %>%
+  mutate(percentage_standard_low = 0)
+d
+```
+
+We need this because of the cummulative sum calculation that comes next. First though, let's reshape the data. After the reshape, I do a tiny bit of cleanup so the `category` variable doesn't repeat `"percentage_standard_"` over and over.
+
+```{r reshape}
+ld <- d %>%
+  gather(category, percentage, starts_with("percentage")) %>%
+  mutate(category = gsub("percentage_standard_", "", category))
+
+ld
+```
+
+Now we need to make sure the categories are ordered in ascending order within a school. The best way to do this, from my perspective, is to transform category into a categorical variable.
+
+```{r cat-fac}
+unique(ld$category)
+ld <- ld %>%
+  mutate(category = factor(category, 
+                           levels = c("low", "not_met", 
+                                      "nearly_met", "met", 
+                                      "exceeded"))) %>%
+  arrange(school_code, grade, specific_group, test_id, category)
+
+ld
+```
+
+And now we can calculate the cummulative percentage
+
+```{r cumm-perc}
+ld <- ld %>%
+  group_by(school_code, grade, specific_group, test_id) %>%
+  mutate(cumm_perc = cumsum(percentage))
+
+ld
+```
+
+And now we're getting close. We just need a column for each each group. We'll drop the raw percentage (so rows are uniquely defined) and spread the cummulative sum into to columns according to the specific group
+
+```{r spread}
+ld %>%
+  select(-percentage) %>%
+  spread(specific_group, cumm_perc)	
+```
+
+This looks basically correct, but to make it a bit more clear, let's remove schools that did not report percentages for both groups
+
+```{r drop-nas}
+ld <- ld %>%
+  select(-percentage) %>%
+  spread(specific_group, cumm_perc)	%>%
+  janitor::clean_names() %>%
+  drop_na(hispanic_or_latino, white) %>%
+  arrange(school_code, grade, test_id, category) 
+
+ld
+```
+
+And now we're very close, but if you look carefully you can see we have one issue remaining - every school has the low category reported for both groups. We need to remove schools that **only** have the low category reported (because they don't actually have any real data reported). There's lots of ways to do this, of course, but a fairly straightforward way is to count the rows within each school/grade/test combination and make sure there are five observations (four categories, plus the low category). Then we'll select for just those observations.
+
+```{r finalize-data}
+ld <- ld %>%
+  group_by(school_code, grade, test_id) %>%
+  mutate(n = n()) %>%
+  filter(n == 5) %>%
+  select(-n)
+
+ld
+```
+
+And our data are **finally** finalized! 🥳
+
+## Produce estimates
+First, let's compute the area under the paired curves. To do this, we just use an x/y integration. This will give us one estimate for each school/test/grade combination. I'll use the {pracma} package again. One small caveat here... to get the correct AUC, the cummulative percentages actually need to be cummulative proportions. We could have done this transformation above in our data prep (and maybe I should have done that) but you can also do it in the integration and it doesn't change the results at all. We'll take this approach.
+
+```{r aucs}
+aucs <- ld %>%
+  group_by(school_code, grade, test_id) %>%
+  summarize(auc = pracma::trapz(hispanic_or_latino / 100, 
+                                white / 100)) %>%
+  ungroup()
+
+aucs
+```
+
+As a reminder, these values represent the probability that a randomly selected student from the x axis group, in this case students coded Hispanic/Latino, would score above a randomly selected student from the y axis group, in this case students coded White.
+
+Now, we can transform these values into effect sizes using `sqrt(2)*qnorm(auc)`, where `auc` represents the values we just calculated.
+
+```{r v}
+v <- aucs %>%
+  mutate(v = sqrt(2)*qnorm(auc))
+
+v
+```
+
+And voilà! We have effect size estimates for **every school in California** that reported data on both groups.
+
+## Quick exploration
+
+This is already a long post, so I'll keep this brief, but let's quickly explore the effect size estimates.
+
+First, let's just look at the distributions by content area.
+
+```{r dist}
+theme_set(theme_minimal(15))
+
+means <- v %>%
+  group_by(test_id) %>%
+  summarize(av = mean(v))
+
+ggplot(v, aes(v)) +
+  annotate("rect",
+           inherit.aes = FALSE,
+           ymin = -Inf, 
+           ymax = Inf,
+           xmin = 0, 
+           xmax = Inf,
+           fill = "gray40",
+           alpha = .8) +
+  geom_histogram(fill = "cornflowerblue") +
+  geom_vline(aes(xintercept = av), means, size = 1.5, color = "magenta") +
+  geom_vline(xintercept = 0, color = "gray80") +
+  facet_wrap(~test_id, ncol = 1)
+```
+
+This gives us a quick understanding of the overall distribution. For the vast majority of schools, students coded Hispanic/Latino are scoring, on average, lower than students coded White. But this is not true for all schools. We can also see that these achievement disparities are, on average, slightly larger in Math than in ELA.
+
+Notice, however, that there is *considerable* variability between schools. What drives this variability? This is currently my primary area of interest.
+
+One more quick exploration, let's look at the distributions by grade. I'll use the {ggridges} package to produce distributions by grade.
+
+```{r grade-distributions}
+grade_means <- v %>%
+  group_by(grade, test_id) %>%
+  summarize(mean = mean(v),
+            mean_se = sundry::se(v))
+
+ggplot(v, aes(x = v, y = factor(grade))) +
+  ggridges::geom_density_ridges(fill = "cornflowerblue", 
+                                alpha = 0.4,
+                                color = "white",
+                                height = 0.4,
+                                scale = 1) +
+  geom_segment(aes(x = mean, xend = mean, 
+                   y = as.numeric(factor(grade)), 
+                   yend = as.numeric(factor(grade)) + 0.7), 
+               grade_means,
+               color = "gray40",
+               lty = "dashed") +
+  scale_x_continuous("", limits = c(-1.75, 1)) +
+  labs(y  = "Grade",
+       title = "Achievement gap effect sizes by grade",
+       subtitle = "Effect sizes estimated from ordinal percent proficient data",
+       caption = "Data obtained from the California Department of Education website: \n https://caaspp.cde.ca.gov/sb2018/ResearchFileList") +
+  facet_wrap(~test_id) 
+
+```
+
+Is there evidence of the achievement gaps growing by grade? Maybe... let's take a different look.
+
+```{r grade-change}
+ggplot(grade_means, aes(grade, mean)) +
+  geom_errorbar(aes(ymax = mean + qnorm(0.975)*mean_se,
+                    ymin = mean + qnorm(0.025)*mean_se)) +
+  geom_point() +
+  geom_smooth() +
+  facet_wrap(~test_id) +
+  scale_x_continuous(breaks = c(3:8, 11, 13))
+```
+
+Maybe some, but the evidence is not overwhelmingly strong in this case
+
+# Conclusions
+This was a long post, but an important one, I think. In the next post, I'll talk about geographical variation in school-level achievement gaps, which will require linking the schools with data including longitude and latitude, and exploring things like census variables to explore how they may relate to the between-school variability.
+
+Thanks for reading! Please get in touch if you found it interesting, see areas that need correcting, or have follow-up questions.

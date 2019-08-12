@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Applying V to study achievement gaps</title>
+      <link>/post/applying-v-to-study-achievement-gaps/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/applying-v-to-study-achievement-gaps/</guid>
+      <description>In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&amp;rsquo;ll put this method to work for the state of California. I&amp;rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade.</description>
+    </item>
     
     <item>
       <title>Estimating important things with public data</title>
