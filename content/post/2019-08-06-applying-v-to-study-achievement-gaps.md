@@ -287,7 +287,7 @@ d
 
 # Estimated effect sizes
 
-We now have a pretty basic dataset that we're ready to use to estimate effect size. If you recall from the previous post, what we need is the *cummumulate* percentage of students in each category, rather than the raw percents. I'm going to do this by first creating a lower category that has zero students in it. I'll then reshape the data to a long(er) format and calculate the cummulative sum.
+We now have a pretty basic dataset that we're ready to use to estimate effect size. If you recall from the previous post, what we need is the *cumulate* percentage of students in each category, rather than the raw percents. I'm going to do this by first creating a lower category that has zero students in it. I'll then reshape the data to a long(er) format and calculate the cumulative sum.
 
 ## Data prep
 First, create the lower category
@@ -319,7 +319,7 @@ d
 ## #   percentage_standard_exceeded <dbl>, percentage_standard_low <dbl>
 ```
 
-We need this because of the cummulative sum calculation that comes next. First though, let's reshape the data. After the reshape, I do a tiny bit of cleanup so the `category` variable doesn't repeat `"percentage_standard_"` over and over.
+We need this because of the cumulative sum calculation that comes next. First though, let's reshape the data. After the reshape, I do a tiny bit of cleanup so the `category` variable doesn't repeat `"percentage_standard_"` over and over.
 
 
 ```r
@@ -388,7 +388,7 @@ ld
 ## #   percentage <dbl>
 ```
 
-And now we can calculate the cummulative percentage
+And now we can calculate the cumulative percentage
 
 
 ```r
@@ -418,7 +418,7 @@ ld
 ## #   percentage <dbl>, cumm_perc <dbl>
 ```
 
-And now we're getting close. We just need a column for each each group. We'll drop the raw percentage (so rows are uniquely defined) and spread the cummulative sum into to columns according to the specific group
+And now we're getting close. We just need a column for each each group. We'll drop the raw percentage (so rows are uniquely defined) and spread the cumulative sum into to columns according to the specific group
 
 
 ```r
@@ -514,7 +514,7 @@ ld
 And our data are **finally** finalized! 🥳
 
 ## Produce estimates
-First, let's compute the area under the paired curves. To do this, we just use an x/y integration. This will give us one estimate for each school/test/grade combination. I'll use the {pracma} package again. One small caveat here... to get the correct AUC, the cummulative percentages actually need to be cummulative proportions. We could have done this transformation above in our data prep (and maybe I should have done that) but you can also do it in the integration and it doesn't change the results at all. We'll take this approach.
+First, let's compute the area under the paired curves. To do this, we just use an x/y integration. This will give us one estimate for each school/test/grade combination. I'll use the {pracma} package again. One small caveat here... to get the correct AUC, the cumulative percentages actually need to be cumulative proportions. We could have done this transformation above in our data prep (and maybe I should have done that) but you can also do it in the integration and it doesn't change the results at all. We'll take this approach.
 
 
 ```r

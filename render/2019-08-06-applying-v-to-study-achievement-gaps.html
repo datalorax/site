@@ -580,7 +580,7 @@ d</code></pre>
 </div>
 <div id="estimated-effect-sizes" class="section level1">
 <h1>Estimated effect sizes</h1>
-<p>We now have a pretty basic dataset that we’re ready to use to estimate effect size. If you recall from the previous post, what we need is the <em>cummumulate</em> percentage of students in each category, rather than the raw percents. I’m going to do this by first creating a lower category that has zero students in it. I’ll then reshape the data to a long(er) format and calculate the cummulative sum.</p>
+<p>We now have a pretty basic dataset that we’re ready to use to estimate effect size. If you recall from the previous post, what we need is the <em>cumulate</em> percentage of students in each category, rather than the raw percents. I’m going to do this by first creating a lower category that has zero students in it. I’ll then reshape the data to a long(er) format and calculate the cumulative sum.</p>
 <div id="data-prep" class="section level2">
 <h2>Data prep</h2>
 <p>First, create the lower category</p>
@@ -604,7 +604,7 @@ d</code></pre>
 ## #   percentage_standard_not_met &lt;dbl&gt;,
 ## #   percentage_standard_nearly_met &lt;dbl&gt;, percentage_standard_met &lt;dbl&gt;,
 ## #   percentage_standard_exceeded &lt;dbl&gt;, percentage_standard_low &lt;dbl&gt;</code></pre>
-<p>We need this because of the cummulative sum calculation that comes next. First though, let’s reshape the data. After the reshape, I do a tiny bit of cleanup so the <code>category</code> variable doesn’t repeat <code>&quot;percentage_standard_&quot;</code> over and over.</p>
+<p>We need this because of the cumulative sum calculation that comes next. First though, let’s reshape the data. After the reshape, I do a tiny bit of cleanup so the <code>category</code> variable doesn’t repeat <code>&quot;percentage_standard_&quot;</code> over and over.</p>
 <pre class="r"><code>ld &lt;- d %&gt;%
   gather(category, percentage, starts_with(&quot;percentage&quot;)) %&gt;%
   mutate(category = gsub(&quot;percentage_standard_&quot;, &quot;&quot;, category))
@@ -651,7 +651,7 @@ ld</code></pre>
 ## 10 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
 ## # … with 802,385 more rows, and 2 more variables: category &lt;fct&gt;,
 ## #   percentage &lt;dbl&gt;</code></pre>
-<p>And now we can calculate the cummulative percentage</p>
+<p>And now we can calculate the cumulative percentage</p>
 <pre class="r"><code>ld &lt;- ld %&gt;%
   group_by(school_code, grade, specific_group, test_id) %&gt;%
   mutate(cumm_perc = cumsum(percentage))
@@ -673,7 +673,7 @@ ld</code></pre>
 ## 10 65243         0100016         3 Ethnicity     Hispanic or L… Mathem…
 ## # … with 802,385 more rows, and 3 more variables: category &lt;fct&gt;,
 ## #   percentage &lt;dbl&gt;, cumm_perc &lt;dbl&gt;</code></pre>
-<p>And now we’re getting close. We just need a column for each each group. We’ll drop the raw percentage (so rows are uniquely defined) and spread the cummulative sum into to columns according to the specific group</p>
+<p>And now we’re getting close. We just need a column for each each group. We’ll drop the raw percentage (so rows are uniquely defined) and spread the cumulative sum into to columns according to the specific group</p>
 <pre class="r"><code>ld %&gt;%
   select(-percentage) %&gt;%
   spread(specific_group, cumm_perc) </code></pre>
@@ -746,7 +746,7 @@ ld</code></pre>
 </div>
 <div id="produce-estimates" class="section level2">
 <h2>Produce estimates</h2>
-<p>First, let’s compute the area under the paired curves. To do this, we just use an x/y integration. This will give us one estimate for each school/test/grade combination. I’ll use the {pracma} package again. One small caveat here… to get the correct AUC, the cummulative percentages actually need to be cummulative proportions. We could have done this transformation above in our data prep (and maybe I should have done that) but you can also do it in the integration and it doesn’t change the results at all. We’ll take this approach.</p>
+<p>First, let’s compute the area under the paired curves. To do this, we just use an x/y integration. This will give us one estimate for each school/test/grade combination. I’ll use the {pracma} package again. One small caveat here… to get the correct AUC, the cumulative percentages actually need to be cumulative proportions. We could have done this transformation above in our data prep (and maybe I should have done that) but you can also do it in the integration and it doesn’t change the results at all. We’ll take this approach.</p>
 <pre class="r"><code>aucs &lt;- ld %&gt;%
   group_by(school_code, grade, test_id) %&gt;%
   summarize(auc = pracma::trapz(hispanic_or_latino / 100, 
