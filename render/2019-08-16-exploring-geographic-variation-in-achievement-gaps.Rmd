@@ -234,7 +234,7 @@ mean_geo <- d %>%
 dir.create(here::here("render",
                       "2019-08-16-exploring-geographic-variation-in-achievement-gaps_files",
                       "maps"))
-leaflet() %>%
+leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   setView(lng = mean_geo$mean_long, 
              lat = mean_geo$mean_lat,
              zoom = 8) %>% 
@@ -259,7 +259,7 @@ leaflet() %>%
 
 
 ```{r save-leaflet-map2, echo = FALSE}
-leaflet() %>%
+leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   setView(lng = mean_geo$mean_long, 
              lat = mean_geo$mean_lat,
              zoom = 8) %>% 
@@ -302,7 +302,7 @@ d_99 <- filter(d, v > -1.5, v < 0.5)
 pal <- colorNumeric(palette = "RdBu",
                     domain = seq(1.5, -1.5, -0.01))
 
-leaflet() %>%
+leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   setView(lng = mean_geo$mean_long, 
              lat = mean_geo$mean_lat,
              zoom = 8) %>% 
@@ -344,7 +344,7 @@ leaflet() %>%
 
 
 ```{r save-leaflet-leg, echo = FALSE}
-leaflet() %>%
+leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   setView(lng = mean_geo$mean_long, 
              lat = mean_geo$mean_lat,
              zoom = 8) %>% 
@@ -402,7 +402,7 @@ pal_rev <- colorNumeric(palette = "RdBu",
                         domain = seq(-1.5, 1.5, 0.01),
                         reverse = TRUE)
 
-leaflet() %>%
+leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   setView(lng = mean_geo$mean_long, 
              lat = mean_geo$mean_lat,
              zoom = 8) %>% 
