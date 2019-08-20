@@ -50,7 +50,14 @@ v
 ## # … with 36,335 more rows
 ```
 
-As before, we have `v`, which is the achievement gap effect size, for each grade, in English/Language Arts (ELA) and Mathetmatics, for every school
+As before, we have `v`, which is the achievement gap effect size, for each grade, in English/Language Arts (ELA) and Mathetmatics, for every school. Let's calculate an average achivement gap across these variables so we have a single estimate for each school (we could, of course, explore them separately, but we'll go with the average for now).
+
+
+```r
+v <- v %>% 
+  group_by(county_code, district_code, school_code) %>% 
+  summarize(v = mean(v, na.rm = TRUE))
+```
 
 
 If we want to look at these data geographically, we need to geocode the schools. That is, we need to know the longitude and lattitude. Luckily for us, California supplies this information publicly [here](https://www.cde.ca.gov/ds/si/ds/pubschls.asp). The code below will load the text file into R. The data are tab delimited, which is why we use `read_delim` with the delimiter set to tabs, `"\t"`
@@ -121,21 +128,21 @@ d
 ```
 
 ```r
-## # A tibble: 36,345 x 10
-##    county_code district_code school_code grade test_id   auc      v CDSCode
-##    <chr>       <chr>         <chr>       <dbl> <chr>   <dbl>  <dbl> <chr>  
-##  1 01          10017         0125567         3 ELA     0.252 -0.945 011001…
-##  2 01          10017         0125567         3 Mathem… 0.308 -0.709 011001…
-##  3 01          10017         0125567        13 ELA     0.313 -0.690 011001…
-##  4 01          10017         0125567        13 Mathem… 0.304 -0.724 011001…
-##  5 01          31617         0131763        11 ELA     0.347 -0.556 013161…
-##  6 01          31617         0131763        11 Mathem… 0.454 -0.163 013161…
-##  7 01          31617         0131763        13 ELA     0.429 -0.253 013161…
-##  8 01          31617         0131763        13 Mathem… 0.458 -0.150 013161…
-##  9 01          61119         0111765         3 ELA     0.417 -0.297 016111…
-## 10 01          61119         0111765         3 Mathem… 0.264 -0.893 016111…
-## # … with 36,335 more rows, and 2 more variables: Longitude <chr>,
-## #   Latitude <chr>
+## # A tibble: 6,451 x 7
+## # Groups:   county_code, district_code [849]
+##    county_code district_code school_code      v CDSCode  Longitude Latitude
+##    <chr>       <chr>         <chr>        <dbl> <chr>    <chr>     <chr>   
+##  1 01          10017         0125567     -0.767 0110017… -122.189… 37.7783…
+##  2 01          31617         0131763     -0.280 0131617… -121.965… 37.5589…
+##  3 01          61119         0111765     -0.399 0161119… -122.286… 37.7818…
+##  4 01          61119         0119222     -0.769 0161119… -122.287… 37.7790…
+##  5 01          61119         0122085     -0.575 0161119… -122.285… 37.7764…
+##  6 01          61119         0126656     -0.789 0161119… -122.271… 37.7727…
+##  7 01          61119         0130229     -0.417 0161119… -122.245… 37.7649…
+##  8 01          61119         0130609     -0.579 0161119… -122.287… 37.7790…
+##  9 01          61119         0132142     -0.357 0161119… -122.289… 37.7727…
+## 10 01          61119         0134304     -0.193 0161119… -122.281… 37.7757…
+## # … with 6,441 more rows
 ```
 
 Last thing, longitude and latitude are currently stored as characters, and we want them to be numeric.
@@ -273,7 +280,7 @@ ggplot(ca, aes(long, lat, group = group)) +
 
 ![](../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/figure-html/cal-map4-1.png)<!-- -->
 
-Much better! What if we limit it even further? If we limit it to values greater thant -1.5 and less that 0.5 we will still represent `(table(d$v > -1.5 & d$v < 0.5)/length(d$v))[2])`% of the data, which is 99%.
+Much better! What if we limit it even further? If we limit it to values greater thant -1.5 and less that 0.5 we will still represent `(table(d$v > -1.5 & d$v < 0.5)/length(d$v))[2])`% of the data, which is 100%.
 
 
 ```r
@@ -355,13 +362,14 @@ leaflet() %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5)
+                   radius = 5,
+                   fillOpacity = 0.8)
 ```
 
 <iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m3.html" width="100%" height="400px"></iframe>
 
 
-Notice I've made the `radius = 5` to make circles representing schools smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!
+Notice I've made the `radius = 5` to make circles representing schools smaller and easier to see, and changed `fillOpacity = 0.8` to make the circles 80% opaque. We could keep messing with this, of course, but we have a fairly nice interactive map already!
 
 Last bit, let's add a legend. This turns out to be trickier than I would have hoped/thought. My initial attempt looked like this
 
@@ -375,7 +383,8 @@ leaflet() %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5) %>% 
+                   radius = 5,
+                   fillOpacity = 0.8) %>% 
   addLegend("bottomleft",
             data = d_99,
             values = ~v,
@@ -406,7 +415,8 @@ leaflet() %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5) %>% 
+                   radius = 5,
+                   fillOpacity = 0.8) %>% 
   addLegend("bottomleft",
             values = seq(-0.5, 1.5, 0.25), # Restrict range
             pal = pal_rev,                 # Use reversed color palette
@@ -433,13 +443,14 @@ leaflet() %>%
                    color = ~pal(v),
                    stroke = FALSE,
                    radius = 5,
+                   fillOpacity = 0.8,
                    label = ~as.character(round(v, 2))) %>% # add label
   addLegend("bottomleft",
-            values = seq(-0.5, 1.5, 0.25), 
-            pal = pal_rev,                 
-            labFormat = labelFormat(       
-              transform = function(x) x*-1 
-              ),                           
+            values = seq(-0.5, 1.5, 0.25),
+            pal = pal_rev,
+            labFormat = labelFormat(
+              transform = function(x) x*-1
+              ),
             title = "Hispanic-White <br/> Achievement Gap ES",
             opacity = 0.7)
 ```

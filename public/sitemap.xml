@@ -20,12 +20,6 @@
   </url>
   
   <url>
-    <loc>/tags/data-visualization/</loc>
-    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/effect-size/</loc>
     <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
@@ -52,6 +46,12 @@
   
   <url>
     <loc>/tags/</loc>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/data-visualization/</loc>
     <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
   </url>

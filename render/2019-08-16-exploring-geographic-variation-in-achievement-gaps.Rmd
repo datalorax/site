@@ -38,7 +38,13 @@ v <- read_rds(tmpfile)
 v
 ```
 
-As before, we have `v`, which is the achievement gap effect size, for each grade, in English/Language Arts (ELA) and Mathetmatics, for every school
+As before, we have `v`, which is the achievement gap effect size, for each grade, in English/Language Arts (ELA) and Mathetmatics, for every school. Let's calculate an average achivement gap across these variables so we have a single estimate for each school (we could, of course, explore them separately, but we'll go with the average for now).
+
+```{r mean-v}
+v <- v %>% 
+  group_by(county_code, district_code, school_code) %>% 
+  summarize(v = mean(v, na.rm = TRUE))
+```
 
 
 If we want to look at these data geographically, we need to geocode the schools. That is, we need to know the longitude and lattitude. Luckily for us, California supplies this information publicly [here](https://www.cde.ca.gov/ds/si/ds/pubschls.asp). The code below will load the text file into R. The data are tab delimited, which is why we use `read_delim` with the delimiter set to tabs, `"\t"`
@@ -226,6 +232,7 @@ library(leaflet)
 
 # Figure out center-ish of alameda county
 mean_geo <- d %>% 
+  ungroup() %>% 
   filter(county_code == "01") %>% 
   summarize(mean_long = mean(Longitude, na.rm = TRUE),
             mean_lat = mean(Latitude, na.rm = TRUE))
@@ -291,7 +298,8 @@ leaflet() %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5)
+                   radius = 5,
+                   fillOpacity = 0.8)
 ```
 
 ```{r save-leaflet-map3, echo = FALSE}
@@ -309,7 +317,8 @@ leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5) %>% 
+                   radius = 5,
+                   fillOpacity = 0.8) %>% 
   saveWidget(file=here::here("render",
                              "2019-08-16-exploring-geographic-variation-in-achievement-gaps_files",
                              "maps",
@@ -319,7 +328,7 @@ knitr::include_url("../2019-08-16-exploring-geographic-variation-in-achievement-
 ```
 
 
-Notice I've made the `radius = 5` to make circles representing schools smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!
+Notice I've made the `radius = 5` to make circles representing schools smaller and easier to see, and changed `fillOpacity = 0.8` to make the circles 80% opaque. We could keep messing with this, of course, but we have a fairly nice interactive map already!
 
 Last bit, let's add a legend. This turns out to be trickier than I would have hoped/thought. My initial attempt looked like this
 
@@ -332,7 +341,8 @@ leaflet() %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5) %>% 
+                   radius = 5,
+                   fillOpacity = 0.8) %>% 
   addLegend("bottomleft",
             data = d_99,
             values = ~v,
@@ -351,7 +361,8 @@ leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5) %>% 
+                   radius = 5,
+                   fillOpacity = 0.8) %>% 
   addLegend("bottomleft",
             data = d_99,
             values = ~v,
@@ -384,7 +395,8 @@ leaflet() %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5) %>% 
+                   radius = 5,
+                   fillOpacity = 0.8) %>% 
   addLegend("bottomleft",
             values = seq(-0.5, 1.5, 0.25), # Restrict range
             pal = pal_rev,                 # Use reversed color palette
@@ -409,7 +421,8 @@ leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
   addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
                    color = ~pal(v),
                    stroke = FALSE,
-                   radius = 5) %>% 
+                   radius = 5,
+                   fillOpacity = 0.8) %>% 
   addLegend("bottomleft",
             values = seq(-0.5, 1.5, 0.25), # Restrict range
             pal = pal_rev,                 # Use reversed color palette
@@ -439,13 +452,14 @@ leaflet() %>%
                    color = ~pal(v),
                    stroke = FALSE,
                    radius = 5,
+                   fillOpacity = 0.8,
                    label = ~as.character(round(v, 2))) %>% # add label
   addLegend("bottomleft",
-            values = seq(-0.5, 1.5, 0.25), 
-            pal = pal_rev,                 
-            labFormat = labelFormat(       
-              transform = function(x) x*-1 
-              ),                           
+            values = seq(-0.5, 1.5, 0.25),
+            pal = pal_rev,
+            labFormat = labelFormat(
+              transform = function(x) x*-1
+              ),
             title = "Hispanic-White <br/> Achievement Gap ES",
             opacity = 0.7)
 ```
@@ -460,6 +474,7 @@ leaflet(options = leafletOptions(preferCanvas = TRUE)) %>%
                    color = ~pal(v),
                    stroke = FALSE,
                    radius = 5,
+                   fillOpacity = 0.8,
                    label = ~as.character(round(v, 2))) %>% # add label
   addLegend("bottomleft",
             values = seq(-0.5, 1.5, 0.25), 
