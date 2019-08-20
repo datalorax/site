@@ -2,34 +2,71 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/post/applying-v-to-study-achievement-gaps/</loc>
-    <lastmod>2019-08-06T20:28:17-07:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
+    <loc>/categories/achievement-gap/</loc>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-08-06T20:28:17-07:00</lastmod>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-08-06T20:28:17-07:00</lastmod>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/data-visualization/</loc>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/effect-size/</loc>
-    <lastmod>2019-08-06T20:28:17-07:00</lastmod>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/exploring-geographic-variation-in-achievement-gaps/</loc>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/mapping/</loc>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-08-06T20:28:17-07:00</lastmod>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/applying-v-to-study-achievement-gaps/</loc>
+    <lastmod>2019-08-06T20:28:17-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -45,20 +82,8 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-06T20:28:17-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/v/</loc>
     <lastmod>2019-08-06T20:28:17-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/achievement-gap/</loc>
-    <lastmod>2019-07-29T19:57:09-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -67,12 +92,6 @@
     <lastmod>2019-07-29T19:57:09-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/data-visualization/</loc>
-    <lastmod>2018-06-19T16:41:49-07:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -243,12 +262,6 @@
   
   <url>
     <loc>/tags/census-data/</loc>
-    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/mapping/</loc>
     <lastmod>2017-11-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

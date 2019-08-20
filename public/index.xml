@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Exploring Geographic Variation in Achievement Gaps</title>
+      <link>/post/exploring-geographic-variation-in-achievement-gaps/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/exploring-geographic-variation-in-achievement-gaps/</guid>
+      <description>This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically.</description>
+    </item>
     
     <item>
       <title>Applying V to study achievement gaps</title>

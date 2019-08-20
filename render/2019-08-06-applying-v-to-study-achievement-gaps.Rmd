@@ -76,6 +76,7 @@ Now we can join these data
 ```{r join}
 d <- left_join(d, subgroups)
 d
+names(d)
 ```
 
 
@@ -84,9 +85,10 @@ It's fairly difficult to see what's going on here so let's limit our data to onl
 
 ```{r cleanup}
 d <- d %>%
-  select(district_code, school_code, grade, overall_group, specific_group, test_id, 
-         percentage_standard_not_met, percentage_standard_nearly_met,
-         percentage_standard_met, percentage_standard_exceeded)
+  select(county_code, district_code, school_code, grade, overall_group,
+         specific_group, test_id, percentage_standard_not_met,
+         percentage_standard_nearly_met,percentage_standard_met,
+         percentage_standard_exceeded)
 d
 ```
 
@@ -206,7 +208,7 @@ First, let's compute the area under the paired curves. To do this, we just use a
 
 ```{r aucs}
 aucs <- ld %>%
-  group_by(school_code, grade, test_id) %>%
+  group_by(county_code, district_code, school_code, grade, test_id) %>%
   summarize(auc = pracma::trapz(hispanic_or_latino / 100, 
                                 white / 100)) %>%
   ungroup()
@@ -223,6 +225,10 @@ v <- aucs %>%
   mutate(v = sqrt(2)*qnorm(auc))
 
 v
+```
+
+```{r label, options}
+write_rds(v, "v.rds")
 ```
 
 And voilà! We have effect size estimates for **every school in California** that reported data on both groups.

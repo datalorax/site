@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Exploring Geographic Variation in Achievement Gaps - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically." />
+
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.0" />
+
+
+<link rel="canonical" href="/post/exploring-geographic-variation-in-achievement-gaps/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Exploring Geographic Variation in Achievement Gaps" />
+<meta property="og:description" content="This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/exploring-geographic-variation-in-achievement-gaps/" />
+<meta property="article:published_time" content="2019-08-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-16T12:45:07-07:00" />
+<meta itemprop="name" content="Exploring Geographic Variation in Achievement Gaps">
+<meta itemprop="description" content="This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically.">
+
+
+<meta itemprop="datePublished" content="2019-08-16T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-08-16T12:45:07-07:00" />
+<meta itemprop="wordCount" content="2295">
+
+
+
+<meta itemprop="keywords" content="Data Visualization,Mapping,Machine Learning," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Exploring Geographic Variation in Achievement Gaps"/>
+<meta name="twitter:description" content="This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">datalorax</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">datalorax</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Exploring Geographic Variation in Achievement Gaps</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-16 </span>
+        <div class="post-category">
+            
+              <a href="/categories/achievement-gap/"> Achievement Gap </a>
+            
+              <a href="/categories/effect-size/"> Effect Size </a>
+            
+          </div>
+        <span class="more-meta"> 2295 words </span>
+        <span class="more-meta"> 11 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#the-data">The Data</a></li>
+<li><a href="#a-basic-map">A basic Map</a></li>
+<li><a href="#interactive-maps">Interactive maps</a></li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The <a href="http://www.datalorax.com/post/estimating-important-things-with-public-data/">first post</a> described the method, while the <a href="http://www.datalorax.com/post/applying-v-to-study-achievement-gaps/">second</a> applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically.</p>
+
+<h1 id="the-data">The Data</h1>
+
+<p>We&rsquo;ll use the same data we used in the last post, which represents school-level Hispanic-White achievement gap effect sizes for every school reporting data on both groups in California. To avoid going through all the gymnastics of creating the dataset, though, I&rsquo;ve posted a file to my website repo. The code below should allow you to read the data directly from the repo.</p>
+
+<pre><code class="language-r">library(tidyverse)
+tmpfile &lt;- tempfile()
+download.file(&quot;https://github.com/datalorax/site/raw/master/content/post/v.rds&quot;,
+              tmpfile)
+
+v &lt;- read_rds(tmpfile)
+v
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 36,345 x 7
+##    county_code district_code school_code grade test_id       auc      v
+##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;
+##  1 01          10017         0125567         3 ELA         0.252 -0.945
+##  2 01          10017         0125567         3 Mathematics 0.308 -0.709
+##  3 01          10017         0125567        13 ELA         0.313 -0.690
+##  4 01          10017         0125567        13 Mathematics 0.304 -0.724
+##  5 01          31617         0131763        11 ELA         0.347 -0.556
+##  6 01          31617         0131763        11 Mathematics 0.454 -0.163
+##  7 01          31617         0131763        13 ELA         0.429 -0.253
+##  8 01          31617         0131763        13 Mathematics 0.458 -0.150
+##  9 01          61119         0111765         3 ELA         0.417 -0.297
+## 10 01          61119         0111765         3 Mathematics 0.264 -0.893
+## # … with 36,335 more rows
+</code></pre>
+
+<p>As before, we have <code>v</code>, which is the achievement gap effect size, for each grade, in English/Language Arts (ELA) and Mathetmatics, for every school</p>
+
+<p>If we want to look at these data geographically, we need to geocode the schools. That is, we need to know the longitude and lattitude. Luckily for us, California supplies this information publicly <a href="https://www.cde.ca.gov/ds/si/ds/pubschls.asp">here</a>. The code below will load the text file into R. The data are tab delimited, which is why we use <code>read_delim</code> with the delimiter set to tabs, <code>&quot;\t&quot;</code></p>
+
+<pre><code class="language-r">schools &lt;- read_delim(&quot;https://www.cde.ca.gov/schooldirectory/report?rid=dl1&amp;tp=txt&quot;,
+                      delim = &quot;\t&quot;)
+schools
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 18,061 x 51
+##    CDSCode NCESDist NCESSchool StatusType County District School Street
+##    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; 
+##  1 011001… 0691051  No Data    Active     Alame… Alameda… No Da… 313 W…
+##  2 011001… 0691051  10546      Closed     Alame… Alameda… FAME … 39899…
+##  3 011001… 0691051  10947      Active     Alame… Alameda… Envis… 1515 …
+##  4 011001… 0691051  12283      Closed     Alame… Alameda… Aspir… 2125 …
+##  5 011001… 0691051  12844      Active     Alame… Alameda… Commu… 2111 …
+##  6 011001… 0691051  12901      Active     Alame… Alameda… Yu Mi… 1086 …
+##  7 011001… 0691051  13008      Active     Alame… Alameda… Urban… 5328 …
+##  8 011001… 0691051  13772      Active     Alame… Alameda… Epic … 1045 …
+##  9 011001… 0691051  No Data    Closed     Alame… Alameda… Techn… 597 C…
+## 10 011001… 0691051  09264      Active     Alame… Alameda… Alame… 2500 …
+## # … with 18,051 more rows, and 43 more variables: StreetAbr &lt;chr&gt;,
+## #   City &lt;chr&gt;, Zip &lt;chr&gt;, State &lt;chr&gt;, MailStreet &lt;chr&gt;,
+## #   MailStrAbr &lt;chr&gt;, MailCity &lt;chr&gt;, MailZip &lt;chr&gt;, MailState &lt;chr&gt;,
+## #   Phone &lt;chr&gt;, Ext &lt;chr&gt;, WebSite &lt;chr&gt;, OpenDate &lt;chr&gt;,
+## #   ClosedDate &lt;chr&gt;, Charter &lt;chr&gt;, CharterNum &lt;chr&gt;, FundingType &lt;chr&gt;,
+## #   DOC &lt;chr&gt;, DOCType &lt;chr&gt;, SOC &lt;chr&gt;, SOCType &lt;chr&gt;, EdOpsCode &lt;chr&gt;,
+## #   EdOpsName &lt;chr&gt;, EILCode &lt;chr&gt;, EILName &lt;chr&gt;, GSoffered &lt;chr&gt;,
+## #   GSserved &lt;chr&gt;, Virtual &lt;chr&gt;, Magnet &lt;chr&gt;, YearRoundYN &lt;chr&gt;,
+## #   FederalDFCDistrictID &lt;chr&gt;, Latitude &lt;chr&gt;, Longitude &lt;chr&gt;,
+## #   AdmFName1 &lt;chr&gt;, AdmLName1 &lt;chr&gt;, AdmEmail1 &lt;chr&gt;, AdmFName2 &lt;chr&gt;,
+## #   AdmLName2 &lt;chr&gt;, AdmEmail2 &lt;chr&gt;, AdmFName3 &lt;chr&gt;, AdmLName3 &lt;chr&gt;,
+## #   AdmEmail3 &lt;chr&gt;, LastUpDate &lt;chr&gt;
+</code></pre>
+
+<p>This data file has longitude and latitude, which we want, so we&rsquo;ll need to join it. If we look at the documentation for the data, we&rsquo;ll see that <code>CDSCode</code> is the California school ID. Let&rsquo;s check that it uniquely identifies each school.</p>
+
+<pre><code class="language-r">schools %&gt;% 
+  count(CDSCode) %&gt;% 
+  filter(n &gt; 1)
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 0 x 2
+## # … with 2 variables: CDSCode &lt;chr&gt;, n &lt;int&gt;
+</code></pre>
+
+<p>And it does! A little sleuthing reveals that this id is the combination of <code>county_code</code>, <code>district_code</code>, and <code>school_code</code> in our <code>v</code> file. Let&rsquo;s recreate this ID variable in <code>v</code>, then join the files. We could use <code>tidyr::unite</code> to create the ID variable, but I want to keep the individual variables here for reasons that will become apparent later on, so I&rsquo;ll do it through a call to <code>dplyr::mutate</code> instead.</p>
+
+<pre><code class="language-r">v &lt;- v %&gt;% 
+  mutate(CDSCode = paste0(county_code, district_code, school_code))
+
+# Limit `schools` to just the variables we really want
+schools &lt;- schools %&gt;% 
+  select(CDSCode, Longitude, Latitude)
+
+d &lt;- left_join(v, schools)
+d
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 36,345 x 10
+##    county_code district_code school_code grade test_id   auc      v CDSCode
+##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+##  1 01          10017         0125567         3 ELA     0.252 -0.945 011001…
+##  2 01          10017         0125567         3 Mathem… 0.308 -0.709 011001…
+##  3 01          10017         0125567        13 ELA     0.313 -0.690 011001…
+##  4 01          10017         0125567        13 Mathem… 0.304 -0.724 011001…
+##  5 01          31617         0131763        11 ELA     0.347 -0.556 013161…
+##  6 01          31617         0131763        11 Mathem… 0.454 -0.163 013161…
+##  7 01          31617         0131763        13 ELA     0.429 -0.253 013161…
+##  8 01          31617         0131763        13 Mathem… 0.458 -0.150 013161…
+##  9 01          61119         0111765         3 ELA     0.417 -0.297 016111…
+## 10 01          61119         0111765         3 Mathem… 0.264 -0.893 016111…
+## # … with 36,335 more rows, and 2 more variables: Longitude &lt;chr&gt;,
+## #   Latitude &lt;chr&gt;
+</code></pre>
+
+<p>Last thing, longitude and latitude are currently stored as characters, and we want them to be numeric.</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;% 
+  mutate(Longitude = as.numeric(Longitude),
+         Latitude = as.numeric(Latitude))
+</code></pre>
+
+<p>And there we are!</p>
+
+<h1 id="a-basic-map">A basic Map</h1>
+
+<p>Let&rsquo;s start by at least trying to plot all of our data. First, we&rsquo;ll get a map of California.</p>
+
+<pre><code class="language-r">ca &lt;- map_data(&quot;state&quot;) %&gt;% 
+  filter(region == &quot;california&quot;)
+head(ca)
+</code></pre>
+
+<pre><code class="language-r">##        long      lat group order     region subregion
+## 1 -120.0060 42.00927     4   667 california      &lt;NA&gt;
+## 2 -120.0060 41.20139     4   668 california      &lt;NA&gt;
+## 3 -120.0060 39.70024     4   669 california      &lt;NA&gt;
+## 4 -119.9946 39.44241     4   670 california      &lt;NA&gt;
+## 5 -120.0060 39.31636     4   671 california      &lt;NA&gt;
+## 6 -120.0060 39.16166     4   672 california      &lt;NA&gt;
+</code></pre>
+
+<p>Now we can produce the map with a basic call to <strong>{ggplot2}</strong>, using <code>geom_polygon</code>.</p>
+
+<pre><code class="language-r">ggplot(ca, aes(long, lat, group = group)) +
+  geom_polygon() +
+  coord_fixed(ratio = 1.3)
+</code></pre>
+
+<p><img src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/figure-html/cal-map1-1.png" alt="" /><!-- --></p>
+
+<p>Let&rsquo;s switch up the theme some. This is a slightly adapted version of Timo Grossenbacher&rsquo;s theme he outlines <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">here</a>.</p>
+
+<pre><code class="language-r">theme_map &lt;- function(...) {
+  theme_minimal(base_size = 15) +
+  theme(
+    text = element_text(color = &quot;#E7F0F2&quot;),
+    axis.line = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.grid.major = element_line(color = &quot;#E7F0F2&quot;, size = 0.2),
+    panel.grid.minor = element_blank(),
+    plot.background = element_rect(fill = &quot;gray20&quot;, color = NA), 
+    panel.background = element_rect(fill = &quot;gray20&quot;, color = NA), 
+    legend.background = element_rect(fill = &quot;gray20&quot;, color = NA),
+    panel.border = element_blank(),
+    ...
+  )
+}
+theme_set(theme_map())
+</code></pre>
+
+<p>Now we just expand that to include points for our schools, and color them by their achievement gap effect size.</p>
+
+<pre><code class="language-r">ggplot(ca, aes(long, lat, group = group)) +
+  geom_polygon(fill = &quot;gray60&quot;,
+               color = &quot;white&quot;) +
+  geom_point(aes(Longitude, Latitude, color = v), 
+             data = d,
+             inherit.aes = FALSE) +
+  coord_fixed(ratio = 1.3) 
+</code></pre>
+
+<p><img src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/figure-html/cal-map2-1.png" alt="" /><!-- --></p>
+
+<p>This is not terrifically helpful, in part because higher effect sizes are darker, and we already have them overlaid on a dark background (the state). Instead, this is probably a good place to use a diverging palette, where the middle of the color scale centers on 0 (no acheivement gap).</p>
+
+<pre><code class="language-r">#install.packages(&quot;colorspace&quot;)
+library(colorspace)
+ggplot(ca, aes(long, lat, group = group)) +
+  geom_polygon(fill = &quot;gray60&quot;,
+               color = &quot;white&quot;) +
+  geom_point(aes(Longitude, Latitude, color = v), 
+             data = d,
+             inherit.aes = FALSE,
+             size = 2.5) +
+  scale_color_continuous_diverging(&quot;Blue-Red3&quot;,
+                                   rev = TRUE) +
+  coord_fixed(ratio = 1.3) 
+</code></pre>
+
+<p><img src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/figure-html/cal-map3-1.png" alt="" /><!-- --></p>
+
+<p>Now we&rsquo;re starting to get somewhere. We definitely have more gradation, but it&rsquo;s still pretty tough to see a ton of variation. Maybe we can limit our scale a bit to highlight the variation better. Let&rsquo;s look at our histogram of V again to see what might be reasonable values.</p>
+
+<pre><code class="language-r">ggplot(d, aes(v)) +
+  geom_histogram(fill = &quot;cornflowerblue&quot;) +
+  theme(axis.text.x = element_text(color = &quot;#E7F0F2&quot;)) # add x-axis back in
+</code></pre>
+
+<p><img src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/figure-html/histo-1.png" alt="" /><!-- --></p>
+
+<p>From this plot, it looks like almost <strong>all</strong> of the data are greater than -2, but our axis goes all the way out to -3. Let&rsquo;s limit it out to -2 and see what happens.</p>
+
+<pre><code class="language-r">ggplot(ca, aes(long, lat, group = group)) +
+  geom_polygon(fill = &quot;gray60&quot;,
+               color = &quot;gray20&quot;) +
+  geom_point(aes(Longitude, Latitude, color = v), 
+             data = d,
+             inherit.aes = FALSE,
+             size = 2.5) +
+  scale_color_continuous_diverging(&quot;Blue-Red3&quot;,
+                                   rev = TRUE,
+                                   limits = c(-2, 1)) +
+  coord_fixed(ratio = 1.3)
+</code></pre>
+
+<p><img src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/figure-html/cal-map4-1.png" alt="" /><!-- --></p>
+
+<p>Much better! What if we limit it even further? If we limit it to values greater thant -1.5 and less that 0.5 we will still represent <code>(table(d$v &gt; -1.5 &amp; d$v &lt; 0.5)/length(d$v))[2])</code>% of the data, which is 99%.</p>
+
+<pre><code class="language-r">ggplot(ca, aes(long, lat, group = group)) +
+  geom_polygon(fill = &quot;gray60&quot;,
+               color = &quot;gray20&quot;) +
+  geom_point(aes(Longitude, Latitude, color = v), 
+             data = d,
+             inherit.aes = FALSE,
+             size = 2.5) +
+  scale_color_continuous_diverging(&quot;Blue-Red3&quot;,
+                                   rev = TRUE,
+                                   limits = c(-1.5, 0.5)) +
+  coord_fixed(ratio = 1.3)
+</code></pre>
+
+<p><img src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/figure-html/cal-map5-1.png" alt="" /><!-- --></p>
+
+<p>And now we&rsquo;re really getting somewhere. We can see the variation even better, and it&rsquo;s pretty clear  that the highest achievement gaps are occurring in the bay area. let&rsquo;s investigate further.</p>
+
+<h1 id="interactive-maps">Interactive maps</h1>
+
+<p>I started by limiting the above maps to Alameda County, which includes the bay area, but instead I decided to go with some interactive mapping that <em>start</em> around Alameda county and you can move to wherever you&rsquo;d like from there. When you&rsquo;re dealing with larger scale data like this, interactive maps can be <em>really</em> beneficial. One of my favorite examples on the <a href="http://personal.tcu.edu/kylewalker/maps/education/#12/37.7536/-122.4473">educational attainment of America</a> by <a href="https://twitter.com/kyle_e_walker?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">Kyle Walker</a> whose work I really admire. He does a lot of amazing things that I think are fascinating, beautiful, and often really helpful (in the case of tools that he creates, such as <a href="https://walkerke.github.io/tidycensus/"><strong>{tidycensus}</strong></a>). The educational attainment map I&rsquo;ve linked to above was built with mapbox, and it&rsquo;s really intriguing to me, but it&rsquo;s still on my &ldquo;to learn&rdquo; list and I haven&rsquo;t dug into it much yet (maybe a later post!). So for now, let&rsquo;s  create a quick interactive map of California using <strong>{leaflet}</strong>.</p>
+
+<p>Let&rsquo;s first make a map that starts in the bay area. It&rsquo;s amazing how easy this is.</p>
+
+<pre><code class="language-r">library(leaflet)
+
+# Figure out center-ish of alameda county
+mean_geo &lt;- d %&gt;% 
+  filter(county_code == &quot;01&quot;) %&gt;% 
+  summarize(mean_long = mean(Longitude, na.rm = TRUE),
+            mean_lat = mean(Latitude, na.rm = TRUE))
+  
+# Make the map
+leaflet() %&gt;%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %&gt;% 
+  addTiles()
+</code></pre>
+
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m1.html" width="100%" height="400px"></iframe>
+
+<p>Now we&rsquo;ll add circles for each school</p>
+
+<pre><code class="language-r">leaflet() %&gt;%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %&gt;% 
+  addTiles() %&gt;% 
+  addCircleMarkers(data = d, lng = ~Longitude, lat = ~Latitude)
+</code></pre>
+
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m2.html" width="100%" height="400px"></iframe>
+
+<p>Notice that after I&rsquo;ve declared the data source, I can refer to variables within the data using <code>~</code>.</p>
+
+<p>Obviously, the above isn&rsquo;t very helpful, but we&rsquo;re getting there. Let&rsquo;s change the color of these according to the achievement gap effect size, and again limit the data a bit so there&rsquo;s higher contrast. I&rsquo;m going to call the data subset object d_99 to remind myself that it has (actully more than) 99% of the overall data.</p>
+
+<pre><code class="language-r">d_99 &lt;- filter(d, v &gt; -1.5, v &lt; 0.5)
+
+# Create a continuous color pallette of reds and blues
+pal &lt;- colorNumeric(palette = &quot;RdBu&quot;,
+                    domain = seq(1.5, -1.5, -0.01))
+
+leaflet() %&gt;%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %&gt;% 
+  addTiles() %&gt;% 
+  addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
+                   color = ~pal(v),
+                   stroke = FALSE,
+                   radius = 5)
+</code></pre>
+
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m3.html" width="100%" height="400px"></iframe>
+
+<p>Notice I&rsquo;ve made the <code>radius = 5</code> to make them smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!</p>
+
+<p>Last bit, let&rsquo;s add a legend. This turns out to be trickier than I would have hoped/thought. My initial attempt looked like this</p>
+
+<pre><code class="language-r">leaflet() %&gt;%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %&gt;% 
+  addTiles() %&gt;% 
+  addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
+                   color = ~pal(v),
+                   stroke = FALSE,
+                   radius = 5) %&gt;% 
+  addLegend(&quot;bottomleft&quot;,
+            data = d_99,
+            values = ~v,
+            pal = pal, 
+            title = &quot;Hispanic-White &lt;br/&gt; Achievement Gap ES&quot;,
+            opacity = 0.7)
+</code></pre>
+
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m4.html" width="100%" height="400px"></iframe>
+
+<p>Which is actually correct but everything is kind of backwards. We have negative values going up vertically, rather than down, which feels a lot more natural. What I ended up doing is reversing the color palette, restricting the range to just the values I wanted, and then (to correct for the reversed palette) multiplied each value by -1.</p>
+
+<p>Because I wanted to have the schools with no real achievement gap to sort of fade into the background, I also changed the default tiles to some that are mostly white, which again just sort of helps with the overall contrast.</p>
+
+<pre><code class="language-r"># Create reversed color palette
+pal_rev &lt;- colorNumeric(palette = &quot;RdBu&quot;,
+                        domain = seq(-1.5, 1.5, 0.01),
+                        reverse = TRUE)
+
+leaflet() %&gt;%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %&gt;% 
+  addProviderTiles(&quot;CartoDB.Positron&quot;) %&gt;% # Changed from `add_tiles()`
+  addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
+                   color = ~pal(v),
+                   stroke = FALSE,
+                   radius = 5) %&gt;% 
+  addLegend(&quot;bottomleft&quot;,
+            values = seq(-0.5, 1.5, 0.25), # Restrict range
+            pal = pal_rev,                 # Use reversed color palette
+            labFormat = labelFormat(       #
+              transform = function(x) x*-1 # Multiply by -1
+              ),                           #
+            title = &quot;Hispanic-White &lt;br/&gt; Achievement Gap ES&quot;,
+            opacity = 0.7)
+</code></pre>
+
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m5.html" width="100%" height="400px"></iframe>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>There&rsquo;s a fair amount of achievement gap variance between schools in California, and there&rsquo;s some evidence of geographic clustering too. This is certainly not unique to California, but understanding what is driving this geographical variation certainly seems like a good place to start if we&rsquo;re going to try to start reducing these inequities.</p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2019-08-16</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/data-visualization/">Data Visualization</a>
+          
+          <a href="/tags/mapping/">Mapping</a>
+          
+          <a href="/tags/machine-learning/">Machine Learning</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/applying-v-to-study-achievement-gaps/">
+            <span class="next-text nav-default">Applying V to study achievement gaps</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/datalorax_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/datalorax" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme based on 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2019
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
