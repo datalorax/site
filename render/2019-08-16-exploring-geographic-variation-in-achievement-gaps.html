@@ -606,7 +606,7 @@ leaflet() %&gt;%
                    radius = 5)</code></pre>
 <iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m3.html" width="100%" height="400px">
 </iframe>
-<p>Notice I’ve made the <code>radius = 5</code> to make them smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!</p>
+<p>Notice I’ve made the <code>radius = 5</code> to make circles representing schools smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!</p>
 <p>Last bit, let’s add a legend. This turns out to be trickier than I would have hoped/thought. My initial attempt looked like this</p>
 <pre class="r"><code>leaflet() %&gt;%
   setView(lng = mean_geo$mean_long, 
@@ -651,6 +651,31 @@ leaflet() %&gt;%
             opacity = 0.7)</code></pre>
 <iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m5.html" width="100%" height="400px">
 </iframe>
+<div id="one-final-edit" class="section level2">
+<h2>One final edit</h2>
+<p>My good friend and colleague, <a href="https://www.brtprojects.org/employees/brock-rowley/">Brock Rowley</a>, was reviewing this post and said something along the lines of “It would really be nice if I could know the exact values for some of these schools.” So let’s make that happen! What we’ll do is just add a <code>label</code> to the circles, as below.</p>
+<pre class="r"><code>leaflet() %&gt;%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %&gt;% 
+  addProviderTiles(&quot;CartoDB.Positron&quot;) %&gt;% 
+  addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
+                   color = ~pal(v),
+                   stroke = FALSE,
+                   radius = 5,
+                   label = ~as.character(round(v, 2))) %&gt;% # add label
+  addLegend(&quot;bottomleft&quot;,
+            values = seq(-0.5, 1.5, 0.25), 
+            pal = pal_rev,                 
+            labFormat = labelFormat(       
+              transform = function(x) x*-1 
+              ),                           
+            title = &quot;Hispanic-White &lt;br/&gt; Achievement Gap ES&quot;,
+            opacity = 0.7)</code></pre>
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m6.html" width="100%" height="400px">
+</iframe>
+<p>And that’s it! Notice because it’s a label we had to transform it to character first. We could make it fancier, of course, but that’s the basic approach.</p>
+</div>
 </div>
 <div id="conclusions" class="section level1">
 <h1>Conclusions</h1>

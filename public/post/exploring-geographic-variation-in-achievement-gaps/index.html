@@ -61,11 +61,11 @@
 
 <meta itemprop="datePublished" content="2019-08-16T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-08-16T12:45:07-07:00" />
-<meta itemprop="wordCount" content="2295">
+<meta itemprop="wordCount" content="2448">
 
 
 
-<meta itemprop="keywords" content="Data Visualization,Mapping,Machine Learning," />
+<meta itemprop="keywords" content="Data Visualization,Mapping," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Exploring Geographic Variation in Achievement Gaps"/>
 <meta name="twitter:description" content="This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically."/>
@@ -151,8 +151,8 @@
               <a href="/categories/effect-size/"> Effect Size </a>
             
           </div>
-        <span class="more-meta"> 2295 words </span>
-        <span class="more-meta"> 11 mins read </span>
+        <span class="more-meta"> 2448 words </span>
+        <span class="more-meta"> 12 mins read </span>
         
       </div>
     </header>
@@ -167,7 +167,10 @@
 <ul>
 <li><a href="#the-data">The Data</a></li>
 <li><a href="#a-basic-map">A basic Map</a></li>
-<li><a href="#interactive-maps">Interactive maps</a></li>
+<li><a href="#interactive-maps">Interactive maps</a>
+<ul>
+<li><a href="#one-final-edit">One final edit</a></li>
+</ul></li>
 <li><a href="#conclusions">Conclusions</a></li>
 </ul>
 </nav>
@@ -481,7 +484,7 @@ leaflet() %&gt;%
 
 <iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m3.html" width="100%" height="400px"></iframe>
 
-<p>Notice I&rsquo;ve made the <code>radius = 5</code> to make them smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!</p>
+<p>Notice I&rsquo;ve made the <code>radius = 5</code> to make circles representing schools smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!</p>
 
 <p>Last bit, let&rsquo;s add a legend. This turns out to be trickier than I would have hoped/thought. My initial attempt looked like this</p>
 
@@ -534,6 +537,34 @@ leaflet() %&gt;%
 
 <iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m5.html" width="100%" height="400px"></iframe>
 
+<h2 id="one-final-edit">One final edit</h2>
+
+<p>My good friend and colleague, <a href="https://www.brtprojects.org/employees/brock-rowley/">Brock Rowley</a>, was reviewing this post and said something along the lines of &ldquo;It would really be nice if I could know the exact values for some of these schools.&rdquo; So let&rsquo;s make that happen! What we&rsquo;ll do is just add a <code>label</code> to the circles, as below.</p>
+
+<pre><code class="language-r">leaflet() %&gt;%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %&gt;% 
+  addProviderTiles(&quot;CartoDB.Positron&quot;) %&gt;% 
+  addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
+                   color = ~pal(v),
+                   stroke = FALSE,
+                   radius = 5,
+                   label = ~as.character(round(v, 2))) %&gt;% # add label
+  addLegend(&quot;bottomleft&quot;,
+            values = seq(-0.5, 1.5, 0.25), 
+            pal = pal_rev,                 
+            labFormat = labelFormat(       
+              transform = function(x) x*-1 
+              ),                           
+            title = &quot;Hispanic-White &lt;br/&gt; Achievement Gap ES&quot;,
+            opacity = 0.7)
+</code></pre>
+
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m6.html" width="100%" height="400px"></iframe>
+
+<p>And that&rsquo;s it! Notice because it&rsquo;s a label we had to transform it to character first. We could make it fancier, of course, but that&rsquo;s the basic approach.</p>
+
 <h1 id="conclusions">Conclusions</h1>
 
 <p>There&rsquo;s a fair amount of achievement gap variance between schools in California, and there&rsquo;s some evidence of geographic clustering too. This is certainly not unique to California, but understanding what is driving this geographical variation certainly seems like a good place to start if we&rsquo;re going to try to start reducing these inequities.</p>
@@ -563,8 +594,6 @@ leaflet() %&gt;%
           <a href="/tags/data-visualization/">Data Visualization</a>
           
           <a href="/tags/mapping/">Mapping</a>
-          
-          <a href="/tags/machine-learning/">Machine Learning</a>
           
         </div>
 

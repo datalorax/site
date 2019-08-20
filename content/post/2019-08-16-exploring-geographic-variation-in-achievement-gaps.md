@@ -9,7 +9,6 @@ categories:
 tags:
   - Data Visualization
   - Mapping
-  - Machine Learning
 lastmod: '2019-08-16T12:45:07-07:00'
 output: 
   html_document:
@@ -362,7 +361,7 @@ leaflet() %>%
 <iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m3.html" width="100%" height="400px"></iframe>
 
 
-Notice I've made the `radius = 5` to make them smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!
+Notice I've made the `radius = 5` to make circles representing schools smaller and easier to see. We could keep messing with this, of course, but we have a fairly nice interactive map already!
 
 Last bit, let's add a legend. This turns out to be trickier than I would have hoped/thought. My initial attempt looked like this
 
@@ -419,6 +418,35 @@ leaflet() %>%
 ```
 
 <iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m5.html" width="100%" height="400px"></iframe>
+
+## One final edit
+My good friend and colleague, [Brock Rowley](https://www.brtprojects.org/employees/brock-rowley/), was reviewing this post and said something along the lines of "It would really be nice if I could know the exact values for some of these schools." So let's make that happen! What we'll do is just add a `label` to the circles, as below.
+
+
+```r
+leaflet() %>%
+  setView(lng = mean_geo$mean_long, 
+             lat = mean_geo$mean_lat,
+             zoom = 8) %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addCircleMarkers(data = d_99, lng = ~Longitude, lat = ~Latitude,
+                   color = ~pal(v),
+                   stroke = FALSE,
+                   radius = 5,
+                   label = ~as.character(round(v, 2))) %>% # add label
+  addLegend("bottomleft",
+            values = seq(-0.5, 1.5, 0.25), 
+            pal = pal_rev,                 
+            labFormat = labelFormat(       
+              transform = function(x) x*-1 
+              ),                           
+            title = "Hispanic-White <br/> Achievement Gap ES",
+            opacity = 0.7)
+```
+
+<iframe src="../2019-08-16-exploring-geographic-variation-in-achievement-gaps_files/maps/m6.html" width="100%" height="400px"></iframe>
+
+And that's it! Notice because it's a label we had to transform it to character first. We could make it fancier, of course, but that's the basic approach. 
 
 # Conclusions
 There's a fair amount of achievement gap variance between schools in California, and there's some evidence of geographic clustering too. This is certainly not unique to California, but understanding what is driving this geographical variation certainly seems like a good place to start if we're going to try to start reducing these inequities. 
