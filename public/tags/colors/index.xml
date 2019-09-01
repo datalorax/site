@@ -18,7 +18,7 @@
       <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/creating-bivariate-color-palettes/</guid>
-      <description>I&amp;rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&amp;rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own.</description>
+      <description>I&amp;rsquo;m taking some time off work this week to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&amp;rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own.</description>
     </item>
     
   </channel>

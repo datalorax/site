@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Daniel Anderson" />
-  <meta name="description" content="I&amp;rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&amp;rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own." />
+  <meta name="description" content="I&amp;rsquo;m taking some time off work this week to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&amp;rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own." />
 
   <meta name="keywords" content="Data Science, Education, Data Visualization" />
 
@@ -50,25 +50,25 @@
 
 
 <meta property="og:title" content="Creating bivariate color palettes" />
-<meta property="og:description" content="I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own." />
+<meta property="og:description" content="I&rsquo;m taking some time off work this week to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/creating-bivariate-color-palettes/" />
 <meta property="article:published_time" content="2019-08-30T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-08-30T09:55:58-07:00" />
 <meta itemprop="name" content="Creating bivariate color palettes">
-<meta itemprop="description" content="I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own.">
+<meta itemprop="description" content="I&rsquo;m taking some time off work this week to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own.">
 
 
 <meta itemprop="datePublished" content="2019-08-30T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-08-30T09:55:58-07:00" />
-<meta itemprop="wordCount" content="1604">
+<meta itemprop="wordCount" content="1605">
 
 
 
 <meta itemprop="keywords" content="Data Visualization,Colors," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Creating bivariate color palettes"/>
-<meta name="twitter:description" content="I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own."/>
+<meta name="twitter:description" content="I&rsquo;m taking some time off work this week to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -145,7 +145,7 @@
       <div class="post-meta">
         <span class="post-time"> 2019-08-30 </span>
         
-        <span class="more-meta"> 1604 words </span>
+        <span class="more-meta"> 1605 words </span>
         <span class="more-meta"> 8 mins read </span>
         
       </div>
@@ -181,7 +181,7 @@
     <div class="post-content">
       
 
-<p>I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, <a href="https://slu-opengis.github.io/biscale/index.html">{biscale}</a>, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own. For more background, I suggest <a href="https://www.joshuastevens.net/cartography/make-a-bivariate-choropleth-map/">this</a> blog post by Joseph Stevens, and for a beautiful example and a nice walk-through, see <a href="https://timogrossenbacher.ch/2019/04/bivariate-maps-with-ggplot2-and-sf/">this</a> post by Timo Grossenbacher.</p>
+<p>I&rsquo;m taking some time off work this week to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, <a href="https://slu-opengis.github.io/biscale/index.html">{biscale}</a>, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own. For more background, I suggest <a href="https://www.joshuastevens.net/cartography/make-a-bivariate-choropleth-map/">this</a> blog post by Joseph Stevens, and for a beautiful example and a nice walk-through, see <a href="https://timogrossenbacher.ch/2019/04/bivariate-maps-with-ggplot2-and-sf/">this</a> post by Timo Grossenbacher.</p>
 
 <h1 id="bivariate-palettes">Bivariate palettes</h1>
 
