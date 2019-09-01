@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Creating bivariate color palettes - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" />
+  <meta name="description" content="I&amp;rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&amp;rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own." />
+
+  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.0" />
+
+
+<link rel="canonical" href="/post/creating-bivariate-color-palettes/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Creating bivariate color palettes" />
+<meta property="og:description" content="I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/creating-bivariate-color-palettes/" />
+<meta property="article:published_time" content="2019-08-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-30T09:55:58-07:00" />
+<meta itemprop="name" content="Creating bivariate color palettes">
+<meta itemprop="description" content="I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own.">
+
+
+<meta itemprop="datePublished" content="2019-08-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-08-30T09:55:58-07:00" />
+<meta itemprop="wordCount" content="1604">
+
+
+
+<meta itemprop="keywords" content="Data Visualization,Colors," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Creating bivariate color palettes"/>
+<meta name="twitter:description" content="I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">datalorax</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a><a href="/vita/vita/">
+        <li class="mobile-menu-item">Vita</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">datalorax</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/vita/vita/">Vita</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Creating bivariate color palettes</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-30 </span>
+        
+        <span class="more-meta"> 1604 words </span>
+        <span class="more-meta"> 8 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#bivariate-palettes">Bivariate palettes</a>
+<ul>
+<li><a href="#creating-a-custom-palette">Creating a custom palette</a>
+<ul>
+<li><a href="#using-rgb">Using rgb</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#how-do-we-actually-use-these-scales">How do we actually use these scales?</a>
+<ul>
+<li><a href="#a-ggplot-hack">A ggplot hack</a></li>
+<li><a href="#a-more-realistic-example">A more realistic example</a></li>
+</ul></li>
+<li><a href="#wrapping-up">Wrapping up</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>I&rsquo;m taking some time off work this to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, <a href="https://slu-opengis.github.io/biscale/index.html">{biscale}</a>, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own. For more background, I suggest <a href="https://www.joshuastevens.net/cartography/make-a-bivariate-choropleth-map/">this</a> blog post by Joseph Stevens, and for a beautiful example and a nice walk-through, see <a href="https://timogrossenbacher.ch/2019/04/bivariate-maps-with-ggplot2-and-sf/">this</a> post by Timo Grossenbacher.</p>
+
+<h1 id="bivariate-palettes">Bivariate palettes</h1>
+
+<p>Basically everything I came across when exploring how to create bivariate palettes were just a series of color codes. For example, in Timo&rsquo;s example he uses the following code to create a bivariate color palette.</p>
+
+<pre><code class="language-r">library(tidyverse)
+ bivariate_color_scale &lt;- tibble(
+  &quot;3 - 3&quot; = &quot;#3F2949&quot;, 
+  &quot;2 - 3&quot; = &quot;#435786&quot;,
+  &quot;1 - 3&quot; = &quot;#4885C1&quot;, 
+  &quot;3 - 2&quot; = &quot;#77324C&quot;,
+  &quot;2 - 2&quot; = &quot;#806A8A&quot;, 
+  &quot;1 - 2&quot; = &quot;#89A1C8&quot;,
+  &quot;3 - 1&quot; = &quot;#AE3A4E&quot;, 
+  &quot;2 - 1&quot; = &quot;#BC7C8F&quot;,
+  &quot;1 - 1&quot; = &quot;#CABED0&quot; 
+)
+</code></pre>
+
+<p>which then ends up looking like this</p>
+
+<pre><code class="language-r">bivariate_color_scale %&gt;%
+  gather(&quot;group&quot;, &quot;fill&quot;) %&gt;%
+  separate(group, into = c(&quot;x&quot;, &quot;y&quot;), sep = &quot; - &quot;) %&gt;%
+  mutate(x = as.integer(x),
+         y = as.integer(y)) %&gt;%
+ggplot(aes(x, y)) +
+	geom_tile(aes(fill = fill)) +
+	scale_fill_identity()
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/timo-scale-visualized-1.png" alt="" /><!-- --></p>
+
+<p>Joshua Stevens also provides similar 3 x 3 bivariate scales, and specifically cautions that it&rsquo;s dangerous to go alone (exactly what I wanted to do!).</p>
+
+<iframe src="https://www.joshuastevens.net/images/js_bivariatePalettes.png" width="100%" height="175px"></iframe>
+
+<p>But what if I wanted 4 or 5 categories? Or what if I even wanted to map continuous scales?</p>
+
+<h2 id="creating-a-custom-palette">Creating a custom palette</h2>
+
+<p>While looking around for different bivariate scales, I came across a <a href="http://lenkiefer.com/2017/04/24/bivariate-map/">blog post by Len Kiefer</a> where he shows how to transform the viridis palette into a bivariate scale as follows (note: I&rsquo;ve slightly modified his code to match my coding style)</p>
+
+<pre><code class="language-r">d &lt;- expand.grid(x = seq(0, 1, 0.01), y = seq(0, 1, 0.01)) %&gt;%
+  mutate(fill_val = atan(y/x),
+         transparency = x + y)
+
+ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
+  geom_tile() +
+  scale_fill_viridis_c() +
+  theme_void() +
+  theme(legend.position = &quot;none&quot;)
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/viridis-bivariate-1.png" alt="" /><!-- --></p>
+
+<p>Why do we divide <code>y</code> by <code>x</code> and take the arc tangent?&hellip; 🤷</p>
+
+<p>I really have no idea, but it works! Part of what is interesting about this approach is that we change the <em>color</em> by (in part) changing the <em>transparency</em> of the fill. This is pretty clever, I think.</p>
+
+<p>I also like this approach because it seems to work pretty well for just about any sequential palette. Here&rsquo;s a few more examples</p>
+
+<pre><code class="language-r"># install.packages(&quot;paletteer&quot;)
+library(paletteer)
+
+ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
+  geom_tile() +
+  scale_fill_paletteer_c(harrypotter, HermioneGranger) +
+  theme_void() +
+  theme(legend.position = &quot;none&quot;)
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/hermoine-bivariate-1.png" alt="" /><!-- --></p>
+
+<p>And it even works fairly well for (some) diverging palettes.</p>
+
+<pre><code class="language-r">ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
+  geom_tile() +
+  scale_fill_paletteer_c(scico, berlin) +
+  theme_void() +
+  theme(legend.position = &quot;none&quot;)
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/scico-berlin-bivariate-1.png" alt="" /><!-- --></p>
+
+<pre><code class="language-r">ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
+  geom_tile() +
+  scale_fill_paletteer_c(harrypotter, HarryPotter) +
+  theme_void() +
+  theme(legend.position = &quot;none&quot;)
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/harry-bivariate-1.png" alt="" /><!-- --></p>
+
+<h3 id="using-rgb">Using rgb</h3>
+
+<p>Another alternative I came across from <a href="https://stackoverflow.com/questions/11773295/how-can-one-mix-2-or-more-color-palettes-to-show-a-combined-color-value">this stackoverflow question/answer</a>, is to just use the rgb values directly, varying one of the colors over many combinations of the other two. Here&rsquo;s an example with (basically) the code from the accepted answer.</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;%
+  mutate(mix1 = rgb(red = x, green = 0, blue = y))
+
+ggplot(d, aes(x, y)) + 
+  geom_tile(aes(fill = mix1)) + 
+  scale_fill_identity()
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/rbg-1-1.png" alt="" /><!-- --></p>
+
+<p>I think this one is actually quite nice, and it gives us almost infinite flexibility (which may not be a good thing). Let&rsquo;s try again with slightly different values.</p>
+
+<pre><code class="language-r">d &lt;- d %&gt;%
+  mutate(mix2 = rgb(red = x, green = y, blue = 0.5))
+
+ggplot(d, aes(x, y)) + 
+  geom_tile(aes(fill = mix2)) + 
+  scale_fill_identity()
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/rbg-2-1.png" alt="" /><!-- --></p>
+
+<p>This one has some pretty distinct quadrants, which could be helpful if we&rsquo;re thinking about having color represent two things.</p>
+
+<h1 id="how-do-we-actually-use-these-scales">How do we actually use these scales?</h1>
+
+<p>So in the above, we&rsquo;ve created and viewed a couple of different scales, but how do we go about using them with our data? There&rsquo;s plenty of different ways, but I&rsquo;m going to talk about the first way I thought of, which is a bit hacky but kind of neat.</p>
+
+<h2 id="a-ggplot-hack">A ggplot hack</h2>
+
+<p>For this example, let&rsquo;s play with the last palette we created. The data used to create any plot created from <code>ggplot2</code> can be returned using the <code>ggplot_build</code> function. Below, I first save the plot, then pull the data I want out using this function (and then limit the data to only the things I really want).</p>
+
+<pre><code class="language-r">p &lt;- ggplot(d, aes(x, y)) + 
+  geom_tile(aes(fill = mix2)) + 
+  scale_fill_identity()
+
+pal_d &lt;- ggplot_build(p)$data[[1]] %&gt;%
+  select(x, y, fill) %&gt;%
+  mutate(x = as.character(x),
+         y = as.character(y))
+head(pal_d)  
+</code></pre>
+
+<pre><code class="language-r">##      x y    fill
+## 1    0 0 #000080
+## 2 0.01 0 #030080
+## 3 0.02 0 #050080
+## 4 0.03 0 #080080
+## 5 0.04 0 #0A0080
+## 6 0.05 0 #0D0080
+</code></pre>
+
+<p>Now we have a palette that we can use by just rescaling our observed data to the $[0, 1]$ range! Notice also that I made the x and y values characters rather than doubles to help with the joining that will come (i.e., only two decimals of precision).</p>
+
+<p>Let&rsquo;s try with the <code>ggplot2::mpg</code> data set, coloring the points according to their values on each axis. We&rsquo;ll show the correlation between engine displacement (<code>displ</code>) and highway miles per gallon (<code>hwy</code>).</p>
+
+<pre><code class="language-r">hwy_mpg &lt;- mpg %&gt;%
+  mutate(x = as.character(round(scales::rescale(displ), 2)),
+         y = as.character(round(scales::rescale(hwy), 2))) %&gt;%
+  left_join(pal_d) 
+hwy_mpg
+</code></pre>
+
+<pre><code class="language-r">## # A tibble: 234 x 14
+##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
+##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 audi         a4      1.8  1999     4 auto… f        18    29 p     comp…
+##  2 audi         a4      1.8  1999     4 manu… f        21    29 p     comp…
+##  3 audi         a4      2    2008     4 manu… f        20    31 p     comp…
+##  4 audi         a4      2    2008     4 auto… f        21    30 p     comp…
+##  5 audi         a4      2.8  1999     6 auto… f        16    26 p     comp…
+##  6 audi         a4      2.8  1999     6 manu… f        18    26 p     comp…
+##  7 audi         a4      3.1  2008     6 auto… f        18    27 p     comp…
+##  8 audi         a4 q…   1.8  1999     4 manu… 4        18    26 p     comp…
+##  9 audi         a4 q…   1.8  1999     4 auto… 4        16    25 p     comp…
+## 10 audi         a4 q…   2    2008     4 manu… 4        20    28 p     comp…
+## # … with 224 more rows, and 3 more variables: x &lt;chr&gt;, y &lt;chr&gt;, fill &lt;chr&gt;
+</code></pre>
+
+<pre><code class="language-r">ggplot(hwy_mpg, aes(displ, hwy)) +
+  geom_point(aes(color = fill)) +
+  scale_color_identity() +
+  guides(color = &quot;none&quot;)
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/bivariate-cars-1.png" alt="" /><!-- --></p>
+
+<p>And there we have it!</p>
+
+<h2 id="a-more-realistic-example">A more realistic example</h2>
+
+<p>Generally we don&rsquo;t want bivariate scales for a scatter plot. Instead, we want them for geographical maps, specifically bivariate choropleths. Below is a quick example with the same palette we used above. We&rsquo;ll use the scale to show county-level values for percentage of people reporting Hispanic backgrounds, according the US Census, and the median earnings of the county for people over 16 years old.</p>
+
+<pre><code class="language-r">library(tidycensus)
+race_table &lt;- get_acs(geography = &quot;county&quot;,
+                      geometry = TRUE,
+                      output=&quot;wide&quot;, 
+                      table = &quot;B03002&quot;,
+                      state = &quot;CA&quot;)
+
+race_table &lt;- race_table %&gt;%
+  select(county = NAME, 
+         hisp = B03002_012E,
+         total = B03002_001E) %&gt;%
+  mutate(p_hisp = hisp/total)
+
+earnings_table &lt;- get_acs(geography = &quot;county&quot;,
+                          geometry = FALSE,
+                          output=&quot;wide&quot;, 
+                          table = &quot;B20018&quot;,
+                          state = &quot;CA&quot;) %&gt;%
+  select(county = NAME,
+         earnings = B20018_001E)
+
+geo &lt;- left_join(race_table, earnings_table)
+geo
+
+geo &lt;- geo %&gt;%
+  mutate(x = as.character(round(scales::rescale(p_hisp), 2)),
+         y = as.character(round(scales::rescale(earnings), 2))) %&gt;%
+  left_join(pal_d)
+geo
+
+ggplot(geo) +
+  geom_sf(aes(fill = fill)) +
+  guides(fill = &quot;none&quot;)
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/bivariate-choropleth-eval-1.png" alt="" /><!-- --></p>
+
+<p>This is pretty close! But we need a legend on there. We&rsquo;ll do this by creating separate plots and putting them together with {cowplot}</p>
+
+<pre><code class="language-r">library(cowplot)
+map &lt;- ggplot(geo) +
+  geom_sf(aes(fill = fill)) +
+  guides(fill = &quot;none&quot;)
+
+legend &lt;- ggplot(pal_d, aes(x, y)) +
+  geom_tile(aes(fill = fill)) +
+  scale_fill_identity() +
+  labs(x = &quot;Higher Percent Hispanic --&gt;&quot;,
+       y = &quot;Higher Earnings --&gt;&quot;) +
+  theme_void() +
+  theme(axis.title = element_text(size = 8),
+  	    axis.title.y = element_text(angle = 90)) +
+  coord_fixed()
+
+ggdraw() +
+  draw_plot(map, 0, 0, 1, 1) +
+  draw_plot(legend, 0.02, 0.05, 0.3, 0.3)
+</code></pre>
+
+<p><img src="../2019-08-30-creating-bivariate-color-palettes_files/figure-html/legend-1.png" alt="" /><!-- --></p>
+
+<p>Better! And it is rather revealing. There&rsquo;s lots of areas of pink (high percentage Hispanic, low relative earnings) and quite a bit of green (low percent Hispanic, high relative earnings). The tan and brown colors indicate areas where the percentage of people with Hispanic origin is moderately high, as are their earnings.</p>
+
+<p>Importantly, I&rsquo;m not sure this particular color scale is working as well as it could. In fact, I&rsquo;m essentially positive we could get more interpretable results with another color scheme (perhaps a different one we used above). But it&rsquo;s still sort of fun to play around with fully custom palettes. Finally, we might also benefit by collapsing the color scale into categories, as is more typical, because it would limit the number of colors and therefore limit the amount of information our brains are trying to process. Of course, that would also mean the colors would be slightly less representative of the actual bivariate value. Which <em>really</em> works best for lay or even moderately informed audiences is (at least for me) an open question.</p>
+
+<h1 id="wrapping-up">Wrapping up</h1>
+
+<p>That&rsquo;s probably good for now. I know the actual producing of the choropleth was super fast, but I&rsquo;ll try to follow up with a second blog post on tweaks there, and we&rsquo;ll try different things like I mention above to try to make it better. But at least we&rsquo;ve been able to go through the process and see a real-world example of where it may make sense to use a bivariate color scale.</p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2019-08-30</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/data-visualization/">Data Visualization</a>
+          
+          <a href="/tags/colors/">Colors</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/exploring-geographic-variation-in-achievement-gaps/">
+            <span class="next-text nav-default">Exploring Geographic Variation in Achievement Gaps</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/datalorax_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/datalorax" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme based on 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2019
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

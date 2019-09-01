@@ -2,6 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/tags/colors/</loc>
+    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/creating-bivariate-color-palettes/</loc>
+    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/data-visualization/</loc>
+    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/achievement-gap/</loc>
     <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
@@ -9,12 +46,6 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
   </url>
@@ -34,24 +65,6 @@
   
   <url>
     <loc>/tags/mapping/</loc>
-    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/data-visualization/</loc>
     <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <priority>0</priority>
   </url>
