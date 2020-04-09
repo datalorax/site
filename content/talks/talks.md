@@ -9,7 +9,7 @@ comments: false
 </p>
 
 ## Spring 2019
-* [Some Advice on Data Viz](../psych-seminar19)
+* [Some Advice on Data Viz](../psych-seminar)
 	+ Talk for first year graduate students in a Psychology seminar on producing
 	better data visualizations
 * [AERA Reproducible Research Training: (part 1)](../aera19-rr-p1)
