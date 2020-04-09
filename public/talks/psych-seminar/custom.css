@@ -1,0 +1,12 @@
+.remark-slide table {
+  font-size: 0.8em;
+}
+
+.pls {
+  float: left;
+  width: 10%;
+}
+.prb {
+  float: right;
+  width: 90%;
+}
