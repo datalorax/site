@@ -16,22 +16,18 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Daniel Anderson" />
-  <meta name="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
- Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!" />
-
-  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+<meta name="author" content="Daniel Anderson" /><meta name="description" content="Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
+ Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!" /><meta name="keywords" content="Data Science, Education, Data Visualization" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.58.1" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="/talks/gina/gina_mr/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,37 +36,28 @@
 
 
 
-
-
-
-
-<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
+<link href="/sass/main.min.6d0e309d5145139b9c722518ec255fcb575568c30552ff0231b5ab9bd512e2aa.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Multiple regression with R" />
-<meta property="og:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
- Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!" />
+<meta property="og:description" content="Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
+ Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/talks/gina/gina_mr/" />
 
 <meta itemprop="name" content="Multiple regression with R">
-<meta itemprop="description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
- Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!">
+<meta itemprop="description" content="Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
+ Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!">
+
+<meta itemprop="wordCount" content="2474">
 
 
 
-<meta itemprop="wordCount" content="2490">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Multiple regression with R"/>
-<meta name="twitter:description" content="em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
- Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!"/>
+<meta name="twitter:description" content="Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
+ Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -101,12 +88,12 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://datalorax.github.io/anderson-cv/">
+        <li class="mobile-menu-item">Curriculum Vita</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">About</li>
       </a><a href="/talks/talks/">
         <li class="mobile-menu-item">Talks</li>
-      </a><a href="/vita/vita/">
-        <li class="mobile-menu-item">Vita</li>
       </a>
   </ul>
 </nav>
@@ -125,15 +112,14 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
       </li><li class="menu-item">
+        <a class="menu-item-link" href="https://datalorax.github.io/anderson-cv/">Curriculum Vita</a>
+      </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">About</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/talks/talks/">Talks</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/vita/vita/">Vita</a>
       </li>
   </ul>
 </nav>
-
     </header>
 
     <main id="main" class="main">
@@ -141,22 +127,11 @@
         <div id="content" class="content">
           <article class="post">
   <div class="post-content">
-      
-
-<style>
-em {
-  font-style: italic
-}
-</style>
-
-<style>
-strong {
-  font-weight: bold;
-}
-</style>
-
+    <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h2 id="agenda">Agenda</h2>
-
 <ul>
 <li>Introduce R</li>
 <li>Very basics of R (object assignment)</li>
@@ -164,32 +139,23 @@ strong {
 <li>Running multiple regression models</li>
 <li>Visualizing multiple regression models</li>
 </ul>
-
 <h2 id="who-am-i">Who am I?</h2>
-
 <p>Daniel Anderson</p>
-
 <ul>
 <li>Research Associate: Behavioral Research and Teaching</li>
 <li>Dad (two daughters: 5 and 3)</li>
 <li>Quantitative educational researcher who <strong>loves</strong> R</li>
 <li>Primary areas of interest
-
 <ul>
 <li>R and computational educational research</li>
 <li>Open data, open science, and reproducible workflows</li>
 <li>Growth modeling (primarily through multilevel models)</li>
-</ul></li>
 </ul>
-
-<div align = "center">
-<img src = ../assets_gina_mr/img/thefam.jpg width = 400 height = 300>
-</div>
-
-<hr />
-
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<hr>
 <h2 id="part-of-why-i-love-r">Part of why I love R</h2>
-
 <ul>
 <li>Computer programming language = you can do ANYTHING!</li>
 <li>Develop websites: <a href="http://www.dandersondata.com">http://www.dandersondata.com</a></li>
@@ -198,294 +164,196 @@ strong {
 <li>Transparency and open and reproducible research</li>
 <li>The R community!</li>
 </ul>
-
 <p>All of this great stuff and it just happens to also be free.</p>
-
 <h2 id="free-books">Free Books!</h2>
-
 <h1 id="the-book-for-the-course-i-teach">The book for the course I teach</h1>
-
-<div align = "center">
-<img src = ../assets_gina_mr/img/r4ds.png width = 400 height = 500>
-</div>
-
+<!-- raw HTML omitted -->
 <p><a href="http://r4ds.had.co.nz">R for Data Science</a></p>
-
 <h1 id="the-book-for-the-next-course-i-would-like-to-teach-if-there-is-one">The book for the next course I would like to teach (if there is one)</h1>
-
-<div align = "center">
-<img src = ../assets_gina_mr/img/advancedr.png width = 400 height = 500>
-</div>
-
+<!-- raw HTML omitted -->
 <p><a href="http://adv-r.had.co.nz">Advanced R</a></p>
-
-<hr />
-
+<hr>
 <h2 id="other-books">Other books</h2>
-
-<p>Freely available at <a href="http://socviz.co">http://socviz.co</a>
-<div align = "center">
-<img src = ../assets_gina_mr/img/socvis.png width = 400 height = 500>
-</div></p>
-
-<hr />
-
+<p>Freely available at <a href="http://socviz.co">http://socviz.co</a></p>
+<!-- raw HTML omitted -->
+<hr>
 <h2 id="what-is-r">What is R?</h2>
-
 <ul>
 <li>A programming language</li>
 <li>Tremendously powerful and flexible statistical software that happens to be free</li>
 <li>No point-and-click interface</li>
 <li>Incredible array of external &ldquo;packages&rdquo; available for specialized analyses, data visualizations, or to automate much of the data &ldquo;munging&rdquo; process</li>
 </ul>
-
-<hr />
-
+<hr>
 <h2 id="code-based-interface">Code-based interface</h2>
-
-<div align = "center">
-<img src = ../assets_gina_mr/img/rstudio.png width = 1000 height = 750>
-</div>
-
-<h2 id="moving-to-code-programming">Moving to code/programming</h2>
-
+<!-- raw HTML omitted -->
+<h2 id="moving-to-codeprogramming">Moving to code/programming</h2>
 <h1 id="advantages">Advantages</h1>
-
 <ul>
 <li>Flexibility
-
 <ul>
 <li>Only limited by your own creativity (and current level of programming skills, which are ever-evolving)</li>
-</ul></li>
+</ul>
+</li>
 <li>Transparency
-
 <ul>
 <li>Documented record of every step taken in your data preparation and analysis</li>
-</ul></li>
+</ul>
+</li>
 <li>Efficiency
-
 <ul>
 <li>Many (most?) tasks can be automated and/or applied to multiple datasets/variables simultaneously or essentially simultaneously</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h1 id="disadvantages">Disadvantages</h1>
-
 <ul>
 <li>Steep learning curve
-
 <ul>
 <li>Absolutely requires a significant time investment, both to learn initially and build fluency</li>
 <li>Equivalent to learning a new language</li>
-</ul></li>
+</ul>
+</li>
 <li>You will lose patience with point-and-click interfaces</li>
 <li>Likely to become &ldquo;one of the converted&rdquo;</li>
 </ul>
-
-<hr />
-
+<hr>
 <h2 id="the-r-learning-curve">The R Learning Curve</h2>
-
-<p><img src="../assets_gina_mr/fig/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1"></p>
+<hr>
 <h2 id="how-to-learn-r">How to learn R?</h2>
-
 <ul>
 <li>Three most important ingredients: time, time, and more time</li>
 <li>A sprinkling of dedication and determination help.</li>
 <li>Be patient and forgiving with yourself. It will feel slow at first. Most people have not trained themselves to think in this way.</li>
 </ul>
-
-<p><img src="../assets_gina_mr/img/impost-r.png" alt="impost-r" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/img/impost-r.png" alt="impost-r"></p>
+<hr>
 <h2 id="r-as-a-big-calculator">R as a big calculator</h2>
-
 <pre><code class="language-r">3 + 2
 </code></pre>
-
 <pre><code>## [1] 5
 </code></pre>
-
 <pre><code class="language-r">(1/-(3/2)^2) / 2^-1/9
 </code></pre>
-
 <pre><code>## [1] -0.09876543
 </code></pre>
-
-<p>-</p>
-
+<ul>
+<li></li>
+</ul>
 <h1 id="object-assignment">Object Assignment</h1>
-
 <pre><code class="language-r">a &lt;- 3
 b &lt;- 2
 a + b
 </code></pre>
-
 <pre><code>## [1] 5
 </code></pre>
-
 <pre><code class="language-r">a / (a + b)
 </code></pre>
-
 <pre><code>## [1] 0.6
 </code></pre>
-
 <h1 id="object-re-assignment">Object re-assignment</h1>
-
 <pre><code class="language-r">a &lt;- 3
 a
 </code></pre>
-
 <pre><code>## [1] 3
 </code></pre>
-
 <pre><code class="language-r">a &lt;- 7
 a
 </code></pre>
-
 <pre><code>## [1] 7
 </code></pre>
-
-<p>-</p>
-
+<ul>
+<li></li>
+</ul>
 <h2 id="object-assignment-continued">Object Assignment (continued)</h2>
-
 <p>Objects can be of a variety of types.</p>
-
 <pre><code class="language-r">string &lt;- &quot;Hello world!&quot;
 logical &lt;- TRUE
 double &lt;- 3.2587021
 Integer &lt;- 6L
 </code></pre>
-
 <p>In this case, we can&rsquo;t exactly do arithmetic with all of these.
-  For example</p>
-
+For example</p>
 <pre><code class="language-r">string + double
 </code></pre>
-
 <pre><code>## Error in string + double: non-numeric argument to binary operator
 </code></pre>
-
 <p>But, these objects can be extremely useful in programming.</p>
-
 <h2 id="functions-and-getting-help">Functions and getting help</h2>
-
 <h1 id="r-functions">R functions</h1>
-
 <ul>
 <li>Anything that carries out an operation in R is a function, even <code>+</code>.</li>
 <li>Functions (outside of primitive functions) are preceded by <code>()</code>
-
 <ul>
 <li>e.g., <code>sum()</code>, <code>lm()</code></li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h1 id="getting-help">Getting help</h1>
-
 <ul>
 <li><code>?</code> can be helpful, but often too advanced early on
-
 <ul>
 <li>Helpful for understanding the formal arguments of a function</li>
 <li>Scroll down to the examples first</li>
-</ul></li>
+</ul>
+</li>
 <li>Google is your  best friend</li>
 <li>Other good websites
-
 <ul>
-<li><a href="http://stackoverflow.com">http://stackoverflow.com</a><br /></li>
+<li><a href="http://stackoverflow.com">http://stackoverflow.com</a></li>
 <li>Mailing lists:
-
-<ul>
-<li><a href="https://stat.ethz.ch/mailman/listinfo/r-help">https://stat.ethz.ch/mailman/listinfo/r-help</a>
-<br /></li>
-</ul></li>
-</ul></li>
+- <a href="https://stat.ethz.ch/mailman/listinfo/r-help">https://stat.ethz.ch/mailman/listinfo/r-help</a></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="r-packages">R packages</h2>
-
 <p>R ships with considerable functionality. It also comes  with a set of <em>pre-loaded</em> packages</p>
-
 <ul>
 <li>e.g.
-
 <ul>
 <li>&ldquo;base&rdquo;</li>
 <li>&ldquo;graphics&rdquo;</li>
 <li>&ldquo;stats&rdquo;</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>R also comes with a set of packages installed, but not loaded on launch</p>
-
 <ul>
 <li>e.g.
-
 <ul>
 <li>&ldquo;boot&rdquo;</li>
 <li>&ldquo;MASS&rdquo;</li>
 <li>&ldquo;Matrix&rdquo;</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>Pre-loaded packages operate &ldquo;out of the box&rdquo;. For example, <code>plot</code> is part of the <em>graphics</em> package, which ships with R.</p>
-
 <pre><code class="language-r">plot(x = 1:10, y = 1:10)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/first_plot-1.png" alt="plot of chunk first_plot" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/first_plot-1.png" alt="plot of chunk first_plot"></p>
+<hr>
 <h2 id="on-cran">On CRAN</h2>
-
-<div align = "center">
-<img src = ../assets_gina_mr/img/pkg_growth.png width = 650 height = 350>
-</div>
-
+<!-- raw HTML omitted -->
 <ul>
 <li>Any of these can be installed with <code>install.packages(&quot;pkg_name&quot;)</code>. You will then have access to all the functionality of the package.</li>
 <li>Notice this plot only goes to mid-2014. As of this writing (11/22/17), there are 11,892 packages available on CRAN! See <a href="https://cran.r-project.org/web/packages/">https://cran.r-project.org/web/packages/</a></li>
 </ul>
-
 <h2 id="other-packages">Other packages</h2>
-
 <h1 id="on-github">On github</h1>
-
-<div align = "center">
-<img src = ../assets_gina_mr/img/esvis.png width = 500 height = 500>
-</div>
-
-<div align = "center">
-<img src = ../assets_gina_mr/img/github_pkgs.png width = 500 height = 500>
-</div>
-
-<hr />
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<hr>
 <h2 id="installing-from-github">Installing from github</h2>
-
 <p>First, install the <em>devtools</em> package from CRAN</p>
-
 <pre><code class="language-r">install.packages(&quot;devtools&quot;)
 </code></pre>
-
 <p>Next, load the <em>devtools</em> library to access the <code>install_github</code> function. For example, to install my <em>esvis</em> package</p>
-
 <pre><code class="language-r">library(devtools)
 install_github(&quot;DJAnderson07/esvis&quot;)
 </code></pre>
-
-<hr />
-
+<hr>
 <p>You then have access to all the functionality of that package once you load it. Let&rsquo;s look at these data:</p>
-
 <table>
 <thead>
 <tr>
@@ -500,7 +368,6 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 <th align="right">math</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="right">332347</td>
@@ -513,7 +380,6 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 <td align="right">208</td>
 <td align="right">205</td>
 </tr>
-
 <tr>
 <td align="right">400047</td>
 <td align="right">1</td>
@@ -525,7 +391,6 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 <td align="right">212</td>
 <td align="right">218</td>
 </tr>
-
 <tr>
 <td align="right">402107</td>
 <td align="right">1</td>
@@ -537,7 +402,6 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 <td align="right">201</td>
 <td align="right">212</td>
 </tr>
-
 <tr>
 <td align="right">402547</td>
 <td align="right">1</td>
@@ -549,7 +413,6 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 <td align="right">185</td>
 <td align="right">177</td>
 </tr>
-
 <tr>
 <td align="right">403047</td>
 <td align="right">1</td>
@@ -561,7 +424,6 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 <td align="right">179</td>
 <td align="right">192</td>
 </tr>
-
 <tr>
 <td align="right">403307</td>
 <td align="right">1</td>
@@ -575,35 +437,23 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 </tr>
 </tbody>
 </table>
-
-<hr />
-
+<hr>
 <h2 id="pp-plot">PP-Plot</h2>
-
 <pre><code class="language-r">library(esvis)
 pp_plot(reading ~ ell, benchmarks)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/load_esvis-1.png" alt="plot of chunk load_esvis" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/load_esvis-1.png" alt="plot of chunk load_esvis"></p>
+<hr>
 <h2 id="binned-quantile-effect-sizes">Binned quantile effect sizes</h2>
-
 <pre><code class="language-r">binned_plot(math ~ ethnicity, benchmarks, 
             qtiles = seq(0, 1, .2), 
             theme = &quot;dark&quot;)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/esvis_ptile-1.png" alt="plot of chunk esvis_ptile" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/esvis_ptile-1.png" alt="plot of chunk esvis_ptile"></p>
+<hr>
 <h2 id="es-calculation">ES Calculation</h2>
-
 <pre><code class="language-r">hedg_g(math ~ ethnicity, benchmarks, ref_group = &quot;White&quot;)
 </code></pre>
-
 <pre><code>##   ref_group  foc_group   estimate
 ## 1     White      Asian -0.1811177
 ## 2     White   Hispanic -0.6226720
@@ -611,10 +461,8 @@ pp_plot(reading ~ ell, benchmarks)
 ## 4     White Am. Indian -0.6685548
 ## 5     White Native Am. -0.8248879
 </code></pre>
-
 <pre><code class="language-r">auc(math ~ ethnicity, benchmarks)
 </code></pre>
-
 <pre><code>##     ref_group  foc_group  estimate
 ## 1       White      Asian 0.5623478
 ## 2       White   Hispanic 0.6689338
@@ -647,47 +495,38 @@ pp_plot(reading ~ ell, benchmarks)
 ## 29   Hispanic      White 0.3311781
 ## 30      Asian      White 0.4368362
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="is-this-exciting-yes">Is this exciting!?! YES!!!</h2>
-
-<p>Why is this such a big deal?
-* With just a basic knowledge of R you have access to literally thousands of packages
-    + Expanding on a daily basis
-    + Provides access to cutting edge and specialized functionality for analysis, data visualization, and data munging
-    + Some of the most modern thinking on data analysis topics are often represented in these packages</p>
-
-<hr />
-
-<h1 id="fitting-multiple-regression-models">Fitting multiple regression models</h1>
-
-<hr />
-
-<h2 id="want-to-follow-along">Want to follow along?</h2>
-
+<p>Why is this such a big deal?</p>
 <ul>
-<li><p>Copy and paste the following code in your R console</p>
-
-<pre><code class="language-r">install.packages(c(&quot;tidyverse&quot;, &quot;rio&quot;, &quot;devtools&quot;, &quot;arm&quot;, &quot;lm.beta&quot;, &quot;visreg&quot;, &quot;lme4&quot;))
-</code></pre></li>
+<li>With just a basic knowledge of R you have access to literally thousands of packages
+<ul>
+<li>Expanding on a daily basis</li>
+<li>Provides access to cutting edge and specialized functionality for analysis, data visualization, and data munging</li>
+<li>Some of the most modern thinking on data analysis topics are often represented in these packages</li>
 </ul>
-
-<hr />
-
+</li>
+</ul>
+<hr>
+<h1 id="fitting-multiple-regression-models">Fitting multiple regression models</h1>
+<hr>
+<h2 id="want-to-follow-along">Want to follow along?</h2>
+<ul>
+<li>Copy and paste the following code in your R console</li>
+</ul>
+<pre><code class="language-r">install.packages(c(&quot;tidyverse&quot;, &quot;rio&quot;, &quot;devtools&quot;, &quot;arm&quot;, &quot;lm.beta&quot;, &quot;visreg&quot;, &quot;lme4&quot;))
+</code></pre>
+<hr>
 <h2 id="step-0">Step 0</h2>
-
 <ul>
 <li>Before fitting model, you&rsquo;ll generally need to import some data, let&rsquo;s do so now</li>
 <li>Make sure your data file is stored in the same place that your script is</li>
-
-<li><p>The <code>setclass</code> argument above is actually not required, but makes it a bit easier to work with.</p>
-
+<li>The <code>setclass</code> argument above is actually not required, but makes it a bit easier to work with.</li>
+</ul>
 <pre><code class="language-r">library(rio)
 d &lt;- import(&quot;synthetic_data.csv&quot;, setclass = &quot;tbl_df&quot;)
 d
 </code></pre>
-
 <pre><code>## # A tibble: 11,218 x 6
 ##         SID grade clock cohort  LD33    SS
 ##       &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;int&gt;
@@ -702,34 +541,25 @@ d
 ##  9  7966652     7     1      7 Never   234
 ## 10  7776640     7     1      6 Never   234
 ## # ... with 11,208 more rows
-</code></pre></li>
-</ul>
-
-<hr />
-
+</code></pre>
+<hr>
 <h2 id="research-questions">Research Questions</h2>
-
 <ol>
 <li>What is the average growth from Grades 6-8 in math (<code>SS</code>)</li>
 <li>Does the averge initial achievement or rate of growth depend upon <code>cohort</code>?</li>
 <li>Does the averge initial achievement or rate of growth depend upon <code>LD33</code>, the students&rsquo; pattern of SLD classification?
-
 <ul>
-<li>I don&rsquo;t remember why the variable has the name it does
-<br /></li>
-</ul></li>
+<li>I don&rsquo;t remember why the variable has the name it does</li>
+</ul>
+</li>
 </ol>
-
 <p><strong>NOTE:</strong> Multiple regression is NOT the best way to approach this. A multilevel model would be preferable. But, at the end, I&rsquo;ll show you how simple it is to extend what we do here to the multilevel modeling approach.</p>
-
-<hr />
-
+<hr>
 <h2 id="step-1-look-at-your-data">Step 1: Look at your data!</h2>
-
 <p>Always best to visualize your data first. Let&rsquo;s produce plots addressing each of our research questions.</p>
-
-<p>1) What does the average growth look like? (plot on next slide)</p>
-
+<ol>
+<li>What does the average growth look like? (plot on next slide)</li>
+</ol>
 <pre><code class="language-r">library(tidyverse)
 theme_set(theme_light()) # Not neccessary, but I like it
 
@@ -737,92 +567,64 @@ ggplot(d, aes(x = grade, y = SS)) +
   geom_point() +
   geom_smooth(method = &quot;lm&quot;) 
 </code></pre>
-
-<hr />
-
-<p><img src="../assets_gina_mr/fig/visualize1_eval-1.png" alt="plot of chunk visualize1_eval" /></p>
-
-<hr />
-
+<hr>
+<p><img src="../assets_gina_mr/fig/visualize1_eval-1.png" alt="plot of chunk visualize1_eval"></p>
+<hr>
 <h1 id="does-initial-achievement-or-average-growth-depend-upon-cohort">Does initial achievement or average growth depend upon cohort?</h1>
-
 <pre><code class="language-r">ggplot(d, aes(grade, SS)) +
   geom_point() +
   geom_smooth(method = &quot;lm&quot;,
               aes(color = factor(cohort)))
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/cohort_growth1-1.png" alt="plot of chunk cohort_growth1" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/cohort_growth1-1.png" alt="plot of chunk cohort_growth1"></p>
+<hr>
 <h1 id="does-initial-achievement-or-average-growth-depend-upon-ld-status">Does initial achievement or average growth depend upon LD status?</h1>
-
 <pre><code class="language-r">ggplot(d, aes(grade, SS)) +
   geom_point() +
   geom_smooth(method = &quot;lm&quot;,
               aes(color = factor(LD33)))
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/cohort_growth2-1.png" alt="plot of chunk cohort_growth2" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/cohort_growth2-1.png" alt="plot of chunk cohort_growth2"></p>
+<hr>
 <h1 id="what-about-both">What about both?</h1>
-
 <pre><code class="language-r">ggplot(d, aes(grade, SS)) +
   geom_point() +
   geom_smooth(method = &quot;lm&quot;,
               aes(color = factor(LD33))) +
   facet_wrap(~cohort)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/by_cohort_ld33-1.png" alt="plot of chunk by_cohort_ld33" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/by_cohort_ld33-1.png" alt="plot of chunk by_cohort_ld33"></p>
+<hr>
 <h2 id="quick-aside">Quick aside</h2>
-
 <ul>
-<li><p><code>geom_jitter</code> might be slightly better in this case</p>
-
-<pre><code class="language-r">ggplot(d, aes(grade, SS)) +
-geom_jitter(height = 0, width = 0.2, color = &quot;gray80&quot;, alpha = 0.6) +
-geom_smooth(method = &quot;lm&quot;,
-          aes(color = factor(LD33))) +
-facet_wrap(~cohort)
-</code></pre></li>
+<li><code>geom_jitter</code> might be slightly better in this case</li>
 </ul>
-
-<p><img src="../assets_gina_mr/fig/jittered-1.png" alt="plot of chunk jittered" /></p>
-
-<hr />
-
+<pre><code class="language-r">ggplot(d, aes(grade, SS)) +
+  geom_jitter(height = 0, width = 0.2, color = &quot;gray80&quot;, alpha = 0.6) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = factor(LD33))) +
+  facet_wrap(~cohort)
+</code></pre>
+<p><img src="../assets_gina_mr/fig/jittered-1.png" alt="plot of chunk jittered"></p>
+<hr>
 <h2 id="step-2-fit-the-model">Step 2: Fit the model</h2>
-
 <ul>
-<li><p>Use the <code>lm</code> function</p>
-
+<li>Use the <code>lm</code> function
 <ul>
 <li>Part of base R</li>
-
-<li><p>Takes the following general form</p>
-
-<pre><code class="language-r">mod &lt;- lm(outcome ~ predictor1 + predictor2 + predictorN,
-  data = d)
-</code></pre></li>
-</ul></li>
+<li>Takes the following general form</li>
 </ul>
-
-<hr />
-
+</li>
+</ul>
+<pre><code class="language-r">mod &lt;- lm(outcome ~ predictor1 + predictor2 + predictorN,
+          data = d)
+</code></pre>
+<hr>
 <h2 id="fit-simple-linear-regression-model-first">Fit simple linear regression model first</h2>
-
 <pre><code class="language-r">library(arm)
 time_mod &lt;- lm(SS ~ clock, data = d)
 display(time_mod, detail = TRUE)
 </code></pre>
-
 <pre><code>## lm(formula = SS ~ clock, data = d)
 ##             coef.est coef.se t value Pr(&gt;|t|)
 ## (Intercept)  227.70     0.15 1485.71    0.00 
@@ -831,55 +633,39 @@ display(time_mod, detail = TRUE)
 ## n = 11218, k = 2
 ## residual sd = 10.24, R-Squared = 0.15
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="include-a-categorical-predictor">Include a categorical predictor</h2>
-
 <ul>
 <li>In R, categorical predictors need to be defined as factors</li>
 <li>Factors can have any underlying contrast matrix, but by default dummy-coding
 is used, with the reference level being the first level</li>
 </ul>
-
 <h1 id="change-cohort-to-be-a-factor">Change <em>cohort</em> to be a factor</h1>
-
 <pre><code class="language-r">d$cohort &lt;- as.factor(d$cohort)
 </code></pre>
-
-<hr />
-
+<hr>
 <p>Inspect the contrast matrix with</p>
-
 <pre><code class="language-r">contrasts(d$cohort)
 </code></pre>
-
 <pre><code>##   6 7
 ## 5 0 0
 ## 6 1 0
 ## 7 0 1
 </code></pre>
-
 <p>Change the reference level with</p>
-
 <pre><code class="language-r">d$cohort &lt;- relevel(d$cohort, ref = &quot;7&quot;)
 contrasts(d$cohort)
 </code></pre>
-
 <pre><code>##   5 6
 ## 7 0 0
 ## 5 1 0
 ## 6 0 1
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="fit-a-second-model">Fit a second model</h2>
-
 <pre><code class="language-r">cohort_mod &lt;- lm(SS ~ clock + cohort, data = d)
 display(cohort_mod, detail = TRUE)
 </code></pre>
-
 <pre><code>## lm(formula = SS ~ clock + cohort, data = d)
 ##             coef.est coef.se t value Pr(&gt;|t|)
 ## (Intercept)  228.40     0.21 1104.77    0.00 
@@ -890,14 +676,10 @@ display(cohort_mod, detail = TRUE)
 ## n = 11218, k = 4
 ## residual sd = 10.22, R-Squared = 0.16
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="compare-models">Compare models</h2>
-
 <pre><code class="language-r">anova(time_mod, cohort_mod)
 </code></pre>
-
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: SS ~ clock
@@ -908,15 +690,11 @@ display(cohort_mod, detail = TRUE)
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="add-cohort-as-predictor-of-the-slope">Add cohort as predictor of the slope</h2>
-
 <pre><code class="language-r">cohort_mod2 &lt;- lm(SS ~ clock + cohort + clock:cohort, data = d)
 display(cohort_mod2, detail = TRUE)
 </code></pre>
-
 <pre><code>## lm(formula = SS ~ clock + cohort + clock:cohort, data = d)
 ##               coef.est coef.se t value Pr(&gt;|t|)
 ## (Intercept)   228.06     0.27  847.84    0.00  
@@ -929,26 +707,18 @@ display(cohort_mod2, detail = TRUE)
 ## n = 11218, k = 6
 ## residual sd = 10.22, R-Squared = 0.16
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="quick-note-on-syntax">Quick note on syntax</h2>
-
 <p>The following two lines of code are equivalent</p>
-
 <pre><code class="language-r">cohort_mod2 &lt;- lm(SS ~ clock + cohort + clock:cohort, data = d)
 cohort_mod2 &lt;- lm(SS ~ clock*cohort, data = d)
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="need-standardized-coefficients">Need standardized coefficients?</h2>
-
 <pre><code class="language-r"># install.packages(&quot;lm.beta&quot;)
 library(lm.beta)
 lm.beta(cohort_mod2)
 </code></pre>
-
 <pre><code>## 
 ## Call:
 ## lm(formula = SS ~ clock + cohort + clock:cohort, data = d)
@@ -959,28 +729,20 @@ lm.beta(cohort_mod2)
 ## clock:cohort6 
 ##   -0.01779824
 </code></pre>
-
-<hr />
-
-<h2 id="let-s-skip-ahead-and-fit-the-full-model">Let&rsquo;s skip ahead and fit the full model</h2>
-
+<hr>
+<h2 id="lets-skip-ahead-and-fit-the-full-model">Let&rsquo;s skip ahead and fit the full model</h2>
 <ul>
 <li>We want <em>clock</em>, <em>cohort</em>, and <em>ld status</em> all entered in the model, as well as
 the interaction between <em>clock</em> and <em>cohort</em>, and <em>clock</em> and <em>ld status</em></li>
 </ul>
-
 <p>Try to write the code on your own</p>
-
-<hr />
-
+<hr>
 <h2 id="model">Model</h2>
-
 <pre><code class="language-r">full_mod &lt;- lm(SS ~ clock + cohort + LD33 +
                    clock:cohort + clock:LD33, 
                  data = d)
 display(full_mod, detail = TRUE)
 </code></pre>
-
 <pre><code>## lm(formula = SS ~ clock + cohort + LD33 + clock:cohort + clock:LD33, 
 ##     data = d)
 ##                     coef.est coef.se t value Pr(&gt;|t|)
@@ -998,14 +760,10 @@ display(full_mod, detail = TRUE)
 ## n = 11218, k = 10
 ## residual sd = 9.83, R-Squared = 0.22
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="compare-our-last-model-to-prior-models">Compare our last model to prior models</h2>
-
 <pre><code class="language-r">anova(cohort_mod2, full_mod)
 </code></pre>
-
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: SS ~ clock + cohort + clock:cohort
@@ -1016,73 +774,48 @@ display(full_mod, detail = TRUE)
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="visualizing-the-fitted-models">Visualizing the fitted models</h2>
-
 <p>(I&rsquo;m guessing I&rsquo;m almost out of time, but quickly&hellip;)
 The <em>visreg</em> package is amazing, and I highly recommend it</p>
-
 <pre><code class="language-r">library(visreg)
 visreg(full_mod, &quot;clock&quot;, by = &quot;LD33&quot;)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/visreg1-1.png" alt="plot of chunk visreg1" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/visreg1-1.png" alt="plot of chunk visreg1"></p>
+<hr>
 <pre><code class="language-r">visreg(full_mod, &quot;clock&quot;, by = &quot;cohort&quot;)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/visreg2-1.png" alt="plot of chunk visreg2" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/visreg2-1.png" alt="plot of chunk visreg2"></p>
+<hr>
 <pre><code class="language-r">visreg(full_mod, &quot;LD33&quot;, by = &quot;clock&quot;, gg = TRUE)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/visreg3-1.png" alt="plot of chunk visreg3" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/visreg3-1.png" alt="plot of chunk visreg3"></p>
+<hr>
 <h2 id="kinda-hard-but-maybe-helpful">Kinda hard but maybe helpful</h2>
-
 <pre><code class="language-r">visreg2d(full_mod, &quot;clock&quot;, &quot;LD33&quot;, plot.type = &quot;persp&quot;)
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/visreg4-1.png" alt="plot of chunk visreg4" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/visreg4-1.png" alt="plot of chunk visreg4"></p>
+<hr>
 <p>See the following links for more info on the <em>visreg</em> package</p>
-
 <ul>
 <li><a href="http://pbreheny.github.io/visreg">http://pbreheny.github.io/visreg</a></li>
 <li><a href="http://myweb.uiowa.edu/pbreheny/publications/visreg.pdf">http://myweb.uiowa.edu/pbreheny/publications/visreg.pdf</a></li>
 </ul>
-
-<hr />
-
-<h2 id="last-note-fitting-the-right-model">Last note - fitting the right model!</h2>
-
+<hr>
+<h2 id="last-note---fitting-the-right-model">Last note - fitting the right model!</h2>
 <ul>
-<li><p>The model we&rsquo;ve fit should be multilevel. So let&rsquo;s do it!</p>
-
+<li>The model we&rsquo;ve fit should be multilevel. So let&rsquo;s do it!</li>
+</ul>
 <pre><code class="language-r">#install.package(&quot;lme4&quot;)
 library(lme4)
 mlm &lt;- lmer(SS ~ clock + cohort + LD33 +
-               clock:cohort + clock:LD33 +
-          (1 + clock|SID), 
-             data = d)
-</code></pre></li>
-</ul>
-
-<hr />
-
+                   clock:cohort + clock:LD33 +
+              (1 + clock|SID), 
+                 data = d)
+</code></pre>
+<hr>
 <pre><code class="language-r">display(mlm, detail = TRUE)
 </code></pre>
-
 <pre><code>## lmer(formula = SS ~ clock + cohort + LD33 + clock:cohort + clock:LD33 + 
 ##     (1 + clock | SID), data = d)
 ##                     coef.est coef.se t value
@@ -1107,40 +840,27 @@ mlm &lt;- lmer(SS ~ clock + cohort + LD33 +
 ## AIC = 83111.4, DIC = 83070.7
 ## deviance = 83077.0
 </code></pre>
-
-<hr />
-
+<hr>
 <h2 id="how-much-variability">How much variability?</h2>
-
 <pre><code class="language-r">library(lattice)
 qqmath(ranef(mlm, condVar = TRUE))
 </code></pre>
-
 <pre><code>## $SID
 </code></pre>
-
-<p><img src="../assets_gina_mr/fig/ranef-1.png" alt="plot of chunk ranef" /></p>
-
-<hr />
-
+<p><img src="../assets_gina_mr/fig/ranef-1.png" alt="plot of chunk ranef"></p>
+<hr>
 <h2 id="parting-thoughts">Parting thoughts</h2>
-
 <p>Today&rsquo;s lecture is mostly about exposure. R takes a lot of time and effort to
 learn, but it is really worth it.</p>
-
 <p>Questions?</p>
-
-<hr />
-
+<hr>
 <h2 id="thanks">Thanks!</h2>
-
-<p><img src="https://media.giphy.com/media/igB2Th9e4nW6s/giphy.gif" alt="thanks" /></p>
+<p><img src="https://media.giphy.com/media/igB2Th9e4nW6s/giphy.gif" alt="thanks"></p>
 
   </div>
 </article>
         </div>
-        
-  <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -1158,6 +878,7 @@ learn, but it is really worth it.</p>
   
 
   
+
       </div>
     </main>
 
@@ -1176,7 +897,7 @@ learn, but it is really worth it.</p>
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme based on 
+    Modified theme - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
@@ -1184,8 +905,7 @@ learn, but it is really worth it.</p>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2020
     <span class="author">Daniel Anderson</span>
   </span>
@@ -1196,14 +916,14 @@ learn, but it is really worth it.</p>
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -1211,7 +931,7 @@ learn, but it is really worth it.</p>
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

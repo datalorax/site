@@ -16,21 +16,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Daniel Anderson" />
-  <meta name="description" content="In this post, I&amp;rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area." />
-
-  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+<meta name="author" content="Daniel Anderson" /><meta name="description" content="In this post, I&amp;rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area." /><meta name="keywords" content="Data Science, Education, Data Visualization" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.58.1" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="/post/mapping-statewide-school-ratings-with-us-census-tracts/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,14 +35,8 @@
 
 
 
-
-
-
-
-<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
+<link href="/sass/main.min.6d0e309d5145139b9c722518ec255fcb575568c30552ff0231b5ab9bd512e2aa.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Mapping Statewide School Ratings with US Census Tracts" />
@@ -57,16 +47,13 @@
 <meta property="article:modified_time" content="2017-11-13T00:00:00+00:00" />
 <meta itemprop="name" content="Mapping Statewide School Ratings with US Census Tracts">
 <meta itemprop="description" content="In this post, I&rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.">
-
-
 <meta itemprop="datePublished" content="2017-11-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2017-11-13T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1835">
 
 
 
-<meta itemprop="keywords" content="Data Visualization,Mapping,Census Data," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Data Visualization,Mapping,Census Data," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mapping Statewide School Ratings with US Census Tracts"/>
 <meta name="twitter:description" content="In this post, I&rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area."/>
 
@@ -99,12 +86,12 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://datalorax.github.io/anderson-cv/">
+        <li class="mobile-menu-item">Curriculum Vita</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">About</li>
       </a><a href="/talks/talks/">
         <li class="mobile-menu-item">Talks</li>
-      </a><a href="/vita/vita/">
-        <li class="mobile-menu-item">Vita</li>
       </a>
   </ul>
 </nav>
@@ -123,15 +110,14 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
       </li><li class="menu-item">
+        <a class="menu-item-link" href="https://datalorax.github.io/anderson-cv/">Curriculum Vita</a>
+      </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">About</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/talks/talks/">Talks</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/vita/vita/">Vita</a>
       </li>
   </ul>
 </nav>
-
     </header>
 
     <main id="main" class="main">
@@ -145,39 +131,27 @@
       <div class="post-meta">
         <span class="post-time"> 2017-11-13 </span>
         <div class="post-category">
-            
-              <a href="/categories/r-code/"> R Code </a>
-            
-          </div>
-        <span class="more-meta"> 1835 words </span>
-        <span class="more-meta"> 9 mins read </span>
+            <a href="/categories/r-code/"> R Code </a>
+            </div>
+          <span class="more-meta"> 1835 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#the-data">The data</a></li>
-<li><a href="#mapping-the-data">Mapping the data</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#the-data">The data</a></li>
+    <li><a href="#mapping-the-data">Mapping the data</a></li>
+  </ul>
 </nav>
   </div>
 </div>
-
-    
     <div class="post-content">
-      
-
-<p>In this post, I&rsquo;d like to share some work related to geo-spatial mapping,
+      <p>In this post, I&rsquo;d like to share some work related to geo-spatial mapping,
 statewide school ratings, and US Census Bureau data using census tracts.
 Specifically, I wanted to investigate whether there was a relation between the
 median housing price in an area, and the statewide achievement ratings for
@@ -188,30 +162,25 @@ how statewide ratings for schools relate to the demographics of the
 corresponding area. Fair warning - this is a rather long post, so you&rsquo;ll have to have a bit
 of endurance to get through it all (I considered splitting it into two posts
 but it felt less cohesive). We&rsquo;ll be using R to produce the following map.</p>
-
-<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools.html" width="100%" height="500"></iframe>
-
+<!-- raw HTML omitted -->
 <p>This post uses the <a href="https://www.tidyverse.org">tidyverse</a>, <a href="http://thomasleeper.com">Thomas
-Leeper</a>&rsquo;s <a href="https://github.com/leeper/rio">rio</a> package
-for data import and <a href="https://github.com/sfirke">Sam Firke</a>&rsquo;s
+Leeper</a>&lsquo;s <a href="https://github.com/leeper/rio">rio</a> package
+for data import and <a href="https://github.com/sfirke">Sam Firke</a>&lsquo;s
 <a href="https://github.com/sfirke/janitor">janitor</a> package for quick cleaning up of
 column names. The <a href="https://rstudio.github.io/leaflet/">leaflet</a> packages, is
 used for mapping, as well the terrific
 <a href="https://github.com/walkerke/tidycensus">tidycensus</a> package by
-<a href="https://walkerke.github.io">Kyle Walker</a>, and the<br />
+<a href="https://walkerke.github.io">Kyle Walker</a>, and the<br>
 <a href="https://github.com/dkahle/ggmap">ggmap</a> package is used for pulling
 lattitude and longitude data from physical addresses. Finally, this post
 builds off a <a href="https://juliasilge.com/blog/using-tidycensus/">wonderful post</a> by
 <a href="https://juliasilge.com">Julia Silge</a>.</p>
-
 <h2 id="the-data">The data</h2>
-
 <p>For this project, I wanted to use only publicly available data. I meandered
 around the Oregon Department of Education (ODE) website for a while and eventually
 came to the file I wanted: <a href="http://www.oregon.gov/ode/schools-and-districts/reportcards/reportcards/Pages/Accountability-Measures.aspx">Report Card Ratings for each school</a>.
 So let&rsquo;s import the data directly from the ODE website, clean it up a bit, and
 take a look.</p>
-
 <pre><code class="language-r"># load packages for data import/prep
 library(tidyverse)
 library(rio)
@@ -232,7 +201,6 @@ achievement &lt;- ratings %&gt;%
 	
 achievement
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 84 x 2
 ##    school_name                   achievement
 ##    &lt;chr&gt;                               &lt;dbl&gt;
@@ -248,19 +216,16 @@ achievement
 ## 10 Boise-Eliot Elementary School        2.00
 ## # ... with 74 more rows
 </code></pre>
-
 <p>In the above code, we import the ratings, filter for only schools in Portland
 School District, spread the data out so we have different columns for each type
 of rating (achievement, growth, and student subgroup growth), and then select
 only the two variables we really need - the school name and the achievement
 rating.</p>
-
 <p>This is a good start, but we don&rsquo;t yet have the geographical coordinates of the
 schools. To do that, we&rsquo;ll get another dataset from ODE that has the physical
 address of each school. We&rsquo;ll then transform those addresses to lattitude and
 longitude using a bit of help from the <em>ggmap</em> package
 First, the addresses:</p>
-
 <pre><code class="language-r">addresses &lt;- import(&quot;http://www.ode.state.or.us/pubs/labels/SchoolMail.xls&quot;,
                     setclass = &quot;tbl_df&quot;) %&gt;% 
   clean_names() %&gt;% 
@@ -271,7 +236,6 @@ First, the addresses:</p>
               
 addresses
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 145 x 2
 ##    name                        address                                    
 ##    &lt;chr&gt;                       &lt;chr&gt;                                      
@@ -287,28 +251,22 @@ addresses
 ## 10 Atkinson Elementary School  5800 SE DIVISION ST PORTLAND OR 97206-1499 
 ## # ... with 135 more rows
 </code></pre>
-
 <p>After import, we limit to only schools in Portland because we&rsquo;re going to be
 joining this dataset with our <em>ratings</em> dataset based on the school name, and
 we want to ensure we don&rsquo;t join the data for schools with the same name but
 but different districts. Unfortunately, the <em>addresses</em> file doesn&rsquo;t tell us the
 district, or we could include that as one of the keyed variables in our join.</p>
-
 <p>We&rsquo;ll now join the <em>addresses</em> dataset with our <em>ratings</em> dataset.</p>
-
 <pre><code class="language-r">d &lt;- inner_join(achievement, addresses, by = c(&quot;school_name&quot; = &quot;name&quot;))
 </code></pre>
-
 <p>Now, we can find the longitude and lattitude of each school using the physical
 address with the help of the <em>ggmap</em> package and, specifically, the <code>geocode</code>
 function. This takes a bit of time. Notice I&rsquo;ve changed the source from the default, which is google, to &ldquo;dsk&rdquo;, which uses <a href="http://www.datasciencetoolkit.org">data science toolkit</a> instead. I like this better because it tends to provide better results, at least in my experience, unless their servers are being overwhelmed (which is not terrifically infrequent), in which case it fails catastrophically.</p>
-
 <pre><code class="language-r">library(ggmap)
 lat_long &lt;- geocode(d$address, source = &quot;dsk&quot;)
 d &lt;- bind_cols(d, lat_long)
 d[ ,c(1, 4:5)]
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 81 x 3
 ##    school_name                     lon   lat
 ##    &lt;chr&gt;                         &lt;dbl&gt; &lt;dbl&gt;
@@ -324,7 +282,6 @@ d[ ,c(1, 4:5)]
 ## 10 Boise-Eliot Elementary School  -123  45.5
 ## # ... with 71 more rows
 </code></pre>
-
 <p>Note - an earlier draft of this post had specified <code>source = &quot;dsk&quot;</code> when running
 the <code>geocode</code> function. I was getting some missing values (~19%) when using
 google (the default) and I received no missing data with <code>source = &quot;dsk&quot;</code>.
@@ -332,16 +289,13 @@ However, it seems the Data Science Toolkit website is fairly frequently
 overwhelmed. Last time I tried this it took forever and failed, so I suppose
 the best option may depend on the availability of the servers at time you run
 the function.</p>
-
 <h2 id="mapping-the-data">Mapping the data</h2>
-
 <p>To map the data, we&rsquo;ll use the <em>leaflet</em> and <em>sf</em> packages. We&rsquo;ll first write a
 quick function that tells leaflet what color we want the schools in our map to
 appear depending on their statewide achievement rating. We&rsquo;ll make a simple
 diverging palette, where low values are red, middle values are white, and high
 values are green. These colors must correspond with the possible values for
 <code>markerColor</code> from <code>leaflet::awesomeIcons</code>.</p>
-
 <pre><code class="language-r">library(leaflet)
 
 get_col &lt;- function(df, indicator) {
@@ -359,7 +313,6 @@ get_col &lt;- function(df, indicator) {
     } })
 }
 </code></pre>
-
 <p>Next we&rsquo;ll map the Portland area using a combination of <em>leaflet</em> and the
 <em>tidycensus</em> packages to not only produce the map, but color census tracts
 according to the median housing income for the tract. Note that you have to have
@@ -370,7 +323,6 @@ tract data for  Multnomah County. The variable argument tells the function
 which variable to get data from (see the <code>load_variables</code> function for other
 variables). I also filter the data for non-negative values (there was one that
 was returning a negative value, I haven&rsquo;t taken the time to track down why yet).</p>
-
 <pre><code class="language-r">library(tidycensus)
 pdx_acs &lt;- get_acs(geography = &quot;tract&quot;, 
                      variables = &quot;B25077_001&quot;, 
@@ -379,7 +331,6 @@ pdx_acs &lt;- get_acs(geography = &quot;tract&quot;,
                      geometry = TRUE) %&gt;% 
   filter(estimate &gt; 0) 
 </code></pre>
-
 <p>The <code>pdx_acs</code> object now has data on the median housing cost for all census
 tracts in Multnomah County, as well as the geometry of each census tract. We
 can use this information to produce the map. First, however, we need to create
@@ -388,15 +339,12 @@ only beautiful, but also good for people with color blindness, as well as for
 printing in black and white. We&rsquo;ll use the <code>colorNumeric</code> function from
 <em>leaflet</em>, and ask it to fill each tract according to the estimate of the
 median housing cost, which we just extracted with the <em>tidycensus</em> package.</p>
-
 <pre><code class="language-r">pal &lt;- colorNumeric(palette = &quot;viridis&quot;, 
                     domain = pdx_acs$estimate)
 </code></pre>
-
 <p>Next we&rsquo;ll get the actual icons we want to use, coloring them according to
 the achievement ratings. The last line in this code gets a hexadecimal
 approximation for these colors, which we&rsquo;ll use in a legend later.</p>
-
 <pre><code class="language-r">pins &lt;- awesomeIcons(
   icon = 'ios-close',
   iconColor = 'black',
@@ -406,14 +354,12 @@ approximation for these colors, which we&rsquo;ll use in a legend later.</p>
 
 cols &lt;- gplots::col2hex(c(&quot;red&quot;, &quot;pink&quot;, &quot;white&quot;, &quot;lightgreen&quot;, &quot;darkgreen&quot;))
 </code></pre>
-
 <p>Finally, we&rsquo;ll produce the map, using the code below. Although it appears
 somewhat complicated, it&rsquo;s actually not too bad, it&rsquo;s just rather long(ish).
 Essentially we first separate <code>NAME</code> into three distinct variables for the
 census tract, county, and state, then we (a) create a blank map, (b) set the
-style in which we want the map to render, &copy; add tract information,
+style in which we want the map to render, (c) add tract information,
 (d) add school information, and (e) add legends.</p>
-
 <pre><code class="language-r">pdx_acs %&gt;%
   separate(NAME, c(&quot;tract&quot;, &quot;county&quot;, &quot;state&quot;), sep = &quot;,&quot;) %&gt;% 
   leaflet() %&gt;%
@@ -440,9 +386,7 @@ style in which we want the map to render, &copy; add tract information,
             title = &quot;Achievement Ratings&quot;,
             opacity = 1)
 </code></pre>
-
-<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools.html" width="100%" height="500"></iframe>
-
+<!-- raw HTML omitted -->
 <p>One of the nice things about this map is that it&rsquo;s fully interactive. And
 that&rsquo;s particularly helpful here because to really see the relation you&rsquo;ll need
 to zoom in quite a bit. Because we added the optional <code>popup</code> argument to
@@ -453,7 +397,6 @@ produce a nice terrain map with <code>provider = &quot;Stamen.TerrainBackground&
 the different options are available
 <a href="http://leaflet-extras.github.io/leaflet-providers/preview/index.html">here</a>,
 where you can preview a map before applying it to yours.</p>
-
 <p>Note that we have a very clear and very strong relation here - essentially all
 the red, pink, and white schools are in the more purple tracts, correpsonding to
 lower median housing price areas. This is powerful information but it is
@@ -464,12 +407,10 @@ about the quality of the school and, indeed, if we look at estimates of growth
 is, the ratings schools receive on the amount of growth students make is less
 correlated with the median housing cost in the area than is absolute achievement,
 although there does still appear to be some correlation.</p>
-
-<iframe seamless src="../2017-11-13-mapping-statewide-school-ratings-with-us-census-tracts_files/map_schools_growth.html" width="100%" height="500"></iframe>
+<!-- raw HTML omitted -->
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
@@ -477,46 +418,36 @@ although there does still appear to be some correlation.</p>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
-    <span class="item-content">2017-11-13</span>
+    <span class="item-content">
+        2017-11-13
+        
+    </span>
   </p>
   
   
 </div>
-
-    
-    
-
-    <footer class="post-footer">
+<footer class="post-footer">
       <div class="post-tags">
-          
           <a href="/tags/data-visualization/">Data Visualization</a>
-          
           <a href="/tags/mapping/">Mapping</a>
-          
           <a href="/tags/census-data/">Census Data</a>
-          
-        </div>
-
-      
+          </div>
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/alluvial-plots-with-ggforce/">
+        <a class="prev" href="/post/alluvial-plots-with-ggforce/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">Alluvial Diagrams with ggforce</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        
-          <a class="next" href="/post/esvis-part-1/">
+        <a class="next" href="/post/esvis-part-1/">
             <span class="next-text nav-default">esvis: Part 1</span>
-            <span class="prev-text nav-mobile">Next</span>
+            <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
     </footer>
   </article>
         </div>
-        
-  <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -534,6 +465,7 @@ although there does still appear to be some correlation.</p>
   
 
   
+
       </div>
     </main>
 
@@ -552,7 +484,7 @@ although there does still appear to be some correlation.</p>
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme based on 
+    Modified theme - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
@@ -560,8 +492,7 @@ although there does still appear to be some correlation.</p>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2020
     <span class="author">Daniel Anderson</span>
   </span>
@@ -572,14 +503,14 @@ although there does still appear to be some correlation.</p>
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -587,7 +518,7 @@ although there does still appear to be some correlation.</p>
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

@@ -908,7 +908,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
           /^\$\$(.|\s)+\$\$$/.test(text) ||
           /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  
+        code.outerHTML = code.innerHTML;  // remove <code></code>
         continue;
       }
     }
@@ -916,7 +916,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
 })();
 </script>
-
+<!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');

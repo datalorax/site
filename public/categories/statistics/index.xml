@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statistics on Data Science in Education</title>
@@ -27,7 +27,8 @@
       <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/estimating-important-things-with-public-data/</guid>
-      <description>Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.</description>
+      <description>Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.
+Background In case you&amp;rsquo;re unfamiliar, states administer tests to students at the end of the year in each of Grades 3-8, and once in high school, for all students in their state in English/Language Arts and Mathematics.</description>
     </item>
     
   </channel>

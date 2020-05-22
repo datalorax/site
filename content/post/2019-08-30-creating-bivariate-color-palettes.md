@@ -91,7 +91,7 @@ library(paletteer)
 
 ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
   geom_tile() +
-  scale_fill_paletteer_c(harrypotter, HermioneGranger) +
+  scale_fill_paletteer_c("harrypotter::hermionegranger") +
   theme_void() +
   theme(legend.position = "none")
 ```
@@ -104,7 +104,7 @@ And it even works fairly well for (some) diverging palettes.
 ```r
 ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
   geom_tile() +
-  scale_fill_paletteer_c(scico, berlin) +
+  scale_fill_paletteer_c("scico::berlin") +
   theme_void() +
   theme(legend.position = "none")
 ```
@@ -115,7 +115,7 @@ ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
 ```r
 ggplot(d, aes(x, y, fill = fill_val, alpha = transparency)) +
   geom_tile() +
-  scale_fill_paletteer_c(harrypotter, HarryPotter) +
+  scale_fill_paletteer_c("harrypotter::harrypotter") +
   theme_void() +
   theme(legend.position = "none")
 ```

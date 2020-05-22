@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Visualization on Data Science in Education</title>
@@ -7,21 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Sat, 04 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Modeling Geographic Variance in Achievement Gaps</title>
-      <link>/post/modeling-geographic-variance-in-achievement-gaps/</link>
-      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/modeling-geographic-variance-in-achievement-gaps/</guid>
-      <description>This is the fourth and (probably) final post in a series of posts about estimating, visualizing, exploring, and now modeling achievement gap variation between schools using publicly available data.
-Let’s start by loading the data directly from my website. The code below should provide you with achievement gap data
-library(tidyverse) d &amp;lt;- read_csv(&amp;quot;https://github.com/datalorax/site/raw/master/content/post/v-geocoded.csv&amp;quot;) %&amp;gt;% mutate_at(vars(v, Longitude, Latitude), as.numeric) Introduction and background What we’d really like to do is understand how much geography accounts for achievement gap variability.</description>
-    </item>
     
     <item>
       <title>Creating bivariate color palettes</title>

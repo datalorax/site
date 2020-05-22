@@ -16,21 +16,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Daniel Anderson" />
-  <meta name="description" content="In this post I basically just wanted to share some recent developments that I&amp;rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&amp;rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github." />
-
-  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+<meta name="author" content="Daniel Anderson" /><meta name="description" content="In this post I basically just wanted to share some recent developments that I&amp;rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&amp;rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN." /><meta name="keywords" content="Data Science, Education, Data Visualization" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.58.1" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="/post/sharing-some-functions-from-my-personal-r-package/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,36 +35,27 @@
 
 
 
-
-
-
-
-<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
+<link href="/sass/main.min.6d0e309d5145139b9c722518ec255fcb575568c30552ff0231b5ab9bd512e2aa.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Sharing some functions from my personal R package" />
-<meta property="og:description" content="In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github." />
+<meta property="og:description" content="In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/sharing-some-functions-from-my-personal-r-package/" />
 <meta property="article:published_time" content="2018-02-10T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-02-10T00:00:00+00:00" />
 <meta itemprop="name" content="Sharing some functions from my personal R package">
-<meta itemprop="description" content="In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github.">
-
-
+<meta itemprop="description" content="In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN.">
 <meta itemprop="datePublished" content="2018-02-10T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-02-10T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1995">
 
 
 
-<meta itemprop="keywords" content="sundry,Data Manipulations," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="sundry,Data Manipulations," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Sharing some functions from my personal R package"/>
-<meta name="twitter:description" content="In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github."/>
+<meta name="twitter:description" content="In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -99,12 +86,12 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://datalorax.github.io/anderson-cv/">
+        <li class="mobile-menu-item">Curriculum Vita</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">About</li>
       </a><a href="/talks/talks/">
         <li class="mobile-menu-item">Talks</li>
-      </a><a href="/vita/vita/">
-        <li class="mobile-menu-item">Vita</li>
       </a>
   </ul>
 </nav>
@@ -123,15 +110,14 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
       </li><li class="menu-item">
+        <a class="menu-item-link" href="https://datalorax.github.io/anderson-cv/">Curriculum Vita</a>
+      </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">About</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/talks/talks/">Talks</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/vita/vita/">Vita</a>
       </li>
   </ul>
 </nav>
-
     </header>
 
     <main id="main" class="main">
@@ -145,51 +131,34 @@
       <div class="post-meta">
         <span class="post-time"> 2018-02-10 </span>
         <div class="post-category">
-            
-              <a href="/categories/r-code/"> R Code </a>
-            
-              <a href="/categories/r-packages/"> R Packages </a>
-            
-          </div>
-        <span class="more-meta"> 1995 words </span>
-        <span class="more-meta"> 10 mins read </span>
+            <a href="/categories/r-code/"> R Code </a>
+            <a href="/categories/r-packages/"> R Packages </a>
+            </div>
+          <span class="more-meta"> 1995 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#batch-reading-data">Batch reading data</a></li>
-<li><a href="#quick-descriptive-statistics">Quick descriptive statistics</a></li>
-<li><a href="#remove-rows-with-complete-missing-data-across-a-set-of-variables">Remove rows with complete missing data across a set of variables</a></li>
-<li><a href="#filter-by-functions">Filter by functions</a></li>
-<li><a href="#conclusions">Conclusions</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#batch-reading-data">Batch reading data</a></li>
+    <li><a href="#quick-descriptive-statistics">Quick descriptive statistics</a></li>
+    <li><a href="#remove-rows-with-complete-missing-data-across-a-set-of-variables">Remove rows with complete missing data across a set of variables</a></li>
+    <li><a href="#filter-by-functions">Filter by functions</a></li>
+    <li><a href="#conclusions">Conclusions</a></li>
+  </ul>
 </nav>
   </div>
 </div>
-
-    
     <div class="post-content">
-      
-
-<p>In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package <a href="https://github.com/DJAnderson07/sundry">{sundry}</a>. All of the recent advancements have been made to work with the tidyverse, so things like <code>group_by</code> should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN. You can install it with <code>devtools::install_github(&quot;DJAnderson_07/sundry&quot;)</code></p>
-
+      <p>In this post I basically just wanted to share some recent developments that I&rsquo;ve made to my personal R package <a href="https://github.com/DJAnderson07/sundry">{sundry}</a>. All of the recent advancements have been made to work with the tidyverse, so things like <code>group_by</code> should work seamlessly. If you feel like giving the package a whirl, I&rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN. You can install it with <code>devtools::install_github(&quot;DJAnderson_07/sundry&quot;)</code></p>
 <h2 id="batch-reading-data">Batch reading data</h2>
-
 <p>Probably my favorite new function is <code>read_files</code>, which is basically meant to make batch reading in files easy. It uses <code>purrr::map_df</code> by default, so all the data frames are bound into a single data frame. And, the part I think is really neat, is that it leverages the power of the <a href="https://github.com/leeper/rio">{rio}</a> package so you don&rsquo;t really have to worry much about file types. In fact, the files you read in can all be of different types and it&rsquo;s no big deal. Here&rsquo;s an example, from the README.</p>
-
 <p>First, we&rsquo;ll load the tidyverse and sundry, then split the iris dataset by species.</p>
-
 <pre><code class="language-r">library(sundry)
 library(tidyverse)
 by_species &lt;- iris %&gt;%
@@ -198,7 +167,6 @@ by_species &lt;- iris %&gt;%
 
 str(by_species)
 </code></pre>
-
 <pre><code class="language-r">## List of 3
 ##  $ setosa    :'data.frame':	50 obs. of  4 variables:
 ##   ..$ Sepal.Length: num [1:50] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
@@ -216,20 +184,15 @@ str(by_species)
 ##   ..$ Petal.Length: num [1:50] 6 5.1 5.9 5.6 5.8 6.6 4.5 6.3 5.8 6.1 ...
 ##   ..$ Petal.Width : num [1:50] 2.5 1.9 2.1 1.8 2.2 2.1 1.7 1.8 1.8 2.5 ...
 </code></pre>
-
 <p>Next, we&rsquo;ll export each dataset from the split as different file types. Note that for each dataset, I&rsquo;m not only writing the file out in a different format (csv, EXCEL, and SPSS), but I&rsquo;m also only writing out specific columns (which are not all in common). So these are all fairly different files at this point, but we can imagine them all being part of the same study.</p>
-
 <pre><code class="language-r">rio::export(by_species$setosa[ ,1:2], &quot;setosa.csv&quot;)
 rio::export(by_species$versicolor[ ,2:4], &quot;versicolor.xlsx&quot;)
 rio::export(by_species$virginica[ ,2:3], &quot;virginica.sav&quot;)
 </code></pre>
-
 <p>Now, we can import all of these datasets back into R with the <code>sundry::read_files</code> function.</p>
-
 <pre><code class="language-r">d &lt;- read_files()
 d
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 150 x 5
 ##    file   Sepal.Length Sepal.Width Petal.Length Petal.Width
 ##    &lt;chr&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
@@ -245,11 +208,9 @@ d
 ## 10 setosa         4.90        3.10           NA          NA
 ## # ... with 140 more rows
 </code></pre>
-
 <pre><code class="language-r">d %&gt;% 
   count(file)
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 3 x 2
 ##   file           n
 ##   &lt;chr&gt;      &lt;int&gt;
@@ -257,14 +218,11 @@ d
 ## 2 versicolor    50
 ## 3 virginica     50
 </code></pre>
-
 <p>This can be a little tricky though, because sometimes you might have the same file in multiple formats, or you may want to only read in data some datasets from a directory but not all. That&rsquo;s where the optional <code>pat</code> argument comes in. For example, let&rsquo;s write out one additional csv file, and then read in only the csv files.</p>
-
 <pre><code class="language-r">rio::export(by_species$virginica[ ,2:3], &quot;virginica.csv&quot;)
 d2 &lt;- read_files(pat = &quot;csv&quot;)
 head(d2)
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 6 x 4
 ##   file   Sepal.Length Sepal.Width Petal.Length
 ##   &lt;chr&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
@@ -275,10 +233,8 @@ head(d2)
 ## 5 setosa         5.00        3.60           NA
 ## 6 setosa         5.40        3.90           NA
 </code></pre>
-
 <pre><code class="language-r">tail(d2)
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 6 x 4
 ##   file      Sepal.Length Sepal.Width Petal.Length
 ##   &lt;chr&gt;            &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
@@ -289,35 +245,26 @@ head(d2)
 ## 5 virginica           NA        3.40         5.40
 ## 6 virginica           NA        3.00         5.10
 </code></pre>
-
 <p>Finally, we&rsquo;ll clean up a bit by deleting all the files we wrote out for this example</p>
-
 <pre><code class="language-r">fs::file_delete(c(&quot;setosa.csv&quot;, &quot;versicolor.xlsx&quot;, 
                   &quot;virginica.sav&quot;, &quot;virginica.csv&quot;))
 </code></pre>
-
 <h2 id="quick-descriptive-statistics">Quick descriptive statistics</h2>
-
 <p>I&rsquo;m sure there are other packages that do similar things, but I often find myself just needing quick descriptives for a variable. That&rsquo;s where <code>sundry::descrips</code> comes in helpful. It&rsquo;s relatively straightforward. You just supply the columns you want descriptive statistics on and, by default, it returns the number of cases, min and max values, as well as the mean and standard deviation.</p>
-
 <pre><code class="language-r">storms %&gt;% 
   descrips(wind, pressure)
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 2 x 6
 ##   variable     n   min   max  mean    sd
 ##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 pressure 10010 882    1022 992    19.5
 ## 2 wind     10010  10.0   160  53.5  26.2
 </code></pre>
-
 <p>The function also works well with <code>dplyr::group_by</code></p>
-
 <pre><code class="language-r">storms %&gt;% 
   group_by(year) %&gt;% 
   descrips(wind, pressure)
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 82 x 7
 ##     year variable     n   min    max   mean    sd
 ##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -333,9 +280,7 @@ head(d2)
 ## 10  1979 wind     301    15.0  150     48.7 30.3 
 ## # ... with 72 more rows
 </code></pre>
-
 <p>And finally, if you want different functions, you can supply them via the optional <code>.funs</code> argument. Below, we&rsquo;ll calculate the 25th, 50th, and 75th percentiles instead.</p>
-
 <pre><code class="language-r">storms %&gt;% 
   group_by(year) %&gt;% 
   descrips(wind, pressure,
@@ -343,7 +288,6 @@ head(d2)
                         median, 
                         qtile75 = quantile(., 0.75)))
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 82 x 5
 ##     year variable qtile25 median qtile75
 ##    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -359,11 +303,8 @@ head(d2)
 ## 10  1979 wind        25.0   35.0    65.0
 ## # ... with 72 more rows
 </code></pre>
-
 <h2 id="remove-rows-with-complete-missing-data-across-a-set-of-variables">Remove rows with complete missing data across a set of variables</h2>
-
 <p>In many datasets I work with, there are sets of variables that have complete missing data. I want to remove any rows that are missing acrross all of these variables. This is different from <code>janitor::remove_empty_rows</code>, because these rows may have valid data on other variables, just not across the set of variables I&rsquo;m interested in. Below is an example from the Oregon Department of Education on schools, where the number and percent of students scoring in each statewide proficiency category on the statewide test are missing if the <em>n</em> size is too small (for confidentiality purposes).</p>
-
 <pre><code class="language-r">d &lt;- rio::import(&quot;http://www.oregon.gov/ode/educator-resources/assessment/TestResults2017/pagr_schools_ela_tot_ecd_ext_gnd_lep_1617.xlsx&quot;,
             setclass = &quot;tbl_df&quot;,
             na = c(&quot;--&quot;, &quot;*&quot;)) %&gt;% 
@@ -372,7 +313,6 @@ head(d2)
 d %&gt;% 
   select(district_id, number_level_4:percent_level_1)
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 23,760 x 9
 ##    district_id number_level_4 percent_level_4 number_level_3
 ##          &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;           &lt;chr&gt;         
@@ -390,14 +330,11 @@ d %&gt;%
 ## #   number_level_2 &lt;chr&gt;, percent_level_2 &lt;chr&gt;, number_level_1 &lt;chr&gt;,
 ## #   percent_level_1 &lt;chr&gt;
 </code></pre>
-
 <p>Note that there are many more columns here, but I&rsquo;m only showing the ones that I&rsquo;m interested in. I want to remove and rows that are missing across these variables, which I can do with <code>sundry::rm_empty_rows</code>.</p>
-
 <pre><code class="language-r">d %&gt;% 
   rm_empty_rows(number_level_4:percent_level_1) %&gt;% 
   select(district_id, number_level_4:percent_level_1) 
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 15,081 x 9
 ##    district_id number_level_4 percent_level_4    number_level_3
 ##          &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;              &lt;chr&gt;         
@@ -415,18 +352,13 @@ d %&gt;%
 ## #   number_level_2 &lt;chr&gt;, percent_level_2 &lt;chr&gt;, number_level_1 &lt;chr&gt;,
 ## #   percent_level_1 &lt;chr&gt;
 </code></pre>
-
 <p>In the above, rows with partial missing data across the set of columns are still returned. The function can also be provided without any column arguments, and the function will then mimic the behavior or <code>janitor::remove_empty_rows</code>.</p>
-
 <h2 id="filter-by-functions">Filter by functions</h2>
-
 <p>For plotting purposes, in particular, I often find myself needing to filter a dataset according to values that can be obtained from functions, such as the min and the max. Below is an example, where the dataset is filtered to return only the rows where the wind speed is equal to the minimum or the maximum wind speed.</p>
-
 <pre><code class="language-r">storms %&gt;%
   filter_by_funs(wind, funs(min, max)) %&gt;% 
   select(fun, name, year, wind) 
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 11 x 4
 ##    fun   name      year  wind
 ##    &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt;
@@ -442,16 +374,13 @@ d %&gt;%
 ## 10 max   Gilbert   1988   160
 ## 11 max   Wilma     2005   160
 </code></pre>
-
 <p>So in this case, the minimum wind speed is 10, and the maximum is 160. The first 9 rows all match the minimum wind speed, while the 10th and 11th rows match the max. You can quickly identify which function the row was selected on by the <em>fun</em> column that is added to the data frame. Again, this function works well with <code>dplyr::group_by</code>, and should work with any function.</p>
-
 <pre><code class="language-r">storms %&gt;%
   group_by(year) %&gt;% 
   filter_by_funs(wind, funs(min, max)) %&gt;% 
   select(fun, name, year, wind) %&gt;% 
   arrange(year)
 </code></pre>
-
 <pre><code class="language-r">## # A tibble: 387 x 4
 ## # Groups:   year [41]
 ##    fun   name      year  wind
@@ -468,14 +397,11 @@ d %&gt;%
 ## 10 min   Clara     1977    20
 ## # ... with 377 more rows
 </code></pre>
-
 <h2 id="conclusions">Conclusions</h2>
-
 <p>There are a few other functions in the package that might be helfpul, but I didn&rsquo;t want this post to get too long. I would love any feedback!</p>
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
@@ -483,44 +409,35 @@ d %&gt;%
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
-    <span class="item-content">2018-02-10</span>
+    <span class="item-content">
+        2018-02-10
+        
+    </span>
   </p>
   
   
 </div>
-
-    
-    
-
-    <footer class="post-footer">
+<footer class="post-footer">
       <div class="post-tags">
-          
           <a href="/tags/sundry/">sundry</a>
-          
           <a href="/tags/data-manipulations/">Data Manipulations</a>
-          
-        </div>
-
-      
+          </div>
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/new-website-theme/">
+        <a class="prev" href="/post/new-website-theme/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">New Website Theme!</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        
-          <a class="next" href="/post/a-tidyeval-use-case/">
+        <a class="next" href="/post/a-tidyeval-use-case/">
             <span class="next-text nav-default">A tidyeval use case</span>
-            <span class="prev-text nav-mobile">Next</span>
+            <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
     </footer>
   </article>
         </div>
-        
-  <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -538,6 +455,7 @@ d %&gt;%
   
 
   
+
       </div>
     </main>
 
@@ -556,7 +474,7 @@ d %&gt;%
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme based on 
+    Modified theme - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
@@ -564,8 +482,7 @@ d %&gt;%
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2020
     <span class="author">Daniel Anderson</span>
   </span>
@@ -576,14 +493,14 @@ d %&gt;%
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -591,7 +508,7 @@ d %&gt;%
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

@@ -1,1 +1,0 @@
-All the files in this directory were written by Hadley Wickham as part of his Tidy Data paper published in the Journal of Statistical Software (August, 2014, Volume 59, Issue 10). See https://github.com/hadley/tidy-data/tree/master/data

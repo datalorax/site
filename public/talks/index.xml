@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Talks on Data Science in Education</title>
@@ -12,112 +12,13 @@
     
     
     <item>
-      <title></title>
-      <link>/talks/aera19-rr-p1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/aera19-rr-p1/</guid>
-      <description>Transparent and Reproducible Research with R (Part 1)    class: center, middle, inverse, title-slide # Transparent and Reproducible Research with R (Part 1) ## And a bit of git/GitHub ### Daniel Anderson ### Joshua M Rosenberg ### April 7, 2019 --- class: inverse background-image:url(https://media.giphy.com/media/yoJC2A59OCZHs1LXvW/giphy.gif) background-size:contain --- # Agenda ### First two hours - Introduction (8:00 - 8:45) - Who we are, who participants are and why they&#39;re here (15 min.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/aera19-rr-p2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/aera19-rr-p2/</guid>
-      <description>Transparent and Reproducible Research with R (Part 2)   class: center, middle, inverse, title-slide # Transparent and Reproducible Research with R (Part 2) ## And a bit of git/GitHub ### Daniel Anderson ### Joshua M Rosenberg ### April 7, 2019 --- # Agenda # Last two hours - Advanced R Markdown functionality (10:15 - 11:00 minutes) - Formatting tables (20 min.) &amp;lt;!-- DA --&amp;gt; - Creating manuscripts to submit for publication (via {papaja}; 25 min.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/cascadia18/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/cascadia18/</guid>
-      <description>Contribute to Open Source with Pretty Slides   class: center, middle, inverse, title-slide # Contribute to Open Source with Pretty Slides ## (And a short preview of a WIP package) ### Daniel Anderson ### June 2, 2018 --- class: center, middle # xaringan ### /ʃæ.&#39;riŋ.ɡæn/ --- # What it is .pull-left[ * HTML-based slides * Produced with R Markdown * Styled with CSS ] .pull-right[ ![](assets/img/rmd.png) ] .</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/datasci-09-11-18/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/datasci-09-11-18/</guid>
-      <description>My research and the COE   class: center, middle, inverse, title-slide # My research and the COE ### Daniel Anderson ### September 11, 2018 --- ![](ncaase-logo.png) ### Large inter-state collaborative * Oregon, Arizona, Pennsylvania, North Carolina * Lots of data and data sharing agreements + State testing data for every student in each state, Grades 3-8, in Reading and Math (some science) + Number of years varies by state, but generally there&#39;s about a decade * Focus on growth-modeling, accountability policies, and between-school --- class: bottom left background-image:url(growth-projections.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/eugene_rug/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/eugene_rug/</guid>
-      <description>Developing Your First R Package   class: center, middle, inverse, title-slide # Developing Your First R Package ## A Case Study with esvis ### Daniel Anderson ### 04-10-2018 --- # Want to follow along? If you&#39;d like to follow along, pleae make sure you have the following packages installed ```r install.packages(c(&#34;tidyverse&#34;, &#34;esvis&#34;, &#34;devtools&#34;, &#34;roxygen2&#34;, &#34;usethis&#34;)) ``` --- # #whomi &amp;lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&#34;&amp;gt; &amp;lt;a href=&#34;https://github.com/DJAnderson07&#34;&amp;gt; &amp;lt;i class=&#34;fa fa-github fa-2x&#34;</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/ncme18/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/ncme18/</guid>
-      <description>Exploring and Visualizing School Achievement and School Effects   class: center, middle, inverse, title-slide # Exploring and Visualizing School Achievement and School Effects ### Daniel Anderson  Joseph Stevens ### 04/16/18 --- # Introduction * Much recent focus on open data in research generally * Open data tend to be rare in educational research + Privacy concerns .footnote[Slides available at [dandersondata.com/talks/ncme18](http://www.dandersondata.com/talks/ncme18)] -- .Large[.bolder[.center[NCLB Required Publicly Available Data]]] -- * School-level data * Percent proficent in each of at least four proficiency categories * Disaggregated by student subgroups --- # Making Comparisons .</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/ncme19/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/ncme19/</guid>
-      <description>Evaluating Content-Related Validity Evidence Using Text Modeling   class: center, middle, inverse, title-slide # Evaluating Content-Related Validity Evidence Using Text Modeling ### Daniel Anderson ### Brock Rowley ### Sondra Stegenga ### P. Shawn Irvin ### Joshua M. Rosenberg --- # Background ### Content-related validity evidence -- * One five major sources of validity evidence (as outlined by the [*Standards*](https://www.apa.org/science/programs/testing/standards)) -- * Does the content represented in the test represent the targeted content?</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/psych-seminar19/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/psych-seminar19/</guid>
-      <description>Some data viz advice   class: center, middle, inverse, title-slide # Some data viz advice ### Daniel Anderson ### Wednesday, April 24 --- # #whoami .pull-left[ * Research Assistant Professor: Behavioral Research and Teaching, University * Dad (two daughters: 7 and 4 (almost 5)) * Primary areas of interest + 💗💗R💗💗 and computational research + Open data, open science, and reproducible workflows + Growth modeling, achievement gaps, and variance between educational institutions (particularly spatially) ] &amp;lt;img src=&#34;</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/sicss-seattle/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/sicss-seattle/</guid>
-      <description>Community Features and School Achievement Gaps   class: center, middle, inverse, title-slide # Community Features and School Achievement Gaps ## And some other stuff ### Daniel Anderson ### June 22, 2018 --- # Introduction * Much recent focus on open data in research generally * Open data tend to be rare in educational research + Privacy concerns -- .Large[.bolder[.center[NCLB Required Publicly Available Data]]] -- * School-level data * Percent proficent in each of at least four proficiency categories * Disaggregated by student subgroups --- # Illustrating one approach * Simulate some data from two distributions + Group 1: `\(n = 200\)`, `\(\mu = 200\)`, `\(\sigma = 10\)` + Group 2: `\(n = 500\)`, `\(\mu = 210\)`, `\(\sigma = 8\)` * Cut Scores: 190, 205, 215 .</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/uu/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/uu/</guid>
-      <description>Measurement, individual differences, and the promise of computational methods   class: center, middle, inverse, title-slide # Measurement, individual differences, and the promise of computational methods ## Job talk for the University of Utah ### Daniel Anderson ### November 15, 2018 --- # My background ### Behavioral Research and Teaching * Research Assistant to Research Associate to Research Assistant Professor * Grant funded research shop at UO that mostly focuses on measurement + Curriculum Based Measurement (e.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/talks/vatech/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talks/vatech/</guid>
-      <description>Variance in Student Growth, Intervention Effects, and Achievement Gaps   class: center, middle, inverse, title-slide # Variance in Student Growth, Intervention Effects, and Achievement Gaps ## Job talk for Virginia Tech ### Daniel Anderson ### March 25, 2019 --- # My background ### Behavioral Research and Teaching * Research Assistant to Research Associate to Research Assistant Professor * Grant funded research shop at UO that mostly focuses on measurement + Curriculum Based Measurement (e.</description>
-    </item>
-    
-    <item>
       <title>Multiple regression with R</title>
       <link>/talks/gina/gina_mr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/gina/gina_mr/</guid>
-      <description>em { font-style: italic }   strong { font-weight: bold; }  Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
- Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)    Part of why I love R  Computer programming language = you can do ANYTHING!</description>
+      <description>Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
+ Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!</description>
     </item>
     
     <item>
@@ -126,7 +27,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/talks/talks/</guid>
-      <description>Talks Spring 2019  Some Advice on Data Viz  Talk for first year graduate students in a Psychology seminar on producing better data visualizations  AERA Reproducible Research Training: (part 1) AERA Reproducible Research Training: (part 2)  Training on open and transparent research with R and git/GitHub. April 7, 2019, Toronto, Ontario.  Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education.</description>
+      <description>Spring 2019  Some Advice on Data Viz  Talk for first year graduate students in a Psychology seminar on producing better data visualizations   AERA Reproducible Research Training: (part 1) AERA Reproducible Research Training: (part 2)  Training on open and transparent research with R and git/GitHub. April 7, 2019, Toronto, Ontario.   Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education.</description>
     </item>
     
   </channel>

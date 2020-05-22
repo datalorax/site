@@ -16,21 +16,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Daniel Anderson" />
-  <meta name="description" content="On April 10, 2018, I gave a talk entitled Developing your first R package: A case study with esvis for the Eugene R Users Group. Although I discussed my esvis package, the focus of the talk was really on tools and tips for developing R pacakges. In this post, I&amp;rsquo;ll go over some of the content in that talk, and discuss why I think you should develop an R package." />
-
-  <meta name="keywords" content="Data Science, Education, Data Visualization" />
+<meta name="author" content="Daniel Anderson" /><meta name="description" content="On April 10, 2018, I gave a talk entitled Developing your first R package: A case study with esvis for the Eugene R Users Group. Although I discussed my esvis package, the focus of the talk was really on tools and tips for developing R pacakges. In this post, I&amp;rsquo;ll go over some of the content in that talk, and discuss why I think you should develop an R package." /><meta name="keywords" content="Data Science, Education, Data Visualization" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.58.1" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="/post/why-i-think-you-should-write-an-r-package/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,14 +35,8 @@
 
 
 
-
-
-
-
-<link href="/dist/even.min.css?v=3.0.1" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
+<link href="/sass/main.min.6d0e309d5145139b9c722518ec255fcb575568c30552ff0231b5ab9bd512e2aa.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Writing an R Package Basics (and why I think you should)" />
@@ -57,16 +47,13 @@
 <meta property="article:modified_time" content="2018-04-24T00:00:00+00:00" />
 <meta itemprop="name" content="Writing an R Package Basics (and why I think you should)">
 <meta itemprop="description" content="On April 10, 2018, I gave a talk entitled Developing your first R package: A case study with esvis for the Eugene R Users Group. Although I discussed my esvis package, the focus of the talk was really on tools and tips for developing R pacakges. In this post, I&rsquo;ll go over some of the content in that talk, and discuss why I think you should develop an R package.">
-
-
 <meta itemprop="datePublished" content="2018-04-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-04-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1304">
+<meta itemprop="wordCount" content="1286">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Writing an R Package Basics (and why I think you should)"/>
 <meta name="twitter:description" content="On April 10, 2018, I gave a talk entitled Developing your first R package: A case study with esvis for the Eugene R Users Group. Although I discussed my esvis package, the focus of the talk was really on tools and tips for developing R pacakges. In this post, I&rsquo;ll go over some of the content in that talk, and discuss why I think you should develop an R package."/>
 
@@ -99,12 +86,12 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://datalorax.github.io/anderson-cv/">
+        <li class="mobile-menu-item">Curriculum Vita</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">About</li>
       </a><a href="/talks/talks/">
         <li class="mobile-menu-item">Talks</li>
-      </a><a href="/vita/vita/">
-        <li class="mobile-menu-item">Vita</li>
       </a>
   </ul>
 </nav>
@@ -123,15 +110,14 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
       </li><li class="menu-item">
+        <a class="menu-item-link" href="https://datalorax.github.io/anderson-cv/">Curriculum Vita</a>
+      </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">About</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/talks/talks/">Talks</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/vita/vita/">Vita</a>
       </li>
   </ul>
 </nav>
-
     </header>
 
     <main id="main" class="main">
@@ -145,70 +131,46 @@
       <div class="post-meta">
         <span class="post-time"> 2018-04-24 </span>
         <div class="post-category">
-            
-              <a href="/categories/r-packages/"> R-Packages </a>
-            
-          </div>
-        <span class="more-meta"> 1304 words </span>
-        <span class="more-meta"> 7 mins read </span>
+            <a href="/categories/r-packages/"> R-Packages </a>
+            </div>
+          <span class="more-meta"> 1286 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#writing-functions-is-the-hard-part">Writing functions is the hard part</a>
-<ul>
-<li><a href="#how-do-we-compile-into-a-function">How do we compile into a function?</a>
-<ul>
-<li><a href="#create-a-package-skeleton-with-usethis">Create a package skeleton with <code>usethis</code></a></li>
-<li><a href="#document-your-function">Document your function</a></li>
-<li><a href="#install-fiddle-install">Install/fiddle/install</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#what-s-the-benefit">What&rsquo;s the benefit?</a></li>
-<li><a href="#it-doesn-t-have-to-be-a-package-for-release">It doesn&rsquo;t have to be a package for release</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#writing-functions-is-the-hard-part">Writing functions is the hard part</a>
+      <ul>
+        <li><a href="#how-do-we-compile-into-a-function">How do we compile into a function?</a></li>
+      </ul>
+    </li>
+    <li><a href="#whats-the-benefit">What&rsquo;s the benefit?</a></li>
+    <li><a href="#it-doesnt-have-to-be-a-package-for-release">It doesn&rsquo;t have to be a package for release</a></li>
+  </ul>
 </nav>
   </div>
 </div>
-
-    
     <div class="post-content">
-      
-
-<p>On April 10, 2018, I gave a talk entitled <a href="http://www.dandersondata.com/talks/eugene_rug/">Developing your first R package: A case study with <em>esvis</em></a> for the <a href="https://www.meetup.com/meetup-group-cwPiAlnB/">Eugene R Users Group</a>. Although I discussed my <a href="https://github.com/DJAnderson07/esvis">esvis</a> package, the focus of the talk was really on tools and tips for developing R pacakges. In this post, I&rsquo;ll go over some of the content in that talk, and discuss <em>why</em> I think you should develop an R package.</p>
-
+      <p>On April 10, 2018, I gave a talk entitled <a href="http://www.dandersondata.com/talks/eugene_rug/">Developing your first R package: A case study with <em>esvis</em></a> for the <a href="https://www.meetup.com/meetup-group-cwPiAlnB/">Eugene R Users Group</a>. Although I discussed my <a href="https://github.com/DJAnderson07/esvis">esvis</a> package, the focus of the talk was really on tools and tips for developing R pacakges. In this post, I&rsquo;ll go over some of the content in that talk, and discuss <em>why</em> I think you should develop an R package.</p>
 <h2 id="writing-functions-is-the-hard-part">Writing functions is the hard part</h2>
-
 <p>The first point I want to make is that compiling functions into a package is not overly difficult, particularly given all the tools that are now available to help make the process as pain-free as possible (e.g., <a href="https://www.tidyverse.org/articles/2017/11/usethis-1.0.0/">{usethis}</a>, <a href="https://github.com/r-lib/devtools/tree/master/R">{devtools}</a>, <a href="https://github.com/klutometis/roxygen">{roxygen2}</a>). Writing functions is the hard part, but you can do that too.</p>
-
 <p>Let&rsquo;s say you have some code that looks like this</p>
-
 <pre><code class="language-r">library(tidyverse)
 mtcars %&gt;% 
   summarize(n_obs = n(),
             mean  = mean(mpg),
             sd    = sd(mpg))
 </code></pre>
-
 <pre><code class="language-r">##   n_obs     mean       sd
 ## 1    32 20.09062 6.026948
 </code></pre>
-
 <p>and we want to extend this code so we can calculate these same descriptives for any numeric column in any data frame. How? We write a function!</p>
-
 <p>To replicate the code above exactly as a function, we&rsquo;d have to use <a href="https://dplyr.tidyverse.org/articles/programming.html">tidyeval</a> (see my <a href="http://www.dandersondata.com/post/a-tidyeval-use-case/">use case here</a>). Instead, I&rsquo;ll just move to some base functions to make it a little easier. I also regularly have to worry about missing data, so I&rsquo;ll extend it a bit to give us some information about the amount of missingness.</p>
-
 <pre><code class="language-r">describe &lt;- function(var) {
   miss  &lt;- sum(is.na(var))
   
@@ -223,126 +185,78 @@ mtcars %&gt;%
              sd      = stdev)
 }
 </code></pre>
-
 <p>The above creates a new function, called <code>describe</code>, which sums the number of missing cases (this works because logicals are implicitly coerced to numeric, where <code>TRUE == 1</code> and <code>FALSE == 0</code>), removes all missing data, calculates the length of the variable (vector) with missing data removed, calculates the mean, calculates the standard deviation, and then compiles it all into a data frame. Let&rsquo;s test it out</p>
-
 <pre><code class="language-r">describe(mtcars$mpg)
 </code></pre>
-
 <pre><code class="language-r">##   n_miss n_valid     mean       sd
 ## 1      0      32 20.09062 6.026948
 </code></pre>
-
 <pre><code class="language-r">describe(iris$Sepal.Width)
 </code></pre>
-
 <pre><code class="language-r">##   n_miss n_valid     mean        sd
 ## 1      0     150 3.057333 0.4358663
 </code></pre>
-
 <pre><code class="language-r">set.seed(04242018)
 describe(c(rnorm(1e5, 100, 3), rep(NA, 500)))
 </code></pre>
-
 <pre><code class="language-r">##   n_miss n_valid     mean       sd
 ## 1    500  100000 99.98689 3.007097
 </code></pre>
-
 <p>So all appears well.</p>
-
 <h3 id="how-do-we-compile-into-a-function">How do we compile into a function?</h3>
-
 <p>In my talk, I recommended taking the following steps</p>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/recipe.png" alt="" />
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/recipe.png" alt="">
 There was some initial confusion on the twitterverse about what I meant by Step 3. To be clear, I am 100% recommending you use <code>usethis::create_package</code>, which I would consider a package skeleton, but that should <strong>not</strong> be confused with <code>utils::package.skeleton</code>, which I would argue is much less friendly to the developer.</p>
-
 <p>So, following the above, we have an idea (basic descriptive stats), we have a function, so now we need to create the package skeleton.</p>
-
 <h4 id="create-a-package-skeleton-with-usethis">Create a package skeleton with <code>usethis</code></h4>
-
 <p>The way I would recommend doing this, so you don&rsquo;t have to worry about paths at all is:</p>
-
 <ol>
 <li>Create a new R Project in a new directory</li>
 </ol>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/new_r-proj1.png" alt="" /></p>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/new_r-proj1.png" alt=""></p>
 <ul>
 <li>Select new project (not R Package)</li>
 </ul>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/new_r-proj2.png" alt="" /></p>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/new_r-proj2.png" alt=""></p>
 <ul>
 <li>Give your project whatever name you want your package to have</li>
 </ul>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/new_r-proj3.png" alt="" /></p>
-
-<ol>
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/new_r-proj3.png" alt=""></p>
+<ol start="2">
 <li>Run <code>usethis::create_package(&quot;.&quot;)</code>, which says &ldquo;Create a package here&rdquo;. It will then prompt you to make sure you want to overwrite the existing project you just created. Just say yes, and it will launch a new project (you can close the old one).</li>
 </ol>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/create_package.png" alt="" /></p>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/create_package.png" alt=""></p>
 <p>If all has gone well, you should see a new batch of files and folders in the directory.</p>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/pkg_files.png" alt="" /></p>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/pkg_files.png" alt=""></p>
 <p>Notice that one of these folders is called &ldquo;R&rdquo;. This is where all your functions go. Save them in a <code>.R</code> script, and we&rsquo;ll move on to Step 4: Document your function.</p>
-
 <h4 id="document-your-function">Document your function</h4>
-
 <p>Function in R packages generally include documentation. For example if you run <code>?lm</code> you will get the documentation for the <code>lm</code> function for linear modeling, which looks like this:</p>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/lm_doc.png" alt="" /></p>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/lm_doc.png" alt=""></p>
 <p>We&rsquo;re going to annotate our R script for our function using specialized comments. Those comments will then be automatically rendered into the documentation pages, like the one shown above, by the <a href="https://github.com/klutometis/roxygen">{roxygen2}</a> package. The comments are <code>#'</code>, rather than just pound signs, and then you&rsquo;ll describe specific parts of the function using parameters like <code>@param</code>, <code>@return</code>, <code>@export</code>, and <code>@examples</code>. These four, specifically, are probably the most common, and most important. <code>@param</code> describes the arguments, <code>@return</code> describes what the function will return, <code>@export</code> makes the function available upon loading the pacakge (rather than an internal function), and <code>@examples</code> provides example usage of the function. Below is an example of how I&rsquo;ve documented our function written earlier.</p>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/describe_doc.png" alt="" /></p>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/describe_doc.png" alt=""></p>
 <p>If you look in the <code>\man</code> folder there is currently nothing there. However, after writing the documentation, we can run <code>devtools::document()</code> and it will render the specialized comments into the documentation we need (i.e., there will be documents in the <code>\man</code> folder corresponding to the documentation for our function).</p>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/describe_man_doc.png" alt="" /></p>
-
-<h4 id="install-fiddle-install">Install/fiddle/install</h4>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/describe_man_doc.png" alt=""></p>
+<h4 id="installfiddleinstall">Install/fiddle/install</h4>
 <p>At this point, we&rsquo;re almost ready to go. If you click on the &ldquo;Build&rdquo; tab you will see a &ldquo;Install and Restart&rdquo; option.</p>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/install.png" alt="" /></p>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/install.png" alt=""></p>
 <p>Just clicking this button will install the package on your computer, and restart your local R session. You can now run <code>?describe</code> and you&rsquo;ll see the documentation for your function (see below). You can also play around with the function, run tests, etc.</p>
-
-<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/describe_help.png" alt="" /></p>
-
-<h2 id="what-s-the-benefit">What&rsquo;s the benefit?</h2>
-
+<p><img src="../2018-04-24-why-i-think-you-should-write-an-r-package_files/img/describe_help.png" alt=""></p>
+<h2 id="whats-the-benefit">What&rsquo;s the benefit?</h2>
 <p>The above basically helps get you started with writing R packages, but it&rsquo;s obviously not everything you need to know. But what&rsquo;s the benefit of all this? I would argue a few things. First, if you&rsquo;re writing functions and using them more than once, it&rsquo;s a great way to stay organized and make your functions more accessible. Part of what is so cool about the above, is that now, in any R session, regardless of our working directory or anything else, we should be able to call <code>library(practice)</code> and the <code>describe</code> function will be available to us.</p>
-
 <p>Second, as you start to write packages, you will naturally run across stumbling blocks. Although these can be frustrating at times, they will actually help push your knowledge and make you a a better programmer.</p>
-
 <p>Third, and finally, particularly if you house your package on <a href="https://github.com">GitHub</a>, sharing the functionality of your package with others will be easier (which may help people become more interested in R and the work you&rsquo;re doing). Further, if you house your code on GitHub, you&rsquo;ll be open and transparent (which sometimes can be a little scary, but the R community is incredibly welcoming), and others may help you make your code better! Leverage the power of open source!</p>
-
-<h2 id="it-doesn-t-have-to-be-a-package-for-release">It doesn&rsquo;t have to be a package for release</h2>
-
+<h2 id="it-doesnt-have-to-be-a-package-for-release">It doesn&rsquo;t have to be a package for release</h2>
 <p>When I first announced I was giving this talk on twitter, <a href="https://alison.rbind.io">Alison Hill</a> <a href="https://twitter.com/apreshill/status/983554271827259397">helped promote it</a> by taking a screen capture of my recipe slide, above. This prompted the following comment by <a href="http://www.masalmon.eu">Maëlle Salmon</a></p>
-
-<p><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">1a) check that no one had the same idea 😇</p>&mdash; Maëlle Salmon 🐟 (@ma_salmon) <a href="https://twitter.com/ma_salmon/status/983572108474241025?ref_src=twsrc%5Etfw">April 10, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
-
+<!-- raw HTML omitted -->
 <p>I think this is an excellent point, and Maëlle even has a <a href="http://www.masalmon.eu/2017/12/11/goodrpackages/">blog post</a> about this topic. In that post she states</p>
-
 <blockquote>
 <p>I won’t speak about the <a href="http://r-pkgs.had.co.nz/intro.html">benefits of building an R package for yourself</a>, or a <a href="https://github.com/ropensci/unconf17/issues/5">research compendium</a> to make your work reproducible.</p>
 </blockquote>
-
-<p>which is also an important qualifier. What I&rsquo;d like to advocate for, however, is exactly those things. I think you should try to build an R package for multiple reasons. It&rsquo;s fun. It&rsquo;shallenges your skillset. And, most importantly, if it can help you, or those you work with, then I &rsquo;s worth it. Maëlle was talking specifically about packages that will go on to be released on <a href="https://cran.r-project.org">CRAN</a>, but I think th(and I&rsquo;m pretty sure she would agree) ere are many times when writing an R package can be a great idea, even if release to CRAN is never the goal.
+<p>which is also an important qualifier. What I&rsquo;d like to advocate for, however, is exactly those things. I think you should try to build an R package for multiple reasons. It&rsquo;s fun. It&rsquo;shallenges your skillset. And, most importantly, if it can help you, or those you work with, then I &lsquo;s worth it. Maëlle was talking specifically about packages that will go on to be released on <a href="https://cran.r-project.org">CRAN</a>, but I think th(and I&rsquo;m pretty sure she would agree) ere are many times when writing an R package can be a great idea, even if release to CRAN is never the goal.
 .</p>
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
@@ -350,38 +264,32 @@ There was some initial confusion on the twitterverse about what I meant by Step 
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
-    <span class="item-content">2018-04-24</span>
+    <span class="item-content">
+        2018-04-24
+        
+    </span>
   </p>
   
   
 </div>
-
-    
-    
-
-    <footer class="post-footer">
-      
-
+<footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/peeking-behind-the-curtain-with-slidex/">
+        <a class="prev" href="/post/peeking-behind-the-curtain-with-slidex/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">Peeking behind the curtain with {slidex}</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        
-          <a class="next" href="/post/new-website-theme/">
+        <a class="next" href="/post/new-website-theme/">
             <span class="next-text nav-default">New Website Theme!</span>
-            <span class="prev-text nav-mobile">Next</span>
+            <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
     </footer>
   </article>
         </div>
-        
-  <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -399,6 +307,7 @@ There was some initial confusion on the twitterverse about what I meant by Step 
   
 
   
+
       </div>
     </main>
 
@@ -417,7 +326,7 @@ There was some initial confusion on the twitterverse about what I meant by Step 
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme based on 
+    Modified theme - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
@@ -425,8 +334,7 @@ There was some initial confusion on the twitterverse about what I meant by Step 
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2020
     <span class="author">Daniel Anderson</span>
   </span>
@@ -437,14 +345,14 @@ There was some initial confusion on the twitterverse about what I meant by Step 
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-<script type="text/javascript" src="/dist/even.min.js?v=3.0.1"></script>
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -452,7 +360,7 @@ There was some initial confusion on the twitterverse about what I meant by Step 
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 
