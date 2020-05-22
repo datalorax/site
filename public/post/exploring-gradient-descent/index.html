@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Exploring Gradient Descent - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" /><meta name="description" content="tl;dr I&amp;rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
+Intro This term I&amp;rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&amp;rsquo;s been a great experience because it&amp;rsquo;s allowed me to dig into topics more deeply than I have previously, and it&amp;rsquo;s defintely helped me learn and understand the tidymodels infrastructure better." /><meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="/post/exploring-gradient-descent/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.6d0e309d5145139b9c722518ec255fcb575568c30552ff0231b5ab9bd512e2aa.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Exploring Gradient Descent" />
+<meta property="og:description" content="tl;dr I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
+Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/exploring-gradient-descent/" />
+<meta property="article:published_time" content="2020-05-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-22T14:12:52-07:00" />
+<meta itemprop="name" content="Exploring Gradient Descent">
+<meta itemprop="description" content="tl;dr I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
+Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better.">
+<meta itemprop="datePublished" content="2020-05-22T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-22T14:12:52-07:00" />
+<meta itemprop="wordCount" content="1901">
+
+
+
+<meta itemprop="keywords" content="ML,Estimation,Optimization," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Exploring Gradient Descent"/>
+<meta name="twitter:description" content="tl;dr I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
+Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">datalorax</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://datalorax.github.io/anderson-cv/">
+        <li class="mobile-menu-item">Curriculum Vita</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">datalorax</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://datalorax.github.io/anderson-cv/">Curriculum Vita</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Exploring Gradient Descent</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-22 </span>
+        <div class="post-category">
+            <a href="/categories/machine-learning/"> Machine Learning </a>
+            </div>
+          <span class="more-meta"> 1901 words </span>
+          <span class="more-meta"> 9 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#exploring-candidate-fits">Exploring candidate fits</a></li>
+    <li><a href="#finding-the-optimal-fit">Finding the optimal fit</a></li>
+    <li><a href="#estimating-the-gradient">Estimating the gradient</a></li>
+    <li><a href="#automate-the-estimation">Automate the estimation</a></li>
+    <li><a href="#animating-the-learning">Animating the learning</a></li>
+    <li><a href="#example-with-polynomial-regression">Example with polynomial regression</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="tldr">tl;dr</h1>
+<p>I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!</p>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif" alt=""></p>
+<h2 id="intro">Intro</h2>
+<p>This term I&rsquo;m <a href="https://uo-datasci-specialization.github.io/c4-ml-2020/">co-teaching an applied machine learning course</a> in R using the <a href="https://www.tidymodels.org">{tidymodels}</a> suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better.</p>
+<p>Next week, I&rsquo;ll be discussing <a href="https://uo-datasci-specialization.github.io/c4-ml-2020/slides/w9p1-boosted-trees.html">boosted trees</a> and that allowed me to dig into gradient descent (the optimization algorithm used in boosted trees) at a deeper level than I have previously. So in this post, I wanted to share some of my exploration. I worked through this in a familiar framework - simple linear regression</p>
+<h2 id="exploring-candidate-fits">Exploring candidate fits</h2>
+<p>Gradient descent is an iterative search algorithm that seeks to find the global minimum of a cost function. What does that mean? Well, first, we have to define a cost function. In linear regression, this is usually the mean squared error, which is defined as</p>
+<p>$$
+\frac{1}{N} \sum_{i=1}^{n} (y_i - (a + bx_i ))^2
+$$</p>
+<p>All this means is that we fit a line through a cloud of data, calculate the distance from each point to the line, square all of these values (because some are positive and others are negative and their sum will be zero otherwise) and then take the mean of these squared values. So it&rsquo;s just a summary statistic indicating how far &ldquo;off&rdquo; our model is from the observed values. This is, hopefully pretty clearly, a statistic that you want to minimize.</p>
+<p>In the case of simple linear regression, there are infinite lines we could fit through the data. Below is an example of three such lines fit to some simulated data.</p>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/unnamed-chunk-1-1.png" alt=""><!-- raw HTML omitted --></p>
+<p>We can calculate the mean square error for each of these lines. The mean square error for the <!-- raw HTML omitted -->light blue line<!-- raw HTML omitted --> is 21.61, the <!-- raw HTML omitted -->slightly darker blue line is <!-- raw HTML omitted --> 20.72, and the <!-- raw HTML omitted -->darkest blue line is <!-- raw HTML omitted --> 20.67. So among these three candidate lines, the one that is closest to the observed values, on average, is the darkest line.</p>
+<h2 id="finding-the-optimal-fit">Finding the optimal fit</h2>
+<p>So using our cost function, we know which of these three lines provides the best fit (minimizes errors) to the data. But these are just three of an infinite number of lines. How do we find what is <em>best</em>? Well, in this case we&rsquo;d just use <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">ordinary least squares</a>. In other words, this problem is simple enough that some very smart people figured out a very long time ago how to directly estimate the line that minimizes the sum of the squared erros. But what if we didn&rsquo;t have a <a href="https://mathworld.wolfram.com/Closed-FormSolution.html">closed-form solution</a>? That&rsquo;s where gradient descent can help.</p>
+<p>First, let&rsquo;s look at the cost surface. What you see below is the mean square error estimate for a wide range of possible combinations for our two parameters in the model, the intercept (line value when x = 0) and the slope (steepness of the line).</p>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/img/cost-surface.mp4" alt=""></p>
+<p><strong>Code for generating the above image is available <a href="https://gist.github.com/datalorax/598ead8bde5c408df1936ffe611bf5f6">here</a></strong></p>
+<p>Gradient descent starts at a random location on this cost surface, evaluates the gradient, and takes a step (iteration) in the direction of steepest descent. The size of this step is called the <em>learning rate</em>, and it controls how quickly the algorithm moves. Too small of a learning rate, and the algorithm will take a very long time to estimate. Too large, and it may skip past the global minimum.</p>
+<h2 id="estimating-the-gradient">Estimating the gradient</h2>
+<p>To estimate our gradient, we take the partial derivative of our cost function for each parameter we are estimating. In simple linear regression, this amounts to</p>
+<p>$$
+\begin{bmatrix}
+\frac{d}{da}\\<br>
+\frac{d}{db}\\<br>
+\end{bmatrix} =
+\begin{bmatrix}
+\frac{1}{N} \sum -2(y_i - (a + bx_i)) \\<br>
+\frac{1}{N} \sum -2x_i(y_i - (a + bx_i)) \\<br>
+\end{bmatrix}
+$$</p>
+<p>or in R code</p>
+<pre><code class="language-r">gradient_descent &lt;- function(x, y, a, b, learning_rate) {
+  # number of observations
+  n &lt;- length(y)
+  
+  # predictions for candidate parameter estimates
+  yhat &lt;- a + (b * x)
+  
+  # errors
+  resid &lt;- y - yhat
+ 
+  # Estimate partial derivatives
+  a_deriv &lt;- (1/n) * sum(-2 * resid)
+  b_deriv &lt;- (1/n) * sum(-2 * x * resid)
+  
+  # multiply by the learning rate
+  a_step &lt;- a_deriv * learning_rate
+  b_step &lt;- b_deriv * learning_rate
+  
+  # update parameters, taking a step down the gradient
+  a_update &lt;- a - a_step
+  b_update &lt;- b - b_step
+  
+  # Return updated parameter estimates
+  c(a_update, b_update)
+}
+</code></pre>
+<p>Let&rsquo;s now simulate some data and play with it. The code below generates the exact same data displayed in the scatterplot above.</p>
+<pre><code class="language-r">set.seed(8675309)
+n &lt;- 1000
+x &lt;- rnorm(n)
+
+a &lt;- 5
+b &lt;- 1.3
+e &lt;- 4
+
+y &lt;- a + b*x + rnorm(n, sd = e)
+</code></pre>
+<p>We now have &ldquo;known&rdquo; parameters - the intercept is five and the slope is 1.3. We can estimate these paramters with ordinary least squares with</p>
+<pre><code class="language-r">coef(lm(y ~ x))
+</code></pre>
+<pre><code class="language-r">## (Intercept)           x 
+##    5.092374    1.413514
+</code></pre>
+<p>and as you can see, they are very close.</p>
+<p>Let&rsquo;s try the same thing with gradient descent. First, set the parameters to  arbitrary values. We&rsquo;ll use a fairly standard learning rate of 0.1.</p>
+<pre><code class="language-r">pars &lt;- gradient_descent(x, y, 0, 0, 0.1)
+pars
+</code></pre>
+<pre><code class="language-r">## [1] 1.0109553 0.2681521
+</code></pre>
+<p>So after one iteration our algorithm has moved the intercept value up to 1.01 and the slope up to 0.27, both of which appear to be heading in the right direction. If you run the code below over and over again you can &ldquo;watch&rdquo; the parameters move toward their optimal estimates, given the sample (i.e., the same values they were estimated at with ordinary least squares).</p>
+<pre><code class="language-r">pars &lt;- gradient_descent(x, y, pars[1], pars[2], 0.1)
+pars
+</code></pre>
+<pre><code class="language-r">## [1] 1.8211460 0.4856731
+</code></pre>
+<p>After a fairly low number of iterations, the estimates become indistinguishable.</p>
+<h2 id="automate-the-estimation">Automate the estimation</h2>
+<p>We can automate the estimation with a loop, and this time we&rsquo;ll store the mean square error at each iteration as well.</p>
+<pre><code class="language-r">mse &lt;- function(x, y, a, b) {
+  pred &lt;- a + b*x
+  resid2 &lt;- (y - pred)^2
+  1/length(y)*sum(resid2)
+}
+
+estimate_gradient &lt;- function(x, y, a, b, learning_rate, iter) {
+  pars &lt;- gradient_descent(x, y, a, b, learning_rate)
+  
+  c(iter, pars[1], pars[2], mse(x, y, a, b))
+}
+
+# number of iterations
+iter &lt;- 500
+
+# set up empty data frame
+estimates &lt;- data.frame(iteration = integer(iter),
+                        intercept = double(iter),
+                        slope = double(iter),
+                        cost = double(iter))
+
+# store first row of estimates
+estimates[1, ] &lt;- estimate_gradient(x, y, 0, 0, 0.01, 1)
+
+# Estimate remain rows, using previous row as input
+for(i in 2:iter) {
+  estimates[i, ] &lt;- estimate_gradient(x, y, 
+                                      a = estimates$intercept[i - 1],
+                                      b = estimates$slope[i - 1],
+                                      learning_rate = 0.01,
+                                      iter = i)
+}
+head(estimates)
+</code></pre>
+<pre><code class="language-r">##   iteration intercept      slope     cost
+## 1         1 0.1010955 0.02681521 44.44593
+## 2         2 0.2001834 0.05312412 43.36282
+## 3         3 0.2973035 0.07893621 42.32217
+## 4         4 0.3924950 0.10426083 41.32230
+## 5         5 0.4857961 0.12910714 40.36163
+## 6         6 0.5772444 0.15348411 39.43861
+</code></pre>
+<p>You can see the cost going down at each iteration. Let&rsquo;s visualize how the mean square error changes.</p>
+<pre><code class="language-r">ggplot(estimates, aes(iteration, cost)) +
+  geom_point(color = &quot;gray70&quot;) +
+  geom_line(color = &quot;cornflowerblue&quot;)
+</code></pre>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/mse-change-1.png" alt=""><!-- raw HTML omitted --></p>
+<p>So you can see after about 150 iterations or so we&rsquo;re not getting much improvement.</p>
+<h2 id="animating-the-learning">Animating the learning</h2>
+<p>Working through the above was really helpful for me, but I also think it can be helpful to <em>see</em> the algorithm work. Thanks to <a href="https://gganimate.com">{gganimate}</a>, it&rsquo;s pretty simple to produce nice visuals. The code below produces an animation of the line starting at our random values (intercept and slope of zero) and working it&rsquo;s way toward the value that minimizes our cost function.</p>
+<pre><code class="language-r">library(gganimate)
+
+ggplot(estimates) +
+  geom_point(aes(x, y), sim_d) +
+  geom_smooth(aes(x, y), sim_d, 
+              method = &quot;lm&quot;, se = FALSE) +
+  geom_abline(aes(intercept = intercept,
+                  slope = slope),
+              color = &quot;#de4f60&quot;) +
+  transition_manual(frames = iteration)
+</code></pre>
+<pre><code class="language-r">## `geom_smooth()` using formula 'y ~ x'
+</code></pre>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/animate-line-1.gif" alt=""><!-- raw HTML omitted --></p>
+<p>I think my favorite thing about this visual is how you can watch the line slow down as it gets closer to the global minimum. This happens because the gradient is not as steep. So even though it&rsquo;s still going downhill, it&rsquo;s not traveling as far with each step.</p>
+<h2 id="example-with-polynomial-regression">Example with polynomial regression</h2>
+<p>To push my understanding a bit further, I tried to replicate the same thing with polynomial regression. Below is the code and resulting animation. As you can see, the process is essentially the same, but it&rsquo;s kind of neat to watch something other than a straight line converge.</p>
+<pre><code class="language-r"># simulate data from a cubic model
+set.seed(8675309)
+n &lt;- 1000
+x &lt;- rnorm(n)
+
+a &lt;- 5
+b1 &lt;- 2.3
+b2 &lt;- 0.5
+b3 &lt;- 1.2
+
+e &lt;- 6
+
+y &lt;- a + b1*x + b2*x^2 + b3*x^3 + rnorm(n, sd = e)
+
+# View ordinary least squares fit
+tibble(x, y) %&gt;% 
+  ggplot(aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;, formula = y ~ poly(x, 3))
+</code></pre>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-2.png" alt=""><!-- raw HTML omitted --></p>
+<pre><code class="language-r"># Define new gradient descent function, with all parameters
+gd &lt;- function(x1, x2, x3, y, a, b1, b2, b3, learning_rate) {
+  n &lt;- length(y)
+  yhat &lt;- a + (b1 * x1) + (b2 * x2) + (b3 * x3)
+  resid &lt;- y - yhat
+  
+  # update theta
+  a_update &lt;- a - ((1/n) * sum(-2*resid)) * learning_rate
+  b1_update &lt;- b1 - ((1/n) * sum(-2*x1*resid)) * learning_rate
+  b2_update &lt;- b2 - ((1/n) * sum(-2*x2*resid)) * learning_rate
+  b3_update &lt;- b3 - ((1/n) * sum(-2*x3*resid)) * learning_rate
+  
+  # Return updated parameter estimates
+  c(a_update, b1_update, b2_update, b3_update)
+}  
+
+# New mean square error function
+mse &lt;- function(x1, x2, x3, y, a, b1, b2, b3) {
+  pred &lt;- a + (b1 * x1) + (b2 * x2) + (b3 * x3)
+  resid2 &lt;- (y - pred)^2
+  1/length(y)*sum(resid2)
+}
+
+# New gradient estimation
+estimate_gradient &lt;- function(x1, x2, x3, y, a, b1, b2, b3, learning_rate, iter) {
+  pars &lt;- gd(x1, x2, x3, y, a, b1, b2, b3, learning_rate)
+  
+  c(iter, pars[1], pars[2], pars[3], pars[4], 
+    mse(x1, x2, x3, y, a, b1, b2, b3))
+}
+
+# Number of iterations
+iter &lt;- 500
+
+# set up empty data frame
+estimates &lt;- data.frame(iteration = integer(iter),
+                        intercept = double(iter),
+                        b1 = double(iter),
+                        b2 = double(iter),
+                        b3 = double(iter),
+                        cost = double(iter))
+
+# store first row of estimates
+estimates[1, ] &lt;- estimate_gradient(x, x^2, x^3, y, 
+                                    a = 0, b1 = 0, b2 = 0, b3 = 0, 
+                                    learning_rate =  0.01, 1)
+
+# Estimate remain rows, using previous row as input
+for(i in 2:iter) {
+  estimates[i, ] &lt;- estimate_gradient(x, x^2, x^3, y,
+                                      a = estimates$intercept[i - 1],
+                                      b1 = estimates$b1[i - 1],
+                                      b2 = estimates$b2[i - 1],
+                                      b3 = estimates$b3[i - 1],
+                                      learning_rate = 0.01,
+                                      iter = i)
+}
+
+# Create a new data frame to make predictions on (for plotting)
+pred_frame &lt;- tibble(x = seq(-3.5, 3.5, 0.1),
+                     x2 = x^2,
+                     x3 = x^3)
+
+# Predictions over pred_frame values
+compute_pred &lt;- function(a, b1, b2, b3) {
+  pred &lt;- a + b1*pred_frame$x + b2*pred_frame$x2 + b3*pred_frame$x3
+  tibble(x = pred_frame$x, pred)
+}
+
+# Create all predictions
+predictions &lt;- estimates %&gt;% 
+  group_by(iteration) %&gt;% 
+  nest() %&gt;% 
+  mutate(pred = map(data, ~compute_pred(.x$intercept, .x$b1, .x$b2, .x$b3))) %&gt;% 
+  select(iteration, pred) %&gt;% 
+  unnest(pred)
+
+# Bind two-dimensional data together (for plotting)
+sim_d &lt;- tibble(x, y)
+
+# Animate
+ggplot(predictions) +
+  geom_point(aes(x, y), sim_d) +
+  geom_smooth(aes(x, y), sim_d, 
+              method = &quot;lm&quot;, 
+              formula = y ~ poly(x, 3),
+              se = FALSE) +
+  geom_line(aes(x = x, y = pred, group = iteration),
+              color = &quot;#de4f60&quot;) +
+  transition_manual(frames = iteration)
+</code></pre>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif" alt=""><!-- raw HTML omitted --></p>
+<p>So that&rsquo;s it for now. Hope you enjoyed it! Please get in touch with me if you&rsquo;d like to chat more (contact info at the bottom).</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-05-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ml/">ML</a>
+          <a href="/tags/estimation/">Estimation</a>
+          <a href="/tags/optimization/">Optimization</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/creating-bivariate-color-palettes/">
+            <span class="next-text nav-default">Creating bivariate color palettes</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/datalorax_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/datalorax" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Modified theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
