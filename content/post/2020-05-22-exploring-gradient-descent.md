@@ -361,6 +361,7 @@ ggplot(predictions) +
 ```
 
 ![](../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif)<!-- -->
+
 Things could be perhaps cleaned up a bit in the above by using matrix algebra, so we don't have to keep writing new lines of code with each new parameter, but I actually found writing out each step to be a bit more clear, at least for me.
 
 So that's it for now. Hope you enjoyed it! Please get in touch with me if you'd like to chat more (contact info at the bottom).
