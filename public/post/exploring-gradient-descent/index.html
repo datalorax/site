@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Daniel Anderson" /><meta name="description" content="tl;dr I&amp;rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
-Intro This term I&amp;rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&amp;rsquo;s been a great experience because it&amp;rsquo;s allowed me to dig into topics more deeply than I have previously, and it&amp;rsquo;s defintely helped me learn and understand the tidymodels infrastructure better." /><meta name="keywords" content="Data Science, Education, Data Visualization" />
+Intro This term I&amp;rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&amp;rsquo;s been a great experience because it&amp;rsquo;s allowed me to dig into topics more deeply than I have previously, and it&amp;rsquo;s definitely helped me learn and understand the tidymodels infrastructure better." /><meta name="keywords" content="Data Science, Education, Data Visualization" />
 
 
 
@@ -42,24 +42,24 @@ Intro This term I&amp;rsquo;m co-teaching an applied machine learning course in 
 
 <meta property="og:title" content="Exploring Gradient Descent" />
 <meta property="og:description" content="tl;dr I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
-Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better." />
+Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s definitely helped me learn and understand the tidymodels infrastructure better." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/exploring-gradient-descent/" />
 <meta property="article:published_time" content="2020-05-22T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-05-22T14:12:52-07:00" />
 <meta itemprop="name" content="Exploring Gradient Descent">
 <meta itemprop="description" content="tl;dr I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
-Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better.">
+Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s definitely helped me learn and understand the tidymodels infrastructure better.">
 <meta itemprop="datePublished" content="2020-05-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-05-22T14:12:52-07:00" />
-<meta itemprop="wordCount" content="1901">
+<meta itemprop="wordCount" content="1950">
 
 
 
 <meta itemprop="keywords" content="ML,Estimation,Optimization," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Exploring Gradient Descent"/>
 <meta name="twitter:description" content="tl;dr I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
-Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better."/>
+Intro This term I&rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s definitely helped me learn and understand the tidymodels infrastructure better."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -137,8 +137,8 @@ Intro This term I&rsquo;m co-teaching an applied machine learning course in R us
         <div class="post-category">
             <a href="/categories/machine-learning/"> Machine Learning </a>
             </div>
-          <span class="more-meta"> 1901 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 1950 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -164,8 +164,8 @@ Intro This term I&rsquo;m co-teaching an applied machine learning course in R us
 <p>I&rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!</p>
 <p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif" alt=""></p>
 <h2 id="intro">Intro</h2>
-<p>This term I&rsquo;m <a href="https://uo-datasci-specialization.github.io/c4-ml-2020/">co-teaching an applied machine learning course</a> in R using the <a href="https://www.tidymodels.org">{tidymodels}</a> suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s defintely helped me learn and understand the tidymodels infrastructure better.</p>
-<p>Next week, I&rsquo;ll be discussing <a href="https://uo-datasci-specialization.github.io/c4-ml-2020/slides/w9p1-boosted-trees.html">boosted trees</a> and that allowed me to dig into gradient descent (the optimization algorithm used in boosted trees) at a deeper level than I have previously. So in this post, I wanted to share some of my exploration. I worked through this in a familiar framework - simple linear regression</p>
+<p>This term I&rsquo;m <a href="https://uo-datasci-specialization.github.io/c4-ml-2020/">co-teaching an applied machine learning course</a> in R using the <a href="https://www.tidymodels.org">{tidymodels}</a> suite of packages. It&rsquo;s been a great experience because it&rsquo;s allowed me to dig into topics more deeply than I have previously, and it&rsquo;s definitely helped me learn and understand the tidymodels infrastructure better.</p>
+<p>I&rsquo;ll be discussing <a href="https://uo-datasci-specialization.github.io/c4-ml-2020/slides/w9p1-boosted-trees.html">boosted trees</a> in that class soon, and that allowed me to dig into gradient descent (the optimization algorithm used in boosted trees) at a deeper level than I have previously. So in this post, I wanted to share some of my exploration. I worked through this in a familiar framework - simple linear regression</p>
 <h2 id="exploring-candidate-fits">Exploring candidate fits</h2>
 <p>Gradient descent is an iterative search algorithm that seeks to find the global minimum of a cost function. What does that mean? Well, first, we have to define a cost function. In linear regression, this is usually the mean squared error, which is defined as</p>
 <p>$$
@@ -176,10 +176,10 @@ $$</p>
 <p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/unnamed-chunk-1-1.png" alt=""><!-- raw HTML omitted --></p>
 <p>We can calculate the mean square error for each of these lines. The mean square error for the <!-- raw HTML omitted -->light blue line<!-- raw HTML omitted --> is 21.61, the <!-- raw HTML omitted -->slightly darker blue line is <!-- raw HTML omitted --> 20.72, and the <!-- raw HTML omitted -->darkest blue line is <!-- raw HTML omitted --> 20.67. So among these three candidate lines, the one that is closest to the observed values, on average, is the darkest line.</p>
 <h2 id="finding-the-optimal-fit">Finding the optimal fit</h2>
-<p>So using our cost function, we know which of these three lines provides the best fit (minimizes errors) to the data. But these are just three of an infinite number of lines. How do we find what is <em>best</em>? Well, in this case we&rsquo;d just use <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">ordinary least squares</a>. In other words, this problem is simple enough that some very smart people figured out a very long time ago how to directly estimate the line that minimizes the sum of the squared erros. But what if we didn&rsquo;t have a <a href="https://mathworld.wolfram.com/Closed-FormSolution.html">closed-form solution</a>? That&rsquo;s where gradient descent can help.</p>
+<p>So using our cost function, we know which of these three lines provides the best fit (minimizes errors) to the data. But these are just three of an infinite number of lines. How do we find what is <em>best</em>? Well, in this case we&rsquo;d just use <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">ordinary least squares</a>. In other words, this problem is simple enough that some very smart people figured out a very long time ago how to directly estimate the line that minimizes the sum of the squared errors. But what if we didn&rsquo;t have a <a href="https://mathworld.wolfram.com/Closed-FormSolution.html">closed-form solution</a>? That&rsquo;s where gradient descent can help.</p>
 <p>First, let&rsquo;s look at the cost surface. What you see below is the mean square error estimate for a wide range of possible combinations for our two parameters in the model, the intercept (line value when x = 0) and the slope (steepness of the line).</p>
 <p><img src="../2020-05-22-exploring-gradient-descent_files/img/cost-surface.mp4" alt=""></p>
-<p><strong>Code for generating the above image is available <a href="https://gist.github.com/datalorax/598ead8bde5c408df1936ffe611bf5f6">here</a></strong></p>
+<p><em>Code for generating the above image is available <a href="https://gist.github.com/datalorax/598ead8bde5c408df1936ffe611bf5f6">here</a></em></p>
 <p>Gradient descent starts at a random location on this cost surface, evaluates the gradient, and takes a step (iteration) in the direction of steepest descent. The size of this step is called the <em>learning rate</em>, and it controls how quickly the algorithm moves. Too small of a learning rate, and the algorithm will take a very long time to estimate. Too large, and it may skip past the global minimum.</p>
 <h2 id="estimating-the-gradient">Estimating the gradient</h2>
 <p>To estimate our gradient, we take the partial derivative of our cost function for each parameter we are estimating. In simple linear regression, this amounts to</p>
@@ -231,7 +231,7 @@ e &lt;- 4
 
 y &lt;- a + b*x + rnorm(n, sd = e)
 </code></pre>
-<p>We now have &ldquo;known&rdquo; parameters - the intercept is five and the slope is 1.3. We can estimate these paramters with ordinary least squares with</p>
+<p>We now have &ldquo;known&rdquo; parameters - the intercept is five and the slope is 1.3. We can estimate these parameters with ordinary least squares with</p>
 <pre><code class="language-r">coef(lm(y ~ x))
 </code></pre>
 <pre><code class="language-r">## (Intercept)           x 
@@ -277,7 +277,7 @@ estimates &lt;- data.frame(iteration = integer(iter),
 # store first row of estimates
 estimates[1, ] &lt;- estimate_gradient(x, y, 0, 0, 0.01, 1)
 
-# Estimate remain rows, using previous row as input
+# Estimate remaining rows, using previous row as input
 for(i in 2:iter) {
   estimates[i, ] &lt;- estimate_gradient(x, y, 
                                       a = estimates$intercept[i - 1],
@@ -312,10 +312,9 @@ ggplot(estimates) +
               method = &quot;lm&quot;, se = FALSE) +
   geom_abline(aes(intercept = intercept,
                   slope = slope),
-              color = &quot;#de4f60&quot;) +
+              color = &quot;#de4f60&quot;,
+              size = 1.2) +
   transition_manual(frames = iteration)
-</code></pre>
-<pre><code class="language-r">## `geom_smooth()` using formula 'y ~ x'
 </code></pre>
 <p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/animate-line-1.gif" alt=""><!-- raw HTML omitted --></p>
 <p>I think my favorite thing about this visual is how you can watch the line slow down as it gets closer to the global minimum. This happens because the gradient is not as steep. So even though it&rsquo;s still going downhill, it&rsquo;s not traveling as far with each step.</p>
@@ -430,10 +429,12 @@ ggplot(predictions) +
               formula = y ~ poly(x, 3),
               se = FALSE) +
   geom_line(aes(x = x, y = pred, group = iteration),
-              color = &quot;#de4f60&quot;) +
+            color = &quot;#de4f60&quot;,
+            size = 1.2) +
   transition_manual(frames = iteration)
 </code></pre>
-<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif" alt=""><!-- raw HTML omitted --></p>
+<p><img src="../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif" alt=""><!-- raw HTML omitted -->
+Things could be perhaps cleaned up a bit in the above by using matrix algebra, so we don&rsquo;t have to keep writing new lines of code with each new parameter, but I actually found writing out each step to be a bit more clear, at least for me.</p>
 <p>So that&rsquo;s it for now. Hope you enjoyed it! Please get in touch with me if you&rsquo;d like to chat more (contact info at the bottom).</p>
 
     </div>

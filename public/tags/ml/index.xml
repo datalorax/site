@@ -19,7 +19,7 @@
       
       <guid>/post/exploring-gradient-descent/</guid>
       <description>tl;dr I&amp;rsquo;ve recently learned a lot about gradient descent, and wanted to share here. I used gradient descent to estimate linear regression models and, by the end, produce gifs like this, showing how the algorithm learns!
-Intro This term I&amp;rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&amp;rsquo;s been a great experience because it&amp;rsquo;s allowed me to dig into topics more deeply than I have previously, and it&amp;rsquo;s defintely helped me learn and understand the tidymodels infrastructure better.</description>
+Intro This term I&amp;rsquo;m co-teaching an applied machine learning course in R using the {tidymodels} suite of packages. It&amp;rsquo;s been a great experience because it&amp;rsquo;s allowed me to dig into topics more deeply than I have previously, and it&amp;rsquo;s definitely helped me learn and understand the tidymodels infrastructure better.</description>
     </item>
     
   </channel>

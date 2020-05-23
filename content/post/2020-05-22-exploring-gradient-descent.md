@@ -23,9 +23,9 @@ I've recently learned a lot about gradient descent, and wanted to share here. I 
 ![](../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif)
 
 ## Intro
-This term I'm [co-teaching an applied machine learning course](https://uo-datasci-specialization.github.io/c4-ml-2020/) in R using the [{tidymodels}](https://www.tidymodels.org) suite of packages. It's been a great experience because it's allowed me to dig into topics more deeply than I have previously, and it's defintely helped me learn and understand the tidymodels infrastructure better.
+This term I'm [co-teaching an applied machine learning course](https://uo-datasci-specialization.github.io/c4-ml-2020/) in R using the [{tidymodels}](https://www.tidymodels.org) suite of packages. It's been a great experience because it's allowed me to dig into topics more deeply than I have previously, and it's definitely helped me learn and understand the tidymodels infrastructure better.
 
-Next week, I'll be discussing [boosted trees](https://uo-datasci-specialization.github.io/c4-ml-2020/slides/w9p1-boosted-trees.html) and that allowed me to dig into gradient descent (the optimization algorithm used in boosted trees) at a deeper level than I have previously. So in this post, I wanted to share some of my exploration. I worked through this in a familiar framework - simple linear regression
+I'll be discussing [boosted trees](https://uo-datasci-specialization.github.io/c4-ml-2020/slides/w9p1-boosted-trees.html) in that class soon, and that allowed me to dig into gradient descent (the optimization algorithm used in boosted trees) at a deeper level than I have previously. So in this post, I wanted to share some of my exploration. I worked through this in a familiar framework - simple linear regression
 
 ## Exploring candidate fits
 Gradient descent is an iterative search algorithm that seeks to find the global minimum of a cost function. What does that mean? Well, first, we have to define a cost function. In linear regression, this is usually the mean squared error, which is defined as 
@@ -43,13 +43,13 @@ In the case of simple linear regression, there are infinite lines we could fit t
 We can calculate the mean square error for each of these lines. The mean square error for the <span style="color:#94e2ff">light blue line</span> is 21.61, the <span style="color:#0abeff">slightly darker blue line is </span> 20.72, and the <span style="color:#004761">darkest blue line is </span> 20.67. So among these three candidate lines, the one that is closest to the observed values, on average, is the darkest line.
 
 ## Finding the optimal fit
-So using our cost function, we know which of these three lines provides the best fit (minimizes errors) to the data. But these are just three of an infinite number of lines. How do we find what is *best*? Well, in this case we'd just use [ordinary least squares](https://en.wikipedia.org/wiki/Ordinary_least_squares). In other words, this problem is simple enough that some very smart people figured out a very long time ago how to directly estimate the line that minimizes the sum of the squared erros. But what if we didn't have a [closed-form solution](https://mathworld.wolfram.com/Closed-FormSolution.html)? That's where gradient descent can help.
+So using our cost function, we know which of these three lines provides the best fit (minimizes errors) to the data. But these are just three of an infinite number of lines. How do we find what is *best*? Well, in this case we'd just use [ordinary least squares](https://en.wikipedia.org/wiki/Ordinary_least_squares). In other words, this problem is simple enough that some very smart people figured out a very long time ago how to directly estimate the line that minimizes the sum of the squared errors. But what if we didn't have a [closed-form solution](https://mathworld.wolfram.com/Closed-FormSolution.html)? That's where gradient descent can help.
 
 First, let's look at the cost surface. What you see below is the mean square error estimate for a wide range of possible combinations for our two parameters in the model, the intercept (line value when x = 0) and the slope (steepness of the line). 
 
 ![](../2020-05-22-exploring-gradient-descent_files/img/cost-surface.mp4)
 
-**Code for generating the above image is available [here](https://gist.github.com/datalorax/598ead8bde5c408df1936ffe611bf5f6)**
+*Code for generating the above image is available [here](https://gist.github.com/datalorax/598ead8bde5c408df1936ffe611bf5f6)*
 
 Gradient descent starts at a random location on this cost surface, evaluates the gradient, and takes a step (iteration) in the direction of steepest descent. The size of this step is called the *learning rate*, and it controls how quickly the algorithm moves. Too small of a learning rate, and the algorithm will take a very long time to estimate. Too large, and it may skip past the global minimum.
 
@@ -113,7 +113,7 @@ e <- 4
 y <- a + b*x + rnorm(n, sd = e)
 ```
 
-We now have "known" parameters - the intercept is five and the slope is 1.3. We can estimate these paramters with ordinary least squares with
+We now have "known" parameters - the intercept is five and the slope is 1.3. We can estimate these parameters with ordinary least squares with
 
 
 ```r
@@ -182,7 +182,7 @@ estimates <- data.frame(iteration = integer(iter),
 # store first row of estimates
 estimates[1, ] <- estimate_gradient(x, y, 0, 0, 0.01, 1)
 
-# Estimate remain rows, using previous row as input
+# Estimate remaining rows, using previous row as input
 for(i in 2:iter) {
   estimates[i, ] <- estimate_gradient(x, y, 
                                       a = estimates$intercept[i - 1],
@@ -229,12 +229,9 @@ ggplot(estimates) +
               method = "lm", se = FALSE) +
   geom_abline(aes(intercept = intercept,
                   slope = slope),
-              color = "#de4f60") +
+              color = "#de4f60",
+              size = 1.2) +
   transition_manual(frames = iteration)
-```
-
-```r
-## `geom_smooth()` using formula 'y ~ x'
 ```
 
 ![](../2020-05-22-exploring-gradient-descent_files/figure-html/animate-line-1.gif)<!-- -->
@@ -358,10 +355,12 @@ ggplot(predictions) +
               formula = y ~ poly(x, 3),
               se = FALSE) +
   geom_line(aes(x = x, y = pred, group = iteration),
-              color = "#de4f60") +
+            color = "#de4f60",
+            size = 1.2) +
   transition_manual(frames = iteration)
 ```
 
 ![](../2020-05-22-exploring-gradient-descent_files/figure-html/polynomial-reg-1.gif)<!-- -->
+Things could be perhaps cleaned up a bit in the above by using matrix algebra, so we don't have to keep writing new lines of code with each new parameter, but I actually found writing out each step to be a bit more clear, at least for me.
 
 So that's it for now. Hope you enjoyed it! Please get in touch with me if you'd like to chat more (contact info at the bottom).
