@@ -2,6 +2,69 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/estimation/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/post/exploring-gradient-descent/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/machine-learning/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ml/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/optimization/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-22T14:12:52-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/tags/colors/</loc>
     <lastmod>2019-08-30T09:55:58-07:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,13 +79,6 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>/tags/data-visualization/</loc>
     <lastmod>2019-08-30T09:55:58-07:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -30,28 +86,7 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-30T09:55:58-07:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>/categories/achievement-gap/</loc>
-    <lastmod>2019-08-16T12:45:07-07:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
     <lastmod>2019-08-16T12:45:07-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
