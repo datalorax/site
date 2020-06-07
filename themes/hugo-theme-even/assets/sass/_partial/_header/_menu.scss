@@ -9,7 +9,10 @@
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  background: url(http://1.bp.blogspot.com/-12NVHKZAcy8/T1JB-oqlKfI/AAAAAAAAAP0/7oRt1PsiaXg/s1600/lorax+blossom.png) center no-repeat $white; 
+  background: 
+    url(http://1.bp.blogspot.com/-12NVHKZAcy8/T1JB-oqlKfI/AAAAAAAAAP0/7oRt1PsiaXg/s1600/lorax+blossom.png) center no-repeat,
+    url(https://github.com/datalorax/site/raw/master/static/img/sticker.png) 1% no-repeat,
+    $white; 
   background-size: 60px 60px;
   box-shadow: 0px 2px 2px $gray;
   border-bottom: 2px solid $theme-color;
