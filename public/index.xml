@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Fri, 22 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Racial inequality and systemic racism</title>
+      <link>/post/racial-inequality-and-systemic-racism/</link>
+      <pubDate>Sat, 13 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/racial-inequality-and-systemic-racism/</guid>
+      <description>The murders of George Floyd, Ahmaud Arbery, Breonna Taylor, and so, so, so many before them have brought into stark relief that if you have black or brown skin in this country, and particularly the former, you are at far greater risk for losing your life for&amp;hellip; existing&amp;hellip; than if your skin is white. It&amp;rsquo;s unacceptable. Infuriating. Enraging. Depressing. As a country, we are mourning these deaths (while, as of the time of this writing, Breonna Taylor&amp;rsquo;s murderers have still not been arrested).</description>
+    </item>
     
     <item>
       <title>Exploring Gradient Descent</title>
