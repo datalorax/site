@@ -2,32 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>esvis on Data Science in Education</title>
-    <link>/tags/esvis/</link>
+    <link>https://www.datalorax.com/tags/esvis/</link>
     <description>Recent content in esvis on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/esvis/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/tags/esvis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>esvis: Binned Effect Size Plots</title>
-      <link>/post/esvis-binned-effect-size-plots/</link>
+      <link>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/esvis-binned-effect-size-plots/</guid>
+      <guid>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</guid>
       <description>In this post, I&amp;rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&amp;rsquo;ll start with a quick example from the package, and then move to a simulated data example.
 Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.</description>
     </item>
     
     <item>
       <title>esvis: Part 1</title>
-      <link>/post/esvis-part-1/</link>
+      <link>https://www.datalorax.com/post/esvis-part-1/</link>
       <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/esvis-part-1/</guid>
+      <guid>https://www.datalorax.com/post/esvis-part-1/</guid>
       <description>This is the first of a series of posts to introduce my new esvis R package, why I think it&amp;rsquo;s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it&amp;rsquo;s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
 install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
     </item>

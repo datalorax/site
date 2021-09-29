@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>The Power of Parameterized Reports With Plumber - Data Science in Education</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Anderson" /><meta name="description" content="Hello! It&amp;rsquo;s been&amp;hellip; a while, to say the least. But I wanted to share a new thing I&amp;rsquo;ve been working on. Specifically, I&amp;rsquo;ve finally started to move more toward the &amp;ldquo;R in production&amp;rdquo; model, and I wanted to share how freaking fantastically awesome the combination of parameterized reports in R Markdown with plumber can be.
+TL;DR I created the report below using pagedown with some (rather a lot) of custom CSS." /><meta name="keywords" content="Data Science, Education, Data Visualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://www.datalorax.com/post/power-parameterized-reports-plumber/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.001e90744d494da82d8d8f788be4e799b35650ddab8ebc84598056ddfd19492b.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="The Power of Parameterized Reports With Plumber" />
+<meta property="og:description" content="Hello! It&rsquo;s been&hellip; a while, to say the least. But I wanted to share a new thing I&rsquo;ve been working on. Specifically, I&rsquo;ve finally started to move more toward the &ldquo;R in production&rdquo; model, and I wanted to share how freaking fantastically awesome the combination of parameterized reports in R Markdown with plumber can be.
+TL;DR I created the report below using pagedown with some (rather a lot) of custom CSS." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.datalorax.com/post/power-parameterized-reports-plumber/" />
+<meta property="article:published_time" content="2021-09-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-28T08:44:10-07:00" />
+<meta itemprop="name" content="The Power of Parameterized Reports With Plumber">
+<meta itemprop="description" content="Hello! It&rsquo;s been&hellip; a while, to say the least. But I wanted to share a new thing I&rsquo;ve been working on. Specifically, I&rsquo;ve finally started to move more toward the &ldquo;R in production&rdquo; model, and I wanted to share how freaking fantastically awesome the combination of parameterized reports in R Markdown with plumber can be.
+TL;DR I created the report below using pagedown with some (rather a lot) of custom CSS.">
+<meta itemprop="datePublished" content="2021-09-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-09-28T08:44:10-07:00" />
+<meta itemprop="wordCount" content="173">
+
+
+
+<meta itemprop="keywords" content="RMarkdown,pagedown,plumber," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Power of Parameterized Reports With Plumber"/>
+<meta name="twitter:description" content="Hello! It&rsquo;s been&hellip; a while, to say the least. But I wanted to share a new thing I&rsquo;ve been working on. Specifically, I&rsquo;ve finally started to move more toward the &ldquo;R in production&rdquo; model, and I wanted to share how freaking fantastically awesome the combination of parameterized reports in R Markdown with plumber can be.
+TL;DR I created the report below using pagedown with some (rather a lot) of custom CSS."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">datalorax</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://datalorax.github.io/anderson-cv/">
+        <li class="mobile-menu-item">Curriculum Vita</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/talks/talks/">
+        <li class="mobile-menu-item">Talks</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">datalorax</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://datalorax.github.io/anderson-cv/">Curriculum Vita</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/talks/talks/">Talks</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">The Power of Parameterized Reports With Plumber</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-28 </span>
+        <div class="post-category">
+            <a href="/categories/r-code/"> R Code </a>
+            </div>
+          <span class="more-meta"> 173 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#parameterized-pagedown-reports">Parameterized pagedown reports</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Hello! It&rsquo;s been&hellip; a while, to say the least. But I wanted to share a new thing I&rsquo;ve been working on. Specifically, I&rsquo;ve finally started to move more toward the &ldquo;R in production&rdquo; model, and I wanted to share how <strong>freaking fantastically awesome</strong> the combination of parameterized reports in R Markdown with <a href="https://www.rplumber.io/">plumber</a> can be.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>I created the report below using pagedown with some (rather a lot) of custom CSS. It&rsquo;s a parameterized report so passing additional arguments to <code>rmarkdown::render()</code> changes how the actual report is produced. I then used <strong>plumber</strong> to build an API so we can produce any report programmatically. Then, we use docker to create an image of the whole thing, and that gets sent to our programmer who links it without our live database and, et voilà! Individual student reports generated on the fly, as soon as the data come in. Wild.</p>
+<p><img src="../images/isr.png" alt=""></p>
+<p>In this post, I&rsquo;m only going to cover the parameterized report and plumber combination. I&rsquo;ll save the docker part for a different post.</p>
+<h2 id="parameterized-pagedown-reports">Parameterized pagedown reports</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Daniel Anderson</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rmarkdown/">RMarkdown</a>
+          <a href="/tags/pagedown/">pagedown</a>
+          <a href="/tags/plumber/">plumber</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/racial-inequality-and-systemic-racism/">
+            <span class="next-text nav-default">Racial inequality and systemic racism</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'http-www-dandersondata-com';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:daniela@uoregon.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/datalorax_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/datalorax" class="iconfont icon-github" title="github"></a>
+  <a href="https://www.datalorax.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Modified theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="author">Daniel Anderson</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

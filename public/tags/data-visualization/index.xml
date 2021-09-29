@@ -2,78 +2,74 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Visualization on Data Science in Education</title>
-    <link>/tags/data-visualization/</link>
+    <link>https://www.datalorax.com/tags/data-visualization/</link>
     <description>Recent content in Data Visualization on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Fri, 30 Aug 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 30 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating bivariate color palettes</title>
-      <link>/post/creating-bivariate-color-palettes/</link>
+      <link>https://www.datalorax.com/post/creating-bivariate-color-palettes/</link>
       <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/creating-bivariate-color-palettes/</guid>
+      <guid>https://www.datalorax.com/post/creating-bivariate-color-palettes/</guid>
       <description>I&amp;rsquo;m taking some time off work this week to be with my two girls in their final week of summer. But in that time I started playing around with colors in R a bit and wanted to share some of what I&amp;rsquo;ve learned, specifically in relation to bivariate color palettes. There is an existing R package, {biscale}, which is probably the simplest way to approach this, but I wanted to dig in a bit more and explore on my own.</description>
     </item>
     
     <item>
       <title>Exploring Geographic Variation in Achievement Gaps</title>
-      <link>/post/exploring-geographic-variation-in-achievement-gaps/</link>
+      <link>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/exploring-geographic-variation-in-achievement-gaps/</guid>
+      <guid>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</guid>
       <description>This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically.</description>
     </item>
     
     <item>
       <title>Looking into #KeepFamiliesTogether</title>
-      <link>/post/looking-into-keepfamiliestogether/</link>
+      <link>https://www.datalorax.com/post/looking-into-keepfamiliestogether/</link>
       <pubDate>Tue, 19 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/looking-into-keepfamiliestogether/</guid>
+      <guid>https://www.datalorax.com/post/looking-into-keepfamiliestogether/</guid>
       <description>This week I&amp;rsquo;m at the Seattle branch of the Summer Institute on Computational Social Science. Today, we discussed digital trace data and spent some time thinking about different sources of digital trace data. One of the easiest sources is twitter, and thanks to Mike Kearney, it&amp;rsquo;s easily accessible in R via the {rtweet} package!
 I joined a group addressing a topic I find myself dwelling on throughout the day - the immigration crisis at the border.</description>
     </item>
     
     <item>
       <title>esvis: Binned Effect Size Plots</title>
-      <link>/post/esvis-binned-effect-size-plots/</link>
+      <link>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/esvis-binned-effect-size-plots/</guid>
+      <guid>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</guid>
       <description>In this post, I&amp;rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&amp;rsquo;ll start with a quick example from the package, and then move to a simulated data example.
 Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.</description>
     </item>
     
     <item>
       <title>Alluvial Diagrams with ggforce</title>
-      <link>/post/alluvial-plots-with-ggforce/</link>
+      <link>https://www.datalorax.com/post/alluvial-plots-with-ggforce/</link>
       <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/alluvial-plots-with-ggforce/</guid>
+      <guid>https://www.datalorax.com/post/alluvial-plots-with-ggforce/</guid>
       <description>Today I wanted to quickly share my first real attempt at making an alluvial diagram. For those not familiar (and I wasn&amp;rsquo;t previously) an alluvial diagram is a type of flow plot that is essentially equivalent to a sankey diagram. The difference is that while sankey diagrams show flow for different categorical variables, alluvial plots show change over time. To produce the alluvial diagram below, I&amp;rsquo;ll be using the development version of the excellent ggforce package written by Thomas Lin Pedersen, who&amp;rsquo;s not only incredibly talented, but also a good follow on twitter.</description>
     </item>
     
     <item>
       <title>Mapping Statewide School Ratings with US Census Tracts</title>
-      <link>/post/mapping-statewide-school-ratings-with-us-census-tracts/</link>
+      <link>https://www.datalorax.com/post/mapping-statewide-school-ratings-with-us-census-tracts/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
+      <guid>https://www.datalorax.com/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
       <description>In this post, I&amp;rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.</description>
     </item>
     
     <item>
       <title>esvis: Part 1</title>
-      <link>/post/esvis-part-1/</link>
+      <link>https://www.datalorax.com/post/esvis-part-1/</link>
       <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/esvis-part-1/</guid>
+      <guid>https://www.datalorax.com/post/esvis-part-1/</guid>
       <description>This is the first of a series of posts to introduce my new esvis R package, why I think it&amp;rsquo;s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it&amp;rsquo;s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
 install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
     </item>

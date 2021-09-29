@@ -24,10 +24,10 @@
 
 
 
-<meta name="generator" content="Hugo 0.68.3 with theme even" />
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
-<link rel="canonical" href="/talks/gina/gina_mr/" />
+<link rel="canonical" href="https://www.datalorax.com/talks/gina/gina_mr/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
  Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/talks/gina/gina_mr/" />
+<meta property="og:url" content="https://www.datalorax.com/talks/gina/gina_mr/" />
 
 <meta itemprop="name" content="Multiple regression with R">
 <meta itemprop="description" content="Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
@@ -54,7 +54,8 @@
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Multiple regression with R"/>
 <meta name="twitter:description" content="Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
  Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!"/>
@@ -357,83 +358,83 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 <table>
 <thead>
 <tr>
-<th align="right">sid</th>
-<th align="right">cohort</th>
-<th align="left">sped</th>
-<th align="left">ethnicity</th>
-<th align="left">frl</th>
-<th align="left">ell</th>
-<th align="left">season</th>
-<th align="right">reading</th>
-<th align="right">math</th>
+<th style="text-align:right">sid</th>
+<th style="text-align:right">cohort</th>
+<th style="text-align:left">sped</th>
+<th style="text-align:left">ethnicity</th>
+<th style="text-align:left">frl</th>
+<th style="text-align:left">ell</th>
+<th style="text-align:left">season</th>
+<th style="text-align:right">reading</th>
+<th style="text-align:right">math</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">332347</td>
-<td align="right">1</td>
-<td align="left">Non-Sped</td>
-<td align="left">Native Am.</td>
-<td align="left">Non-FRL</td>
-<td align="left">Non-ELL</td>
-<td align="left">Winter</td>
-<td align="right">208</td>
-<td align="right">205</td>
+<td style="text-align:right">332347</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">Non-Sped</td>
+<td style="text-align:left">Native Am.</td>
+<td style="text-align:left">Non-FRL</td>
+<td style="text-align:left">Non-ELL</td>
+<td style="text-align:left">Winter</td>
+<td style="text-align:right">208</td>
+<td style="text-align:right">205</td>
 </tr>
 <tr>
-<td align="right">400047</td>
-<td align="right">1</td>
-<td align="left">Non-Sped</td>
-<td align="left">Native Am.</td>
-<td align="left">FRL</td>
-<td align="left">Non-ELL</td>
-<td align="left">Spring</td>
-<td align="right">212</td>
-<td align="right">218</td>
+<td style="text-align:right">400047</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">Non-Sped</td>
+<td style="text-align:left">Native Am.</td>
+<td style="text-align:left">FRL</td>
+<td style="text-align:left">Non-ELL</td>
+<td style="text-align:left">Spring</td>
+<td style="text-align:right">212</td>
+<td style="text-align:right">218</td>
 </tr>
 <tr>
-<td align="right">402107</td>
-<td align="right">1</td>
-<td align="left">Non-Sped</td>
-<td align="left">White</td>
-<td align="left">Non-FRL</td>
-<td align="left">Non-ELL</td>
-<td align="left">Winter</td>
-<td align="right">201</td>
-<td align="right">212</td>
+<td style="text-align:right">402107</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">Non-Sped</td>
+<td style="text-align:left">White</td>
+<td style="text-align:left">Non-FRL</td>
+<td style="text-align:left">Non-ELL</td>
+<td style="text-align:left">Winter</td>
+<td style="text-align:right">201</td>
+<td style="text-align:right">212</td>
 </tr>
 <tr>
-<td align="right">402547</td>
-<td align="right">1</td>
-<td align="left">Non-Sped</td>
-<td align="left">White</td>
-<td align="left">Non-FRL</td>
-<td align="left">Non-ELL</td>
-<td align="left">Fall</td>
-<td align="right">185</td>
-<td align="right">177</td>
+<td style="text-align:right">402547</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">Non-Sped</td>
+<td style="text-align:left">White</td>
+<td style="text-align:left">Non-FRL</td>
+<td style="text-align:left">Non-ELL</td>
+<td style="text-align:left">Fall</td>
+<td style="text-align:right">185</td>
+<td style="text-align:right">177</td>
 </tr>
 <tr>
-<td align="right">403047</td>
-<td align="right">1</td>
-<td align="left">Sped</td>
-<td align="left">Hispanic</td>
-<td align="left">FRL</td>
-<td align="left">Active</td>
-<td align="left">Winter</td>
-<td align="right">179</td>
-<td align="right">192</td>
+<td style="text-align:right">403047</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">Sped</td>
+<td style="text-align:left">Hispanic</td>
+<td style="text-align:left">FRL</td>
+<td style="text-align:left">Active</td>
+<td style="text-align:left">Winter</td>
+<td style="text-align:right">179</td>
+<td style="text-align:right">192</td>
 </tr>
 <tr>
-<td align="right">403307</td>
-<td align="right">1</td>
-<td align="left">Sped</td>
-<td align="left">Hispanic</td>
-<td align="left">Non-FRL</td>
-<td align="left">Non-ELL</td>
-<td align="left">Winter</td>
-<td align="right">189</td>
-<td align="right">188</td>
+<td style="text-align:right">403307</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">Sped</td>
+<td style="text-align:left">Hispanic</td>
+<td style="text-align:left">Non-FRL</td>
+<td style="text-align:left">Non-ELL</td>
+<td style="text-align:left">Winter</td>
+<td style="text-align:right">189</td>
+<td style="text-align:right">188</td>
 </tr>
 </tbody>
 </table>
@@ -547,7 +548,7 @@ d
 <ol>
 <li>What is the average growth from Grades 6-8 in math (<code>SS</code>)</li>
 <li>Does the averge initial achievement or rate of growth depend upon <code>cohort</code>?</li>
-<li>Does the averge initial achievement or rate of growth depend upon <code>LD33</code>, the students&rsquo; pattern of SLD classification?
+<li>Does the averge initial achievement or rate of growth depend upon <code>LD33</code>, the students' pattern of SLD classification?
 <ul>
 <li>I don&rsquo;t remember why the variable has the name it does</li>
 </ul>
@@ -888,7 +889,7 @@ learn, but it is really worth it.</p>
       <a href="https://stackoverflow.com/users/4959854/daniel-anderson" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://twitter.com/datalorax_" class="iconfont icon-twitter" title="twitter"></a>
       <a href="https://github.com/datalorax" class="iconfont icon-github" title="github"></a>
-  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://www.datalorax.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -906,7 +907,7 @@ learn, but it is really worth it.</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2020
+    2021
     <span class="author">Daniel Anderson</span>
   </span>
 </div>
