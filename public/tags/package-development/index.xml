@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Package Development on Data Science in Education</title>
-    <link>/tags/package-development/</link>
+    <link>https://www.datalorax.com/tags/package-development/</link>
     <description>Recent content in Package Development on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/package-development/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/tags/package-development/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>esvis: Binned Effect Size Plots</title>
-      <link>/post/esvis-binned-effect-size-plots/</link>
+      <link>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/esvis-binned-effect-size-plots/</guid>
+      <guid>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</guid>
       <description>In this post, I&amp;rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&amp;rsquo;ll start with a quick example from the package, and then move to a simulated data example.
 Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.</description>
     </item>

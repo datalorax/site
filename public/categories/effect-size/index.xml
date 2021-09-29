@@ -2,40 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Effect Size on Data Science in Education</title>
-    <link>/categories/effect-size/</link>
+    <link>https://www.datalorax.com/categories/effect-size/</link>
     <description>Recent content in Effect Size on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/effect-size/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/categories/effect-size/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exploring Geographic Variation in Achievement Gaps</title>
-      <link>/post/exploring-geographic-variation-in-achievement-gaps/</link>
+      <link>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/exploring-geographic-variation-in-achievement-gaps/</guid>
+      <guid>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</guid>
       <description>This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically.</description>
     </item>
     
     <item>
       <title>Applying V to study achievement gaps</title>
-      <link>/post/applying-v-to-study-achievement-gaps/</link>
+      <link>https://www.datalorax.com/post/applying-v-to-study-achievement-gaps/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/applying-v-to-study-achievement-gaps/</guid>
+      <guid>https://www.datalorax.com/post/applying-v-to-study-achievement-gaps/</guid>
       <description>In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&amp;rsquo;ll put this method to work for the state of California. I&amp;rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade.</description>
     </item>
     
     <item>
       <title>Estimating important things with public data</title>
-      <link>/post/estimating-important-things-with-public-data/</link>
+      <link>https://www.datalorax.com/post/estimating-important-things-with-public-data/</link>
       <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/estimating-important-things-with-public-data/</guid>
+      <guid>https://www.datalorax.com/post/estimating-important-things-with-public-data/</guid>
       <description>Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.
 Background In case you&amp;rsquo;re unfamiliar, states administer tests to students at the end of the year in each of Grades 3-8, and once in high school, for all students in their state in English/Language Arts and Mathematics.</description>
     </item>

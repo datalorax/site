@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Census Data on Data Science in Education</title>
-    <link>/tags/census-data/</link>
+    <link>https://www.datalorax.com/tags/census-data/</link>
     <description>Recent content in Census Data on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Mon, 13 Nov 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/census-data/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 13 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/tags/census-data/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mapping Statewide School Ratings with US Census Tracts</title>
-      <link>/post/mapping-statewide-school-ratings-with-us-census-tracts/</link>
+      <link>https://www.datalorax.com/post/mapping-statewide-school-ratings-with-us-census-tracts/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
+      <guid>https://www.datalorax.com/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
       <description>In this post, I&amp;rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.</description>
     </item>
     

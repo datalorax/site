@@ -2,31 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Talks on Data Science in Education</title>
-    <link>/talks/</link>
+    <link>https://www.datalorax.com/talks/</link>
     <description>Recent content in Talks on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Daniel Anderson</copyright>
-    
-	<atom:link href="/talks/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Daniel Anderson</copyright><atom:link href="https://www.datalorax.com/talks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Multiple regression with R</title>
-      <link>/talks/gina/gina_mr/</link>
+      <link>https://www.datalorax.com/talks/gina/gina_mr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/talks/gina/gina_mr/</guid>
+      <guid>https://www.datalorax.com/talks/gina/gina_mr/</guid>
       <description>Agenda  Introduce R Very basics of R (object assignment) R packages Running multiple regression models Visualizing multiple regression models  Who am I? Daniel Anderson
  Research Associate: Behavioral Research and Teaching Dad (two daughters: 5 and 3) Quantitative educational researcher who loves R Primary areas of interest  R and computational educational research Open data, open science, and reproducible workflows Growth modeling (primarily through multilevel models)     Part of why I love R  Computer programming language = you can do ANYTHING!</description>
     </item>
     
     <item>
       <title>Talks</title>
-      <link>/talks/talks/</link>
+      <link>https://www.datalorax.com/talks/talks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/talks/talks/</guid>
+      <guid>https://www.datalorax.com/talks/talks/</guid>
       <description>Spring 2019  Some Advice on Data Viz  Talk for first year graduate students in a Psychology seminar on producing better data visualizations   AERA Reproducible Research Training: (part 1) AERA Reproducible Research Training: (part 2)  Training on open and transparent research with R and git/GitHub. April 7, 2019, Toronto, Ontario.   Evaluating Content-Related Validity Evidence Using Text Modeling  Talk for the annual conference of the National Council on Measurement in Education.</description>
     </item>
     

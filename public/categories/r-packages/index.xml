@@ -2,59 +2,55 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R-Packages on Data Science in Education</title>
-    <link>/categories/r-packages/</link>
+    <link>https://www.datalorax.com/categories/r-packages/</link>
     <description>Recent content in R-Packages on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/r-packages/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/categories/r-packages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Peeking behind the curtain with {slidex}</title>
-      <link>/post/peeking-behind-the-curtain-with-slidex/</link>
+      <link>https://www.datalorax.com/post/peeking-behind-the-curtain-with-slidex/</link>
       <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/peeking-behind-the-curtain-with-slidex/</guid>
+      <guid>https://www.datalorax.com/post/peeking-behind-the-curtain-with-slidex/</guid>
       <description>I gave a lightning talk (slides here) this past weekend at the second annual Cascadia R Conference that was focused on creating and contributing new themes to the {xaringan} package, which is essentially a really well thought out and well-organized R Markdown wrapper around the remark.js package for producing beautiful HTML slides. At the end of that talk, I announced the work-in-progress version of my new R package, {slidex}, for converting Microsoft PowerPoint slides to R Markdown, and specifically {xaringan}, with a single function.</description>
     </item>
     
     <item>
       <title>Writing an R Package Basics (and why I think you should)</title>
-      <link>/post/why-i-think-you-should-write-an-r-package/</link>
+      <link>https://www.datalorax.com/post/why-i-think-you-should-write-an-r-package/</link>
       <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/why-i-think-you-should-write-an-r-package/</guid>
+      <guid>https://www.datalorax.com/post/why-i-think-you-should-write-an-r-package/</guid>
       <description>On April 10, 2018, I gave a talk entitled Developing your first R package: A case study with esvis for the Eugene R Users Group. Although I discussed my esvis package, the focus of the talk was really on tools and tips for developing R pacakges. In this post, I&amp;rsquo;ll go over some of the content in that talk, and discuss why I think you should develop an R package.</description>
     </item>
     
     <item>
       <title>Sharing some functions from my personal R package</title>
-      <link>/post/sharing-some-functions-from-my-personal-r-package/</link>
+      <link>https://www.datalorax.com/post/sharing-some-functions-from-my-personal-r-package/</link>
       <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/sharing-some-functions-from-my-personal-r-package/</guid>
+      <guid>https://www.datalorax.com/post/sharing-some-functions-from-my-personal-r-package/</guid>
       <description>In this post I basically just wanted to share some recent developments that I&amp;rsquo;ve made to my personal R package {sundry}. All of the recent advancements have been made to work with the tidyverse, so things like group_by should work seamlessly. If you feel like giving the package a whirl, I&amp;rsquo;d love any feedback you have or bugs you may find. At this point the package is only on github. If there seems to be interest from others in using any of this functionality, I may submit it to CRAN.</description>
     </item>
     
     <item>
       <title>esvis: Binned Effect Size Plots</title>
-      <link>/post/esvis-binned-effect-size-plots/</link>
+      <link>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</link>
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/esvis-binned-effect-size-plots/</guid>
+      <guid>https://www.datalorax.com/post/esvis-binned-effect-size-plots/</guid>
       <description>In this post, I&amp;rsquo;d like to share one of the more unique plots from esvis - the binned effect size plot. The overall purpose of the binned effect size plot is to evaluate if the differences between two distributions are consistent across the scale. We&amp;rsquo;ll start with a quick example from the package, and then move to a simulated data example.
 Quick example The API for esvis is consistent across functions, so we use the same outcome ~ predictor forumula as the first argument, followed by the data for all functions.</description>
     </item>
     
     <item>
       <title>esvis: Part 1</title>
-      <link>/post/esvis-part-1/</link>
+      <link>https://www.datalorax.com/post/esvis-part-1/</link>
       <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/esvis-part-1/</guid>
+      <guid>https://www.datalorax.com/post/esvis-part-1/</guid>
       <description>This is the first of a series of posts to introduce my new esvis R package, why I think it&amp;rsquo;s important, and some of its capabilities. As of this writing the current version on CRAN is 0.0.1, so it&amp;rsquo;s obviously still fresh and may have some bugs. If you find any, please let me know. You can install the package like you would any other on R
 install.packages(&amp;quot;esvis&amp;quot;)  or if you&amp;rsquo;d prefer the sometimes buggy but more feature-heavy development version, install from github with devtools.</description>
     </item>

@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Public Data on Data Science in Education</title>
-    <link>/tags/public-data/</link>
+    <link>https://www.datalorax.com/tags/public-data/</link>
     <description>Recent content in Public Data on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/public-data/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/tags/public-data/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Applying V to study achievement gaps</title>
-      <link>/post/applying-v-to-study-achievement-gaps/</link>
+      <link>https://www.datalorax.com/post/applying-v-to-study-achievement-gaps/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/applying-v-to-study-achievement-gaps/</guid>
+      <guid>https://www.datalorax.com/post/applying-v-to-study-achievement-gaps/</guid>
       <description>In the last post I talked about one method to estimate distributional differences from ordinal data, such as those reported by statewide accountability systems. In this post, we&amp;rsquo;ll put this method to work for the state of California. I&amp;rsquo;ll show how we can estimate school-level Hispanic/White achievement gaps for every school in the state that reports data on both groups. In California, this means the school must have at least 30 students in each group, for the corresponding grade.</description>
     </item>
     

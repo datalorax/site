@@ -2,31 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mapping on Data Science in Education</title>
-    <link>/tags/mapping/</link>
+    <link>https://www.datalorax.com/tags/mapping/</link>
     <description>Recent content in Mapping on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/mapping/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/tags/mapping/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exploring Geographic Variation in Achievement Gaps</title>
-      <link>/post/exploring-geographic-variation-in-achievement-gaps/</link>
+      <link>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/exploring-geographic-variation-in-achievement-gaps/</guid>
+      <guid>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</guid>
       <description>This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically.</description>
     </item>
     
     <item>
       <title>Mapping Statewide School Ratings with US Census Tracts</title>
-      <link>/post/mapping-statewide-school-ratings-with-us-census-tracts/</link>
+      <link>https://www.datalorax.com/post/mapping-statewide-school-ratings-with-us-census-tracts/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
+      <guid>https://www.datalorax.com/post/mapping-statewide-school-ratings-with-us-census-tracts/</guid>
       <description>In this post, I&amp;rsquo;d like to share some work related to geo-spatial mapping, statewide school ratings, and US Census Bureau data using census tracts. Specifically, I wanted to investigate whether there was a relation between the median housing price in an area, and the statewide achievement ratings for schools in the corresponding area. There is a strong relation between socio-economic status and student achievement, but less is known about how statewide ratings for schools relate to the demographics of the corresponding area.</description>
     </item>
     

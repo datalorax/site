@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pagedown on Data Science in Education</title>
+    <link>https://www.datalorax.com/tags/pagedown/</link>
+    <description>Recent content in pagedown on Data Science in Education</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Daniel Anderson</copyright>
+    <lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/tags/pagedown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Power of Parameterized Reports With Plumber</title>
+      <link>https://www.datalorax.com/post/power-parameterized-reports-plumber/</link>
+      <pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.datalorax.com/post/power-parameterized-reports-plumber/</guid>
+      <description>Hello! It&amp;rsquo;s been&amp;hellip; a while, to say the least. But I wanted to share a new thing I&amp;rsquo;ve been working on. Specifically, I&amp;rsquo;ve finally started to move more toward the &amp;ldquo;R in production&amp;rdquo; model, and I wanted to share how freaking fantastically awesome the combination of parameterized reports in R Markdown with plumber can be.
+TL;DR I created the report below using pagedown with some (rather a lot) of custom CSS.</description>
+    </item>
+    
+  </channel>
+</rss>

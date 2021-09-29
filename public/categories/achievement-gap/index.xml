@@ -2,40 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Achievement Gap on Data Science in Education</title>
-    <link>/categories/achievement-gap/</link>
+    <link>https://www.datalorax.com/categories/achievement-gap/</link>
     <description>Recent content in Achievement Gap on Data Science in Education</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Daniel Anderson</copyright>
-    <lastBuildDate>Sat, 13 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/achievement-gap/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 13 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.datalorax.com/categories/achievement-gap/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Racial inequality and systemic racism</title>
-      <link>/post/racial-inequality-and-systemic-racism/</link>
+      <link>https://www.datalorax.com/post/racial-inequality-and-systemic-racism/</link>
       <pubDate>Sat, 13 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/racial-inequality-and-systemic-racism/</guid>
+      <guid>https://www.datalorax.com/post/racial-inequality-and-systemic-racism/</guid>
       <description>The murders of George Floyd, Ahmaud Arbery, Breonna Taylor, and so, so, so many before them have brought into stark relief that if you have black or brown skin in this country, and particularly the former, you are at far greater risk for losing your life for&amp;hellip; existing&amp;hellip; than if your skin is white. It&amp;rsquo;s unacceptable. Infuriating. Enraging. Depressing. As a country, we are mourning these deaths (while, as of the time of this writing, Breonna Taylor&amp;rsquo;s murderers have still not been arrested).</description>
     </item>
     
     <item>
       <title>Exploring Geographic Variation in Achievement Gaps</title>
-      <link>/post/exploring-geographic-variation-in-achievement-gaps/</link>
+      <link>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/exploring-geographic-variation-in-achievement-gaps/</guid>
+      <guid>https://www.datalorax.com/post/exploring-geographic-variation-in-achievement-gaps/</guid>
       <description>This is, basically, the third post in a series of posts about estimating and, now, exploring achievement gap variation between schools. The first post described the method, while the second applied the method to estimate achievement gaps for all schools reporting data on students coded as Hispanic and White in California. That post included some preliminary explorations of the data, but this post will take that further by looking at the variance geographically.</description>
     </item>
     
     <item>
       <title>Estimating important things with public data</title>
-      <link>/post/estimating-important-things-with-public-data/</link>
+      <link>https://www.datalorax.com/post/estimating-important-things-with-public-data/</link>
       <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/estimating-important-things-with-public-data/</guid>
+      <guid>https://www.datalorax.com/post/estimating-important-things-with-public-data/</guid>
       <description>Intro One of the neatest things I&amp;rsquo;ve learned about in the last few years is how to estimate effect sizes from coarsened data. The original article discussed using the method with publicly available data reported by statewide education agencies, and that&amp;rsquo;s the approach I&amp;rsquo;ll use here too. But more generally, the method could be applied in any situation in which a continuous distribution is reported out in ordinal bins.
 Background In case you&amp;rsquo;re unfamiliar, states administer tests to students at the end of the year in each of Grades 3-8, and once in high school, for all students in their state in English/Language Arts and Mathematics.</description>
     </item>
