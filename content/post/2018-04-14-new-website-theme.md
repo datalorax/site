@@ -44,7 +44,7 @@ Once I decided to adopt and hopefully modify a new theme I spent **hours** explo
 
 Finally, I settled on the [even](https://github.com/olOwOlo/hugo-theme-even) theme. It had a lot of things I liked. I'm a sucker for fancy animations and the *even* theme has a lot. On the home page, you'll see links underline from center on hover, the table of contents on posts (like this one) floats with the page, tags grow marginally, and when there are figures or images you can click to zoom and it will pull out in a nice panel where you can select which image you want to look at. All of this had me like
 
-![](http://68.media.tumblr.com/53346ceedde5b6d29c0558bb1e932858/tumblr_or91vaey0D1rmp6e8o1_540.gif)
+![](https://pbs.twimg.com/tweet_video_thumb/DfSFjGcWsAAui6Q.jpg)
 
 Of course, there were things I didn't like too, or at least things that I wished were different. 
 
