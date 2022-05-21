@@ -1,0 +1,52 @@
+---
+title: Reflections on my start in industry
+author: Daniel Anderson
+date: '2022-05-19'
+categories: [Reflections]
+tags:
+  - Academia
+  - Industry
+lastmod: '2022-05-19T21:13:54-07:00'
+toc: true
+output: 
+  html_document:
+    keep_md: true
+---
+
+In mid-February, I made a really big life decision, which was to officially leave academia and, really, everything I'd ever known professionally, and accept a position in industry as a data scientist.
+
+[![](2022-05-19-reflections-on-my-start-in-industry/img/leaving-academia-tweet.png)](https://twitter.com/datalorax_/status/1494365384090083343?ref_src=twsrc%5Etfw)
+
+It's now been a bit over six weeks since I officially started, and I felt like it was time for some reflections
+
+# tl;dr
+Academia often gets a bad wrap, and I understand that completely. For me personally, it was actually pretty great and I'm very grateful to so many people at the University of Oregon, where I worked. But I had been feeling restless for quite some time, and I feel unbelievably lucky to have landed where I did. The people are kind and the work is invigorating. Both things can be good!
+
+## Leaving academia
+I think anytime anyone devotes a substantial portion of their life in the pursuit of something, changing directions can be hard and feel like "giving up". I had many of those emotions when considering leaving. My path to academia was not typical. I was a sixth-grade elementary school teacher at 22 years old, fresh out of college. I loved the job but didn't like where I was living. I decided to go back to school to pursue my Master's degree at UO and... never left. I loved research from the start and, after completing my Master's degree, accepted a full-time research assistant position at an educational research center at UO ([Behavioral Resarch and Teaching (BRT)](https://www.brtprojects.org/)). I worked in this position for two years, then decided to go back for my PhD. I worked at BRT full-time throughout my PhD and, after completing my PhD, remained at BRT but at a higher rank (which functionally meant very little, outside of a pay raise). I then got into teaching, and my career life was mostly great. I stayed in that position until... well, next month! (I'm currently still teaching one class).
+
+My career at UO was very good for me. I know what salaries are typically in academia, and I feel pretty confident saying mine was on the higher end for my experience. I was teaching only courses I wanted (which I designed). But... I also felt increasingly lonely. During my graduate studies I became super interested in R and data science, and that was a journey I mostly took alone. Substantively, I really cared about equity in education, but (a) the research shop I worked in didn't really focus in that area, so I didn't really have many collaborators "in house", and (b) I could not ever seem to get grant funding to support that research. It was *incredibly* frustrating and probably the single biggest reason I decided to start to look elsewhere. But, there was the other part - I'd worked at BRT since I was 23. I'm now 37! It was basically the only thing I'd ever known, professionally. It was a great situation, and I still love the people there. They are truly like my extended family. I was largely content, but I was increasingly feeling like I was ready for a new challenge. I had spent almost a third of my life at UO and BRT. Giving up on that was hard and scary, but ultimately, I felt like I was ready to at least dip my toes in the industry waters and see what else was out there.
+
+I started looking for jobs outside of academia and applied for a few. I was not going to leave for just any job. I did really like my current one! I made it to the final stages for one other ed tech company, but ultimately pulled out because I didn't feel like it was a good fit. Then I found [Abl](https://www.ablschools.com/) and it felt perfect. I remember coming into the living room that night after I found the job ad (while perusing jobs in my daughter's room, waiting for her to go to sleep) and trying to not get too excited, because the odds always feel long, after all. But it truly had everything. A Senior Data Scientist role in industry, working in K-12 education, with an equity focus. What!?! 🤩🤩🤩 
+
+Luckily, I was offered the job, and decided to accept.
+
+## Life at Abl (so far)
+Granted, I have still not been in industry long - 7 full weeks, as of this typing. But really I couldn't be happier with my decision. The people are kind, there is a consistent focus throughout the company on equity, the work is new and challenging, and I'm learning a ton.
+
+I knew coming in that having an "academic data science" background would mean that I would have some holes. Luckily, my boss is also a former academic, and she was very confident these wouldn't be major drawbacks. I think the one I was most nervous about was SQL. I knew that in this role I would (like most data scientists) be querying large SQL databases daily. That's not something I'd done previously. But I'm happy to report that the transition there has been surprisingly easy. I already feel fluent in at least the basics of SQL. The querying has not been the difficult part. Learning the data structures has been. They are immensely complex, and I'm only really just starting to scratch the surface on what data we have and what we can do with it.
+
+There are other things that I used *a lot* in academia but haven't used at all so far in industry, like R Markdown. In my previous role at BRT, I regularly built automated reports, websites, etc. using R Markdown. I still really believe in R Markdown (what I'm currently using for this blog post), but it's not what my company uses, outside of prototyping, and so I haven't either. But... I do think there are places where it could be helpful in a more "production" sense, even for internal reports. So maybe that's an area where I can contribute down the line.
+
+I have also felt that my academic background helps me bring something different to the table. Initially, I felt like it was sort of a weakness - I'd never really worked for a business before. But it does help me frame problems and perhaps view things from a slightly different angle. I know the literature well, for example. I know how to interrogate evidence and think about different research designs that can lead to specific kinds of inferences. And my statistical training, which was almost entirely in classical inferential statistics, is still a foundational piece for me in terms of *thinking* about problems, even if I'm not fitting many of those models anymore (at least so far).  To be clear, I don't use these tools everyday, and many I haven't used at all, but I do think they provide me a different lens from which to view problems that can be helpful. And all of this can also introduce some tension at times, because there's a real need to get things done and out the door. We can't always wait until the evidence is overwhelming. But even this is refreshing to me, because I often feel that the research to implementation timeline is much too slow.
+
+
+### Culture and kindness
+I think the biggest thing that worried me about the transition was culture and fit. As I said above, I really worked with some amazing humans at BRT. The idea of going somewhere new and possibly falling into a toxic work environment was really scary. I still think that's scary. But I was super lucky to land at a place where everyone is incredibly kind, and it really does feel like they are investing in me and want me to succeed.
+
+When I first got to Abl I felt this need to "prove" myself right away. I wanted to dig in and show them that they made the right decision by hiring me. But that's not how their onboarding process works. They take it slow, and work hard to get you acclimated and make you feel like you're part of the team. It was nearly three weeks before I touched any data at all. This was hard for me, but when I took a step back, I really valued it. They had already hired me, after all. Why did I feel like I needed to prove myself? I'm still not totally sure, but I do think it's natural, and it's something I talked openly with to one of my new colleagues, who assured me she had felt similarly. 
+
+## Looking forward
+As I said from the start, I really am very happy with my decision. I think the work we're doing at Abl is exciting and has the potential to be highly impactful. Everything is new, which is invigorating. However, part of why leaving UO was scary was that I wasn't just leaving a position, I was also leaving behind my reputation. I was well known at UO for data science in particular, and nobody at Abl really knew much about me beyond my interviewing skills and my resume. Going from feeling like an "expert" in the area you are working, with others generally giving you that title as well, to a place where you are brand new and know very little about anything can be really hard. But, nothing good comes without risk. This felt like a giant risk to me, but it also absolutely feels like one that will pay off.
+
+I'll close by saying that I don't know how long I'll be at Abl. I hope a long time. But industry is different. Five years is a really long time in the tech world to stay in one position. I was at my previous position for essentially my entire adult life. There are all sorts of reasons I might need to move on that have nothing to do with my desire or my job performance - e.g., we could be bought out (though I don't expect it, but you never know). But even *this* is exciting to me. I know myself, and I know I get bored with things if I stay in them too long. My primary area of research shifted three times while I was in academia (from measurement, to growth modeling, to equity). The equity piece doesn't feel like it's ever leaving but... could I imagine myself working outside of education? Yeah, I could. It's not my preference, not now anyway, but there are lots of neat data science roles out there in the equity space, and having previous experience as a data scientist in industry will better position me for those roles. That's exciting to me, even if it does mean the future is more murky than it would have been staying in academia. But, I am also happy for everyone who has a good home in academia! Both options can be good, depending on your specific situation and what you want to get out of it.
